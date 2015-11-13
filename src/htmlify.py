@@ -1,8 +1,12 @@
+import re
 import sys
-from bs4 import BeautifulSoup
 from os.path import (join,
                      exists,
-                     dirname)
+                     dirname,
+                     basename)
+from collections import OrderedDict
+
+from bs4 import BeautifulSoup
 from argparse import (ArgumentParser,
                       ArgumentDefaultsHelpFormatter)
 
@@ -19,6 +23,9 @@ albums_index_html_file_name = 'albums.html'
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
 
+# Annotation regular expression
+ANNOTATION = re.compile(r'\*\*([0-9]+)\*\*')
+
 def read_index():
     """
     Read .index file and make dictionary representation.
@@ -29,10 +36,10 @@ def read_index():
     :raises: ValueError
     """
 
-    albums = {}
+    albums = OrderedDict()
     i = 0
     lines = open(index_file_path).readlines()
-    current_album = {}
+    current_album = None
     while i < len(lines):
 
         # Strip newlines off the end of the line
@@ -46,7 +53,7 @@ def read_index():
         # Lines that name an album begin unindented
         elif not line.startswith(' '):
             current_album = tuple(line.rsplit(', '))
-            albums[current_album] = {}
+            albums[current_album] = OrderedDict()
             i += 1
 
         # Songs begin on indented lines
@@ -231,10 +238,16 @@ def htmlify_song(name, song_id, album_file_name=None):
     song_lines = open(input_path).read().strip().split('\n')
     paragraphs = []
     current_paragraph = []
-    for ind, line in enumerate(song_lines):
+    annotations = []
+    for line_ind, line in enumerate(song_lines):
         if line.strip():
+            # If the line begins with two asterisks in a row, that
+            # means that it is an annotation line
+            if line.startswith('**'):
+                annotations.append(line.strip().split(' ', 1)[1])
+                continue
             current_paragraph.append(line.strip())
-            if len(song_lines) == ind + 1:
+            if len(song_lines) == line_ind + 1:
                 paragraphs.append(current_paragraph)
                 current_paragraph = []
         else:
@@ -247,11 +260,77 @@ def htmlify_song(name, song_id, album_file_name=None):
         paragraph_elem = soup.new_tag('p')
         div_ind = 0
         for line_elem in paragraph:
+
+            # Create new `div` element to store the line
             div = soup.new_tag('div')
-            div.string = line_elem
+
+            # Check if line has annotations
+            annotation_nums = ANNOTATION.findall(line_elem)
+            if annotation_nums:
+
+                # Get indices for the annotations in the given line
+                annotation_inds = find_annotation_indices(line_elem,
+                                                          annotation_nums)
+
+                # Remove annotations from the line
+                line_elem = ANNOTATION.sub('', line_elem)
+
+                # Copy the contents of the line (after removing the
+                # annotations) into the `div` element
+                div.string = line_elem
+
+                # Iterate over the annotations, generating anchor
+                # elements that link the annotation to the note at the
+                # bottom of the page
+                for annotation_num, annotation_ind in zip(annotation_nums,
+                                                          annotation_inds):
+                    a = soup.new_tag('a')
+                    a.attrs['href'] = '#'.join([basename(html_output_path),
+                                                annotation_num])
+                    sup = soup.new_tag('sup')
+                    sup.string = annotation_num
+                    a.insert(0, sup)
+
+                    # Insert the anchor element into the `div` element
+                    # at the appropriate location
+                    div.insert(annotation_ind, a)
+
+            else:
+
+                # Copy the contents of the line into the `div` element
+                div.string = line_elem
+
+            # Insert the `div` element into the paragraph element
             paragraph_elem.insert(div_ind, div)
             div_ind += 1
+
         body.insert(paragraph_ind, paragraph_elem)
+
+    # Add in annotation section
+    if annotations:
+        annotation_section = soup.new_tag('p')
+
+        # Iterate over the annotations, assuming the the index of the
+        # list matches the natural ordering of the annotations
+        for annotation_num, annotation in enumerate(annotations):
+            div = soup.new_tag('div')
+            small = soup.new_tag('small')
+            small.string = '\t{}'.format(annotation)
+            div.insert(0, small)
+
+            # Generate a named anchor element so that the original
+            # location of the annotation in the song can be linked to
+            # this location
+            a = soup.new_tag('a')
+            a.attrs['name'] = annotation_num + 1
+            sup = soup.new_tag('sup')
+            sup.string = str(annotation_num + 1)
+            a.insert(0, sup)
+            div.insert(0, a)
+            annotation_section.insert(annotation_num, div)
+
+        # Insert annotation section at the next index
+        body.insert(paragraph_ind + 1, annotation_section)
 
     # Add in navigational links
     div = soup.new_tag('div')
@@ -272,7 +351,7 @@ def htmlify_song(name, song_id, album_file_name=None):
         a_back_to_albums.attrs['href'] = join('..', '..',
                                               albums_index_html_file_name)
         div.insert(2, a_back_to_albums)
-    current_body_ind = paragraph_ind + 1
+    current_body_ind = paragraph_ind + 2
     body.insert(current_body_ind, div)
 
     # Put body in HTML element
@@ -281,6 +360,36 @@ def htmlify_song(name, song_id, album_file_name=None):
     # Write out "prettified" HTML to the output file
     with open(html_output_path, 'w') as html_output:
         html_output.write(html.prettify())
+
+
+def find_annotation_indices(line, annotations):
+    """
+    Get list of annotation indices in a sentence (treating the
+    annotations themselves as zero-length entities).
+
+    :param line: original line (including annotations)
+    :type line: str
+    :param annotation_nums: list of annotation values, i.e., the
+                            numbered part of each annotation
+    :type annotation_nums: list
+
+    :returns: list of indices for zero-length annotations in line
+    :rtype: list
+    """
+
+    indices = []
+
+    # Figure out the indices of the zero-length annotations
+    i = 0
+    line = line.split(' ', 1)[1]
+    for part in line:
+        if part in annotations:
+            indices.append(i)
+            continue
+        if not part in annotations:
+            i += len(part)
+
+    return indices
 
 
 def main():
