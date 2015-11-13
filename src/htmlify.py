@@ -232,19 +232,9 @@ def htmlify_song(name, song_id, album_file_name=None):
     heading.string = name
     html.insert(0, heading)
 
-    # Create `body` element
-    body = soup.new_tag('body')
-
-    # Insert a `head` element in body with a `style` sub-element to
-    # define the navigation bar at the bottom
-    head = soup.new_tag('head')
-    style = soup.new_tag('style')
-    style.string = "\nul {\n\tlist-style-type: none;\n\tmargin: 0;\n\tpadding: 0;\n\toverflow: hidden;\n}\n\nli {\n\tfloat: left;\n}\n\na:link, a:visited {\n\tdisplay: block;\n\twidth: 120px;\n\tfont-weight: bold;\n\tcolor: #FFFFFF;\n\tbackground-color: #2C3539;\n\ttext-align: center;\n\tpadding: 4px;\n\ttext-decoration: none;\n\ttext-transform: uppercase;\n}\n\na:hover, a:active {\n\tbackground-color: #848482;\n}"
-    head.insert(0, style)
-    body.insert(0, head)
-
     # Process lines from raw lyrics file into different paragraph
     # elements
+    body = soup.new_tag('body')
     song_lines = open(input_path).read().strip().split('\n')
     paragraphs = []
     current_paragraph = []
@@ -314,7 +304,7 @@ def htmlify_song(name, song_id, album_file_name=None):
             paragraph_elem.insert(div_ind, div)
             div_ind += 1
 
-        body.insert(paragraph_ind + 1, paragraph_elem)
+        body.insert(paragraph_ind, paragraph_elem)
 
     # Add in annotation section
     if annotations:
@@ -340,41 +330,29 @@ def htmlify_song(name, song_id, album_file_name=None):
             annotation_section.insert(annotation_num, div)
 
         # Insert annotation section at the next index
-        body.insert(paragraph_ind + 2, annotation_section)
+        body.insert(paragraph_ind + 1, annotation_section)
 
-    # Add in navigation bar
-    nav_bar = soup.new_tag('ul')
-    li_home = soup.new_tag('li')
+    # Add in navigational links
+    div = soup.new_tag('div')
     a_home = soup.new_tag('a')
     a_home.string = 'Home'
     a_home.attrs['href'] = join('..', '..', index_html_file_name)
-    li_home.insert(0, a_home)
-    nav_bar.insert(0, li_home)
-
-    # If the song file has an associated album ID, insert links to the
-    # album index page and to the albums index page
+    div.insert(0, a_home)
     if album_file_name:
 
-        # Insert navigational link for going "back" to the album index
-        # page
-        li_back = soup.new_tag('li')
+        # Insert back/back to album navigational links only if the song
+        # file has an associated album ID
         a_back = soup.new_tag('a')
         a_back.string = 'Back to album'
         a_back.attrs['href'] = join('..', '..', 'albums', album_file_name)
-        li_back.insert(0, a_back)
-        nav_bar.insert(1, li_back)
-
-        # Insert navigational link for going "back" to the albums index
-        # page
-        li_back_to_albums = soup.new_tag('li')
+        div.insert(1, a_back)
         a_back_to_albums = soup.new_tag('a')
         a_back_to_albums.string = 'Back to albums'
         a_back_to_albums.attrs['href'] = join('..', '..',
                                               albums_index_html_file_name)
-        li_back_to_albums.insert(0, a_back_to_albums)
-        nav_bar.insert(2, li_back_to_albums)
-
-    body.insert(paragraph_ind + 3, nav_bar)
+        div.insert(2, a_back_to_albums)
+    current_body_ind = paragraph_ind + 2
+    body.insert(current_body_ind, div)
 
     # Put body in HTML element
     html.insert(1, body)
