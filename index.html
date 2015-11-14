@@ -12,9 +12,9 @@
   	<script>
   		$(document).ready(function(){
   			$(".album").click(function(){
-  				var pagelink = $(this).id;
+  				var pagelink = this.id;
+  				console.log(pagelink)
     			$("#content").load(pagelink);
-    			alert("test");
 			});
 		});
   	</script>
