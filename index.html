@@ -1,24 +1,74 @@
+<!DOCTYPE html>
 <html>
 
-<h1>Bob Dylan Lyrics</h1>
-<br>
-<div><a href="albums.html">Albums</a></div><br>
-<div><a href="">1960s</a><br><a href="">1970s</a><br></div>
-<br>
-<h2>What is this site?</h2>
-<br>
-<div>This project is an offshoot of work I did in my final year at the University of Pennsylvania toward my honors thesis in creative writing. The basic idea of my thesis was to take the lyrics of Bob Dylan and conduct writing “experiments” on the lyrics. For example, one particular experiment I did was collecting all of the questions in Dylan’s lyrics and forming them into a sort of poem. But, the collecting of the questions led to many issues:</div>
-<br>
-<div>In what order would I put the questions?</div>
-<div>How would I even decide what was and was not a question? (Keep in mind, there are no question marks in the songs themselves!)</div>
-<div>How would I conduct experiments with faulty, unpunctuated, and inaccurate lyrics?</div>
-<br>
-<div>As a result, I decided that I would have to take it upon myself to transcribe the lyrics, since I could find no authoritative versions of the lyrics (even the “official” Bob Dylan lyrics book is woefully inadequate). But this idea of an authoritative version of a given song led to an interesting question: how could one indeed create an accurate transcription of any given song, given that songs are dynamic, different from performance to performance? There are no “official” lyrics for a song, there only exist “official” lyrics for a specific performance of a song. So, I decided to transcribe not merely all of the songs, but all of the different versions too. If you’re a Bob Dylan fan - and I was a huge one even before I started the project, my fandom growing exponentially the deeper I got into the transcriptions, then you know that one of the things that makes Dylan’s art distinctive is his ability to adapt, change, add to, subtract from, and rearrange his lyrics, as well as the way in which the words are uttered and the musical accompaniment. Dylan is known for experimenting with his songs and, whether these experiments work or not, it’s fascinating to study them and try to understand them.</div>
-<br>
-<div>So, the aim of this website is to provide the lyrics of all of the official versions of Bob Dylan’s songs as I’ve transcribed them (by official, I mean, officially released, either on album or video). Now, I have not transcribed every single song - I’m still going, but I can tell you that I have transcribed about 98% of his songs and I will be posting them to this website as fast as I can. Of course, it will take time to put all of it up (Dylan has been putting out albums since 1962!), so check back often. I hope that you all can help me fix any errors I’ve made and contribute to this site and make it a great resource for all Dylan enthusiasts! Please email me at mulhodm@gmail.com if you have any comments or suggestions. I’d love to hear from you!</div>
-<br>
-<div>- Matt M.</div>
-<br>
-<div>If you would like to contact me, please email me at mulhodm AT gmail DOT com</div>
-<br>
+<head>
+	<title>Simple Twist of Fate Project</title>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/stof-style.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	<script>
+  		$(document).ready(function(){
+  			$(".album").click(function(){
+  				var pagelink = $(this).id + "#content";
+    			$("#content").load(pagelink);
+    			alert("test");
+			});
+		});
+  	</script>
+</head>
+
+<body>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>Bob Dylan Lyrics</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="nav nav-tabs">
+  				<li class="active"><a href="#">Home</a></li>
+  				<li class="dropdown">
+   					 <a class="dropdown-toggle" data-toggle="dropdown" href="#">1960s
+   					 <span class="caret"></span></a>
+    				 <ul class="dropdown-menu">
+      					<li><a href="#" class="album" id="albums/bob_dylan.html">Bob Dylan</a></li>
+      					<li><a href="#">Submenu 1-2</a></li>
+      					<li><a href="#">Submenu 1-3</a></li> 
+    				</ul>
+  				</li>
+  				<li><a href="#">1970s</a></li>
+  				<li><a href="#">1980s</a></li>
+  				<li><a href="#">1990s</a></li>
+  				<li><a href="#">2000s</a></li>
+  				<li><a href="#">2010s</a></li>
+			</ul>
+			
+<!-- <p><a href="albums.html">Albums</a></p>
+<p><a href="">1960s</a><a href="">1970s</a></p>
+ -->
+
+	<div class="row">
+		<div class="col-xs-12" id="content">
+			<h2>What is this site?</h2>
+			<p>This project is an offshoot of work I did in my final year at the University of Pennsylvania toward my honors thesis in creative writing. The basic idea of my thesis was to take the lyrics of Bob Dylan and conduct writing “experiments” on the lyrics. For example, one particular experiment I did was collecting all of the questions in Dylan’s lyrics and forming them into a sort of poem. But, the collecting of the questions led to many issues:</p>
+			<p>In what order would I put the questions?</p>
+			<p>How would I even decide what was and was not a question? (Keep in mind, there are no question marks in the songs themselves!)</p>
+			<p>How would I conduct experiments with faulty, unpunctuated, and inaccurate lyrics?</p>
+			<p>As a result, I decided that I would have to take it upon myself to transcribe the lyrics, since I could find no authoritative versions of the lyrics (even the “official” Bob Dylan lyrics book is woefully inadequate). But this idea of an authoritative version of a given song led to an interesting question: how could one indeed create an accurate transcription of any given song, given that songs are dynamic, different from performance to performance? There are no “official” lyrics for a song, there only exist “official” lyrics for a specific performance of a song. So, I decided to transcribe not merely all of the songs, but all of the different versions too. If you’re a Bob Dylan fan - and I was a huge one even before I started the project, my fandom growing exponentially the deeper I got into the transcriptions, then you know that one of the things that makes Dylan’s art distinctive is his ability to adapt, change, add to, subtract from, and rearrange his lyrics, as well as the way in which the words are uttered and the musical accompaniment. Dylan is known for experimenting with his songs and, whether these experiments work or not, it’s fascinating to study them and try to understand them.</p>
+			<p>So, the aim of this website is to provide the lyrics of all of the official versions of Bob Dylan’s songs as I’ve transcribed them (by official, I mean, officially released, either on album or video). Now, I have not transcribed every single song - I’m still going, but I can tell you that I have transcribed about 98% of his songs and I will be posting them to this website as fast as I can. Of course, it will take time to put all of it up (Dylan has been putting out albums since 1962!), so check back often. I hope that you all can help me fix any errors I’ve made and contribute to this site and make it a great resource for all Dylan enthusiasts! Please email me at mulhodm@gmail.com if you have any comments or suggestions. I’d love to hear from you!</p>
+			<p>- Matt M.</p>
+			<p>If you would like to contact me, please email me at mulhodm AT gmail DOT com</p>
+		</div>
+	</div>
+
+</div>
+
+</body>
 </html>
