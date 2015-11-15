@@ -180,18 +180,6 @@ def htmlify_album(name, file_name, songs):
         ol.insert(ol_ind, li)
     body.insert(1, ol)
 
-    # Add in links to "Home" and "Back"
-    div = soup.new_tag('div')
-    a_home = soup.new_tag('a')
-    a_home.string = 'Home'
-    a_home.attrs['href'] = join('..', index_html_file_name)
-    div.insert(0, a_home)
-    a_back = soup.new_tag('a')
-    a_back.string = 'Back'
-    a_back.attrs['href'] = join('..', albums_index_html_file_name)
-    div.insert(1, a_back)
-    body.insert(2, div)
-
     # Put body in HTML element
     html.insert(0, body)
 
@@ -331,28 +319,6 @@ def htmlify_song(name, song_id, album_file_name=None):
 
         # Insert annotation section at the next index
         body.insert(paragraph_ind + 1, annotation_section)
-
-    # Add in navigational links
-    div = soup.new_tag('div')
-    a_home = soup.new_tag('a')
-    a_home.string = 'Home'
-    a_home.attrs['href'] = join('..', '..', index_html_file_name)
-    div.insert(0, a_home)
-    if album_file_name:
-
-        # Insert back/back to album navigational links only if the song
-        # file has an associated album ID
-        a_back = soup.new_tag('a')
-        a_back.string = 'Back to album'
-        a_back.attrs['href'] = join('..', '..', 'albums', album_file_name)
-        div.insert(1, a_back)
-        a_back_to_albums = soup.new_tag('a')
-        a_back_to_albums.string = 'Back to albums'
-        a_back_to_albums.attrs['href'] = join('..', '..',
-                                              albums_index_html_file_name)
-        div.insert(2, a_back_to_albums)
-    current_body_ind = paragraph_ind + 2
-    body.insert(current_body_ind, div)
 
     # Put body in HTML element
     html.insert(1, body)
