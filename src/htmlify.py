@@ -174,8 +174,7 @@ def htmlify_album(name, file_name, songs):
         li = soup.new_tag('li')
         a = soup.new_tag('a')
         a.string = song_name
-        a.attrs['href'] = join('..', 'songs', 'html',
-                               '{0}.html'.format(song_file_id))
+        a.attrs['href'] = join('songs', 'html', '{0}.html'.format(song_file_id))
         li.insert(0, a)
         ol.insert(ol_ind, li)
     body.insert(1, ol)
