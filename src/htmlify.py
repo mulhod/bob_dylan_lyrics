@@ -160,10 +160,7 @@ def htmlify_album(name, file_name, songs):
 
     # Add in elements for the heading
     heading = soup.new_tag('h1')
-    a = soup.new_tag('a')
-    a.attrs['href'] = file_name
-    a.string = name
-    heading.insert(0, a)
+    heading.string = name
     body.insert(0, heading)
 
     # Add in ordered list element for all songs
