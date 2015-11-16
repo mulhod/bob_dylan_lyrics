@@ -79,6 +79,36 @@ def clean_up_html(html):
     return BS_CLEANUP2.sub(r'<', BS_CLEANUP1.sub(r'>', html))
 
 
+def find_annotation_indices(line, annotations):
+    """
+    Get list of annotation indices in a sentence (treating the
+    annotations themselves as zero-length entities).
+
+    :param line: original line (including annotations)
+    :type line: str
+    :param annotation_nums: list of annotation values, i.e., the
+                            numbered part of each annotation
+    :type annotation_nums: list
+
+    :returns: list of indices for zero-length annotations in line
+    :rtype: list
+    """
+
+    indices = []
+
+    # Figure out the indices of the zero-length annotations
+    i = 0
+    line = line.split(' ', 1)[1]
+    for part in line:
+        if part in annotations:
+            indices.append(i)
+            continue
+        if not part in annotations:
+            i += len(part)
+
+    return indices
+
+
 def read_index():
     """
     Read .index file and make dictionary representation.
@@ -121,9 +151,10 @@ def read_index():
     return albums
 
 
-def htmlify(albums):
+def htmlify_everything(albums):
     """
-    Create HTML file for each album.
+    Create HTML files for the albums index page, each album, and each
+    song.
 
     :param albums: dictionary of album names/album HTML file names and
                    associated song dictionaries (which, in turn, have a
@@ -389,36 +420,6 @@ def htmlify_song(name, song_id, album_file_name=None):
         html_output.write(clean_up_html(str(html)))
 
 
-def find_annotation_indices(line, annotations):
-    """
-    Get list of annotation indices in a sentence (treating the
-    annotations themselves as zero-length entities).
-
-    :param line: original line (including annotations)
-    :type line: str
-    :param annotation_nums: list of annotation values, i.e., the
-                            numbered part of each annotation
-    :type annotation_nums: list
-
-    :returns: list of indices for zero-length annotations in line
-    :rtype: list
-    """
-
-    indices = []
-
-    # Figure out the indices of the zero-length annotations
-    i = 0
-    line = line.split(' ', 1)[1]
-    for part in line:
-        if part in annotations:
-            indices.append(i)
-            continue
-        if not part in annotations:
-            i += len(part)
-
-    return indices
-
-
 def main():
     parser = \
         ArgumentParser(conflict_handler='resolve',
@@ -436,7 +437,7 @@ def main():
 
     # Generate HTML files for albums, songs, etc.
     sys.stderr.write('Generating HTML files for the albums and songs...\n')
-    htmlify(albums_dict)
+    htmlify_everything(albums_dict)
 
 
 if __name__ == '__main__':
