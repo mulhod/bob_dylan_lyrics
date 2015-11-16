@@ -23,8 +23,61 @@ albums_index_html_file_name = 'albums.html'
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
 
-# Annotation regular expression
+# Regular expression matching the expected annotation format
 ANNOTATION = re.compile(r'\*\*([0-9]+)\*\*')
+
+# Regular expressions for stylized double, single quotes
+DOUBLE_QUOTES = re.compile(r'“|”')
+SINGLE_QUOTES = re.compile(r'‘')
+
+# BeautifulSoup clean-up-related regular expressions
+BS_CLEANUP1 = re.compile(r'&gt;')
+BS_CLEANUP2 = re.compile(r'&lt;')
+
+
+def remove_annotations(line):
+    """
+    Remove all annotations from a line of text.
+
+    :param line: input line
+    :type line: str
+
+    :returns: output line
+    :rtype: str
+    """
+
+    return ANNOTATION.sub('', line)
+
+
+def replace_funky_quotes(text):
+    """
+    Replace all single/double stylized quotes with their unstylized
+    counterparts.
+
+    :param text: input text
+    :type text: str
+
+    :returns: output text
+    :rtype: str
+    """
+
+    return SINGLE_QUOTES.sub(r"'", DOUBLE_QUOTES.sub(r'"', text))
+
+
+def clean_up_html(html):
+    """
+    Clean up HTML generated via BeautifulSoup by converting
+    "&lt;"/"&gt;" character sequences to "<"/">".
+
+    :param html: input HTML
+    :type html: str
+
+    :returns: output HTML
+    :rtype: str
+    """
+
+    return BS_CLEANUP2.sub(r'<', BS_CLEANUP1.sub(r'>', html))
+
 
 def read_index():
     """
@@ -92,39 +145,36 @@ def htmlify(albums):
 
     # Add in elements for the heading
     index_heading = soup.new_tag('h1')
-    a = soup.new_tag('a')
-    a.attrs['href'] = albums_index_html_file_name
-    a.string = 'Albums'
-    index_heading.insert(0, a)
-    index_body.insert(0, index_heading)
+    index_heading.string = 'Albums'
+    index_heading.string.wrap(soup.new_tag('a',
+                                           href=albums_index_html_file_name))
+    index_body.append(index_heading)
 
     # Add in ordered list element for all albums
     index_ol = soup.new_tag('ol')
-    for ol_ind, album in enumerate(albums):
+    for album in albums:
         album_name = album[0]
         album_html_file_name = album[1]
         li = soup.new_tag('li')
-        a = soup.new_tag('a')
-        a.string = album_name
-        a.attrs['href'] = join('albums', album_html_file_name)
-        li.insert(0, a)
-        index_ol.insert(ol_ind, li)
-    index_body.insert(1, index_ol)
+        li.string = album_name
+        li.string.wrap(soup.new_tag('a', href=join('albums',
+                                                   album_html_file_name)))
+        index_ol.append(li)
+    index_body.append(index_ol)
 
     # Add in "Home" link
     div = soup.new_tag('div')
-    a_home = soup.new_tag('a')
-    a_home.string = 'Home'
-    a_home.attrs['href'] = index_html_file_name
-    div.insert(0, a_home)
-    index_body.insert(2, div)
+    div.string = 'Home'
+    div.string.wrap(soup.new_tag('a', href=index_html_file_name))
+    index_body.append(div)
 
     # Put body in HTML element
-    index_html.insert(0, index_body)
+    index_html.append(index_body)
 
     # Write new HTML file for albums index page
-    with open(join(project_dir, albums_index_html_file_name), 'w') as albums_index:
-        albums_index.write(index_html.prettify())
+    with open(join(project_dir,
+                   albums_index_html_file_name), 'w') as albums_index:
+        albums_index.write(index_html.prettify(formatter="html"))
 
     # Generate pages for albums
     sys.stderr.write('HTMLifying the individual album pages...\n')
@@ -161,27 +211,27 @@ def htmlify_album(name, file_name, songs):
     # Add in elements for the heading
     heading = soup.new_tag('h1')
     heading.string = name
-    body.insert(0, heading)
+    body.append(heading)
 
     # Add in ordered list element for all songs
     ol = soup.new_tag('ol')
-    for ol_ind, song in enumerate(songs.items()):
+    for song in songs.items():
         song_name = song[0]
         song_file_id = song[1]
         li = soup.new_tag('li')
-        a = soup.new_tag('a')
-        a.string = song_name
-        a.attrs['href'] = join('songs', 'html', '{0}.html'.format(song_file_id))
-        li.insert(0, a)
-        ol.insert(ol_ind, li)
-    body.insert(1, ol)
+        li.string = song_name
+        li.string.wrap(soup.new_tag('a',
+                                    href=join('songs', 'html',
+                                              '{0}.html'.format(song_file_id))))
+        ol.append(li)
+    body.append(ol)
 
     # Put body in HTML element
-    html.insert(0, body)
+    html.append(body)
 
     # Write new HTML file for albums index page
     with open(join(albums_dir, file_name), 'w') as album_file:
-        album_file.write(html.prettify())
+        album_file.write(html.prettify(formatter="html"))
 
     # Generate HTML files for all of the songs
     for song, song_id in songs.items():
@@ -214,12 +264,14 @@ def htmlify_song(name, song_id, album_file_name=None):
     # Title
     heading = soup.new_tag('h1')
     heading.string = name
-    html.insert(0, heading)
+    html.append(heading)
 
     # Process lines from raw lyrics file into different paragraph
     # elements
     body = soup.new_tag('body')
-    song_lines = open(input_path).read().strip().split('\n')
+    song_lines = (replace_funky_quotes(open(input_path).read())
+                  .strip()
+                  .split('\n'))
     paragraphs = []
     current_paragraph = []
     annotations = []
@@ -240,9 +292,8 @@ def htmlify_song(name, song_id, album_file_name=None):
 
     # Add paragraph elements with sub-elements of type `div` to the
     # `body` element
-    for paragraph_ind, paragraph in enumerate(paragraphs):
+    for paragraph in paragraphs:
         paragraph_elem = soup.new_tag('p')
-        div_ind = 0
         for line_elem in paragraph:
 
             # Create new `div` element to store the line
@@ -257,7 +308,7 @@ def htmlify_song(name, song_id, album_file_name=None):
                                                           annotation_nums)
 
                 # Remove annotations from the line
-                line_elem = ANNOTATION.sub('', line_elem)
+                line_elem = remove_annotations(line_elem)
 
                 # Copy the contents of the line (after removing the
                 # annotations) into the `div` element
@@ -266,29 +317,45 @@ def htmlify_song(name, song_id, album_file_name=None):
                 # Iterate over the annotations, generating anchor
                 # elements that link the annotation to the note at the
                 # bottom of the page
-                for annotation_num, annotation_ind in zip(annotation_nums,
-                                                          annotation_inds):
-                    a = soup.new_tag('a')
-                    a.attrs['href'] = '#'.join([basename(html_output_path),
-                                                annotation_num])
-                    sup = soup.new_tag('sup')
-                    sup.string = annotation_num
-                    a.insert(0, sup)
+                for i, annotation_num in enumerate(annotation_nums):
+                    a = soup.new_tag('a',
+                                     href='#'.join([basename(html_output_path),
+                                                    annotation_num]))
+                    a.string = annotation_num
+                    a.string.wrap(soup.new_tag('sup'))
 
                     # Insert the anchor element into the `div` element
                     # at the appropriate location
-                    div.insert(annotation_ind, a)
+                    ind = annotation_inds[i]
+                    if ind == len(div.string):
+                        div.string.replace_with('{0}{1}'
+                                                .format(div.string,
+                                                        str(a)))
+                    else:
+                        (div.string
+                         .replace_with('{0}{1}{2}'
+                                       .format(div.string[:ind + 1],
+                                               str(a),
+                                               div.string[ind + 1:])))
 
+                        # After putting annotations back into the
+                        # contents of the `div`, the indices of the
+                        # annotations after will necessarily change as
+                        # they will be pushed back by the length of the
+                        # string that is being added
+                        for j in range(len(annotation_inds)):
+                            if j > i:
+                                annotation_inds[j] = (annotation_inds[j]
+                                                      + len(a.string))
             else:
 
                 # Copy the contents of the line into the `div` element
                 div.string = line_elem
 
             # Insert the `div` element into the paragraph element
-            paragraph_elem.insert(div_ind, div)
-            div_ind += 1
+            paragraph_elem.append(div)
 
-        body.insert(paragraph_ind, paragraph_elem)
+        body.append(paragraph_elem)
 
     # Add in annotation section
     if annotations:
@@ -298,30 +365,28 @@ def htmlify_song(name, song_id, album_file_name=None):
         # list matches the natural ordering of the annotations
         for annotation_num, annotation in enumerate(annotations):
             div = soup.new_tag('div')
-            small = soup.new_tag('small')
-            small.string = '\t{}'.format(annotation)
-            div.insert(0, small)
+            div.string = '\t{}'.format(annotation)
+            div.string.wrap(soup.new_tag('small'))
 
             # Generate a named anchor element so that the original
             # location of the annotation in the song can be linked to
             # this location
             a = soup.new_tag('a')
             a.attrs['name'] = annotation_num + 1
-            sup = soup.new_tag('sup')
-            sup.string = str(annotation_num + 1)
-            a.insert(0, sup)
-            div.insert(0, a)
-            annotation_section.insert(annotation_num, div)
+            a.string = str(annotation_num + 1)
+            a.string.wrap(soup.new_tag('sup'))
+            div.small.insert_before(a)
+            annotation_section.append(div)
 
         # Insert annotation section at the next index
-        body.insert(paragraph_ind + 1, annotation_section)
+        body.append(annotation_section)
 
     # Put body in HTML element
-    html.insert(1, body)
+    html.append(body)
 
     # Write out "prettified" HTML to the output file
     with open(html_output_path, 'w') as html_output:
-        html_output.write(html.prettify())
+        html_output.write(clean_up_html(str(html)))
 
 
 def find_annotation_indices(line, annotations):
