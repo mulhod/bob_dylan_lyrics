@@ -15,9 +15,9 @@ from argparse import (ArgumentParser,
 project_dir = dirname(dirname(__file__))
 albums_dir = join(project_dir, 'albums')
 songs_dir = join(project_dir, 'songs')
+index_file_path = join(project_dir, '.songs_index')
 txt_dir = join(songs_dir, 'txt')
 html_dir = join(songs_dir, 'html')
-index_file_path = join(songs_dir, '.index')
 index_html_file_name = 'index.html'
 albums_index_html_file_name = 'albums.html'
 
@@ -112,7 +112,7 @@ def find_annotation_indices(line, annotations):
 
 def read_index():
     """
-    Read .index file and make dictionary representation.
+    Read .songs_index and make dictionary representation.
 
     :returns: albums dictionary
     :rtype: dict
@@ -129,7 +129,7 @@ def read_index():
         # Strip newlines off the end of the line
         line = lines[i].strip('\n')
 
-        # Empty lines separate albums in .index
+        # Empty lines separate albums in .songs_index
         if not line:
             i += 1
             continue
@@ -154,7 +154,7 @@ def read_index():
             i += 1
 
     if not albums:
-        raise ValueError('No albums found in .index file!')
+        raise ValueError('No albums found in .songs_index file!')
 
     return albums
 
@@ -194,8 +194,9 @@ def htmlify_everything(albums):
     index_ol = soup.new_tag('ol')
     for album in albums:
         album_html_file_name = albums[album]['attrs']['file name']
+        year = albums[album]['attrs']['release date'].split()[-1]
         li = soup.new_tag('li')
-        li.string = album
+        li.string = '{0} ({1})'.format(album, year)
         li.string.wrap(soup.new_tag('a', href=join('albums',
                                                    album_html_file_name)))
         index_ol.append(li)
@@ -219,19 +220,19 @@ def htmlify_everything(albums):
     sys.stderr.write('HTMLifying the individual album pages...\n')
     for album, attrs_songs in albums.items():
         htmlify_album(album,
-                      attrs_songs['attrs']['file name'],
+                      attrs_songs['attrs'],
                       attrs_songs['songs'])
 
 
-def htmlify_album(name, file_name, songs):
+def htmlify_album(name, attrs, songs):
     """
     Generate HTML pages for a particular album and its songs.
 
     :param name: name of the album
     :type name: str
-    :param file_name: name of HTML file corresponding to the given
-                      album
-    :type file_name: str
+    :param attrs: dictionary of album attributes, including the name of
+                  the HTML file corresponding to the given album
+    :type attrs: str
     :param songs: dictionary of song names mapped to song IDs
     :type songs: dict
 
@@ -252,6 +253,30 @@ def htmlify_album(name, file_name, songs):
     heading.string = name
     body.append(heading)
 
+    # Add in the album attributes, including a picture of the album
+    attrs_div = soup.new_tag('div')
+    image = soup.new_tag('img', src=join('..', 'resources', 'images',
+                                         attrs['image file name']))
+    attrs_div.append(image)
+    release_div = soup.new_tag('div')
+    release_div.string = 'Released: {0}'.format(attrs['release date'])
+    attrs_div.append(release_div)
+    length_div = soup.new_tag('div')
+    length_div.string = 'Length: {0}'.format(attrs['length'])
+    attrs_div.append(length_div)
+    producers_string = attrs['producer(s)']
+    producers_string_template = \
+        ('Producer{0}: {1}'
+         .format('' if len(producers_string.split(', ')) == 1 else '(s)',
+                 '{0}'))
+    producers_div = soup.new_tag('div')
+    producers_div.string = producers_string_template.format(producers_string)
+    attrs_div.append(producers_div)
+    label_div = soup.new_tag('div')
+    label_div.string = 'Label: {0}'.format(attrs['label'])
+    attrs_div.append(label_div)
+    body.append(attrs_div)
+
     # Add in ordered list element for all songs
     ol = soup.new_tag('ol')
     for song in songs.items():
@@ -269,12 +294,12 @@ def htmlify_album(name, file_name, songs):
     html.append(body)
 
     # Write new HTML file for albums index page
-    with open(join(albums_dir, file_name), 'w') as album_file:
+    with open(join(albums_dir, attrs['file name']), 'w') as album_file:
         album_file.write(html.prettify(formatter="html"))
 
     # Generate HTML files for all of the songs
     for song, song_id in songs.items():
-        htmlify_song(song, song_id, file_name)
+        htmlify_song(song, song_id, attrs['file name'])
 
 
 def htmlify_song(name, song_id, album_file_name=None):
@@ -433,14 +458,15 @@ def main():
         ArgumentParser(conflict_handler='resolve',
                        formatter_class=ArgumentDefaultsHelpFormatter,
                        description='Generates HTML files based largely on the'
-                                   ' contents of the .index file and on the '
-                                   'raw text files that contain the lyrics.')
+                                   ' contents of the .songs_index file and on'
+                                   ' the raw text files that contain the '
+                                   'lyrics.')
     args = parser.parse_args()
 
-    # Read in contents of .index file, constructing a dictionary of
-    # albums and the associated songs, etc.
-    sys.stderr.write('Reading .index file and building up index of albums and'
-                     ' songs...\n')
+    # Read in contents of .songs_index file, constructing a dictionary
+    # of albums and the associated songs, etc.
+    sys.stderr.write('Reading .songs_index file and building up index of '
+                     'albums and songs...\n')
     albums_dict = read_index()
 
     # Generate HTML files for albums, songs, etc.
