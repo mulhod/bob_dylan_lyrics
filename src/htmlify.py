@@ -1,5 +1,6 @@
 import re
 import sys
+from json import loads
 from os.path import (join,
                      exists,
                      dirname,
@@ -133,16 +134,23 @@ def read_index():
             i += 1
             continue
 
-        # Lines that name an album begin unindented
-        elif not line.startswith(' '):
-            current_album = tuple(line.rsplit(', '))
-            albums[current_album] = OrderedDict()
+        # Lines that name an album begin unindented and start with a
+        # "{" character (as they are part of encoded JSON objects)
+        # TODO: How are we going to deal with songs that we want to add
+        # that are NOT on albums at all? We're going to have to
+        # introduce some other parsing/notation for stray songs.
+        elif (not line.startswith(' ')
+              and line.startswith('{')):
+            attrs = loads(line)
+            current_album = attrs['name']
+            del attrs['name']
+            albums[current_album] = dict(attrs=attrs, songs=OrderedDict())
             i += 1
 
         # Songs begin on indented lines
         else:
             song, song_id = line.strip().rsplit(', ', 1)
-            albums[current_album][song] = song_id
+            albums[current_album]['songs'][song] = song_id
             i += 1
 
     if not albums:
@@ -156,9 +164,10 @@ def htmlify_everything(albums):
     Create HTML files for the albums index page, each album, and each
     song.
 
-    :param albums: dictionary of album names/album HTML file names and
-                   associated song dictionaries (which, in turn, have a
-                   similar kind of contents)
+    :param albums: dictionary of album names mapped to tuples
+                   containing an album attribute dictionary, including
+                   attributes such as the HTML file name, the release
+                   date, etc., and a song dictionary
     :type albums: dict
 
     :returns: None
@@ -184,10 +193,9 @@ def htmlify_everything(albums):
     # Add in ordered list element for all albums
     index_ol = soup.new_tag('ol')
     for album in albums:
-        album_name = album[0]
-        album_html_file_name = album[1]
+        album_html_file_name = albums[album]['attrs']['file name']
         li = soup.new_tag('li')
-        li.string = album_name
+        li.string = album
         li.string.wrap(soup.new_tag('a', href=join('albums',
                                                    album_html_file_name)))
         index_ol.append(li)
@@ -209,10 +217,10 @@ def htmlify_everything(albums):
 
     # Generate pages for albums
     sys.stderr.write('HTMLifying the individual album pages...\n')
-    for album, songs in albums.items():
-        album_name = album[0]
-        album_html_file_name = album[1]
-        htmlify_album(album_name, album_html_file_name, songs)
+    for album, attrs_songs in albums.items():
+        htmlify_album(album,
+                      attrs_songs['attrs']['file name'],
+                      attrs_songs['songs'])
 
 
 def htmlify_album(name, file_name, songs):

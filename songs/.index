@@ -1,4 +1,4 @@
-Bob Dylan, bob_dylan.html
+{"name": "Bob Dylan", "file name": "bob_dylan.html", "image file name": "Bob_Dylan.gif", "release date": "March 19, 1962", "length": "36:54", "producer(s)": "John Hammond", "label": "Columbia"}
     You're No Good, youre_no_good_1
     Talkin' New York, talkin_new_york_1
     In My Time of Dyin', in_my_time_of_dyin_1
@@ -13,7 +13,7 @@ Bob Dylan, bob_dylan.html
     Song to Woody, song_to_woody_1
     See That My Grave Is Kept Clean, see_that_my_grave_is_kept_clean_1
 
-The Freewheelin' Bob Dylan, the_freewheelin_bob_dylan.html
+{"name": "The Freewheelin' Bob Dylan", "file name": "the_freewheelin_bob_dylan.html", "image file name": "The_Freewheelin_Bob_Dylan.jpg", "release date": "May 27, 1963", "length": "50:04", "producer(s)": "John Hammond, Tom Wilson", "label": "Columbia"}
     Blowin' in the Wind, blowin_in_the_wind_1
     Girl from the North Country, girl_from_the_north_country_1
     Masters of War, masters_of_war_1
@@ -28,7 +28,7 @@ The Freewheelin' Bob Dylan, the_freewheelin_bob_dylan.html
     Honey, Just Allow Me One More Chance, honey_just_allow_me_one_more_chance_1
     I Shall Be Free, i_shall_be_free_1
 
-The Times They Are A-Changin', the_times_they_are_a-changin.html
+{"name": "The Times They Are A-Changin'", "file name": "the_times_they_are_a-changin.html", "image file name": "The_Times_They_Are_A-Changin.jpg", "release date": "January 13, 1964", "length": "45:36", "producer(s)": "Tom Wilson", "label": "Columbia"}
     The Times They Are A-Changin', the_times_they_are_a-changin_1
     Ballad of Hollis Brown, ballad_of_hollis_brown_1
     With God on Our Side, with_god_on_our_side_1
@@ -39,3 +39,16 @@ The Times They Are A-Changin', the_times_they_are_a-changin.html
     When the Ship Comes In, when_the_ship_comes_in_1
     The Lonesome Death of Hattie Carroll, the_lonesome_death_of_hattie_carroll_1
     Restless Farewell, restless_farewell_1
+
+{"name": "Another Side of Bob Dylan", "file name": "another_side_of_bob_dylan.html", "image file name": "Another_Side_of_Bob_Dylan.jpg", "release date": "August 8, 1964", "length": "50:37", "producer(s)": "Tom Wilson", "label": "Columbia"}
+    All I Really Want to Do, all_i_really_want_to_do_1
+    Black Crow Blues, black_crow_blues_1
+    Spanish Harlem Incident, spanish_harlem_incident_1
+    Chimes of Freedom, chimes_of_freedom_1
+    I Shall Be Free No.10, i_shall_be_free_no_10_1
+    To Ramona, to_ramona_1
+    Motorpsycho Nightmare, motorpsycho_nightmare_1
+    My Back Pages, my_back_pages_1
+    I Don't Believe You, i_dont_believe_you_1
+    Ballad in Plain D, ballad_in_plain_d_1
+    It Ain't Me, Babe, it_aint_me_babe_1
