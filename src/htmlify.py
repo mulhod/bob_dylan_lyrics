@@ -99,7 +99,7 @@ def find_annotation_indices(line, annotations):
 
     # Figure out the indices of the zero-length annotations
     i = 0
-    line = line.split(' ', 1)[1]
+    line = line.strip().split('**')
     for part in line:
         if part in annotations:
             indices.append(i)
