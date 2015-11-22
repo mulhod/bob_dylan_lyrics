@@ -373,9 +373,9 @@ def htmlify_song(name, song_id, album_file_name=None):
                     else:
                         (div.string
                          .replace_with('{0}{1}{2}'
-                                       .format(div.string[:ind + 1],
+                                       .format(div.string[:ind],
                                                str(a),
-                                               div.string[ind + 1:])))
+                                               div.string[ind:])))
 
                         # After putting annotations back into the
                         # contents of the `div`, the indices of the
