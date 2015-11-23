@@ -255,7 +255,7 @@ def htmlify_album(name, attrs, songs):
 
     # Add in the album attributes, including a picture of the album
     attrs_div = soup.new_tag('div')
-    image = soup.new_tag('img', src=join('..', 'resources', 'images',
+    image = soup.new_tag('img', src=join('resources', 'images',
                                          attrs['image file name']))
     attrs_div.append(image)
     release_div = soup.new_tag('div')
@@ -286,7 +286,7 @@ def htmlify_album(name, attrs, songs):
         li.string = song_name
         li.string.wrap(soup
                        .new_tag('a',
-                                href=join('..', 'songs', 'html',
+                                href=join('songs', 'html',
                                           '{0}.html'.format(song_file_id))))
         ol.append(li)
     body.append(ol)
