@@ -284,7 +284,7 @@ def htmlify_album(name, attrs, songs):
     # Write new HTML file for albums index page
     with open(join(albums_dir,
                    '{}.html'.format(attrs['file_id'])), 'w') as album_file:
-        album_file.write(html.prettify(formatter="html"))
+        album_file.write(clean_up_html(str(html)))
 
     # Generate HTML files for all of the songs
     for song, song_id in songs.items():
