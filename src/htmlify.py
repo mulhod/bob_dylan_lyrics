@@ -32,8 +32,9 @@ DOUBLE_QUOTES = re.compile(r'“|”')
 SINGLE_QUOTES = re.compile(r'‘')
 
 # BeautifulSoup clean-up-related regular expressions
-BS_CLEANUP1 = re.compile(r'&gt;')
-BS_CLEANUP2 = re.compile(r'&lt;')
+CLEANUP_REGEXES = {'>': re.compile(r'&gt;'),
+                   '<': re.compile(r'&lt;'),
+                   '&': re.compile(r'&amp;amp;')}
 
 
 def remove_annotations(line):
@@ -77,7 +78,10 @@ def clean_up_html(html):
     :rtype: str
     """
 
-    return BS_CLEANUP2.sub(r'<', BS_CLEANUP1.sub(r'>', html))
+    for sub, regex in CLEANUP_REGEXES.items():
+        html = regex.sub(sub, html)
+
+    return html
 
 
 def find_annotation_indices(line, annotations):
@@ -112,7 +116,8 @@ def find_annotation_indices(line, annotations):
 
 def read_songs_index():
     """
-    Read .songs_index file and make dictionary representation.
+    Read albums_and_songs_index.jsonlines file and make dictionary
+    representation.
 
     :returns: albums dictionary
     :rtype: dict
@@ -127,15 +132,26 @@ def read_songs_index():
 
         if album_or_song_dict['type'] == 'album':
 
+            # Make a dictionary that has keys 'attrs' mapped to the
+            # album attributes, i.e., metadata, and 'songs' mapped to
+            # an ordered dictionary of songs where the keys are song
+            # names and the values are dictionaries containing the file
+            # IDs and a key 'from' mapped to the name/file ID of the
+            # original album that the song came from (only if the song
+            # came from a previous album; otherwise, this will be set
+            # to None)
             attrs = album_or_song_dict['metadata']
             songs = attrs['songs']
             del attrs['songs']
             albums[attrs['name']] = \
-                dict(attrs=attrs,
-                     songs=OrderedDict((song_id, song_dict['file_id'])
-                                       for song_id, song_dict
-                                       in sorted(songs.items(),
-                                                 key=lambda x: x[1]['index'])))
+                {'attrs': attrs,
+                 'songs':
+                     OrderedDict((song_id,
+                                  {'file_id': song_dict['file_id'],
+                                   'from': song_dict.get('from', None)})
+                                 for song_id, song_dict
+                                 in sorted(songs.items(),
+                                           key=lambda x: x[1]['index']))}
 
         elif album_or_song_dict['type'] == 'song':
 
@@ -148,7 +164,8 @@ def read_songs_index():
                              'attribute is neither "album" nor "song".')
 
     if not albums:
-        raise ValueError('No albums found in .songs_index file!')
+        raise ValueError('No albums found in albums_and_songs_index.jsonlines'
+                         ' file!')
 
     return albums
 
@@ -158,10 +175,14 @@ def htmlify_everything(albums):
     Create HTML files for the albums index page, each album, and each
     song.
 
-    :param albums: dictionary of album names mapped to tuples
+    :param albums: dictionary of album names mapped to a dictionary
                    containing an album attribute dictionary, including
                    attributes such as the HTML file name, the release
-                   date, etc., and a song dictionary
+                   date, etc., and an ordered dictionary of songs,
+                   including song file IDs and information about where
+                   the songs come from (if they were from a previous
+                   album, as in the case of compilation albums, for
+                   instance)
     :type albums: dict
 
     :returns: None
@@ -222,8 +243,10 @@ def htmlify_album(name, attrs, songs):
     :param attrs: dictionary of album attributes, including the name of
                   the HTML file corresponding to the given album
     :type attrs: str
-    :param songs: dictionary of song names mapped to song IDs
-    :type songs: dict
+    :param songs: ordered dictionary of song names mapped to song
+                  IDs/info regarding the source of the song (in cases
+                  where the album is a compilation album)
+    :type songs: OrderedDict
 
     :returns: None
     :rtype: None
@@ -267,14 +290,29 @@ def htmlify_album(name, attrs, songs):
 
     # Add in ordered list element for all songs
     ol = soup.new_tag('ol')
-    for song in songs.items():
-        song_name = song[0]
-        song_file_id = song[1]
+    for song in songs:
+        song_name = song
+        song = songs[song]
         li = soup.new_tag('li')
-        li.string = song_name
-        li.string.wrap(soup.new_tag('a',
-                                    href=join('songs', 'html',
-                                              '{0}.html'.format(song_file_id))))
+        from_song = song.get('from')
+        if from_song:
+            a_song = soup.new_tag('a',
+                                  href=join('songs', 'html',
+                                            '{0}.html'.format(song['file_id'])))
+            a_song.string = song_name
+            a_orig_album = \
+                soup.new_tag('a',
+                             href=join(join('albums',
+                                            '{0}'.format(from_song['file_id']))))
+            a_orig_album.string = from_song['name']
+            a_orig_album.string.wrap(soup.new_tag('i'))
+            li.string = ('{0} (appeared on {1})'.format(a_song, a_orig_album))
+        else:
+            li.string = song_name
+            li.string.wrap(soup.new_tag('a',
+                                        href=join('songs', 'html',
+                                                  '{0}.html'
+                                                  .format(song['file_id']))))
         ol.append(li)
     body.append(ol)
 
@@ -286,9 +324,12 @@ def htmlify_album(name, attrs, songs):
                    '{}.html'.format(attrs['file_id'])), 'w') as album_file:
         album_file.write(clean_up_html(str(html)))
 
-    # Generate HTML files for all of the songs
-    for song, song_id in songs.items():
-        htmlify_song(song, song_id)
+    # Generate HTML files for each song (unless a song is indicated as
+    # having appeared on previous album(s) since this new instance of
+    # the song will simply reuse the original lyrics file)
+    for song in songs:
+        if not songs[song].get('from'):
+            htmlify_song(song, songs[song]['file_id'])
 
 
 def htmlify_song(name, song_id):
@@ -440,15 +481,16 @@ def main():
         ArgumentParser(conflict_handler='resolve',
                        formatter_class=ArgumentDefaultsHelpFormatter,
                        description='Generates HTML files based largely on the'
-                                   ' contents of the .songs_index file and on'
-                                   ' the raw text files that contain the '
+                                   ' contents of the '
+                                   'albums_and_songs_index.jsonlines file and'
+                                   ' on the raw text files that contain the '
                                    'lyrics.')
     args = parser.parse_args()
 
-    # Read in contents of .songs_index file, constructing a dictionary
-    # of albums and the associated songs, etc.
-    sys.stderr.write('Reading .songs_index file and building up index of '
-                     'albums and songs...\n')
+    # Read in contents of the albums_and_songs_index.jsonlines file,
+    # constructing a dictionary of albums and the associated songs, etc.
+    sys.stderr.write('Reading the albums_and_songs_index.jsonlines file and '
+                     'building up index of albums and songs...\n')
     albums_dict = read_songs_index()
 
     # Generate HTML files for albums, songs, etc.
