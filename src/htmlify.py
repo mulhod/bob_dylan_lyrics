@@ -20,6 +20,7 @@ txt_dir = join(songs_dir, 'txt')
 html_dir = join(songs_dir, 'html')
 index_html_file_name = 'index.html'
 albums_index_html_file_name = 'albums.html'
+site_url = 'http://mulhod.github.io/bob_dylan_lyrics'
 
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
@@ -201,7 +202,9 @@ def htmlify_everything(albums):
     # Add in elements for the heading
     index_heading = soup.new_tag('h1')
     index_heading.string = 'Albums'
-    index_heading.string.wrap(soup.new_tag('a', href=albums_index_html_file_name))
+    index_heading.string.wrap(soup.new_tag('a',
+                                           href=join(site_url,
+                                                     albums_index_html_file_name)))
     index_body.append(index_heading)
 
     # Add in ordered list element for all albums
@@ -211,14 +214,19 @@ def htmlify_everything(albums):
         year = albums[album]['attrs']['release_date'].split()[-1]
         li = soup.new_tag('li')
         li.string = '{0} ({1})'.format(album, year)
-        li.string.wrap(soup.new_tag('a', href=join('albums', album_html_file_name)))
+        li.string.wrap(soup.new_tag('a',
+                                    href=join(site_url,
+                                              'albums',
+                                              album_html_file_name)))
         index_ol.append(li)
     index_body.append(index_ol)
 
     # Add in "Home" link
     div = soup.new_tag('div')
     div.string = 'Home'
-    div.string.wrap(soup.new_tag('a', href=index_html_file_name))
+    div.string.wrap(soup.new_tag('a',
+                                 href=join(site_url,
+                                           index_html_file_name)))
     index_body.append(div)
 
     # Put body in HTML element
@@ -267,8 +275,11 @@ def htmlify_album(name, attrs, songs):
 
     # Add in the album attributes, including a picture of the album
     attrs_div = soup.new_tag('div')
-    image = soup.new_tag('img', src=join('resources', 'images',
-                                         attrs['image_file_name']))
+    image = soup.new_tag('img',
+                         src=join(site_url,
+                                  'resources',
+                                  'images',
+                                  attrs['image_file_name']))
     attrs_div.append(image)
     release_div = soup.new_tag('div')
     release_div.string = 'Released: {0}'.format(attrs['release_date'])
@@ -295,24 +306,24 @@ def htmlify_album(name, attrs, songs):
         song = songs[song]
         li = soup.new_tag('li')
         from_song = song.get('from')
+        a_song = soup.new_tag('a',
+                              href=join(site_url,
+                                        'songs',
+                                        'html',
+                                        '{0}.html'.format(song['file_id'])))
         if from_song:
-            a_song = soup.new_tag('a',
-                                  href=join('songs', 'html',
-                                            '{0}.html'.format(song['file_id'])))
             a_song.string = song_name
             a_orig_album = \
                 soup.new_tag('a',
-                             href=join(join('albums',
+                             href=join(join(site_url,
+                                            'albums',
                                             '{0}'.format(from_song['file_id']))))
             a_orig_album.string = from_song['name']
             a_orig_album.string.wrap(soup.new_tag('i'))
             li.string = ('{0} (appeared on {1})'.format(a_song, a_orig_album))
         else:
             li.string = song_name
-            li.string.wrap(soup.new_tag('a',
-                                        href=join('songs', 'html',
-                                                  '{0}.html'
-                                                  .format(song['file_id']))))
+            li.string.wrap(a_song)
         ol.append(li)
     body.append(ol)
 
@@ -407,9 +418,9 @@ def htmlify_song(name, song_id):
                 # elements that link the annotation to the note at the
                 # bottom of the page
                 for i, annotation_num in enumerate(annotation_nums):
-                    a = soup.new_tag('a',
-                                     href='#'.join([basename(html_output_path),
-                                                    annotation_num]))
+                    href = '#'.join([join(site_url, basename(html_output_path)),
+                                     annotation_num])
+                    a = soup.new_tag('a', href=href)
                     a.string = annotation_num
                     a.string.wrap(soup.new_tag('sup'))
 
