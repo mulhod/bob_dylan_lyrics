@@ -13,14 +13,15 @@ from argparse import (ArgumentParser,
 
 # Paths
 project_dir = dirname(dirname(__file__))
+site_url = 'http://mulhod.github.io/bob_dylan_lyrics'
 albums_dir = join(project_dir, 'albums')
 songs_dir = join(project_dir, 'songs')
 index_file_path = join(project_dir, 'albums_and_songs_index.jsonlines')
 txt_dir = join(songs_dir, 'txt')
 html_dir = join(songs_dir, 'html')
+song_html_url = join(site_url, 'songs', 'html')
 index_html_file_name = 'index.html'
 albums_index_html_file_name = 'albums.html'
-site_url = 'http://mulhod.github.io/bob_dylan_lyrics'
 
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
@@ -357,7 +358,9 @@ def htmlify_song(name, song_id):
     """
 
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
-    html_output_path = join(html_dir, '{0}.html'.format(song_id))
+    html_file_name = '{0}.html'.format(song_id)
+    html_output_path = join(html_dir, html_file_name)
+    html_url = join(song_html_url, html_file_name)
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
     # Make BeautifulSoup object
@@ -418,7 +421,7 @@ def htmlify_song(name, song_id):
                 # elements that link the annotation to the note at the
                 # bottom of the page
                 for i, annotation_num in enumerate(annotation_nums):
-                    href = '#'.join([html_output_path, annotation_num])
+                    href = '{0}#{1}'.format(html_url, annotation_num)
                     a = soup.new_tag('a', href=href)
                     a.string = annotation_num
                     a.string.wrap(soup.new_tag('sup'))
