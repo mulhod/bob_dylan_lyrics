@@ -418,8 +418,7 @@ def htmlify_song(name, song_id):
                 # elements that link the annotation to the note at the
                 # bottom of the page
                 for i, annotation_num in enumerate(annotation_nums):
-                    href = '#'.join([join(site_url, basename(html_output_path)),
-                                     annotation_num])
+                    href = '#'.join([html_output_path, annotation_num])
                     a = soup.new_tag('a', href=href)
                     a.string = annotation_num
                     a.string.wrap(soup.new_tag('sup'))
