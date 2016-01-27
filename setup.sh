@@ -35,7 +35,7 @@ echo "Created \"dylan_lyrics\" environment successfully! To use environment," \
 
 echo "Installing some extra packages with pip (since conda does not seem to" \
      "want to install them)..."
-pip install argparse pudb
+pip install argparse pudb typing==3.5.0.1
 if [[ $? -gt 0 ]]; then
     
     echo "pip installation of langdetect and argparse failed. Exiting."

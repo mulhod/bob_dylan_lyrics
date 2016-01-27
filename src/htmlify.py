@@ -7,6 +7,9 @@ from os.path import (join,
                      basename)
 from collections import OrderedDict
 
+from typing import (Any,
+                    Dict,
+                    List)
 from bs4 import BeautifulSoup
 from argparse import (ArgumentParser,
                       ArgumentDefaultsHelpFormatter)
@@ -49,7 +52,7 @@ song_texts = []
 unique_song_texts = set()
 
 
-def remove_annotations(text: str):
+def remove_annotations(text: str) -> str:
     """
     Remove inline annotation marks and footnotes from a string
     containing raw lyrics text file(s).
@@ -75,7 +78,7 @@ def remove_annotations(text: str):
 
 
 
-def standardize_quotes(text):
+def standardize_quotes(text: str) -> str:
     """
     Replace all single/double stylized quotes with their unstylized
     counterparts.
@@ -91,7 +94,7 @@ def standardize_quotes(text):
                                  replace_double_quotes(r'"', text))
 
 
-def clean_up_html(html):
+def clean_up_html(html: str) -> str:
     """
     Clean up HTML generated via BeautifulSoup by converting
     "&lt;"/"&gt;" character sequences to "<"/">".
@@ -109,7 +112,8 @@ def clean_up_html(html):
     return html
 
 
-def find_annotation_indices(line, annotations):
+def find_annotation_indices(line: str,
+                            annotations: List[str]) -> List[int]:
     """
     Get list of annotation indices in a sentence (treating the
     annotations themselves as zero-length entities).
@@ -139,7 +143,7 @@ def find_annotation_indices(line, annotations):
     return indices
 
 
-def read_songs_index():
+def read_songs_index() -> Dict[str, Any]:
     """
     Read albums_and_songs_index.jsonlines file and make dictionary
     representation.
@@ -151,9 +155,9 @@ def read_songs_index():
     """
 
     albums = OrderedDict()
-    for album_or_song_dict in (loads(line.strip('\n')) for line
-                               in open(index_file_path)
-                               if not line.startswith('#') and line.strip('\n')):
+    for album_or_song_dict in \
+        (loads(line.strip('\n')) for line in open(index_file_path)
+         if not line.startswith('#') and line.strip('\n')):
 
         if album_or_song_dict['type'] == 'album':
 
@@ -198,7 +202,8 @@ def read_songs_index():
     return albums
 
 
-def htmlify_everything(albums, make_downloads=False):
+def htmlify_everything(albums: Dict[str, Any],
+                       make_downloads: bool = False) -> None:
     """
     Create HTML files for the albums index page, each album, and each
     song.
@@ -275,7 +280,10 @@ def htmlify_everything(albums, make_downloads=False):
                       make_downloads=make_downloads)
 
 
-def htmlify_album(name, attrs, songs, make_downloads=False):
+def htmlify_album(name: str,
+                  attrs: Dict[str, Any],
+                  songs: OrderedDict,
+                  make_downloads: bool = False) -> None:
     """
     Generate HTML pages for a particular album and its songs.
 
@@ -283,7 +291,7 @@ def htmlify_album(name, attrs, songs, make_downloads=False):
     :type name: str
     :param attrs: dictionary of album attributes, including the name of
                   the HTML file corresponding to the given album
-    :type attrs: str
+    :type attrs: dict
     :param songs: ordered dictionary of song names mapped to song
                   IDs/info regarding the source of the song (in cases
                   where the album is a compilation album)
@@ -338,11 +346,13 @@ def htmlify_album(name, attrs, songs, make_downloads=False):
     # Add in ordered list element for all songs
     ol = soup.new_tag('ol')
     for song in songs:
+
         song_name = song
         song = songs[song]
         li = soup.new_tag('li')
         from_song = song.get('from')
-        instrumental = song.get('instrumental')
+        instrumental = (' (Instrumental)' if song.get('instrumental')
+                        else '')
         a_song = soup.new_tag('a',
                               href=join(site_url,
                                         'songs',
@@ -357,17 +367,19 @@ def htmlify_album(name, attrs, songs, make_downloads=False):
                                             '{0}'.format(from_song['file_id']))))
             a_orig_album.string = from_song['name']
             a_orig_album.string.wrap(soup.new_tag('i'))
-            li.string = ('{0} (appeared on {1})'.format(a_song, a_orig_album))
+            li.string = ('{0} (appeared on {1}{2})'
+                         .format(a_song, a_orig_album, instrumental))
         else:
-            li.string = song_name
+            li.string = '{0}{1}'.format(song_name, instrumental)
             li.string.wrap(a_song)
+        
+        # Italicize/gray out song entries if they do not contain lyrics
         if instrumental:
-            # Italicize/gray out song entries if they do not contain
-            # lyrics and add a parenthetical comment.
-            li.string = '{} (Instrumental)'.format(li.string)
             li.string.wrap(soup.new_tag('i'))
             li.string.wrap(soup.new_tag('font', color='#726E6D'))
+
         ol.append(li)
+
     body.append(ol)
 
     # Put body in HTML element
@@ -394,6 +406,7 @@ def htmlify_album(name, attrs, songs, make_downloads=False):
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
         if make_downloads and not song.get('instrumental'):
+
             input_path = join(txt_dir, '{0}.txt'.format(songs[song]['file_id']))
             song_text = standardize_quotes(open(input_path).read()).strip()
             song_text = remove_annotations(song_text)
@@ -401,7 +414,9 @@ def htmlify_album(name, attrs, songs, make_downloads=False):
             unique_song_texts.add(song_text)
 
 
-def htmlify_song(name, song_id, instrumental=False):
+def htmlify_song(name: str,
+                 song_id: str,
+                 instrumental: bool = False) -> None:
     """
     Read in a raw text file containing lyrics and output an HTML file
     (unless the song is an instrumental and contains no lyrics).
@@ -576,7 +591,7 @@ def htmlify_song(name, song_id, instrumental=False):
         html_output.write(clean_up_html(str(html)))
 
 
-def write_big_lyrics_files():
+def write_big_lyrics_files() -> None:
     """
     Process the raw lyrics files stored in `song_texts` and
     `unique_song_texts` (i.e., after `htmlify_song` has been run on each
