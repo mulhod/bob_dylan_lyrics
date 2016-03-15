@@ -405,7 +405,7 @@ def htmlify_album(name: str,
                          instrumental=songs[song].get('instrumental'))
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
-        if make_downloads and not song.get('instrumental'):
+        if make_downloads and not songs[song].get('instrumental'):
 
             input_path = join(txt_dir, '{0}.txt'.format(songs[song]['file_id']))
             song_text = standardize_quotes(open(input_path).read()).strip()
