@@ -90,8 +90,7 @@ def standardize_quotes(text: str) -> str:
     :rtype: str
     """
 
-    return replace_single_quotes(r"'",
-                                 replace_double_quotes(r'"', text))
+    return replace_single_quotes(r"'", replace_double_quotes(r'"', text))
 
 
 def clean_up_html(html: str) -> str:
@@ -178,6 +177,7 @@ def read_songs_index() -> Dict[str, Any]:
                      OrderedDict((song_id,
                                   {'file_id': song_dict['file_id'],
                                    'from': song_dict.get('from'),
+                                   'sung_by': song_dict.get('sung_by'),
                                    'instrumental': song_dict.get('instrumental')})
                                  for song_id, song_dict
                                  in sorted(songs.items(),
@@ -347,12 +347,20 @@ def htmlify_album(name: str,
     ol = soup.new_tag('ol')
     for song in songs:
 
+        # Make a list element for the song
+        li = soup.new_tag('li')
         song_name = song
         song = songs[song]
-        li = soup.new_tag('li')
         from_song = song.get('from')
-        instrumental = (' (Instrumental)' if song.get('instrumental')
-                        else '')
+        sung_by = song.get('sung_by', '')
+
+        # If the song was sung by someone other than Bob Dylan, there
+        # will be a "sung_by" key whose value will be the actual (and
+        # primary) singer of the song, which should appear in a
+        # parenthetical comment
+        if sung_by:
+            sung_by = ' (sung by {0})'.format(sung_by)
+        instrumental = ' (Instrumental)' if song.get('instrumental') else ''
         a_song = soup.new_tag('a',
                               href=join(site_url,
                                         'songs',
@@ -367,10 +375,20 @@ def htmlify_album(name: str,
                                             '{0}'.format(from_song['file_id']))))
             a_orig_album.string = from_song['name']
             a_orig_album.string.wrap(soup.new_tag('i'))
-            li.string = ('{0} (appeared on {1}{2})'
-                         .format(a_song, a_orig_album, instrumental))
+
+            # Construct the string content of the list element including
+            # information about the original song/album, a comment that
+            # the song is an instrumental song if that applies, and a
+            # comment that the song was sung by someone else if that applies
+            li.string = ('{0} (appeared on {1}{2}){3}'
+                         .format(a_song, a_orig_album, instrumental, sung_by))
         else:
-            li.string = '{0}{1}'.format(song_name, instrumental)
+
+            # Construct the string content of the list element including
+            # a comment that the song is an instrumental song if that
+            # applies, and a comment that the song was sung by someone
+            # else if that applies
+            li.string = '{0}{1}{2}'.format(song_name, instrumental, sung_by)
             li.string.wrap(a_song)
         
         # Italicize/gray out song entries if they do not contain lyrics
