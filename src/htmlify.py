@@ -177,7 +177,7 @@ def read_songs_index() -> Dict[str, Any]:
                      OrderedDict((song_id,
                                   {'file_id': song_dict['file_id'],
                                    'from': song_dict.get('from'),
-                                   'sung_by': song_dict.get('sung_by'),
+                                   'sung_by': song_dict.get('sung_by', ''),
                                    'instrumental': song_dict.get('instrumental')})
                                  for song_id, song_dict
                                  in sorted(songs.items(),
