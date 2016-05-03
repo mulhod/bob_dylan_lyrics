@@ -125,13 +125,22 @@ def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
 
     # Figure out the indices of the zero-length annotations
     i = 0
+    annotation_index = 0
     line = line.strip().split('**')
     for part in line:
-        if part in annotations:
-            indices.append(i)
-            continue
+        try:
+            if part == annotations[annotation_index]:
+                indices.append(i)
+                annotation_index += 1
+                continue
+        except IndexError:
+            pass
         if not part in annotations:
             i += len(part)
+
+    if len(annotations) != annotation_index:
+        raise ValueError('One or more annotations were not found. annotations '
+                         '= {0}, line = "{1}".'.format(annotations, line))
 
     return indices
 
