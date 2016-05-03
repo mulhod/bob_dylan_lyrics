@@ -287,7 +287,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                     raise ValueError('The "sides" attribute contains invalid '
                                      'song indices: {0}.'.format(sides_dict[side]))
             ol.append(inner_ol)
-            ol.append('p')
+            ol.append(soup.new_tag('p'))
     else:
         for song in songs:
             ol.append(generate_song_list_element(song, songs[song]))
