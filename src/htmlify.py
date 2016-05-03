@@ -270,7 +270,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
 
     ol = soup.new_tag('ol')
     if sides_dict:
-        for side in sides_dict:
+        for side in sorted(sides_dict):
             side_div = soup.new_tag('div')
             side_div.string = "Side {0}".format(side)
             ol.append(side_div)
