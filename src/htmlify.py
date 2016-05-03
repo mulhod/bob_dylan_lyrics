@@ -5,6 +5,7 @@ from os.path import join, exists, dirname, basename
 from collections import OrderedDict
 
 from typing import Any, Dict, List
+from bs4.element import Tag
 from bs4 import BeautifulSoup
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
@@ -191,6 +192,109 @@ def read_songs_index() -> Dict[str, Any]:
     return albums
 
 
+def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag:
+    """
+    Make a list element for a song (for use when generating an album
+    webpage, for example).
+
+    :param song_name: name of song
+    :type song_name: str
+    :param song_dict: dictionary containing song attributes
+    :type song_dict: dict
+
+    :returns: HTML list element
+    :rtype: bs4.element.Tag
+    """
+
+    # Make a list element for the song
+    li = soup.new_tag('li')
+    from_song = song_dict.get('from')
+    sung_by = song_dict.get('sung_by', '')
+
+    # If the song was sung by someone other than Bob Dylan, there will
+    # be a "sung_by" key whose value will be the actual (and primary)
+    # singer of the song, which should appear in a parenthetical comment
+    if sung_by:
+        sung_by = ' (sung by {0})'.format(sung_by)
+    instrumental = ' (Instrumental)' if song_dict.get('instrumental') else ''
+    song_file_path = join(site_url, 'songs', 'html', '{0}.html'
+                          .format(song_dict['file_id']))
+    a_song = soup.new_tag('a', href=song_file_path)
+    if from_song:
+        a_song.string = song_name
+        orig_album_file_path = join(site_url, 'albums', '{0}'.format(from_song['file_id']))
+        a_orig_album = soup.new_tag('a', href=orig_album_file_path)
+        a_orig_album.string = from_song['name']
+        a_orig_album.string.wrap(soup.new_tag('i'))
+
+        # Construct the string content of the list element including
+        # information about the original song/album, a comment that the
+        # song is an instrumental song if that applies, and a comment
+        # that the song was sung by someone else if that applies
+        li.string = ('{0} (appeared on {1}{2}){3}'
+                     .format(a_song, a_orig_album, instrumental, sung_by))
+    else:
+
+        # Construct the string content of the list element including a
+        # comment that the song is an instrumental song if that applies,
+        # and a comment that the song was sung by someone else if that
+        # applies
+        li.string = '{0}{1}{2}'.format(song_name, instrumental, sung_by)
+        li.string.wrap(a_song)
+        
+    # Italicize/gray out song entries if they do not contain lyrics
+    if instrumental:
+        li.string.wrap(soup.new_tag('i'))
+        li.string.wrap(soup.new_tag('font', color='#726E6D'))
+
+    return li
+
+
+def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) -> Tag:
+    """
+    Generate an HTML element representing an ordered list of songs.
+
+    If `sides_dict`
+
+    :param songs: ordered dictionary of song names mapped to song
+                  IDs/info regarding the source of the song (in cases
+                  where the album is a compilation album)
+    :type songs: OrderedDict
+    :param sides_dict: dictionary mapping side indices to song index
+                       ranges, i.e., "1" -> "1-5"
+    :type sides_dict: dict
+
+    :returns: ordered list element
+    :rtype: bs4.element.Tag
+    """
+
+    ol = soup.new_tag('ol')
+    if sides_dict:
+        for side in sides_dict:
+            side_div = soup.new_tag('div')
+            side_div.string = "Side {0}".format(side)
+            ol.append(side_div)
+            ol.append(soup.new_tag('p'))
+            inner_ol = soup.new_tag('ol')
+            first, last = sides_dict[side].split('-')
+            for index, song in enumerate(songs):
+                try:
+                    if index + 1 in range(int(first), int(last) + 1):
+                        inner_ol.append(generate_song_list_element(song, songs[song]))
+                    if int(last) == index + 1:
+                        break
+                except TypeError as e:
+                    raise ValueError('The "sides" attribute contains invalid '
+                                     'song indices: {0}.'.format(sides_dict[side]))
+            ol.append(inner_ol)
+            ol.append('p')
+    else:
+        for song in songs:
+            ol.append(generate_song_list_element(song, songs[song]))
+    
+    return ol
+
+
 def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> None:
     """
     Create HTML files for the albums index page, each album, and each
@@ -318,58 +422,11 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     attrs_div.append(label_div)
     body.append(attrs_div)
 
-    # Add in ordered list element for all songs
-    ol = soup.new_tag('ol')
-    for song in songs:
-
-        # Make a list element for the song
-        li = soup.new_tag('li')
-        song_name = song
-        song = songs[song]
-        from_song = song.get('from')
-        sung_by = song.get('sung_by', '')
-
-        # If the song was sung by someone other than Bob Dylan, there
-        # will be a "sung_by" key whose value will be the actual (and
-        # primary) singer of the song, which should appear in a
-        # parenthetical comment
-        if sung_by:
-            sung_by = ' (sung by {0})'.format(sung_by)
-        instrumental = ' (Instrumental)' if song.get('instrumental') else ''
-        song_file_path = join(site_url, 'songs', 'html',
-                              '{0}.html'.format(song['file_id']))
-        a_song = soup.new_tag('a', href=song_file_path)
-        if from_song:
-            a_song.string = song_name
-            orig_album_file_path = join(site_url, 'albums',
-                                        '{0}'.format(from_song['file_id']))
-            a_orig_album = soup.new_tag('a', href=orig_album_file_path)
-            a_orig_album.string = from_song['name']
-            a_orig_album.string.wrap(soup.new_tag('i'))
-
-            # Construct the string content of the list element including
-            # information about the original song/album, a comment that
-            # the song is an instrumental song if that applies, and a
-            # comment that the song was sung by someone else if that applies
-            li.string = ('{0} (appeared on {1}{2}){3}'
-                         .format(a_song, a_orig_album, instrumental, sung_by))
-        else:
-
-            # Construct the string content of the list element including
-            # a comment that the song is an instrumental song if that
-            # applies, and a comment that the song was sung by someone
-            # else if that applies
-            li.string = '{0}{1}{2}'.format(song_name, instrumental, sung_by)
-            li.string.wrap(a_song)
-        
-        # Italicize/gray out song entries if they do not contain lyrics
-        if instrumental:
-            li.string.wrap(soup.new_tag('i'))
-            li.string.wrap(soup.new_tag('font', color='#726E6D'))
-
-        ol.append(li)
-
-    body.append(ol)
+    # Add in an ordered list element for all songs (or several ordered
+    # lists for each side, disc, etc.)
+    # NOTE: Deal with the possibility of a 'discs' attribute in addition
+    # to the 'sides' attribute
+    body.append(generate_song_list(songs, attrs.get('sides', None)))
 
     # Put body in HTML element
     html.append(body)
@@ -382,22 +439,22 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
     # the song will simply reuse the original lyrics file) and,
-    # optionally, add song texts to the
-    # `song_texts`/`unique_song_texts` lists so that lyrics file
-    # downloads can be generated at the end of processing
+    # optionally, add song texts to the `song_texts`/`unique_song_texts`
+    # lists so that lyrics file downloads can be generated at the end of
+    # processing
     for song in songs:
+        song_attrs = songs[song]
 
         # HTMLify the song
-        if not songs[song].get('from'):
-            htmlify_song(song, songs[song]['file_id'],
-                         instrumental=songs[song].get('instrumental'))
+        if not song_attrs.get('from'):
+            htmlify_song(song, song_attrs['file_id'],
+                         instrumental=song_attrs.get('instrumental'))
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
-        if make_downloads and not songs[song].get('instrumental'):
+        if make_downloads and not song_attrs.get('instrumental'):
 
-            input_path = join(txt_dir, '{0}.txt'.format(songs[song]['file_id']))
-            song_text = standardize_quotes(open(input_path).read()).strip()
-            song_text = remove_annotations(song_text)
+            input_path = join(txt_dir, '{0}.txt'.format(song_attrs['file_id']))
+            song_text = remove_annotations(standardize_quotes(open(input_path).read()).strip())
             song_texts.append(song_text)
             unique_song_texts.add(song_text)
 
