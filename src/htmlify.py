@@ -275,26 +275,82 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
 
     :returns: ordered list element
     :rtype: bs4.element.Tag
+
+    :raises: ValueError if information about sides contains conflicts
+             with assumptions
     """
 
     ol = soup.new_tag('ol')
     if sides_dict:
         for side in sorted(sides_dict):
+
+            # Make sure the side is interpretable as an integer
+            try:
+                if int(side) < 1:
+                    raise ValueError
+            except ValueError:
+                raise ValueError('Each side ID should be interpretable as an '
+                                 'integer that is greater than zero. Offending'
+                                 ' side ID: "{0}".'.format(side))
+
             side_div = soup.new_tag('div')
             side_div.string = "Side {0}".format(side)
             ol.append(side_div)
             ol.append(soup.new_tag('p'))
             inner_ol = soup.new_tag('ol')
-            first, last = sides_dict[side].split('-')
+
+            # Each side will have an associated range of song numbers,
+            # e.g. "1-5" (unless a side contains only a single song, in
+            # which case it will simply be the song number by itself)
+            if '-' in sides_dict[side]:
+                first, last = sides_dict[side].split('-')
+                try:
+                    if int(first) < 1:
+                        raise ValueError
+                    if int(last) < 1:
+                        raise ValueError
+                    if int(last) <= int(first):
+                        raise ValueError
+                except ValueError:
+                    raise ValueError("Each side's associated range should "
+                                     "consist of integer values greater than "
+                                     "zero and the second value should be "
+                                     "greater than the first. Offending range:"
+                                     " \"{0}\".".format(sides_dict[side]))
+            else:
+                first = last = sides_dict[side]
+                try:
+                    if int(first) < 1:
+                        raise ValueError
+                except ValueError:
+                    raise ValueError("Each side's associated range can consist"
+                                     " of a single value, but that value "
+                                     "should be an integer greater than zero. "
+                                     "Offending range: \"{0}\"."
+                                     .format(sides_dict[side]))
+
+            # Get the expected number of songs for the given side
+            expected_number_of_songs = int(last) - int(first) + 1
+            added_songs = 0
             for index, song in enumerate(songs):
                 try:
                     if index + 1 in range(int(first), int(last) + 1):
                         inner_ol.append(generate_song_list_element(song, songs[song]))
+                        added_songs += 1
                     if int(last) == index + 1:
                         break
                 except TypeError as e:
                     raise ValueError('The "sides" attribute contains invalid '
                                      'song indices: {0}.'.format(sides_dict[side]))
+
+            # Make sure the correct number of songs were included
+            if added_songs != expected_number_of_songs:
+                sys.stderr.write('The number of expected songs ({0}) for the '
+                                 'given side ({1}) does not equal the number '
+                                 'of songs actually included on the side '
+                                 '({2}).'
+                                 .format(expected_number_of_songs, side, added_songs))
+
             ol.append(inner_ol)
             ol.append(soup.new_tag('p'))
     else:
