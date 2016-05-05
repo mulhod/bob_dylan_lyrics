@@ -235,21 +235,25 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     elif performed_by:
         performed_by = ' (performed by {0})'.format(performed_by)
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
-    song_file_path = join(site_url, 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
-    a_song = soup.new_tag('a', href=song_file_path)
+    if not instrumental and not performed_by:
+        song_file_path = join(site_url, 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
+        a_song = soup.new_tag('a', href=song_file_path)
     if from_song:
-        a_song.string = song_name
-        orig_album_file_path = join(site_url, 'albums', '{0}'.format(from_song['file_id']))
-        a_orig_album = soup.new_tag('a', href=orig_album_file_path)
-        a_orig_album.string = from_song['name']
-        a_orig_album.string.wrap(soup.new_tag('i'))
+        if not instrumental and not performed_by:
+            a_song.string = song_name
+            orig_album_file_path = join(site_url, 'albums', '{0}'.format(from_song['file_id']))
+            a_orig_album = soup.new_tag('a', href=orig_album_file_path)
+            a_orig_album.string = from_song['name']
+            a_orig_album.string.wrap(soup.new_tag('i'))
 
-        # Construct the string content of the list element including
-        # information about the original song/album, a comment that the
-        # song is an instrumental song if that applies, and a comment
-        # that the song was sung by someone else if that applies
-        li.string = ('{0} (appeared on {1}{2}){3}'
-                     .format(a_song, a_orig_album, instrumental, sung_by))
+            # Construct the string content of the list element including
+            # information about the original song/album, a comment that
+            # the song is an instrumental song if that applies, and a
+            # comment that the song was sung by someone else if that
+            # applies
+            li.string = '{0} (appeared on {1}{2})'.format(a_song, a_orig_album, sung_by)
+        else:
+            li.string = '{0}{1}{2}'.format(song_name, instrumental, performed_by)
     else:
 
         # Construct the string content of the list element including a
@@ -258,7 +262,8 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         # basically just not a Bob Dylan song, if either of those
         # applies
         li.string = '{0}{1}{2}{3}'.format(song_name, instrumental, sung_by, performed_by)
-        li.string.wrap(a_song)
+        if not instrumental and not performed_by:
+            li.string.wrap(a_song)
         
     # Italicize/gray out song entries if they do not contain lyrics
     if instrumental or performed_by:
@@ -520,8 +525,10 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
         song_attrs = songs[song]
 
         # HTMLify the song
-        if not song_attrs['from'] and not song_attrs['written_and_performed_by']:
-            htmlify_song(song, song_attrs['file_id'], instrumental=song_attrs['instrumental'])
+        if (not song_attrs['instrumental'] and
+            not song_attrs['from'] and
+            not song_attrs['written_and_performed_by']):
+            htmlify_song(song, song_attrs['file_id'])
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
         if (make_downloads and
@@ -534,23 +541,15 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             unique_song_texts.add(song_text)
 
 
-def htmlify_song(name: str, song_id: str, instrumental: bool = False) -> None:
+def htmlify_song(name: str, song_id: str) -> None:
     """
     Read in a raw text file containing lyrics and output an HTML file
     (unless the song is an instrumental and contains no lyrics).
-
-    If the song is an instrumental, do not try to read in the raw text
-    file (as there will be none) and instead just write an HTML file
-    that includes only the heading content and the text
-    "(Instrumental)".
 
     :param name: song name
     :type name: str
     :param song_id: file ID
     :type song_id: str
-    :param instrumental: whether or not the song is an instrumental
-                         (default: False)
-    :type instrumental: bool
 
     :returns: None
     :rtype: None
@@ -572,26 +571,6 @@ def htmlify_song(name: str, song_id: str, instrumental: bool = False) -> None:
 
     # Body element
     body = soup.new_tag('body')
-
-    # If the song is an instrumental, forgo any text processing and
-    # simply write a file that contains a message saying the song is an
-    # instrumental
-    if instrumental:
-        div = soup.new_tag('div')
-        p_elem = soup.new_tag('p')
-        p_elem.string = "(Instrumental)"
-        p_elem.string.wrap(soup.new_tag('i'))
-        div.append(p_elem)
-        body.append(div)
-
-        # Put body in HTML element
-        html.append(body)
-
-        # Write out "prettified" HTML to the output file
-        with open(html_output_path, 'w') as html_output:
-            html_output.write(clean_up_html(str(html)))
-        
-        return
 
     # Process lines from raw lyrics file into different paragraph
     # elements
