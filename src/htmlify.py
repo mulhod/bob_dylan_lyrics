@@ -176,9 +176,11 @@ def read_songs_index() -> Dict[str, Any]:
             sorted_songs = sorted(songs.items(), key=lambda x: x[1]['index'])
             ordered_songs = OrderedDict((song_id,
                                          {'file_id': song_dict['file_id'],
-                                          'from': song_dict.get('from'),
+                                          'from': song_dict.get('from', ''),
                                           'sung_by': song_dict.get('sung_by', ''),
-                                          'instrumental': song_dict.get('instrumental')})
+                                          'instrumental': song_dict.get('instrumental', ''),
+                                          'written_and_performed_by':
+                                              song_dict.get('written_and_performed_by', {})})
                                         for song_id, song_dict in sorted_songs)
             albums[attrs['name']] = {'attrs': attrs, 'songs': ordered_songs}
 
@@ -217,17 +219,23 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
 
     # Make a list element for the song
     li = soup.new_tag('li')
-    from_song = song_dict.get('from')
-    sung_by = song_dict.get('sung_by', '')
+    from_song = song_dict['from']
+    sung_by = song_dict['sung_by']
+    performed_by = song_dict['written_and_performed_by'].get('performed_by', '')
 
     # If the song was sung by someone other than Bob Dylan, there will
     # be a "sung_by" key whose value will be the actual (and primary)
-    # singer of the song, which should appear in a parenthetical comment
+    # singer of the song, which should appear in a parenthetical
+    # comment. On the other hand, if the song was both performed by
+    # someone other than Bob Dylan (primarily, at least) and written by
+    # someone other than Bob Dyaln (primarily, again), then there will
+    # be a special "written_and_performed_by" key.
     if sung_by:
         sung_by = ' (sung by {0})'.format(sung_by)
-    instrumental = ' (Instrumental)' if song_dict.get('instrumental') else ''
-    song_file_path = join(site_url, 'songs', 'html', '{0}.html'
-                          .format(song_dict['file_id']))
+    elif performed_by:
+        performed_by = ' (performed by {0})'.format(performed_by)
+    instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
+    song_file_path = join(site_url, 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
     a_song = soup.new_tag('a', href=song_file_path)
     if from_song:
         a_song.string = song_name
@@ -246,13 +254,14 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
 
         # Construct the string content of the list element including a
         # comment that the song is an instrumental song if that applies,
-        # and a comment that the song was sung by someone else if that
+        # and a comment that the song was sung by someone else or is
+        # basically just not a Bob Dylan song, if either of those
         # applies
-        li.string = '{0}{1}{2}'.format(song_name, instrumental, sung_by)
+        li.string = '{0}{1}{2}{3}'.format(song_name, instrumental, sung_by, performed_by)
         li.string.wrap(a_song)
         
     # Italicize/gray out song entries if they do not contain lyrics
-    if instrumental:
+    if instrumental or performed_by:
         li.string.wrap(soup.new_tag('i'))
         li.string.wrap(soup.new_tag('font', color='#726E6D'))
 
@@ -511,12 +520,13 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
         song_attrs = songs[song]
 
         # HTMLify the song
-        if not song_attrs.get('from'):
-            htmlify_song(song, song_attrs['file_id'],
-                         instrumental=song_attrs.get('instrumental'))
+        if not song_attrs['from'] and not song_attrs['written_and_performed_by']:
+            htmlify_song(song, song_attrs['file_id'], instrumental=song_attrs['instrumental'])
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
-        if make_downloads and not song_attrs.get('instrumental'):
+        if (make_downloads and
+            not song_attrs['instrumental'] and
+            not song_attrs['written_and_performed_by']):
 
             input_path = join(txt_dir, '{0}.txt'.format(song_attrs['file_id']))
             song_text = remove_annotations(standardize_quotes(open(input_path).read()).strip())
