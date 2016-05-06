@@ -20,7 +20,7 @@ html_dir = join(songs_dir, 'html')
 song_html_url = join(site_url, 'songs', 'html')
 index_html_file_name = 'index.html'
 albums_index_html_file_name = 'albums.html'
-albums_index_html_file_path = join(site_url, albums_index_html_file_name)
+#albums_index_html_file_path = join(site_url, albums_index_html_file_name)
 file_dumps_dir = join(project_dir, 'full_lyrics_file_dumps')
 
 # BeautifulSoup-related
@@ -236,12 +236,12 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         performed_by = ' (performed by {0})'.format(performed_by)
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
     if not instrumental and not performed_by:
-        song_file_path = join(site_url, 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
+        song_file_path = join('..', 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
         a_song = soup.new_tag('a', href=song_file_path)
     if from_song:
         if not instrumental and not performed_by:
             a_song.string = song_name
-            orig_album_file_path = join(site_url, 'albums', '{0}'.format(from_song['file_id']))
+            orig_album_file_path = join('..', 'albums', '{0}'.format(from_song['file_id']))
             a_orig_album = soup.new_tag('a', href=orig_album_file_path)
             a_orig_album.string = from_song['name']
             a_orig_album.string.wrap(soup.new_tag('i'))
@@ -408,14 +408,14 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
     # Add in elements for the heading
     index_heading = soup.new_tag('h1')
     index_heading.string = 'Albums'
-    index_heading.string.wrap(soup.new_tag('a', href=albums_index_html_file_path))
+    index_heading.string.wrap(soup.new_tag('a', href=albums_index_html_file_name))
     index_body.append(index_heading)
 
     # Add in ordered list element for all albums
     index_ol = soup.new_tag('ol')
     for album in albums:
         album_html_file_name = '{}.html'.format(albums[album]['attrs']['file_id'])
-        album_html_file_path = join(site_url, 'albums', album_html_file_name)
+        album_html_file_path = join('albums', album_html_file_name)
         year = albums[album]['attrs']['release_date'].split()[-1]
         li = soup.new_tag('li')
         li.string = '{0} ({1})'.format(album, year)
@@ -426,7 +426,7 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
     # Add in "Home" link
     div = soup.new_tag('div')
     div.string = 'Home'
-    div.string.wrap(soup.new_tag('a', href=join(site_url, index_html_file_name)))
+    div.string.wrap(soup.new_tag('a', href=index_html_file_name))
     index_body.append(div)
 
     # Put body in HTML element
@@ -558,7 +558,7 @@ def htmlify_song(name: str, song_id: str) -> None:
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(html_dir, html_file_name)
-    html_url = join(song_html_url, html_file_name)
+    #html_url = join('songs', 'html', html_file_name)
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
     # Make BeautifulSoup object
@@ -621,7 +621,7 @@ def htmlify_song(name: str, song_id: str) -> None:
                 # elements that link the annotation to the note at the
                 # bottom of the page
                 for i, annotation_num in enumerate(annotation_nums):
-                    href = '{0}#{1}'.format(html_url, annotation_num)
+                    href = '#{0}'.format(annotation_num)
                     a = soup.new_tag('a', href=href)
                     a.string = annotation_num
                     a.string.wrap(soup.new_tag('sup'))
