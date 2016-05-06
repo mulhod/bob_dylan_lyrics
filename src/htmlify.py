@@ -23,6 +23,14 @@ file_dumps_dir = join(project_dir, 'full_lyrics_file_dumps')
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
 
+# Bootstrap/HTML/Javascript/CSS-related
+song_head_element = None
+album_head_element = None
+bootstrap_style_sheet = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'
+custom_style_sheet_name = join('resources', 'stof-style.css')
+jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
+bootstrap_script_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
+
 # Regular expression matching the expected annotation mark format
 ANNOTATION_MARK = re.compile(r'\*\*([0-9]+)\*\*')
 replace_inline_annotation_marks = ANNOTATION_MARK.sub
@@ -43,6 +51,34 @@ CLEANUP_REGEXES = {'>': re.compile(r'&gt;'),
 # For collecting all of the song texts together to write big files
 song_texts = []
 unique_song_texts = set()
+
+
+def make_head_element(levels_up=0) -> Tag:
+    """
+    Make a head element including stylesheets, Javascript, etc.
+
+    :param levels_up: how many "levels up" (relative to the the current
+                      file) it takes to get to the root directory (i.e.,
+                      that containing the 'resources' directory)
+    :type levels_up: int
+
+    :returns: HTML head element
+    :rtype: bs4.Tag
+    """
+
+    head = soup.new_tag('head')
+    head.append(soup.new_tag('meta', charset="utf-8"))
+    meta_tag = soup.new_tag('meta')
+    meta_tag.attrs['name'] = 'viewport'
+    meta_tag.attrs['content'] = 'width=device-width, initial-scale=1'
+    head.append(meta_tag)
+    head.append(soup.new_tag('link', rel="stylesheet", href=bootstrap_style_sheet))
+    custom_style_sheet_relative_path = join('..', '..', custom_style_sheet_name)
+    head.append(soup.new_tag('link', rel="stylesheet", href=custom_style_sheet_relative_path))
+    head.append(soup.new_tag('script', src=jquery_script_url))
+    head.append(soup.new_tag('script', src=bootstrap_script_url))
+
+    return head
 
 
 def remove_annotations(text: str) -> str:
@@ -525,7 +561,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
         if (not song_attrs['instrumental'] and
             not song_attrs['from'] and
             not song_attrs['written_and_performed_by']):
-            htmlify_song(song, song_attrs['file_id'])
+            htmlify_song(song, song_attrs['file_id'], '{}.html'.format(attrs['file_id']))
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
         if (make_downloads and
@@ -538,35 +574,43 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             unique_song_texts.add(song_text)
 
 
-def htmlify_song(name: str, song_id: str) -> None:
+def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     """
     Read in a raw text file containing lyrics and output an HTML file
     (unless the song is an instrumental and contains no lyrics).
 
     :param name: song name
     :type name: str
-    :param song_id: file ID
+    :param song_id: song file ID
     :type song_id: str
+    :param album_id: album file ID
+    :type album_id: str
 
     :returns: None
     :rtype: None
     """
+
+    global song_head_element
+    if not song_head_element:
+        song_head_element = make_head_element(2)
 
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(html_dir, html_file_name)
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
-    # Make BeautifulSoup object
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
     html = soup.new_tag('html')
-
-    # Title
-    heading = soup.new_tag('h1')
-    heading.string = name
-    html.append(heading)
+    html.append(song_head_element)
 
     # Body element
     body = soup.new_tag('body')
+
+    # Make a tag for the name of the song
+    h_tag = soup.new_tag('h1')
+    h_tag.string = name
+    body.append(h_tag)
 
     # Process lines from raw lyrics file into different paragraph
     # elements
@@ -673,6 +717,25 @@ def htmlify_song(name: str, song_id: str) -> None:
 
         # Insert annotation section at the next index
         body.append(annotation_section)
+
+    # Add in navigation buttons
+    nav_tag = soup.new_tag('ul')
+    nav_tag.attrs['class'] = 'nav nav-pills'
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href='../../index.html')
+    a_tag.string = 'Home'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href=join('..', '..', 'albums', album_id))
+    a_tag.string = 'Back'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    body.append(nav_tag)
 
     # Put body in HTML element
     html.append(body)
