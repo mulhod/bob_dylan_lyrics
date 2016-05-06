@@ -500,8 +500,14 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     sys.stderr.write('HTMLifying index page for {}...\n'.format(name))
 
-    # Make HTML element for albums index page
+    global album_head_element
+    if not album_head_element:
+        album_head_element = make_head_element(1)
+
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
     html = soup.new_tag('html')
+    html.append(album_head_element)
 
     # Generate body for albums page
     body = soup.new_tag('body')
@@ -590,6 +596,8 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     :rtype: None
     """
 
+    sys.stderr.write('HTMLifying {}...\n'.format(name))
+
     global song_head_element
     if not song_head_element:
         song_head_element = make_head_element(2)
@@ -597,7 +605,6 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(html_dir, html_file_name)
-    sys.stderr.write('HTMLifying {}...\n'.format(name))
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
