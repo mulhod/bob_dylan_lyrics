@@ -11,16 +11,13 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 # Paths
 project_dir = dirname(dirname(__file__))
-site_url = 'http://mulhod.github.io/bob_dylan_lyrics'
 albums_dir = join(project_dir, 'albums')
 songs_dir = join(project_dir, 'songs')
 index_file_path = join(project_dir, 'albums_and_songs_index.jsonlines')
 txt_dir = join(songs_dir, 'txt')
 html_dir = join(songs_dir, 'html')
-song_html_url = join(site_url, 'songs', 'html')
 index_html_file_name = 'index.html'
 albums_index_html_file_name = 'albums.html'
-#albums_index_html_file_path = join(site_url, albums_index_html_file_name)
 file_dumps_dir = join(project_dir, 'full_lyrics_file_dumps')
 
 # BeautifulSoup-related
@@ -480,7 +477,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     # Add in the album attributes, including a picture of the album
     attrs_div = soup.new_tag('div')
-    image_file_path = join(site_url, 'resources', 'images', attrs['image_file_name'])
+    image_file_path = join('..', 'resources', 'images', attrs['image_file_name'])
     image = soup.new_tag('img', src=image_file_path)
     attrs_div.append(image)
     release_div = soup.new_tag('div')
@@ -558,7 +555,6 @@ def htmlify_song(name: str, song_id: str) -> None:
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(html_dir, html_file_name)
-    #html_url = join('songs', 'html', html_file_name)
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
     # Make BeautifulSoup object
