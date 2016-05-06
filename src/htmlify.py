@@ -552,7 +552,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     li_tag = soup.new_tag('li')
     li_tag.attrs['role'] = 'presentation'
     li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='../../index.html')
+    a_tag = soup.new_tag('a', href='../index.html')
     a_tag.string = 'Home'
     li_tag.append(a_tag)
     nav_tag.append(li_tag)
