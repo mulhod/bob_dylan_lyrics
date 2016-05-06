@@ -41,4 +41,4 @@ Sara, oh, Sara, glamorous nymph with an arrow and bow,
 Sara, oh, Sara, don't ever leave me, don't ever go.
 
 **1** A coastal town in Jamaica.
-**2** Lily Pond Lane is in East Hampton, Long Island, New York, which is where Dylan and Jacques Levy collaborated on songs for <i><a href="http://mulhod.github.io/bob_dylan_lyrics/albums/desire.html">Desire</a></i>.
+**2** Lily Pond Lane is in East Hampton, Long Island, New York, which is where Dylan and Jacques Levy collaborated on songs for <i><a href="../../albums/desire.html">Desire</a></i>.
