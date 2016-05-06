@@ -546,6 +546,18 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # to the 'sides' attribute
     body.append(generate_song_list(songs, attrs.get('sides', None)))
 
+    # Add in navigation buttons
+    nav_tag = soup.new_tag('ul')
+    nav_tag.attrs['class'] = 'nav nav-pills'
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href='../../index.html')
+    a_tag.string = 'Home'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    body.append(nav_tag)
+
     # Put body in HTML element
     html.append(body)
 
