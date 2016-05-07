@@ -327,6 +327,10 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
              with assumptions
     """
 
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
     ol = soup.new_tag('ol')
     if sides_dict:
         for side in sorted(sides_dict):
@@ -403,8 +407,11 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     else:
         for song in songs:
             ol.append(generate_song_list_element(song, songs[song]))
+
+    columns_div.append(ol)
+    row_div.append(columns_div)
     
-    return ol
+    return row_div
 
 
 def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> None:
@@ -512,12 +519,26 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # Generate body for albums page
     body = soup.new_tag('body')
 
+    # Create div tag for the "container"
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+
     # Add in elements for the heading
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
     heading = soup.new_tag('h1')
     heading.string = name
-    body.append(heading)
+    columns_div.append(heading)
+    row_div.append(columns_div)
+    container_div.append(row_div)
 
     # Add in the album attributes, including a picture of the album
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
     attrs_div = soup.new_tag('div')
     image_file_path = join('..', 'resources', 'images', attrs['image_file_name'])
     image = soup.new_tag('img', src=image_file_path)
@@ -538,13 +559,15 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     label_div = soup.new_tag('div')
     label_div.string = 'Label: {0}'.format(attrs['label'])
     attrs_div.append(label_div)
-    body.append(attrs_div)
+    columns_div.append(attrs_div)
+    row_div.append(columns_div)
+    container_div.append(row_div)
 
     # Add in an ordered list element for all songs (or several ordered
     # lists for each side, disc, etc.)
     # NOTE: Deal with the possibility of a 'discs' attribute in addition
     # to the 'sides' attribute
-    body.append(generate_song_list(songs, attrs.get('sides', None)))
+    container_div.append(generate_song_list(songs, attrs.get('sides', None)))
 
     # Add in navigation buttons
     nav_tag = soup.new_tag('ul')
@@ -556,7 +579,8 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     a_tag.string = 'Home'
     li_tag.append(a_tag)
     nav_tag.append(li_tag)
-    body.append(nav_tag)
+    container_div.append(nav_tag)
+    body.append(container_div)
 
     # Put body in HTML element
     html.append(body)
@@ -627,9 +651,17 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     body = soup.new_tag('body')
 
     # Make a tag for the name of the song
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
     h_tag = soup.new_tag('h1')
     h_tag.string = name
-    body.append(h_tag)
+    columns_div.append(h_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
 
     # Process lines from raw lyrics file into different paragraph
     # elements
@@ -655,6 +687,10 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
 
     # Add paragraph elements with sub-elements of type `div` to the
     # `body` element
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
     for paragraph in paragraphs:
         paragraph_elem = soup.new_tag('p')
         for line_elem in paragraph:
@@ -711,7 +747,7 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
             # Insert the `div` element into the paragraph element
             paragraph_elem.append(div)
 
-        body.append(paragraph_elem)
+        columns_div.append(paragraph_elem)
 
     # Add in annotation section
     if annotations:
@@ -735,7 +771,7 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
             annotation_section.append(div)
 
         # Insert annotation section at the next index
-        body.append(annotation_section)
+        columns_div.append(annotation_section)
 
     # Add in navigation buttons
     nav_tag = soup.new_tag('ul')
@@ -754,7 +790,10 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     a_tag.string = 'Back'
     li_tag.append(a_tag)
     nav_tag.append(li_tag)
-    body.append(nav_tag)
+    columns_div.append(nav_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    body.append(container_div)
 
     # Put body in HTML element
     html.append(body)
