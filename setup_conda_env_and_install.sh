@@ -2,7 +2,7 @@
 
 # Note: having conda installed is a requirement (currently)
 
-# Usage: ./setup.sh
+# Usage: ./setup_conda_env_and_install.sh
 
 set -eu
 
@@ -13,14 +13,15 @@ cd ${THIS_DIR}
 echo "Make sure that conda (miniconda) is installed before trying to set up" \
      "or else this script will fail..."
 
-echo "Creating conda environment..."
-# Create environment first and force python=3.5 (for some reason, just adding
-# python=3.5 to the list of packages in conda_requirements.txt does not work
-# as it is not recognized as a valid package name)
+echo "Creating conda environment named \"dylan_lyrics\"..."
+# Create environment first and force python=3.5
 conda create --yes -n dylan_lyrics python=3.5
 source activate dylan_lyrics
 
 # And now run setup.py and install all of the packages we need
 echo "Running setup.py and installing packages..."
-python3.4 setup.py install
+python setup.py install
 echo "Installation complete!"
+echo "Now just run \"source activate dylan_lyrics\" any time you want to use" \
+     "the virtual environment and \"source deactivate\" when you want to" \
+     "leave the virtual environment."
