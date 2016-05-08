@@ -3,6 +3,10 @@ from setuptools import setup
 def readme():
     return open('README.md').read()
 
+def reqs():
+    with open('requirements.txt') as f:
+        return f.read().splitlines()
+
 setup(name = 'Bob Dylan Lyrics',
       description='Repository of Bob Dylan lyrics project. The aim is not only to provide all of the lyrics, but to make sure the lyrics are correct and also to supply the lyrics with interpretations and punctuation (which they often lack elsewhere).',
       url='https://github.com/mulhod/reviewer_experience_prediction',
@@ -11,6 +15,7 @@ setup(name = 'Bob Dylan Lyrics',
       author='Matt Mulholland et al.',
       author_email='mulhodm@gmail.com',
       include_package_data=True,
+      install_requires=reqs(),
       entry_points={'console_scripts': ['htmlify = src.htmlify:main']},
       keywords='bob dylan lyrics',
       classifiers=['Intended Audience :: Science/Research',

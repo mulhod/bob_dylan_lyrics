@@ -1,12 +1,14 @@
 import re
 import sys
+import string
 from json import loads
 from os.path import join, exists, dirname, basename
 from collections import OrderedDict
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Iterable
 from bs4.element import Tag
 from bs4 import BeautifulSoup
+from cytoolz import first as firzt
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 # Paths
@@ -16,41 +18,41 @@ songs_dir = join(project_dir, 'songs')
 index_file_path = join(project_dir, 'albums_and_songs_index.jsonlines')
 txt_dir = join(songs_dir, 'txt')
 html_dir = join(songs_dir, 'html')
-index_html_file_name = 'index.html'
+main_index_html_file_name = 'index.html'
+song_index_dir = join(songs_dir, 'song_index')
+song_index_html_file_name = 'song_index.html'
 albums_index_html_file_name = 'albums.html'
+songs_index_html_file_path = join(song_index_dir, song_index_html_file_name)
 file_dumps_dir = join(project_dir, 'full_lyrics_file_dumps')
 
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
 
 # Bootstrap/HTML/Javascript/CSS-related
-song_head_element = None
-album_head_element = None
 bootstrap_style_sheet = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'
 custom_style_sheet_name = join('resources', 'stof-style.css')
 jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
 bootstrap_script_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
 
-# Regular expression matching the expected annotation mark format
-ANNOTATION_MARK = re.compile(r'\*\*([0-9]+)\*\*')
-replace_inline_annotation_marks = ANNOTATION_MARK.sub
+# Regular expression- and cleaning-related
+ANNOTATION_MARK_RE = re.compile(r'\*\*([0-9]+)\*\*')
+replace_inline_annotation_marks = ANNOTATION_MARK_RE.sub
 remove_inline_annotation_marks = lambda x: replace_inline_annotation_marks('', x)
-
-# Regular expressions/functions for standardizing stylized
-# double/single quotation marks
-DOUBLE_QUOTES = re.compile(r'“|”')
-SINGLE_QUOTES = re.compile(r'‘')
-replace_double_quotes = DOUBLE_QUOTES.sub
-replace_single_quotes = SINGLE_QUOTES.sub
-
-# BeautifulSoup clean-up-related regular expressions
-CLEANUP_REGEXES = {'>': re.compile(r'&gt;'),
-                   '<': re.compile(r'&lt;'),
-                   '&': re.compile(r'&amp;amp;')}
+DOUBLE_QUOTES_RE = re.compile(r'“|”')
+SINGLE_QUOTES_RE = re.compile(r'‘')
+replace_double_quotes = DOUBLE_QUOTES_RE.sub
+replace_single_quotes = SINGLE_QUOTES_RE.sub
+CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
+                        '<': re.compile(r'&lt;'),
+                        '&': re.compile(r'&amp;amp;')}
+A_THE_RE = re.compile(r'^(the|a) ')
+clean = lambda x: x.strip('()').lower()
 
 # For collecting all of the song texts together to write big files
 song_texts = []
 unique_song_texts = set()
+song_files_dict = {}
+file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
 
 
 def make_head_element(levels_up=0) -> Tag:
@@ -133,7 +135,7 @@ def clean_up_html(html: str) -> str:
     :rtype: str
     """
 
-    for sub, regex in CLEANUP_REGEXES.items():
+    for sub, regex in CLEANUP_REGEXES_DICT.items():
         html = regex.sub(sub, html)
 
     return html
@@ -466,7 +468,7 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
     # Add in "Home" link
     div = soup.new_tag('div')
     div.string = 'Home'
-    div.string.wrap(soup.new_tag('a', href=index_html_file_name))
+    div.string.wrap(soup.new_tag('a', href=main_index_html_file_name))
     index_body.append(div)
 
     # Put body in HTML element
@@ -507,14 +509,10 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     sys.stderr.write('HTMLifying index page for {}...\n'.format(name))
 
-    global album_head_element
-    if not album_head_element:
-        album_head_element = make_head_element(1)
-
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
     html = soup.new_tag('html')
-    html.append(album_head_element)
+    html.append(make_head_element(1))
 
     # Generate body for albums page
     body = soup.new_tag('body')
@@ -615,6 +613,47 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             song_texts.append(song_text)
             unique_song_texts.add(song_text)
 
+        # Add in song name/file ID and album name/file ID to
+        # `song_files_dict` (for the song index), indicating if the song
+        # is an instrumental or if it wouldn't be associated with an
+        # actual file ID for some other reason
+        if song_attrs['instrumental']:
+            song_file_id = 'instrumental'
+        elif song_attrs['written_and_performed_by']:
+            song_file_id = 'not_written_or_peformed_by_dylan'
+        else:
+            song_file_id = song_attrs['file_id']
+        if not song in song_files_dict:
+            file_album_dict = {'name': name, 'file_id': attrs['file_id']}
+            song_files_dict[song] = [{'file_id': song_file_id,
+                                      'album(s)': [file_album_dict]}]
+        else:
+
+            # Iterate over the entries in `song_files_dict` for a given
+            # song, each entry corresponding to a different `file_id`
+            # (basically, a different version of the same song) and, if
+            # an entry for the song's file ID is found, add its album to
+            # the list of albums associated with that file ID/version,
+            # and, if not, then add the file ID/version to the list of
+            # versions associated with the song (i.e., with its own list
+            # of albums)
+            # TODO: This assumes that all songs are attached to the same
+            #       exact name whenever they show up on an album, but
+            #       this is not strictly true, e.g. "Crash on the Levee
+            #       (Down in the Flood)."
+            found_file_id_in_song_dicts = False
+            if not song_file_id in file_id_types_to_skip:
+                for file_ids_dict in song_files_dict[song]:
+                    if file_ids_dict['file_id'] == song_file_id:
+                        file_album_dict = {'name': name, 'file_id': attrs['file_id']}
+                        file_ids_dict['album(s)'].append(file_album_dict)
+                        found_file_id_in_song_dicts = True
+                        break
+            if not found_file_id_in_song_dicts:
+                file_album_dict = {'name': name, 'file_id': attrs['file_id']}
+                song_files_dict[song].append({'file_id': song_file_id,
+                                              'album(s)': [file_album_dict]})
+
 
 def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     """
@@ -634,10 +673,6 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
 
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
-    global song_head_element
-    if not song_head_element:
-        song_head_element = make_head_element(2)
-
     input_path = join(txt_dir, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(html_dir, html_file_name)
@@ -645,7 +680,7 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
     html = soup.new_tag('html')
-    html.append(song_head_element)
+    html.append(make_head_element(2))
 
     # Body element
     body = soup.new_tag('body')
@@ -699,7 +734,7 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
             div = soup.new_tag('div')
 
             # Check if line has annotations
-            annotation_nums = ANNOTATION_MARK.findall(line_elem)
+            annotation_nums = ANNOTATION_MARK_RE.findall(line_elem)
             if annotation_nums:
 
                 # Get indices for the annotations in the given line
@@ -803,6 +838,279 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
         html_output.write(clean_up_html(str(html)))
 
 
+def htmlify_main_song_index_page() -> None:
+    """
+    Generate the main song index HTML page.
+
+    :returns: None
+    :rtype: None
+    """
+
+    sys.stderr.write('HTMLifying the main songs index page...')
+
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
+    html = soup.new_tag('html')
+    html.append(make_head_element(2))
+
+    # Body element
+    body = soup.new_tag('body')
+
+    # Make a tag for the name of the song
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    h_tag = soup.new_tag('h1')
+    h_tag.string = 'Songs Index'
+    columns_div.append(h_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    container_div.append(soup.new_tag('p'))
+
+    for letter in string.ascii_uppercase:
+        row_div = soup.new_tag('div')
+        row_div.attrs['class'] = 'row'
+        columns_div = soup.new_tag('div')
+        columns_div.attrs['class'] = 'col-xs-12'
+        div_tag = soup.new_tag('div')
+        a_tag = soup.new_tag('a', href=join('{0}.html'.format(letter.lower())))
+        a_tag.string = letter
+        bold_tag = soup.new_tag('strong')
+        bold_tag.attrs['style'] = 'font-size: 125%;'
+        a_tag.string.wrap(bold_tag)
+        div_tag.append(a_tag)
+        columns_div.append(div_tag)
+        row_div.append(columns_div)
+        container_div.append(row_div)
+
+        # Generate the sub-index page for the letter
+        htmlify_song_index_page(letter)
+
+    # Add in navigation buttons
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    nav_tag = soup.new_tag('ul')
+    nav_tag.attrs['class'] = 'nav nav-pills'
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href='../../index.html')
+    a_tag.string = 'Home'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    columns_div.append(nav_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+
+    body.append(container_div)
+    html.append(body)
+
+    with open(songs_index_html_file_path, 'w') as songs_index_page:
+        songs_index_page.write(clean_up_html(str(html)))
+
+
+def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
+    """
+    Sort a list of strings (ignoring leading "The" or "A" or
+    parentheses).
+
+    :param titles: an iterable collection of strings (song titles, album
+                   titles)
+    :type titles: Iterable[str]
+    :param filter_char: character on which to filter the strings, i.e.
+                        strings not beginning with this character --
+                        after being cleaned -- will be filtered out
+    :type filter_char: str
+
+    :returns: string generator
+    :rtype: filter
+
+    :raises: ValueError if any of the strings are empty or there are no
+             strings at all
+    """
+
+    if not titles or not all(x for x in titles):
+        raise ValueError('Received empty string!')
+
+    key_func = lambda x: A_THE_RE.sub(r'', clean(x))
+    filter_func = None
+    if filter_char:
+        filter_func = lambda x: filter_char.lower() == firzt(A_THE_RE.sub(r'', clean(x)))
+    return filter(filter_func, sorted(titles, key=key_func))
+
+
+def and_join_album_links(albums: List[Dict[str, str]]) -> str:
+    """
+    Concatenate one or more albums together such that if it's two, then
+    then they are concatenated by the word "and" padded by spaces, if
+    there's more than two, they're separated by a comma followed by a
+    space except for the last two which are separated with the word
+    "and" as above, and, if there's only one, there's no need to do any
+    special concatenation. Also, each album name should be wrapped in an
+    "a" tag with "href" pointing to the album's index page.
+
+    :param albums: list of dictionaries containing the album
+                   names/file IDs (in 'file_id'/'name' keys)
+    :type albums: list
+
+    :returns: string representing the concatenation of album titles,
+              with each one being surrounded by a link tag pointing to
+              the album's index page
+    :rtype: str
+
+    :raises: ValueError if there are no albums or expected keys in the
+             album dictionaries are not present
+    """
+
+    if not len(albums): raise ValueError('No albums!')
+
+    link_template = '<a href="../../albums/{0}.html">{1}</a>'
+    link = (lambda x: link_template.format(x['file_id'], x['name']))
+
+    if len(albums) == 1:
+        return link(firzt(albums))
+    else:
+        last_two = ' and '.join([link(album) for album in albums[-2:]])
+        if len(albums) > 2:
+            return ', '.join(', '.join([link(album) for album in albums[:-2]]), last_two)
+        return last_two
+
+
+def htmlify_song_index_page(letter: str) -> None:
+    """
+    Generate a specific index page.
+
+    :param letter: index letter
+    :type letter: str
+
+    :returns: None
+    :rtype: None
+    """
+
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
+    html = soup.new_tag('html')
+    html.append(make_head_element(2))
+
+    # Body element
+    body = soup.new_tag('body')
+
+    # Make a tag for the name of the song
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    h_tag = soup.new_tag('h1')
+    h_tag.string = letter
+    columns_div.append(h_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    container_div.append(soup.new_tag('p'))
+
+    not_dylan = 'not written by or not performed by Bob Dylan'
+    for song in sort_titles(song_files_dict, letter):
+
+        # Get information about the song, such as the different versions
+        # of the song, their file IDs, which albums they occurred on,
+        # whether they were instrumentals, etc.
+        song_info = song_files_dict[song]
+
+        row_div = soup.new_tag('div')
+        row_div.attrs['class'] = 'row'
+        columns_div = soup.new_tag('div')
+        columns_div.attrs['class'] = 'col-xs-12'
+        div_tag = soup.new_tag('div')
+        if len(song_info) == 1:
+            song_info = firzt(song_info)
+            album_links = and_join_album_links(song_info['album(s)'])
+
+            if song_info['file_id'] in file_id_types_to_skip:
+                instrumental_or_not_dylan = song_info['file_id']
+                if instrumental_or_not_dylan != 'instrumental':
+                    instrumental_or_not_dylan = not_dylan
+                div_tag.string = ('{0} ({1}, appeared on {2})'
+                                  .format(song, instrumental_or_not_dylan, album_links))
+                row_div.append(div_tag)
+                columns_div.append(row_div)
+            else:
+                song_html_file_path = '../html/{0}.html'.format(song_info['file_id'])
+                a_tag = soup.new_tag('a', href=song_html_file_path)
+                a_tag.string = '{0}'.format(song)
+                div_tag.append(a_tag)
+                div_tag.append = ' (appeared on {0})'.format(album_links)
+
+        else:
+            div_tag.string = song
+            columns_div.append(div_tag)
+
+            # Make an unordered list for the different versions of the
+            # song
+            ul_tag = soup.new_tag('ul')
+            for i, version_info in enumerate(song_info):
+                li_tag = soup.new_tag('li')
+
+                # Add in instrumental entries (but with no link to the
+                # song pages since they don't exist), but don't even add
+                # in entries for the songs that have been deemed as
+                # non-Dylan songs
+                if version_info['file_id'] == 'instrumental':
+                    album_links = and_join_album_links(version_info['album(s)'])
+                    li_tag.string = 'Instrumental version (appeared on {0})'.format(album_links)
+                elif version_info['file_id'] == 'not_written_or_peformed_by_dylan':
+                    continue
+                else:
+                    album_links = and_join_album_links(version_info['album(s)'])
+                    href = '../html/{0}.html'.format(version_info['file_id'])
+                    a_tag = soup.new_tag('a', href=href)
+                    a_tag.string = 'Version #{0}'.format(i + 1)
+                    li_tag.append(a_tag)
+                    li_tag.append(' (appeared on {0})'.format(album_links))
+                ul_tag.append(li_tag)
+            div_tag.append(ul_tag)
+        row_div.append(div_tag)
+        columns_div.append(row_div)
+        container_div.append(columns_div)
+
+    # Add in navigation buttons
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    nav_tag = soup.new_tag('ul')
+    nav_tag.attrs['class'] = 'nav nav-pills'
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href='../../index.html')
+    a_tag.string = 'Home'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    li_tag = soup.new_tag('li')
+    li_tag.attrs['role'] = 'presentation'
+    li_tag.attrs['class'] = 'active'
+    a_tag = soup.new_tag('a', href='song_index.html')
+    a_tag.string = 'Back'
+    li_tag.append(a_tag)
+    nav_tag.append(li_tag)
+    columns_div.append(nav_tag)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+
+    body.append(container_div)
+    html.append(body)
+
+    letter_index_file_path = join(song_index_dir, '{0}.html'.format(letter.lower()))
+    with open(letter_index_file_path, 'w') as letter_index_page:
+        letter_index_page.write(clean_up_html(str(html)))
+
+
 def write_big_lyrics_files() -> None:
     """
     Process the raw lyrics files stored in `song_texts` and
@@ -861,6 +1169,7 @@ def main():
     # Generate HTML files for albums, songs, etc.
     sys.stderr.write('Generating HTML files for the albums and songs...\n')
     htmlify_everything(albums_dict, make_downloads=make_downloads)
+    htmlify_main_song_index_page()
 
     # Write raw lyrics files (for downloading), if requested
     if make_downloads:

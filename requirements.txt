@@ -1,0 +1,7 @@
+argparse
+beautifulsoup4==4.4.1
+cytoolz==0.7.5
+jupyter==1.0.0
+pudb
+requests==2.8.1
+typing==3.5.0.1
