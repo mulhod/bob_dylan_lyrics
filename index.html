@@ -2,76 +2,88 @@
 <html>
   
   <head>
-	  <title>Bob Dylan Lyrics</title>
-	  <meta charset="utf-8"> 
-	  <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  	<link rel="stylesheet" href="resources/stof-style.css">
+    <title>Bob Dylan Lyrics</title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/stof-style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  	<script>
-  		$(document).ready(function(){
-  			$(".album").click(function(){
-  				var pagelink = this.id;
-  				console.log(pagelink)
-    			$("#content").load(pagelink);
-			  });
-		  });
-  	</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".album").click(function(){
+          var pagelink = this.id;
+          console.log(pagelink)
+          $("#content").load(pagelink);
+        });
+      });
+    </script>
   </head>
-  
+
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-    	    <h1>Bob Dylan Lyrics</h1>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bob Dylan Lyrics</a>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-    		  <ul class="nav nav-tabs">
-  	    	  <li class="active">
-              <a data-toggle="tab" href="#home">Home</a>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="index2.html">Home
+                <span class="sr-only">(current)</span>
+              </a>
             </li>
-  		      <li class="dropdown">
-   		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">1960s
+            <li>
+              <a href="full_lyrics_file_dumps/downloads.html">Downloads</a>
+            </li>
+            <li>
+              <a href="songs/song_index/song_index.html">All Songs</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1960s
                 <span class="caret"></span>
               </a>
-    	        <ul class="dropdown-menu">
-    	          <li>
+              <ul class="dropdown-menu">
+                <li>
                   <a href="albums/bob_dylan.html" class="album">Bob Dylan</a>
                 </li>
-    			      <li>
+                <li>
                   <a href="albums/the_freewheelin_bob_dylan.html" class="album">The Freewheelin' Bob Dylan</a>
                 </li>
-    			      <li>
+                <li>
                   <a href="albums/the_times_they_are_a-changin.html" class="album">The Times They Are A-Changin'</a>
                 </li>
-    			      <li>
+                <li>
                   <a href="albums/another_side_of_bob_dylan.html" class="album">Another Side of Bob Dylan</a>
                 </li>
-          	    <li>
+                <li>
                   <a href="albums/bringing_it_all_back_home.html" class="album">Bringing It All Back Home</a>
                 </li>
-          	    <li>
+                <li>
                   <a href="albums/highway_61_revisited.html" class="album">Highway 61 Revisited</a>
                 </li>
-        		    <li>
+                <li>
                   <a href="albums/blonde_on_blonde.html" class="album">Blonde on Blonde</a>
                 </li>
-      	  	    <li>
+                <li>
                   <a href="albums/bob_dylans_greatest_hits.html" class="album">Bob Dylan's Greatest Hits</a>
                 </li>
-        		    <li>
+                <li>
                   <a href="albums/john_wesley_harding.html" class="album">John Wesley Harding</a>
                 </li>
-      	  	    <li>
+                <li>
                   <a href="albums/nashville_skyline.html" class="album">Nashville Skyline</a>
                 </li>
-    		      </ul>
-  		      </li>
-  		      <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown">1970s
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1970s
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -110,33 +122,43 @@
                 </li>
               </ul>
             </li>
-  		      <li class="dropdown">
-  		        <a class="dropdown-toggle" data-toggle="dropdown">1980s
-  		          <span class="caret"></span>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1980s
+                <span class="caret"></span>
               </a>
-  		      </li>
-  		      <li class="dropdown">
-  		        <a class="dropdown-toggle" data-toggle="dropdown">1990s
-  		          <span class="caret"></span>
-              </a>
-  		      </li>
-  		      <li class="dropdown">
-  		        <a class="dropdown-toggle" data-toggle="dropdown">2000s
-  		          <span class="caret"></span>
-              </a>
-  		      </li>
-  		      <li class="dropdown">
-  		        <a class="dropdown-toggle" data-toggle="dropdown">2010s
-  		          <span class="caret"></span>
-              </a>
-  		      </li>
-            <li>
-              <a href="full_lyrics_file_dumps/downloads.html">Downloads</a>
+              <ul class="dropdown-menu"></ul>
             </li>
-            <li>
-              <a href="songs/song_index/song_index.html">All Songs</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">1990s
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu"></ul>
             </li>
-		      </ul>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2000s
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu"></ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">2010s
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu"></ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
           <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
               <h2>How to Contribute</h2>
@@ -159,4 +181,5 @@
       </div>
     </div>
   </body>
+
 </html>
