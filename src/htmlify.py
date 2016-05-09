@@ -2,13 +2,13 @@ import re
 import sys
 import string
 from json import loads
-from os.path import join, exists, dirname, basename
 from collections import OrderedDict
+from os.path import join, exists, dirname, basename
 
-from typing import Any, Dict, List, Iterable
 from bs4.element import Tag
 from bs4 import BeautifulSoup
-from cytoolz import first as firzt
+from cytoolz import first as first_
+from typing import Any, Dict, List, Iterable
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 # Paths
@@ -940,7 +940,7 @@ def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
     key_func = lambda x: A_THE_RE.sub(r'', clean(x))
     filter_func = None
     if filter_char:
-        filter_func = lambda x: filter_char.lower() == firzt(A_THE_RE.sub(r'', clean(x)))
+        filter_func = lambda x: filter_char.lower() == first_(A_THE_RE.sub(r'', clean(x)))
     return filter(filter_func, sorted(titles, key=key_func))
 
 
@@ -973,7 +973,7 @@ def and_join_album_links(albums: List[Dict[str, str]]) -> str:
     link = (lambda x: link_template.format(x['file_id'], x['name']))
 
     if len(albums) == 1:
-        return link(firzt(albums))
+        return link(first_(albums))
     else:
         last_two = ' and '.join([link(album) for album in albums[-2:]])
         if len(albums) > 2:
@@ -1028,7 +1028,7 @@ def htmlify_song_index_page(letter: str) -> None:
         columns_div.attrs['class'] = 'col-xs-12'
         div_tag = soup.new_tag('div')
         if len(song_info) == 1:
-            song_info = firzt(song_info)
+            song_info = first_(song_info)
             album_links = and_join_album_links(song_info['album(s)'])
 
             if song_info['file_id'] in file_id_types_to_skip:
