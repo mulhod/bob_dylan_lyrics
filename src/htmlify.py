@@ -55,6 +55,21 @@ song_files_dict = {}
 file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
 
 
+def add_declaration(html_string: str) -> str:
+    """
+    Add in the declaration, i.e., "<!DOCTYPE html>", to the beginning of
+    a string representation of an HTML file and return the new string.
+
+    :param html_string: 
+    :type html_string: str
+
+    :returns: HTML string
+    :rtype: str
+    """
+
+    return '<!DOCTYPE html>\n{0}'.format(html_string)
+
+
 def make_head_element(levels_up=0) -> Tag:
     """
     Make a head element including stylesheets, Javascript, etc.
@@ -105,7 +120,6 @@ def remove_annotations(text: str) -> str:
     text = remove_inline_annotation_marks(text)
 
     return text
-
 
 
 def standardize_quotes(text: str) -> str:
@@ -476,7 +490,7 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
 
     # Write new HTML file for albums index page
     with open(join(project_dir, albums_index_html_file_name), 'w') as albums_index:
-        albums_index.write(index_html.prettify(formatter="html"))
+        albums_index.write(add_declaration(index_html.prettify(formatter="html")))
 
     # Generate pages for albums
     sys.stderr.write('HTMLifying the individual album pages...\n')
@@ -586,7 +600,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # Write new HTML file for albums index page
     album_file_path = join(albums_dir, '{}.html'.format(attrs['file_id']))
     with open(album_file_path, 'w') as album_file:
-        album_file.write(clean_up_html(str(html)))
+        album_file.write(add_declaration(clean_up_html(str(html))))
 
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
@@ -601,7 +615,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
         if (not song_attrs['instrumental'] and
             not song_attrs['from'] and
             not song_attrs['written_and_performed_by']):
-            htmlify_song(song, song_attrs['file_id'], '{}.html'.format(attrs['file_id']))
+            htmlify_song(song, song_attrs['file_id'])
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
         if (make_downloads and
@@ -655,7 +669,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
                                               'album(s)': [file_album_dict]})
 
 
-def htmlify_song(name: str, song_id: str, album_id: str) -> None:
+def htmlify_song(name: str, song_id: str) -> None:
     """
     Read in a raw text file containing lyrics and output an HTML file
     (unless the song is an instrumental and contains no lyrics).
@@ -664,8 +678,6 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     :type name: str
     :param song_id: song file ID
     :type song_id: str
-    :param album_id: album file ID
-    :type album_id: str
 
     :returns: None
     :rtype: None
@@ -821,7 +833,7 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     li_tag = soup.new_tag('li')
     li_tag.attrs['role'] = 'presentation'
     li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href=join('..', '..', 'albums', album_id))
+    a_tag = soup.new_tag('a', href='javascript:history.back()')
     a_tag.string = 'Back'
     li_tag.append(a_tag)
     nav_tag.append(li_tag)
@@ -834,8 +846,8 @@ def htmlify_song(name: str, song_id: str, album_id: str) -> None:
     html.append(body)
 
     # Write out "prettified" HTML to the output file
-    with open(html_output_path, 'w') as html_output:
-        html_output.write(clean_up_html(str(html)))
+    with open(html_output_path, 'w') as song_file:
+        song_file.write(add_declaration(clean_up_html(str(html))))
 
 
 def htmlify_main_song_index_page() -> None:
@@ -910,8 +922,8 @@ def htmlify_main_song_index_page() -> None:
     body.append(container_div)
     html.append(body)
 
-    with open(songs_index_html_file_path, 'w') as songs_index_page:
-        songs_index_page.write(clean_up_html(str(html)))
+    with open(songs_index_html_file_path, 'w') as songs_index_file:
+        songs_index_file.write(add_declaration(clean_up_html(str(html))))
 
 
 def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
@@ -1107,8 +1119,8 @@ def htmlify_song_index_page(letter: str) -> None:
     html.append(body)
 
     letter_index_file_path = join(song_index_dir, '{0}.html'.format(letter.lower()))
-    with open(letter_index_file_path, 'w') as letter_index_page:
-        letter_index_page.write(clean_up_html(str(html)))
+    with open(letter_index_file_path, 'w') as letter_index_file:
+        letter_index_file.write(add_declaration(clean_up_html(str(html))))
 
 
 def write_big_lyrics_files() -> None:
