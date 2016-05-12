@@ -11,19 +11,31 @@ from cytoolz import first as first_
 from typing import Any, Dict, List, Iterable
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
+AlbumDict = Dict[str, Dict[str, Any]]
+
 # Paths
-project_dir = dirname(dirname(__file__))
-albums_dir = join(project_dir, 'albums')
-songs_dir = join(project_dir, 'songs')
-index_file_path = join(project_dir, 'albums_and_songs_index.jsonlines')
-txt_dir = join(songs_dir, 'txt')
-html_dir = join(songs_dir, 'html')
+root_dir_path = dirname(dirname(__file__))
+albums_dir = 'albums'
+songs_dir = 'songs'
+text_dir = 'txt'
+html_dir = 'html'
+file_dumps_dir = 'full_lyrics_file_dumps'
+song_index_dir = 'song_index'
 main_index_html_file_name = 'index.html'
-song_index_dir = join(songs_dir, 'song_index')
 song_index_html_file_name = 'song_index.html'
 albums_index_html_file_name = 'albums.html'
-songs_index_html_file_path = join(song_index_dir, song_index_html_file_name)
-file_dumps_dir = join(project_dir, 'full_lyrics_file_dumps')
+downloads_file_name = 'downloads.html'
+albums_dir_path = join(root_dir_path, albums_dir)
+songs_dir_path = join(root_dir_path, songs_dir)
+text_dir_path = join(songs_dir, text_dir)
+html_dir_path = join(songs_dir, html_dir)
+song_index_dir_path = join(songs_dir, song_index_dir)
+songs_and_albums_jsonl_file_name = 'albums_and_songs_index.jsonlines'
+songs_and_albums_jsonl_file_path = join(root_dir_path, songs_and_albums_jsonl_file_name)
+songs_index_html_file_path = join(song_index_dir_path, song_index_html_file_name)
+file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
+file_dumps_downloads_html_path = join(file_dumps_dir_path, downloads_file_name)
+main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
 
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
@@ -33,6 +45,8 @@ bootstrap_style_sheet = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/boot
 custom_style_sheet_name = join('resources', 'stof-style.css')
 jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
 bootstrap_script_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
+
+decades = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
 
 # Regular expression- and cleaning-related
 ANNOTATION_MARK_RE = re.compile(r'\*\*([0-9]+)\*\*')
@@ -70,14 +84,13 @@ def add_declaration(html_string: str) -> str:
     return '<!DOCTYPE html>\n{0}'.format(html_string)
 
 
-def make_head_element(levels_up=0) -> Tag:
+def make_head_element(level=0) -> Tag:
     """
     Make a head element including stylesheets, Javascript, etc.
 
-    :param levels_up: how many "levels up" (relative to the the current
-                      file) it takes to get to the root directory (i.e.,
-                      that containing the 'resources' directory)
-    :type levels_up: int
+    :param level: how many levels down (from the root) is the file for
+                  which this head element will be used, if any
+    :type level: int
 
     :returns: HTML head element
     :rtype: bs4.Tag
@@ -90,7 +103,7 @@ def make_head_element(levels_up=0) -> Tag:
     meta_tag.attrs['content'] = 'width=device-width, initial-scale=1'
     head.append(meta_tag)
     head.append(soup.new_tag('link', rel="stylesheet", href=bootstrap_style_sheet))
-    custom_style_sheet_relative_path = join('..', '..', custom_style_sheet_name)
+    custom_style_sheet_relative_path = join(*['..']*level, custom_style_sheet_name)
     head.append(soup.new_tag('link', rel="stylesheet", href=custom_style_sheet_relative_path))
     head.append(soup.new_tag('script', src=jquery_script_url))
     head.append(soup.new_tag('script', src=bootstrap_script_url))
@@ -206,7 +219,8 @@ def read_songs_index() -> Dict[str, Any]:
     """
 
     albums = OrderedDict()
-    for album_or_song_dict in (loads(line.strip('\n')) for line in open(index_file_path)
+    for album_or_song_dict in (loads(line.strip('\n'))
+                               for line in open(songs_and_albums_jsonl_file_path)
                                if not line.startswith('#') and line.strip('\n')):
 
         if album_or_song_dict['type'] == 'album':
@@ -252,6 +266,260 @@ def read_songs_index() -> Dict[str, Any]:
     return albums
 
 
+def generate_index_page(albums: AlbumDict) -> None:
+    """
+    Generate the main site's index.html page.
+
+    :param albums: dictionary of album names mapped to a dictionary
+                   containing an album attribute dictionary, including
+                   attributes such as the HTML file name, the release
+                   date, etc., and an ordered dictionary of songs,
+                   including song file IDs and information about where
+                   the songs come from (if they were from a previous
+                   album, as in the case of compilation albums, for
+                   instance)
+    :type albums: dict
+
+    :returns: None
+    :rtype: None
+    """
+
+    # Relative paths
+    index_html_rel_path = main_index_html_file_name
+    downloads_html_rel_path = join(file_dumps_dir, downloads_file_name)
+    song_index_html_rel_path = join(songs_dir, song_index_dir, song_index_html_file_name)
+
+    html = soup.new_tag('html')
+    
+    # Add in head element
+    html.append(make_head_element(0))
+
+    # Start to construct the body tag, including a navigation bar
+    body = soup.new_tag('body')
+    top_level_nav = soup.new_tag('nav')
+    top_level_nav.attrs['class'] = 'navbar navbar-default'
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container-fluid'
+    navbar_header_div = soup.new_tag('div')
+    navbar_header_div.attrs['class'] = 'navbar-header'
+    
+    # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
+    # downloads page and the songs index
+    a_site = soup.new_tag('a', href=index_html_rel_path)
+    a_site.attrs['class'] = 'navbar-brand'
+    a_site.string = 'Bob Dylan Lyrics'
+    navbar_header_div.append(a_site)
+    container_div.append(navbar_header_div)
+    navbar_collapse_div = soup.new_tag('div')
+    navbar_collapse_div.attrs['class'] = 'collapse navbar-collapse'
+    navbar_ul = soup.new_tag('ul')
+    navbar_ul.attrs['class'] = 'nav navbar-nav'
+    downloads_li = soup.new_tag('li')
+    a_downloads = soup.new_tag('a', href=downloads_html_rel_path)
+    a_downloads.string = 'Downloads'
+    downloads_li.append(a_downloads)
+    navbar_ul.append(downloads_li)
+    index_li = soup.new_tag('li')
+    a_index = soup.new_tag('a', href=song_index_html_rel_path)
+    a_index.string = 'All Songs'
+    index_li.append(a_index)
+    navbar_ul.append(index_li)
+
+    # Add in dropdown menus for albums by decade
+    for decade in decades:
+        dropdown_li = soup.new_tag('li')
+        a_dropdown = soup.new_tag('a', href='#')
+        a_dropdown.attrs['class'] = 'dropdown-toggle'
+        a_dropdown.attrs['data-toggle'] = 'dropdown'
+        a_dropdown.attrs['role'] = 'button'
+        a_dropdown.attrs['aria-haspopup'] = 'true'
+        a_dropdown.attrs['aria-expanded'] = 'false'
+        a_dropdown.string = decade
+        dropdown_li.append(a_dropdown)
+        caret_span = soup.new_tag('span')
+        caret_span.attrs['class'] = 'caret'
+        dropdown_li.append(caret_span)
+        dropdown_menu_ul = soup.new_tag('ul')
+        dropdown_menu_ul.attrs['class'] = 'dropdown-menu'
+        
+        # Add albums from the given decade into the decade dropdown menu
+        decade_albums = [album for album in albums if decade[:3]
+                         in albums[album]['attrs']['release_date'].split()[-1][:3]]
+        for album in decade_albums:
+            album_file_name = '{0}.html'.format(albums[album]['attrs']['file_id'])
+            album_li = soup.new_tag('li')
+            album_a = soup.new_tag('a', href=join(albums_dir, album_file_name))
+            album_a.attrs['class'] = 'album'
+            album_a.string = album
+            album_li.append(album_a)
+            dropdown_menu_ul.append(album_li)
+
+        dropdown_li.append(dropdown_menu_ul)
+        navbar_ul.append(dropdown_li)
+
+    navbar_collapse_div.append(navbar_ul)
+
+    # Add in search box
+    search_form = soup.new_tag('form')
+    search_form.attrs['class'] = 'navbar-form navbar-left'
+    search_form.attrs['role'] = 'search'
+    form_group_div = soup.new_tag('div')
+    form_group_div.attrs['class'] = 'form-group'
+    search_input = soup.new_tag('input')
+    search_input.attrs['type'] = 'text'
+    search_input.attrs['class'] = 'form-control'
+    search_input.attrs['placeholder'] = 'Search'
+    form_group_div.append(search_input)
+    search_form.append(form_group_div)
+    search_button = soup.new_tag('button')
+    search_button.attrs['type'] = 'submit'
+    search_button.attrs['class'] = 'btn btn-default'
+    search_button.string = 'Search'
+    search_form.append(search_button)
+    navbar_collapse_div.append(search_form)
+
+    container_div.append(navbar_collapse_div)
+    top_level_nav.append(container_div)
+    body.append(top_level_nav)
+
+    # Add in home page content (introduction, contributions, etc.)
+    # Home page content/links
+    github_url = 'https://github.com'
+    personal_github_url = join(github_url, 'mulhod')
+    github_a_tag = '<a href="{0}">GitHub</a>'.format(github_url)
+    orig_lyrics_site_url = 'https://sites.google.com/site/simpletwistoffateproject'
+    orig_lyrics_site_a_tag = '<a href="{0}">here</a>'.format(orig_lyrics_site_url)
+    lyrics_repo_url = join(personal_github_url, 'bob_dylan_lyrics')
+    lyrics_repo_a_tag = '<a href="{0}">here</a>'.format(lyrics_repo_url)
+    email_address = 'mulhodm@gmail.com'
+    email_a_tag = '<a href="mailto:{0}">email me</a>'.format(email_address)
+    personal_page_url = 'http://mulhod.github.io/index.html'
+    personal_page_a_tag = '<a href="{0}">personal page</a>'.format(personal_page_url)
+    personal_github_page_a_tag = '<a href="{0}">GitHub page</a>'.format(personal_github_url)
+    contribute_title = 'How to Contribute'
+    description_title = 'What is this site?'
+    about_author_title = 'About the Author'
+    contribute = ('This website is hosted for free by {0}. It used to be '
+                  '(still is, for the time being) hosted on Google Sites {1}. '
+                  'The current site is not fully developed and most of the '
+                  'lyrics are not even up yet, but I hope to change that soon.'
+                  ' Because the site is hosted on GitHub, that means that the '
+                  'source code and all of the lyrics files are open source, '
+                  'i.e., available for free and without much restriction. The '
+                  '"repository" for the site can be found {2}. Also due to the'
+                  ' fact that the site is hosted on GitHub, anybody who wants '
+                  'to contribute -- whether it\'s by adding lyrics or changing'
+                  ' some aspect of the site or fixing errors -- can do so by '
+                  'submitting requests to me, the author of the page, for '
+                  'approval. It is true that using the version control system '
+                  'called "git" (which is where GitHub gets its name) can be '
+                  'difficult for the unintiated. However, I plan to put '
+                  'together a very comprehensive guide to submitting requests '
+                  'for adding to/changing the website. I want the website to '
+                  'be a collaborative process. Any changes will result in '
+                  'authorship credit. Stay tuned for the guide!'
+                  .format(github_a_tag, orig_lyrics_site_a_tag, lyrics_repo_a_tag))
+    description_1 = ('This project is an offshoot of a project I did in my '
+                     'final year in college. The basic idea of was to conduct '
+                     'writing "experiments" on the lyrics of Bob Dylan. For '
+                     'example, one simple experiment I did was collecting all '
+                     'of the questions in Dylan\'s lyrics and forming them '
+                     'into one piece. But, the collecting of the questions led'
+                     ' to many issues:')
+    description_li_elements = ['In what order would I put the questions?',
+                               'How would I even decide what was and was not a'
+                               ' question? (Keep in mind, there are no '
+                               'question marks in the songs themselves!)',
+                               'How would I conduct experiments with faulty, '
+                               'unpunctuated, and inaccurate lyrics?']
+    description_2 = ('As a result, I decided that I would have to take it upon'
+                     ' myself to transcribe the lyrics since I could find no '
+                     'authoritative versions of the songs (even the "official"'
+                     ' Bob Dylan lyrics book is woefully inadequate). But this'
+                     ' idea of an authoritative version of a given song led to'
+                     ' an interesting question: how could one indeed create an'
+                     ' accurate transcription of any given song, given that '
+                     'songs are dynamic, different from performance to '
+                     'performance? There are no "official" lyrics for a song, '
+                     'there only exist "official" lyrics for a specific '
+                     'performance of a song. So, I decided to transcribe not '
+                     'merely all of the songs, but all of the different '
+                     'versions too. If you\'re a Bob Dylan fan, then you know '
+                     'that one of the things that makes Dylan\'s art '
+                     'distinctive is his ability to adapt, change, add to, '
+                     'subtract from, and rearrange his lyrics, as well as the '
+                     'way in which the words are uttered and the musical '
+                     'accompaniment. Dylan is known for experimenting with his'
+                     ' songs and, whether these experiments work or not, it\'s'
+                     ' fascinating to study them and try to understand them.')
+    description_3 = ('So, the aim of this website is to provide the lyrics of '
+                     'all of the official versions of Bob Dylan\'s songs as '
+                     'I\'ve transcribed them (by official, I mean, officially '
+                     'released, either on album or video). I have not '
+                     'transcribed every single song - this is an ongoing '
+                     'process, but I will continue to transcribe songs as my '
+                     'schedule allows and I will be posting them to this '
+                     'website. Any help would be greatly appreciated. That '
+                     'includes transcriptions of not-yet-included songs as '
+                     'well as edits of existing content. I will put together a'
+                     ' comprehensive guide to submitting a request to add to/'
+                     'edit the site so that anybody can contribute. Please {0}'
+                     ' if you have any comments or suggestions. I\'d love to '
+                     'hear from you!'.format(email_a_tag))
+    description_signature = '&nbsp;-- Matt'
+    about_author = ('My name is Matt Mulholland and I work at Educational '
+                    'Testing Service in Princeton, NJ as a research engineer '
+                    'in the natural language processing/speech group. Please '
+                    'check out my {0} as well as my {1} to learn about other '
+                    'projects I have been working on.'
+                    .format(personal_page_a_tag, personal_github_page_a_tag))
+
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    contribute_h2 = soup.new_tag('h2')
+    contribute_h2.string = contribute_title
+    columns_div.append(contribute_h2)
+    contribute_p = soup.new_tag('p')
+    contribute_p.string = contribute
+    columns_div.append(contribute_p)
+    description_h2 = soup.new_tag('h2')
+    description_h2.string = description_title
+    columns_div.append(description_h2)
+    description_p_1 = soup.new_tag('p')
+    description_p_1.string = description_1
+    columns_div.append(description_p_1)
+    description_ul = soup.new_tag('ul')
+    for element in description_li_elements:
+        li = soup.new_tag('li')
+        li.string = element
+        description_ul.append(li)
+    columns_div.append(description_ul)
+    description_p_2 = soup.new_tag('p')
+    description_p_2.string = description_2
+    columns_div.append(description_p_2)
+    description_p_3 = soup.new_tag('p')
+    description_p_3.string = description_3
+    columns_div.append(description_p_3)
+    about_author_h2 = soup.new_tag('h2')
+    about_author_h2.string = about_author_title
+    columns_div.append(about_author_h2)
+    about_author_p = soup.new_tag('p')
+    about_author_p.string = about_author
+    columns_div.append(about_author_p)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+
+    body.append(container_div)
+    html.append(body)
+
+    with open('{}2.html'.format(main_index_html_file_path[:-5]), 'w') as index_file:
+        index_file.write(add_declaration(clean_up_html(str(html))))
+
+
 def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag:
     """
     Make a list element for a song (for use when generating an album
@@ -285,12 +553,12 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         performed_by = ' (performed by {0})'.format(performed_by)
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
     if not instrumental and not performed_by:
-        song_file_path = join('..', 'songs', 'html', '{0}.html'.format(song_dict['file_id']))
+        song_file_path = join('..', songs_dir, 'html', '{0}.html'.format(song_dict['file_id']))
         a_song = soup.new_tag('a', href=song_file_path)
     if from_song:
         if not instrumental and not performed_by:
             a_song.string = song_name
-            orig_album_file_path = join('..', 'albums', '{0}'.format(from_song['file_id']))
+            orig_album_file_path = join('..', albums_dir, '{0}'.format(from_song['file_id']))
             a_orig_album = soup.new_tag('a', href=orig_album_file_path)
             a_orig_album.string = from_song['name']
             a_orig_album.string.wrap(soup.new_tag('i'))
@@ -471,7 +739,7 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
     index_ol = soup.new_tag('ol')
     for album in albums:
         album_html_file_name = '{}.html'.format(albums[album]['attrs']['file_id'])
-        album_html_file_path = join('albums', album_html_file_name)
+        album_html_file_path = join(albums_dir, album_html_file_name)
         year = albums[album]['attrs']['release_date'].split()[-1]
         li = soup.new_tag('li')
         li.string = '{0} ({1})'.format(album, year)
@@ -489,7 +757,7 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
     index_html.append(index_body)
 
     # Write new HTML file for albums index page
-    with open(join(project_dir, albums_index_html_file_name), 'w') as albums_index:
+    with open(join(root_dir_path, albums_index_html_file_name), 'w') as albums_index:
         albums_index.write(add_declaration(index_html.prettify(formatter="html")))
 
     # Generate pages for albums
@@ -622,7 +890,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             not song_attrs['instrumental'] and
             not song_attrs['written_and_performed_by']):
 
-            input_path = join(txt_dir, '{0}.txt'.format(song_attrs['file_id']))
+            input_path = join(text_dir_path, '{0}.txt'.format(song_attrs['file_id']))
             song_text = remove_annotations(standardize_quotes(open(input_path).read()).strip())
             song_texts.append(song_text)
             unique_song_texts.add(song_text)
@@ -685,9 +953,9 @@ def htmlify_song(name: str, song_id: str) -> None:
 
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
-    input_path = join(txt_dir, '{0}.txt'.format(song_id))
+    input_path = join(text_dir_path, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
-    html_output_path = join(html_dir, html_file_name)
+    html_output_path = join(html_dir_path, html_file_name)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -1118,7 +1386,7 @@ def htmlify_song_index_page(letter: str) -> None:
     body.append(container_div)
     html.append(body)
 
-    letter_index_file_path = join(song_index_dir, '{0}.html'.format(letter.lower()))
+    letter_index_file_path = join(song_index_dir_path, '{0}.html'.format(letter.lower()))
     with open(letter_index_file_path, 'w') as letter_index_file:
         letter_index_file.write(add_declaration(clean_up_html(str(html))))
 
@@ -1139,7 +1407,7 @@ def write_big_lyrics_files() -> None:
     # Write big file with all songs (even duplicates)
     song_text_lines = newline_join(song_texts).split('\n')
     song_text = newline_join([line.strip() for line in song_text_lines if line.strip()])
-    song_text_path = join(file_dumps_dir, 'all_songs.txt')
+    song_text_path = join(file_dumps_dir_path, 'all_songs.txt')
     with open(song_text_path, 'w') as song_text_file:
         song_text_file.write(song_text)
 
@@ -1147,7 +1415,7 @@ def write_big_lyrics_files() -> None:
     unique_song_text_lines = newline_join(unique_song_texts).split('\n')
     unique_song_text = newline_join([line.strip() for line in unique_song_text_lines
                                      if line.strip()])
-    unique_song_text_path = join(file_dumps_dir, 'all_songs_unique.txt')
+    unique_song_text_path = join(file_dumps_dir_path, 'all_songs_unique.txt')
     with open(unique_song_text_path, 'w') as unique_song_text_file:
         unique_song_text_file.write(unique_song_text)
 
@@ -1178,8 +1446,10 @@ def main():
                      'building up index of albums and songs...\n')
     albums_dict = read_songs_index()
 
-    # Generate HTML files for albums, songs, etc.
-    sys.stderr.write('Generating HTML files for the albums and songs...\n')
+    # Generate HTML files for the main index page, albums, songs, etc.
+    sys.stderr.write('Generating HTML files for the main page, albums, songs, '
+                     'etc....\n')
+    generate_index_page(albums_dict)
     htmlify_everything(albums_dict, make_downloads=make_downloads)
     htmlify_main_song_index_page()
 
