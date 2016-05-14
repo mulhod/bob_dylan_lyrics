@@ -1,12 +1,13 @@
 import re
 import sys
-import string
 from json import loads
+from string import ascii_uppercase
 from collections import OrderedDict
-from os.path import join, exists, dirname, basename
+from os.path import join, dirname, realpath
 
 from bs4.element import Tag
 from bs4 import BeautifulSoup
+from markdown import Markdown
 from cytoolz import first as first_
 from typing import Any, Dict, List, Iterable
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
@@ -14,19 +15,20 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 AlbumDict = Dict[str, Dict[str, Any]]
 
 # Paths
-root_dir_path = dirname(dirname(__file__))
+root_dir_path = dirname(dirname(realpath(__file__)))
 albums_dir = 'albums'
 songs_dir = 'songs'
 text_dir = 'txt'
 html_dir = 'html'
+resources_dir = 'resources'
+images_dir = 'images'
 file_dumps_dir = 'full_lyrics_file_dumps'
 song_index_dir = 'song_index'
 main_index_html_file_name = 'index.html'
 song_index_html_file_name = 'song_index.html'
 albums_index_html_file_name = 'albums.html'
+custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
-albums_dir_path = join(root_dir_path, albums_dir)
-songs_dir_path = join(root_dir_path, songs_dir)
 text_dir_path = join(songs_dir, text_dir)
 html_dir_path = join(songs_dir, html_dir)
 song_index_dir_path = join(songs_dir, song_index_dir)
@@ -34,15 +36,14 @@ songs_and_albums_jsonl_file_name = 'albums_and_songs_index.jsonlines'
 songs_and_albums_jsonl_file_path = join(root_dir_path, songs_and_albums_jsonl_file_name)
 songs_index_html_file_path = join(song_index_dir_path, song_index_html_file_name)
 file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
-file_dumps_downloads_html_path = join(file_dumps_dir_path, downloads_file_name)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
+home_page_content_file_path = join(root_dir_path, resources_dir, 'home_page_content.md')
 
 # BeautifulSoup-related
 soup = BeautifulSoup('', 'html.parser')
 
 # Bootstrap/HTML/Javascript/CSS-related
 bootstrap_style_sheet = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'
-custom_style_sheet_name = join('resources', 'stof-style.css')
 jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
 bootstrap_script_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
 
@@ -103,8 +104,9 @@ def make_head_element(level=0) -> Tag:
     meta_tag.attrs['content'] = 'width=device-width, initial-scale=1'
     head.append(meta_tag)
     head.append(soup.new_tag('link', rel="stylesheet", href=bootstrap_style_sheet))
-    custom_style_sheet_relative_path = join(*['..']*level, custom_style_sheet_name)
-    head.append(soup.new_tag('link', rel="stylesheet", href=custom_style_sheet_relative_path))
+    custom_style_sheet_path = join(*['..']*level, resources_dir,
+                                            custom_style_sheet_file_name)
+    head.append(soup.new_tag('link', rel="stylesheet", href=custom_style_sheet_path))
     head.append(soup.new_tag('script', src=jquery_script_url))
     head.append(soup.new_tag('script', src=bootstrap_script_url))
 
@@ -335,10 +337,10 @@ def generate_index_page(albums: AlbumDict) -> None:
         a_dropdown.attrs['aria-haspopup'] = 'true'
         a_dropdown.attrs['aria-expanded'] = 'false'
         a_dropdown.string = decade
-        dropdown_li.append(a_dropdown)
         caret_span = soup.new_tag('span')
         caret_span.attrs['class'] = 'caret'
-        dropdown_li.append(caret_span)
+        a_dropdown.append(caret_span)
+        dropdown_li.append(a_dropdown)
         dropdown_menu_ul = soup.new_tag('ul')
         dropdown_menu_ul.attrs['class'] = 'dropdown-menu'
         
@@ -382,141 +384,28 @@ def generate_index_page(albums: AlbumDict) -> None:
     top_level_nav.append(container_div)
     body.append(top_level_nav)
 
-    # Add in home page content (introduction, contributions, etc.)
-    # Home page content/links
-    github_url = 'https://github.com'
-    personal_github_url = join(github_url, 'mulhod')
-    github_a_tag = '<a href="{0}">GitHub</a>'.format(github_url)
-    orig_lyrics_site_url = 'https://sites.google.com/site/simpletwistoffateproject'
-    orig_lyrics_site_a_tag = '<a href="{0}">here</a>'.format(orig_lyrics_site_url)
-    lyrics_repo_url = join(personal_github_url, 'bob_dylan_lyrics')
-    lyrics_repo_a_tag = '<a href="{0}">here</a>'.format(lyrics_repo_url)
-    email_address = 'mulhodm@gmail.com'
-    email_a_tag = '<a href="mailto:{0}">email me</a>'.format(email_address)
-    personal_page_url = 'http://mulhod.github.io/index.html'
-    personal_page_a_tag = '<a href="{0}">personal page</a>'.format(personal_page_url)
-    personal_github_page_a_tag = '<a href="{0}">GitHub page</a>'.format(personal_github_url)
-    contribute_title = 'How to Contribute'
-    description_title = 'What is this site?'
-    about_author_title = 'About the Author'
-    contribute = ('This website is hosted for free by {0}. It used to be '
-                  '(still is, for the time being) hosted on Google Sites {1}. '
-                  'The current site is not fully developed and most of the '
-                  'lyrics are not even up yet, but I hope to change that soon.'
-                  ' Because the site is hosted on GitHub, that means that the '
-                  'source code and all of the lyrics files are open source, '
-                  'i.e., available for free and without much restriction. The '
-                  '"repository" for the site can be found {2}. Also due to the'
-                  ' fact that the site is hosted on GitHub, anybody who wants '
-                  'to contribute -- whether it\'s by adding lyrics or changing'
-                  ' some aspect of the site or fixing errors -- can do so by '
-                  'submitting requests to me, the author of the page, for '
-                  'approval. It is true that using the version control system '
-                  'called "git" (which is where GitHub gets its name) can be '
-                  'difficult for the unintiated. However, I plan to put '
-                  'together a very comprehensive guide to submitting requests '
-                  'for adding to/changing the website. I want the website to '
-                  'be a collaborative process. Any changes will result in '
-                  'authorship credit. Stay tuned for the guide!'
-                  .format(github_a_tag, orig_lyrics_site_a_tag, lyrics_repo_a_tag))
-    description_1 = ('This project is an offshoot of a project I did in my '
-                     'final year in college. The basic idea of was to conduct '
-                     'writing "experiments" on the lyrics of Bob Dylan. For '
-                     'example, one simple experiment I did was collecting all '
-                     'of the questions in Dylan\'s lyrics and forming them '
-                     'into one piece. But, the collecting of the questions led'
-                     ' to many issues:')
-    description_li_elements = ['In what order would I put the questions?',
-                               'How would I even decide what was and was not a'
-                               ' question? (Keep in mind, there are no '
-                               'question marks in the songs themselves!)',
-                               'How would I conduct experiments with faulty, '
-                               'unpunctuated, and inaccurate lyrics?']
-    description_2 = ('As a result, I decided that I would have to take it upon'
-                     ' myself to transcribe the lyrics since I could find no '
-                     'authoritative versions of the songs (even the "official"'
-                     ' Bob Dylan lyrics book is woefully inadequate). But this'
-                     ' idea of an authoritative version of a given song led to'
-                     ' an interesting question: how could one indeed create an'
-                     ' accurate transcription of any given song, given that '
-                     'songs are dynamic, different from performance to '
-                     'performance? There are no "official" lyrics for a song, '
-                     'there only exist "official" lyrics for a specific '
-                     'performance of a song. So, I decided to transcribe not '
-                     'merely all of the songs, but all of the different '
-                     'versions too. If you\'re a Bob Dylan fan, then you know '
-                     'that one of the things that makes Dylan\'s art '
-                     'distinctive is his ability to adapt, change, add to, '
-                     'subtract from, and rearrange his lyrics, as well as the '
-                     'way in which the words are uttered and the musical '
-                     'accompaniment. Dylan is known for experimenting with his'
-                     ' songs and, whether these experiments work or not, it\'s'
-                     ' fascinating to study them and try to understand them.')
-    description_3 = ('So, the aim of this website is to provide the lyrics of '
-                     'all of the official versions of Bob Dylan\'s songs as '
-                     'I\'ve transcribed them (by official, I mean, officially '
-                     'released, either on album or video). I have not '
-                     'transcribed every single song - this is an ongoing '
-                     'process, but I will continue to transcribe songs as my '
-                     'schedule allows and I will be posting them to this '
-                     'website. Any help would be greatly appreciated. That '
-                     'includes transcriptions of not-yet-included songs as '
-                     'well as edits of existing content. I will put together a'
-                     ' comprehensive guide to submitting a request to add to/'
-                     'edit the site so that anybody can contribute. Please {0}'
-                     ' if you have any comments or suggestions. I\'d love to '
-                     'hear from you!'.format(email_a_tag))
-    description_signature = '&nbsp;-- Matt'
-    about_author = ('My name is Matt Mulholland and I work at Educational '
-                    'Testing Service in Princeton, NJ as a research engineer '
-                    'in the natural language processing/speech group. Please '
-                    'check out my {0} as well as my {1} to learn about other '
-                    'projects I have been working on.'
-                    .format(personal_page_a_tag, personal_github_page_a_tag))
-
+    # Add in home page content (introduction, contributions, etc.),
+    # which is stored in a file in the resources directory called
+    # "home_page_content.md" (as its name suggests it is in Markdown
+    # format and therefore it will be necessary to convert automatically
+    # from Markdown to HTML)
+    markdowner = Markdown()
+    with open(home_page_content_file_path) as home_markdown_file:
+        html_content = markdowner.convert(home_markdown_file.read())
     container_div = soup.new_tag('div')
     container_div.attrs['class'] = 'container'
     row_div = soup.new_tag('div')
     row_div.attrs['class'] = 'row'
     columns_div = soup.new_tag('div')
     columns_div.attrs['class'] = 'col-xs-12'
-    contribute_h2 = soup.new_tag('h2')
-    contribute_h2.string = contribute_title
-    columns_div.append(contribute_h2)
-    contribute_p = soup.new_tag('p')
-    contribute_p.string = contribute
-    columns_div.append(contribute_p)
-    description_h2 = soup.new_tag('h2')
-    description_h2.string = description_title
-    columns_div.append(description_h2)
-    description_p_1 = soup.new_tag('p')
-    description_p_1.string = description_1
-    columns_div.append(description_p_1)
-    description_ul = soup.new_tag('ul')
-    for element in description_li_elements:
-        li = soup.new_tag('li')
-        li.string = element
-        description_ul.append(li)
-    columns_div.append(description_ul)
-    description_p_2 = soup.new_tag('p')
-    description_p_2.string = description_2
-    columns_div.append(description_p_2)
-    description_p_3 = soup.new_tag('p')
-    description_p_3.string = description_3
-    columns_div.append(description_p_3)
-    about_author_h2 = soup.new_tag('h2')
-    about_author_h2.string = about_author_title
-    columns_div.append(about_author_h2)
-    about_author_p = soup.new_tag('p')
-    about_author_p.string = about_author
-    columns_div.append(about_author_p)
+    columns_div.string = html_content
     row_div.append(columns_div)
     container_div.append(row_div)
 
     body.append(container_div)
     html.append(body)
 
-    with open('{}2.html'.format(main_index_html_file_path[:-5]), 'w') as index_file:
+    with open(main_index_html_file_path, 'w') as index_file:
         index_file.write(add_declaration(clean_up_html(str(html))))
 
 
@@ -820,7 +709,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     columns_div = soup.new_tag('div')
     columns_div.attrs['class'] = 'col-xs-12'
     attrs_div = soup.new_tag('div')
-    image_file_path = join('..', 'resources', 'images', attrs['image_file_name'])
+    image_file_path = join('..', resources_dir, images_dir, attrs['image_file_name'])
     image = soup.new_tag('img', src=image_file_path)
     attrs_div.append(image)
     release_div = soup.new_tag('div')
@@ -1150,7 +1039,7 @@ def htmlify_main_song_index_page() -> None:
     container_div.append(row_div)
     container_div.append(soup.new_tag('p'))
 
-    for letter in string.ascii_uppercase:
+    for letter in ascii_uppercase:
         row_div = soup.new_tag('div')
         row_div.attrs['class'] = 'row'
         columns_div = soup.new_tag('div')
