@@ -1,9 +1,11 @@
 import re
 import sys
+from math import ceil
+from glob import glob
 from json import loads
 from string import ascii_uppercase
 from collections import OrderedDict
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, getsize
 
 from bs4.element import Tag
 from bs4 import BeautifulSoup
@@ -27,6 +29,8 @@ song_index_html_file_name = 'song_index.html'
 albums_index_html_file_name = 'albums.html'
 custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
+all_songs_file_name = 'all_songs.txt'
+all_songs_unique_file_name = 'all_songs_unique.txt'
 text_dir_path = join(songs_dir, text_dir)
 html_dir_path = join(songs_dir, html_dir)
 song_index_dir_path = join(songs_dir, song_index_dir)
@@ -1226,7 +1230,7 @@ def write_big_lyrics_files() -> None:
     # Write big file with all songs (even duplicates)
     song_text_lines = newline_join(song_texts).split('\n')
     song_text = newline_join([line.strip() for line in song_text_lines if line.strip()])
-    song_text_path = join(file_dumps_dir_path, 'all_songs.txt')
+    song_text_path = join(file_dumps_dir_path, all_songs_file_name)
     with open(song_text_path, 'w') as song_text_file:
         song_text_file.write(song_text)
 
@@ -1234,9 +1238,69 @@ def write_big_lyrics_files() -> None:
     unique_song_text_lines = newline_join(unique_song_texts).split('\n')
     unique_song_text = newline_join([line.strip() for line in unique_song_text_lines
                                      if line.strip()])
-    unique_song_text_path = join(file_dumps_dir_path, 'all_songs_unique.txt')
+    unique_song_text_path = join(file_dumps_dir_path, all_songs_unique_file_name)
     with open(unique_song_text_path, 'w') as unique_song_text_file:
         unique_song_text_file.write(unique_song_text)
+
+
+def htmlify_downloads_page() -> None:
+    """
+    Generate the downloads page.
+
+    :returns: None
+    :rtype: None
+    """
+
+    # Get the size of the files in KiB
+    file_sizes_dict = {file_path: ceil(getsize(file_path)/1024) for file_path
+                       in glob(join(file_dumps_dir_path, '*.txt'))}
+
+    html = soup.new_tag('html')
+    html.append(make_head_element(1))
+
+    # Create body element and add in a navigation bar
+    body = soup.new_tag('body')
+    body.append(make_navbar_element(1))
+
+    # Make a tag for download links
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container'
+    row_div = soup.new_tag('div')
+    row_div.attrs['class'] = 'row'
+    columns_div = soup.new_tag('div')
+    columns_div.attrs['class'] = 'col-xs-12'
+    h3 = soup.new_tag('h3')
+    h3.string = 'Lyrics File Downloads'
+    columns_div.append(h3)
+    last_album = albums_dict.popitem()
+    last_album_name = last_album[0]
+    last_album_file_rel_path = join('..', albums_dir,
+                                    '{0}.html'.format(last_album[1]['attrs']['file_id']))
+    last_album_a = soup.new_tag('a', href=last_album_file_rel_path)
+    last_album_a.string = last_album_name
+    i = soup.new_tag('i')
+    i.append(last_album_a)
+    ul = soup.new_tag('ul')
+    for file_name in [all_songs_file_name, all_songs_unique_file_name]:
+        if 'unique' in file_name:
+            text = 'All unique songs '
+        else:
+            text = 'All songs in the order in which they appeared on released albums '
+        download_a = ('<a href={0} download>{1}(up to and including {2}) ({3} '
+                      'KiB)</a>'
+                      .format(file_name, text, clean_up_html(str(i)),
+                              file_sizes_dict[join(file_dumps_dir_path, file_name)]))
+        li = soup.new_tag('li')
+        li.string = download_a
+        ul.append(li)
+    columns_div.append(ul)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    body.append(container_div)
+    html.append(body)
+
+    with open(join(file_dumps_dir_path, downloads_file_name), 'w') as downloads_file:
+        downloads_file.write(add_declaration(clean_up_html(str(html))))
 
 
 def main():
@@ -1275,6 +1339,7 @@ def main():
     if make_downloads:
         sys.stderr.write('Generating the full lyrics download files...\n')
         write_big_lyrics_files()
+        htmlify_downloads_page()
 
     sys.stderr.write('Program complete.\n')
 
