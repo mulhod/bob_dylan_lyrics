@@ -12,8 +12,6 @@ from cytoolz import first as first_
 from typing import Any, Dict, List, Iterable
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-AlbumDict = Dict[str, Dict[str, Any]]
-
 # Paths
 root_dir_path = dirname(dirname(realpath(__file__)))
 albums_dir = 'albums'
@@ -43,9 +41,10 @@ home_page_content_file_path = join(root_dir_path, resources_dir, 'home_page_cont
 soup = BeautifulSoup('', 'html.parser')
 
 # Bootstrap/HTML/Javascript/CSS-related
-bootstrap_style_sheet = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'
+bootstrap_3_3_5_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5'
+bootstrap_style_sheet = join(bootstrap_3_3_5_url, 'css', 'bootstrap.min.css')
+bootstrap_script_url = join(bootstrap_3_3_5_url, 'js', 'bootstrap.min.js')
 jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
-bootstrap_script_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
 
 decades = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
 
@@ -63,11 +62,12 @@ CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
 A_THE_RE = re.compile(r'^(the|a) ')
 clean = lambda x: x.strip('()').lower()
 
-# For collecting all of the song texts together to write big files
+# For writing files depending on all albums/songs
 song_texts = []
 unique_song_texts = set()
 song_files_dict = {}
 file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
+albums_dict = OrderedDict()
 
 
 def add_declaration(html_string: str) -> str:
@@ -89,8 +89,9 @@ def make_head_element(level=0) -> Tag:
     """
     Make a head element including stylesheets, Javascript, etc.
 
-    :param level: how many levels down (from the root) is the file for
-                  which this head element will be used, if any
+    :param level: number of levels down (from the root) the file for
+                  which this head element will be used is located, if
+                  any
     :type level: int
 
     :returns: HTML head element
@@ -111,6 +112,118 @@ def make_head_element(level=0) -> Tag:
     head.append(soup.new_tag('script', src=bootstrap_script_url))
 
     return head
+
+
+def make_navbar_element(level=0) -> Tag:
+    """
+    Generate a navigation bar element to insert into webpages for songs,
+    albums, etc.
+
+    :param level: number of levels down (from the root) the file for
+                  which this navigation bar will be used is located, if
+                  any
+    :type level: int
+
+    :returns: HTML head element
+    :rtype: bs4.Tag
+    """
+
+    up_levels = join('', *['..']*level)
+
+    # Create a navigation element in which to put in buttons and
+    # dropdown menus, etc.
+    top_level_nav = soup.new_tag('nav')
+    top_level_nav.attrs['class'] = 'navbar navbar-default'
+    container_div = soup.new_tag('div')
+    container_div.attrs['class'] = 'container-fluid'
+    navbar_header_div = soup.new_tag('div')
+    navbar_header_div.attrs['class'] = 'navbar-header'
+    
+    # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
+    # downloads page and the songs index
+    main_index_file_rel_path = join(up_levels, main_index_html_file_name)
+    a_site = soup.new_tag('a', href=main_index_file_rel_path)
+    a_site.attrs['class'] = 'navbar-brand'
+    a_site.string = 'Bob Dylan Lyrics'
+    navbar_header_div.append(a_site)
+    container_div.append(navbar_header_div)
+    navbar_collapse_div = soup.new_tag('div')
+    navbar_collapse_div.attrs['class'] = 'collapse navbar-collapse'
+    navbar_ul = soup.new_tag('ul')
+    navbar_ul.attrs['class'] = 'nav navbar-nav'
+    downloads_li = soup.new_tag('li')
+    downloads_file_rel_path = join(up_levels, file_dumps_dir, downloads_file_name)
+    a_downloads = soup.new_tag('a', href=downloads_file_rel_path)
+    a_downloads.string = 'Downloads'
+    downloads_li.append(a_downloads)
+    navbar_ul.append(downloads_li)
+    index_li = soup.new_tag('li')
+    song_index_file_rel_path = join(up_levels, songs_dir, song_index_dir,
+                                    song_index_html_file_name)
+    a_index = soup.new_tag('a', href=song_index_file_rel_path)
+    a_index.string = 'All Songs'
+    index_li.append(a_index)
+    navbar_ul.append(index_li)
+
+    # Add in dropdown menus for albums by decade
+    for decade in decades:
+        dropdown_li = soup.new_tag('li')
+        a_dropdown = soup.new_tag('a', href='#')
+        a_dropdown.attrs['class'] = 'dropdown-toggle'
+        a_dropdown.attrs['data-toggle'] = 'dropdown'
+        a_dropdown.attrs['role'] = 'button'
+        a_dropdown.attrs['aria-haspopup'] = 'true'
+        a_dropdown.attrs['aria-expanded'] = 'false'
+        a_dropdown.string = decade
+        caret_span = soup.new_tag('span')
+        caret_span.attrs['class'] = 'caret'
+        a_dropdown.append(caret_span)
+        dropdown_li.append(a_dropdown)
+        dropdown_menu_ul = soup.new_tag('ul')
+        dropdown_menu_ul.attrs['class'] = 'dropdown-menu'
+        
+        # Add albums from the given decade into the decade dropdown menu
+        albums_dir_rel_path = join(up_levels, albums_dir)
+        decade_albums = [album for album in albums_dict if decade[:3]
+                         in albums_dict[album]['attrs']['release_date'].split()[-1][:3]]
+        for album in decade_albums:
+            album_file_name = '{0}.html'.format(albums_dict[album]['attrs']['file_id'])
+            album_li = soup.new_tag('li')
+            album_index_file_rel_path = join(albums_dir_rel_path, album_file_name)
+            album_a = soup.new_tag('a', href=album_index_file_rel_path)
+            album_a.attrs['class'] = 'album'
+            album_a.string = album
+            album_li.append(album_a)
+            dropdown_menu_ul.append(album_li)
+
+        dropdown_li.append(dropdown_menu_ul)
+        navbar_ul.append(dropdown_li)
+
+    navbar_collapse_div.append(navbar_ul)
+
+    # Add in search box
+    search_form = soup.new_tag('form')
+    search_form.attrs['class'] = 'navbar-form navbar-left'
+    search_form.attrs['role'] = 'search'
+    form_group_div = soup.new_tag('div')
+    form_group_div.attrs['class'] = 'form-group'
+    search_input = soup.new_tag('input')
+    search_input.attrs['type'] = 'text'
+    search_input.attrs['class'] = 'form-control'
+    search_input.attrs['placeholder'] = 'Search'
+    form_group_div.append(search_input)
+    search_form.append(form_group_div)
+    search_button = soup.new_tag('button')
+    search_button.attrs['type'] = 'submit'
+    search_button.attrs['class'] = 'btn btn-default'
+    search_button.string = 'Search'
+    search_form.append(search_button)
+    navbar_collapse_div.append(search_form)
+
+    container_div.append(navbar_collapse_div)
+    top_level_nav.append(container_div)
+
+    return top_level_nav
 
 
 def remove_annotations(text: str) -> str:
@@ -209,18 +322,14 @@ def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
     return indices
 
 
-def read_songs_index() -> Dict[str, Any]:
+def read_songs_index():
     """
     Read albums_and_songs_index.jsonlines file and make dictionary
     representation.
 
-    :returns: albums dictionary
-    :rtype: dict
-
     :raises: ValueError
     """
 
-    albums = OrderedDict()
     for album_or_song_dict in (loads(line.strip('\n'))
                                for line in open(songs_and_albums_jsonl_file_path)
                                if not line.startswith('#') and line.strip('\n')):
@@ -247,7 +356,7 @@ def read_songs_index() -> Dict[str, Any]:
                                           'written_and_performed_by':
                                               song_dict.get('written_and_performed_by', {})})
                                         for song_id, song_dict in sorted_songs)
-            albums[attrs['name']] = {'attrs': attrs, 'songs': ordered_songs}
+            albums_dict[attrs['name']] = {'attrs': attrs, 'songs': ordered_songs}
 
         elif album_or_song_dict['type'] == 'song':
 
@@ -261,26 +370,14 @@ def read_songs_index() -> Dict[str, Any]:
             raise ValueError('Encountered a JSON object whose "type" '
                              'attribute is neither "album" nor "song".')
 
-    if not albums:
+    if not albums_dict:
         raise ValueError('No albums found in albums_and_songs_index.jsonlines'
                          ' file!')
 
-    return albums
 
-
-def generate_index_page(albums: AlbumDict) -> None:
+def generate_index_page() -> None:
     """
     Generate the main site's index.html page.
-
-    :param albums: dictionary of album names mapped to a dictionary
-                   containing an album attribute dictionary, including
-                   attributes such as the HTML file name, the release
-                   date, etc., and an ordered dictionary of songs,
-                   including song file IDs and information about where
-                   the songs come from (if they were from a previous
-                   album, as in the case of compilation albums, for
-                   instance)
-    :type albums: dict
 
     :returns: None
     :rtype: None
@@ -298,91 +395,7 @@ def generate_index_page(albums: AlbumDict) -> None:
 
     # Start to construct the body tag, including a navigation bar
     body = soup.new_tag('body')
-    top_level_nav = soup.new_tag('nav')
-    top_level_nav.attrs['class'] = 'navbar navbar-default'
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container-fluid'
-    navbar_header_div = soup.new_tag('div')
-    navbar_header_div.attrs['class'] = 'navbar-header'
-    
-    # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
-    # downloads page and the songs index
-    a_site = soup.new_tag('a', href=index_html_rel_path)
-    a_site.attrs['class'] = 'navbar-brand'
-    a_site.string = 'Bob Dylan Lyrics'
-    navbar_header_div.append(a_site)
-    container_div.append(navbar_header_div)
-    navbar_collapse_div = soup.new_tag('div')
-    navbar_collapse_div.attrs['class'] = 'collapse navbar-collapse'
-    navbar_ul = soup.new_tag('ul')
-    navbar_ul.attrs['class'] = 'nav navbar-nav'
-    downloads_li = soup.new_tag('li')
-    a_downloads = soup.new_tag('a', href=downloads_html_rel_path)
-    a_downloads.string = 'Downloads'
-    downloads_li.append(a_downloads)
-    navbar_ul.append(downloads_li)
-    index_li = soup.new_tag('li')
-    a_index = soup.new_tag('a', href=song_index_html_rel_path)
-    a_index.string = 'All Songs'
-    index_li.append(a_index)
-    navbar_ul.append(index_li)
-
-    # Add in dropdown menus for albums by decade
-    for decade in decades:
-        dropdown_li = soup.new_tag('li')
-        a_dropdown = soup.new_tag('a', href='#')
-        a_dropdown.attrs['class'] = 'dropdown-toggle'
-        a_dropdown.attrs['data-toggle'] = 'dropdown'
-        a_dropdown.attrs['role'] = 'button'
-        a_dropdown.attrs['aria-haspopup'] = 'true'
-        a_dropdown.attrs['aria-expanded'] = 'false'
-        a_dropdown.string = decade
-        caret_span = soup.new_tag('span')
-        caret_span.attrs['class'] = 'caret'
-        a_dropdown.append(caret_span)
-        dropdown_li.append(a_dropdown)
-        dropdown_menu_ul = soup.new_tag('ul')
-        dropdown_menu_ul.attrs['class'] = 'dropdown-menu'
-        
-        # Add albums from the given decade into the decade dropdown menu
-        decade_albums = [album for album in albums if decade[:3]
-                         in albums[album]['attrs']['release_date'].split()[-1][:3]]
-        for album in decade_albums:
-            album_file_name = '{0}.html'.format(albums[album]['attrs']['file_id'])
-            album_li = soup.new_tag('li')
-            album_a = soup.new_tag('a', href=join(albums_dir, album_file_name))
-            album_a.attrs['class'] = 'album'
-            album_a.string = album
-            album_li.append(album_a)
-            dropdown_menu_ul.append(album_li)
-
-        dropdown_li.append(dropdown_menu_ul)
-        navbar_ul.append(dropdown_li)
-
-    navbar_collapse_div.append(navbar_ul)
-
-    # Add in search box
-    search_form = soup.new_tag('form')
-    search_form.attrs['class'] = 'navbar-form navbar-left'
-    search_form.attrs['role'] = 'search'
-    form_group_div = soup.new_tag('div')
-    form_group_div.attrs['class'] = 'form-group'
-    search_input = soup.new_tag('input')
-    search_input.attrs['type'] = 'text'
-    search_input.attrs['class'] = 'form-control'
-    search_input.attrs['placeholder'] = 'Search'
-    form_group_div.append(search_input)
-    search_form.append(form_group_div)
-    search_button = soup.new_tag('button')
-    search_button.attrs['type'] = 'submit'
-    search_button.attrs['class'] = 'btn btn-default'
-    search_button.string = 'Search'
-    search_form.append(search_button)
-    navbar_collapse_div.append(search_form)
-
-    container_div.append(navbar_collapse_div)
-    top_level_nav.append(container_div)
-    body.append(top_level_nav)
+    body.append(make_navbar_element(0))
 
     # Add in home page content (introduction, contributions, etc.),
     # which is stored in a file in the resources directory called
@@ -587,20 +600,11 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     return row_div
 
 
-def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> None:
+def htmlify_everything(make_downloads: bool = False) -> None:
     """
-    Create HTML files for the albums index page, each album, and each
-    song.
+    Create HTML files for the main index page, each album's index page,
+    and the pages for all songs.
 
-    :param albums: dictionary of album names mapped to a dictionary
-                   containing an album attribute dictionary, including
-                   attributes such as the HTML file name, the release
-                   date, etc., and an ordered dictionary of songs,
-                   including song file IDs and information about where
-                   the songs come from (if they were from a previous
-                   album, as in the case of compilation albums, for
-                   instance)
-    :type albums: dict
     :param make_downloads: True if lyrics file downloads should be
                            generated
     :type make_downloads: bool
@@ -614,8 +618,6 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
 
     # Make HTML element for albums index page
     index_html = soup.new_tag('html')
-
-    # Generate body for albums page
     index_body = soup.new_tag('body')
 
     # Add in elements for the heading
@@ -626,21 +628,15 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
 
     # Add in ordered list element for all albums
     index_ol = soup.new_tag('ol')
-    for album in albums:
-        album_html_file_name = '{}.html'.format(albums[album]['attrs']['file_id'])
+    for album in albums_dict:
+        album_html_file_name = '{}.html'.format(albums_dict[album]['attrs']['file_id'])
         album_html_file_path = join(albums_dir, album_html_file_name)
-        year = albums[album]['attrs']['release_date'].split()[-1]
+        year = albums_dict[album]['attrs']['release_date'].split()[-1]
         li = soup.new_tag('li')
         li.string = '{0} ({1})'.format(album, year)
         li.string.wrap(soup.new_tag('a', href=album_html_file_path))
         index_ol.append(li)
     index_body.append(index_ol)
-
-    # Add in "Home" link
-    div = soup.new_tag('div')
-    div.string = 'Home'
-    div.string.wrap(soup.new_tag('a', href=main_index_html_file_name))
-    index_body.append(div)
 
     # Put body in HTML element
     index_html.append(index_body)
@@ -651,9 +647,13 @@ def htmlify_everything(albums: Dict[str, Any], make_downloads: bool = False) -> 
 
     # Generate pages for albums
     sys.stderr.write('HTMLifying the individual album pages...\n')
-    for album, attrs_songs in albums.items():
+    for album, attrs_songs in albums_dict.items():
         htmlify_album(album, attrs_songs['attrs'], attrs_songs['songs'],
                       make_downloads=make_downloads)
+
+    # Generate the main index page
+    sys.stderr.write('HTMLifying the main index page...\n')
+    htmlify_main_song_index_page()
 
 
 def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
@@ -685,8 +685,9 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     html = soup.new_tag('html')
     html.append(make_head_element(1))
 
-    # Generate body for albums page
+    # Generate body for albums page and add in a navigation bar
     body = soup.new_tag('body')
+    body.append(make_navbar_element(1))
 
     # Create div tag for the "container"
     container_div = soup.new_tag('div')
@@ -737,21 +738,9 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # NOTE: Deal with the possibility of a 'discs' attribute in addition
     # to the 'sides' attribute
     container_div.append(generate_song_list(songs, attrs.get('sides', None)))
-
-    # Add in navigation buttons
-    nav_tag = soup.new_tag('ul')
-    nav_tag.attrs['class'] = 'nav nav-pills'
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='../index.html')
-    a_tag.string = 'Home'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    container_div.append(nav_tag)
+    
+    # Add content to body and put body in HTML element
     body.append(container_div)
-
-    # Put body in HTML element
     html.append(body)
 
     # Write new HTML file for albums index page
@@ -851,8 +840,9 @@ def htmlify_song(name: str, song_id: str) -> None:
     html = soup.new_tag('html')
     html.append(make_head_element(2))
 
-    # Body element
+    # Create a body element and add in a navigation bar
     body = soup.new_tag('body')
+    body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
     container_div = soup.new_tag('div')
@@ -977,29 +967,10 @@ def htmlify_song(name: str, song_id: str) -> None:
         # Insert annotation section at the next index
         columns_div.append(annotation_section)
 
-    # Add in navigation buttons
-    nav_tag = soup.new_tag('ul')
-    nav_tag.attrs['class'] = 'nav nav-pills'
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='../../index.html')
-    a_tag.string = 'Home'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='javascript:history.back()')
-    a_tag.string = 'Back'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    columns_div.append(nav_tag)
+    # Add content to body and put body in HTML element
     row_div.append(columns_div)
     container_div.append(row_div)
     body.append(container_div)
-
-    # Put body in HTML element
     html.append(body)
 
     # Write out "prettified" HTML to the output file
@@ -1022,8 +993,9 @@ def htmlify_main_song_index_page() -> None:
     html = soup.new_tag('html')
     html.append(make_head_element(2))
 
-    # Body element
+    # Create a body element and add in a navigation bar
     body = soup.new_tag('body')
+    body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
     container_div = soup.new_tag('div')
@@ -1057,24 +1029,6 @@ def htmlify_main_song_index_page() -> None:
 
         # Generate the sub-index page for the letter
         htmlify_song_index_page(letter)
-
-    # Add in navigation buttons
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    nav_tag = soup.new_tag('ul')
-    nav_tag.attrs['class'] = 'nav nav-pills'
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='../../index.html')
-    a_tag.string = 'Home'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    columns_div.append(nav_tag)
-    row_div.append(columns_div)
-    container_div.append(row_div)
 
     body.append(container_div)
     html.append(body)
@@ -1166,8 +1120,9 @@ def htmlify_song_index_page(letter: str) -> None:
     html = soup.new_tag('html')
     html.append(make_head_element(2))
 
-    # Body element
+    # Create body element and add in a navigation bar
     body = soup.new_tag('body')
+    body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
     container_div = soup.new_tag('div')
@@ -1247,31 +1202,6 @@ def htmlify_song_index_page(letter: str) -> None:
         columns_div.append(row_div)
         container_div.append(columns_div)
 
-    # Add in navigation buttons
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    nav_tag = soup.new_tag('ul')
-    nav_tag.attrs['class'] = 'nav nav-pills'
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='../../index.html')
-    a_tag.string = 'Home'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    li_tag = soup.new_tag('li')
-    li_tag.attrs['role'] = 'presentation'
-    li_tag.attrs['class'] = 'active'
-    a_tag = soup.new_tag('a', href='song_index.html')
-    a_tag.string = 'Back'
-    li_tag.append(a_tag)
-    nav_tag.append(li_tag)
-    columns_div.append(nav_tag)
-    row_div.append(columns_div)
-    container_div.append(row_div)
-
     body.append(container_div)
     html.append(body)
 
@@ -1333,14 +1263,13 @@ def main():
     # constructing a dictionary of albums and the associated songs, etc.
     sys.stderr.write('Reading the albums_and_songs_index.jsonlines file and '
                      'building up index of albums and songs...\n')
-    albums_dict = read_songs_index()
+    read_songs_index()
 
     # Generate HTML files for the main index page, albums, songs, etc.
     sys.stderr.write('Generating HTML files for the main page, albums, songs, '
                      'etc....\n')
-    generate_index_page(albums_dict)
-    htmlify_everything(albums_dict, make_downloads=make_downloads)
-    htmlify_main_song_index_page()
+    generate_index_page()
+    htmlify_everything(make_downloads=make_downloads)
 
     # Write raw lyrics files (for downloading), if requested
     if make_downloads:
