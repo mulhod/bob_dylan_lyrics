@@ -142,6 +142,26 @@ def make_navbar_element(level=0) -> Tag:
     container_div.attrs['class'] = 'container-fluid'
     navbar_header_div = soup.new_tag('div')
     navbar_header_div.attrs['class'] = 'navbar-header'
+    navbar_collapse_button = soup.new_tag('button')
+    navbar_collapse_button.attrs['type'] = 'button'
+    navbar_collapse_button.attrs['class'] = 'navbar-toggle collapsed'
+    navbar_collapse_button.attrs['data-toggle'] = 'collapse'
+    navbar_collapse_button.attrs['data-target'] = '#bs-example-navbar-collapse-1'
+    navbar_collapse_button.attrs['aria-expanded'] = 'false'
+    button_span1 = soup.new_tag('span')
+    button_span1.attrs['class'] = 'sr-only'
+    button_span1.string = 'Toggle navigation'
+    button_span2 = soup.new_tag('span')
+    button_span2.attrs['class'] = 'icon-bar'
+    button_span3 = soup.new_tag('span')
+    button_span3.attrs['class'] = 'icon-bar'
+    button_span4 = soup.new_tag('span')
+    button_span4.attrs['class'] = 'icon-bar'
+    navbar_collapse_button.append(button_span1)
+    navbar_collapse_button.append(button_span2)
+    navbar_collapse_button.append(button_span3)
+    navbar_collapse_button.append(button_span4)
+    navbar_header_div.append(navbar_collapse_button)
     
     # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
     # downloads page and the songs index
@@ -152,7 +172,10 @@ def make_navbar_element(level=0) -> Tag:
     navbar_header_div.append(a_site)
     container_div.append(navbar_header_div)
     navbar_collapse_div = soup.new_tag('div')
-    navbar_collapse_div.attrs['class'] = 'collapse navbar-collapse'
+    navbar_collapse_div.attrs['class'] = 'navbar-collapse collapse'
+    navbar_collapse_div.attrs['id'] = 'bs-example-navbar-collapse-1'
+    navbar_collapse_div.attrs['aria-expanded'] = 'false'
+    navbar_collapse_div.attrs['style'] = 'height: 1px'
     navbar_ul = soup.new_tag('ul')
     navbar_ul.attrs['class'] = 'nav navbar-nav'
     downloads_li = soup.new_tag('li')
@@ -172,6 +195,7 @@ def make_navbar_element(level=0) -> Tag:
     # Add in dropdown menus for albums by decade
     for decade in decades:
         dropdown_li = soup.new_tag('li')
+        dropdown_li.attrs['class'] = 'dropdown'
         a_dropdown = soup.new_tag('a', href='#')
         a_dropdown.attrs['class'] = 'dropdown-toggle'
         a_dropdown.attrs['data-toggle'] = 'dropdown'
@@ -517,10 +541,8 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
              with assumptions
     """
 
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
     columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
+    columns_div.attrs['class'] = 'col-xs-8'
     ol = soup.new_tag('ol')
     if sides_dict:
         for side in sorted(sides_dict):
@@ -599,10 +621,8 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
             ol.append(generate_song_list_element(song, songs[song]))
 
     columns_div.append(ol)
-    row_div.append(columns_div)
     
-    return row_div
-
+    return columns_div
 
 def htmlify_everything(make_downloads: bool = False) -> None:
     """
@@ -711,11 +731,14 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     # Add in the album attributes, including a picture of the album
     row_div = soup.new_tag('div')
     row_div.attrs['class'] = 'row'
+    row_div.attrs['style'] = 'padding-top:12px'
     columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
+    columns_div.attrs['class'] = 'col-xs-4'
     attrs_div = soup.new_tag('div')
     image_file_path = join('..', resources_dir, images_dir, attrs['image_file_name'])
     image = soup.new_tag('img', src=image_file_path)
+    image.attrs['width'] = '300px'
+    image.attrs['style'] = 'padding-bottom:10px'
     attrs_div.append(image)
     release_div = soup.new_tag('div')
     release_div.string = 'Released: {0}'.format(attrs['release_date'])
@@ -735,14 +758,14 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
     attrs_div.append(label_div)
     columns_div.append(attrs_div)
     row_div.append(columns_div)
-    container_div.append(row_div)
 
     # Add in an ordered list element for all songs (or several ordered
     # lists for each side, disc, etc.)
     # NOTE: Deal with the possibility of a 'discs' attribute in addition
     # to the 'sides' attribute
-    container_div.append(generate_song_list(songs, attrs.get('sides', None)))
-    
+    row_div.append(generate_song_list(songs, attrs.get('sides', None)))
+    container_div.append(row_div)
+
     # Add content to body and put body in HTML element
     body.append(container_div)
     html.append(body)
