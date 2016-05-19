@@ -86,7 +86,7 @@ def add_declaration(html_string: str) -> str:
     :rtype: str
     """
 
-    return '<!DOCTYPE html>\n{0}'.format(html_string)
+    return str(BeautifulSoup('<!DOCTYPE html>\n{0}'.format(html_string), 'html.parser'))
 
 
 def make_head_element(level=0) -> Tag:
@@ -102,18 +102,20 @@ def make_head_element(level=0) -> Tag:
     :rtype: bs4.Tag
     """
 
-    head = soup.new_tag('head')
-    head.append(soup.new_tag('meta', charset="utf-8"))
-    meta_tag = soup.new_tag('meta')
-    meta_tag.attrs['name'] = 'viewport'
-    meta_tag.attrs['content'] = 'width=device-width, initial-scale=1'
+    head = Tag(name='head')
+    head.append(Tag(name='meta', attrs={'charset': "utf-8"}))
+    meta_tag = Tag(name='meta',
+                   attrs={'name': 'viewport',
+                          'content': 'width=device-width, initial-scale=1'})
     head.append(meta_tag)
-    head.append(soup.new_tag('link', rel="stylesheet", href=bootstrap_style_sheet))
-    custom_style_sheet_path = join(*['..']*level, resources_dir,
-                                            custom_style_sheet_file_name)
-    head.append(soup.new_tag('link', rel="stylesheet", href=custom_style_sheet_path))
-    head.append(soup.new_tag('script', src=jquery_script_url))
-    head.append(soup.new_tag('script', src=bootstrap_script_url))
+    head.append(Tag(name='link',
+                    attrs={'rel': 'stylesheet', 'href': bootstrap_style_sheet}))
+    head.append(Tag(name='link',
+                    attrs={'rel': 'stylesheet',
+                           'href': join(*['..']*level, resources_dir,
+                                        custom_style_sheet_file_name)}))
+    head.append(Tag(name='script', attrs={'src': jquery_script_url}))
+    head.append(Tag(name='script', attrs={'src': bootstrap_script_url}))
 
     return head
 
@@ -136,27 +138,20 @@ def make_navbar_element(level=0) -> Tag:
 
     # Create a navigation element in which to put in buttons and
     # dropdown menus, etc.
-    top_level_nav = soup.new_tag('nav')
-    top_level_nav.attrs['class'] = 'navbar navbar-default'
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container-fluid'
-    navbar_header_div = soup.new_tag('div')
-    navbar_header_div.attrs['class'] = 'navbar-header'
-    navbar_collapse_button = soup.new_tag('button')
-    navbar_collapse_button.attrs['type'] = 'button'
-    navbar_collapse_button.attrs['class'] = 'navbar-toggle collapsed'
-    navbar_collapse_button.attrs['data-toggle'] = 'collapse'
-    navbar_collapse_button.attrs['data-target'] = '#bs-example-navbar-collapse-1'
-    navbar_collapse_button.attrs['aria-expanded'] = 'false'
-    button_span1 = soup.new_tag('span')
-    button_span1.attrs['class'] = 'sr-only'
+    top_level_nav = Tag(name='nav', attrs={'class': 'navbar navbar-default'})
+    container_div = Tag(name='div', attrs={'class': 'container-fluid'})
+    navbar_header_div = Tag(name='div', attrs={'class': 'navbar-header'})
+    navbar_collapse_button = Tag(name='button',
+                                 attrs={'type': 'button',
+                                        'class': 'navbar-toggle collapsed',
+                                        'data-toggle': 'collapse',
+                                        'data-target': '#bs-example-navbar-collapse-1',
+                                        'aria-expanded': 'false'})
+    button_span1 = Tag(name='span', attrs={'class': 'sr-only'})
     button_span1.string = 'Toggle navigation'
-    button_span2 = soup.new_tag('span')
-    button_span2.attrs['class'] = 'icon-bar'
-    button_span3 = soup.new_tag('span')
-    button_span3.attrs['class'] = 'icon-bar'
-    button_span4 = soup.new_tag('span')
-    button_span4.attrs['class'] = 'icon-bar'
+    button_span2 = Tag(name='span', attrs={'class': 'icon-bar'})
+    button_span3 = Tag(name='span', attrs={'class': 'icon-bar'})
+    button_span4 = Tag(name='span', attrs={'class': 'icon-bar'})
     navbar_collapse_button.append(button_span1)
     navbar_collapse_button.append(button_span2)
     navbar_collapse_button.append(button_span3)
@@ -166,49 +161,47 @@ def make_navbar_element(level=0) -> Tag:
     # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
     # downloads page and the songs index
     main_index_file_rel_path = join(up_levels, main_index_html_file_name)
-    a_site = soup.new_tag('a', href=main_index_file_rel_path)
-    a_site.attrs['class'] = 'navbar-brand'
+    a_site = Tag(name='a',
+                 attrs={'href': main_index_file_rel_path,
+                        'class': 'navbar-brand'})
     a_site.string = 'Bob Dylan Lyrics'
     navbar_header_div.append(a_site)
     container_div.append(navbar_header_div)
-    navbar_collapse_div = soup.new_tag('div')
-    navbar_collapse_div.attrs['class'] = 'navbar-collapse collapse'
-    navbar_collapse_div.attrs['id'] = 'bs-example-navbar-collapse-1'
-    navbar_collapse_div.attrs['aria-expanded'] = 'false'
-    navbar_collapse_div.attrs['style'] = 'height: 1px'
-    navbar_ul = soup.new_tag('ul')
-    navbar_ul.attrs['class'] = 'nav navbar-nav'
-    downloads_li = soup.new_tag('li')
+    navbar_collapse_div = Tag(name='div',
+                              attrs={'class': 'navbar-collapse collapse',
+                                     'id': 'bs-example-navbar-collapse-1',
+                                     'aria-expanded': 'false',
+                                     'style': 'height: 1px'})
+    navbar_ul = Tag(name='ul', attrs={'class': 'nav navbar-nav'})
+    downloads_li = Tag(name='li')
     downloads_file_rel_path = join(up_levels, file_dumps_dir, downloads_file_name)
-    a_downloads = soup.new_tag('a', href=downloads_file_rel_path)
+    a_downloads = Tag(name='a', attrs={'href': downloads_file_rel_path})
     a_downloads.string = 'Downloads'
     downloads_li.append(a_downloads)
     navbar_ul.append(downloads_li)
-    index_li = soup.new_tag('li')
+    index_li = Tag(name='li')
     song_index_file_rel_path = join(up_levels, songs_dir, song_index_dir,
                                     song_index_html_file_name)
-    a_index = soup.new_tag('a', href=song_index_file_rel_path)
+    a_index = Tag(name='a', attrs={'href': song_index_file_rel_path})
     a_index.string = 'All Songs'
     index_li.append(a_index)
     navbar_ul.append(index_li)
 
     # Add in dropdown menus for albums by decade
     for decade in decades:
-        dropdown_li = soup.new_tag('li')
-        dropdown_li.attrs['class'] = 'dropdown'
-        a_dropdown = soup.new_tag('a', href='#')
-        a_dropdown.attrs['class'] = 'dropdown-toggle'
-        a_dropdown.attrs['data-toggle'] = 'dropdown'
-        a_dropdown.attrs['role'] = 'button'
-        a_dropdown.attrs['aria-haspopup'] = 'true'
-        a_dropdown.attrs['aria-expanded'] = 'false'
+        dropdown_li = Tag(name='li', attrs={'class': 'dropdown'})
+        a_dropdown = Tag(name='a',
+                         attrs={'href': '#',
+                                'class': 'dropdown-toggle',
+                                'data-toggle': 'dropdown',
+                                'role': 'button',
+                                'aria-haspopup': 'true',
+                                'aria-expanded': 'false'})
         a_dropdown.string = decade
-        caret_span = soup.new_tag('span')
-        caret_span.attrs['class'] = 'caret'
+        caret_span = Tag(name='span', attrs={'class': 'caret'})
         a_dropdown.append(caret_span)
         dropdown_li.append(a_dropdown)
-        dropdown_menu_ul = soup.new_tag('ul')
-        dropdown_menu_ul.attrs['class'] = 'dropdown-menu'
+        dropdown_menu_ul = Tag(name='ul', attrs={'class': 'dropdown-menu'})
         
         # Add albums from the given decade into the decade dropdown menu
         albums_dir_rel_path = join(up_levels, albums_dir)
@@ -216,10 +209,11 @@ def make_navbar_element(level=0) -> Tag:
                          in albums_dict[album]['attrs']['release_date'].split()[-1][:3]]
         for album in decade_albums:
             album_file_name = '{0}.html'.format(albums_dict[album]['attrs']['file_id'])
-            album_li = soup.new_tag('li')
+            album_li = Tag(name='li')
             album_index_file_rel_path = join(albums_dir_rel_path, album_file_name)
-            album_a = soup.new_tag('a', href=album_index_file_rel_path)
-            album_a.attrs['class'] = 'album'
+            album_a = Tag(name='a',
+                          attrs={'href': album_index_file_rel_path,
+                                 'class': 'album'})
             album_a.string = album
             album_li.append(album_a)
             dropdown_menu_ul.append(album_li)
@@ -230,20 +224,19 @@ def make_navbar_element(level=0) -> Tag:
     navbar_collapse_div.append(navbar_ul)
 
     # Add in search box
-    search_form = soup.new_tag('form')
-    search_form.attrs['class'] = 'navbar-form navbar-left'
-    search_form.attrs['role'] = 'search'
-    form_group_div = soup.new_tag('div')
-    form_group_div.attrs['class'] = 'form-group'
-    search_input = soup.new_tag('input')
-    search_input.attrs['type'] = 'text'
-    search_input.attrs['class'] = 'form-control'
-    search_input.attrs['placeholder'] = 'Search'
+    search_form = Tag(name='form',
+                      attrs={'class': 'navbar-form navbar-left',
+                             'role': 'search'})
+    form_group_div = Tag(name='div', attrs={'class': 'form-group'})
+    search_input = Tag(name='input',
+                       attrs={'type': 'text',
+                              'class': 'form-control',
+                              'placeholder': 'Search'})
     form_group_div.append(search_input)
     search_form.append(form_group_div)
-    search_button = soup.new_tag('button')
-    search_button.attrs['type'] = 'submit'
-    search_button.attrs['class'] = 'btn btn-default'
+    search_button = Tag(name='button',
+                        attrs={'type': 'submit',
+                               'class': 'btn btn-default'})
     search_button.string = 'Search'
     search_form.append(search_button)
     navbar_collapse_div.append(search_form)
