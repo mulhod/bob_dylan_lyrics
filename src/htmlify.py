@@ -409,13 +409,13 @@ def generate_index_page() -> None:
     downloads_html_rel_path = join(file_dumps_dir, downloads_file_name)
     song_index_html_rel_path = join(songs_dir, song_index_dir, song_index_html_file_name)
 
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     
     # Add in head element
     html.append(make_head_element(0))
 
     # Start to construct the body tag, including a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(0))
 
     # Add in home page content (introduction, contributions, etc.),
@@ -425,14 +425,12 @@ def generate_index_page() -> None:
     # from Markdown to HTML)
     markdowner = Markdown()
     with open(home_page_content_file_path) as home_markdown_file:
-        html_content = markdowner.convert(home_markdown_file.read())
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    columns_div.string = html_content
+        home_page_content_html = \
+            BeautifulSoup(markdowner.convert(home_markdown_file.read()), 'html.parser')
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div.append(home_page_content_html)
     row_div.append(columns_div)
     container_div.append(row_div)
 
@@ -458,7 +456,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     """
 
     # Make a list element for the song
-    li = soup.new_tag('li')
+    li = Tag(name='li')
     from_song = song_dict['from']
     sung_by = song_dict['sung_by']
     performed_by = song_dict['written_and_performed_by'].get('performed_by', '')
@@ -477,14 +475,14 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
     if not instrumental and not performed_by:
         song_file_path = join('..', songs_dir, 'html', '{0}.html'.format(song_dict['file_id']))
-        a_song = soup.new_tag('a', href=song_file_path)
+        a_song = Tag(name='a', attrs={'href': song_file_path})
     if from_song:
         if not instrumental and not performed_by:
             a_song.string = song_name
             orig_album_file_path = join('..', albums_dir, '{0}'.format(from_song['file_id']))
-            a_orig_album = soup.new_tag('a', href=orig_album_file_path)
+            a_orig_album = Tag(name='a', attrs={'href': orig_album_file_path})
             a_orig_album.string = from_song['name']
-            a_orig_album.string.wrap(soup.new_tag('i'))
+            a_orig_album.string.wrap(Tag(name='i'))
 
             # Construct the string content of the list element including
             # information about the original song/album, a comment that
@@ -507,8 +505,8 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         
     # Italicize/gray out song entries if they do not contain lyrics
     if instrumental or performed_by:
-        li.string.wrap(soup.new_tag('i'))
-        li.string.wrap(soup.new_tag('font', color='#726E6D'))
+        li.string.wrap(Tag(name='i'))
+        li.string.wrap(Tag(name='font', attrs={'color': '#726E6D'}))
 
     return li
 
@@ -534,9 +532,8 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
              with assumptions
     """
 
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-8'
-    ol = soup.new_tag('ol')
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-8'})
+    ol = Tag(name='ol')
     if sides_dict:
         for side in sorted(sides_dict):
 
@@ -549,11 +546,11 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                                  'integer that is greater than zero. Offending'
                                  ' side ID: "{0}".'.format(side))
 
-            side_div = soup.new_tag('div')
+            side_div = Tag(name='div')
             side_div.string = "Side {0}".format(side)
             ol.append(side_div)
-            ol.append(soup.new_tag('p'))
-            inner_ol = soup.new_tag('ol')
+            ol.append(Tag(name='p'))
+            inner_ol = Tag(name='ol')
 
             # Each side will have an associated range of song numbers,
             # e.g. "1-5" (unless a side contains only a single song, in
@@ -608,7 +605,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                                  .format(expected_number_of_songs, side, added_songs))
 
             ol.append(inner_ol)
-            ol.append(soup.new_tag('p'))
+            ol.append(Tag(name='p'))
     else:
         for song in songs:
             ol.append(generate_song_list_element(song, songs[song]))
@@ -616,6 +613,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     columns_div.append(ol)
     
     return columns_div
+
 
 def htmlify_everything(make_downloads: bool = False) -> None:
     """
@@ -634,24 +632,24 @@ def htmlify_everything(make_downloads: bool = False) -> None:
     sys.stderr.write('HTMLifying the albums index page...\n')
 
     # Make HTML element for albums index page
-    index_html = soup.new_tag('html')
-    index_body = soup.new_tag('body')
+    index_html = Tag(name='html')
+    index_body = Tag(name='body')
 
     # Add in elements for the heading
-    index_heading = soup.new_tag('h1')
+    index_heading = Tag(name='h1')
     index_heading.string = 'Albums'
-    index_heading.string.wrap(soup.new_tag('a', href=albums_index_html_file_name))
+    index_heading.string.wrap(Tag(name='a', attrs={'href': albums_index_html_file_name}))
     index_body.append(index_heading)
 
     # Add in ordered list element for all albums
-    index_ol = soup.new_tag('ol')
+    index_ol = Tag(name='ol')
     for album in albums_dict:
         album_html_file_name = '{}.html'.format(albums_dict[album]['attrs']['file_id'])
         album_html_file_path = join(albums_dir, album_html_file_name)
         year = albums_dict[album]['attrs']['release_date'].split()[-1]
-        li = soup.new_tag('li')
+        li = Tag(name='li')
         li.string = '{0} ({1})'.format(album, year)
-        li.string.wrap(soup.new_tag('a', href=album_html_file_path))
+        li.string.wrap(Tag(name='a', attrs={'href': album_html_file_path}))
         index_ol.append(li)
     index_body.append(index_ol)
 
@@ -699,54 +697,49 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     html.append(make_head_element(1))
 
     # Generate body for albums page and add in a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(1))
 
     # Create div tag for the "container"
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
+    container_div = Tag(name='div', attrs={'class': 'container'})
 
     # Add in elements for the heading
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    heading = soup.new_tag('h1')
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    heading = Tag(name='h1')
     heading.string = name
     columns_div.append(heading)
     row_div.append(columns_div)
     container_div.append(row_div)
 
     # Add in the album attributes, including a picture of the album
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    row_div.attrs['style'] = 'padding-top:12px'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-4'
-    attrs_div = soup.new_tag('div')
+    row_div = Tag(name='div', attrs={'class': 'row', 'style': 'padding-top:12px'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-4'})
+    attrs_div = Tag(name='div')
     image_file_path = join('..', resources_dir, images_dir, attrs['image_file_name'])
-    image = soup.new_tag('img', src=image_file_path)
-    image.attrs['width'] = '300px'
-    image.attrs['style'] = 'padding-bottom:10px'
+    image = Tag(name='img',
+                attrs={'src': image_file_path,
+                       'width': '300px',
+                       'style': 'padding-bottom:10px'})
     attrs_div.append(image)
-    release_div = soup.new_tag('div')
+    release_div = Tag(name='div')
     release_div.string = 'Released: {0}'.format(attrs['release_date'])
     attrs_div.append(release_div)
-    length_div = soup.new_tag('div')
+    length_div = Tag(name='div')
     length_div.string = 'Length: {0}'.format(attrs['length'])
     attrs_div.append(length_div)
     producers_string = attrs['producers']
     producers_string_template = ('Producer{0}: {1}'
                                  .format('' if len(producers_string.split(', ')) == 1
                                          else '(s)', '{0}'))
-    producers_div = soup.new_tag('div')
+    producers_div = Tag(name='div')
     producers_div.string = producers_string_template.format(producers_string)
     attrs_div.append(producers_div)
-    label_div = soup.new_tag('div')
+    label_div = Tag(name='div')
     label_div.string = 'Label: {0}'.format(attrs['label'])
     attrs_div.append(label_div)
     columns_div.append(attrs_div)
@@ -784,6 +777,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             htmlify_song(song, song_attrs['file_id'])
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
+        # for the lyrics file downloads
         if (make_downloads and
             not song_attrs['instrumental'] and
             not song_attrs['written_and_performed_by']):
@@ -820,7 +814,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             # TODO: This assumes that all songs are attached to the same
             #       exact name whenever they show up on an album, but
             #       this is not strictly true, e.g. "Crash on the Levee
-            #       (Down in the Flood)."
+            #       (Down in the Flood)".
             found_file_id_in_song_dicts = False
             if not song_file_id in file_id_types_to_skip:
                 for file_ids_dict in song_files_dict[song]:
@@ -857,21 +851,18 @@ def htmlify_song(name: str, song_id: str) -> None:
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     html.append(make_head_element(2))
 
     # Create a body element and add in a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    h_tag = soup.new_tag('h1')
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    h_tag = Tag(name='h1')
     h_tag.string = name
     columns_div.append(h_tag)
     row_div.append(columns_div)
@@ -901,16 +892,14 @@ def htmlify_song(name: str, song_id: str) -> None:
 
     # Add paragraph elements with sub-elements of type `div` to the
     # `body` element
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
     for paragraph in paragraphs:
-        paragraph_elem = soup.new_tag('p')
+        paragraph_elem = Tag(name='p')
         for line_elem in paragraph:
 
             # Create new `div` element to store the line
-            div = soup.new_tag('div')
+            div = Tag(name='div')
 
             # Check if line has annotations
             annotation_nums = ANNOTATION_MARK_RE.findall(line_elem)
@@ -931,9 +920,9 @@ def htmlify_song(name: str, song_id: str) -> None:
                 # bottom of the page
                 for i, annotation_num in enumerate(annotation_nums):
                     href = '#{0}'.format(annotation_num)
-                    a = soup.new_tag('a', href=href)
+                    a = Tag(name='a', attrs={'href': href})
                     a.string = annotation_num
-                    a.string.wrap(soup.new_tag('sup'))
+                    a.string.wrap(Tag(name='sup'))
 
                     # Insert the anchor element into the `div` element
                     # at the appropriate location
@@ -965,22 +954,21 @@ def htmlify_song(name: str, song_id: str) -> None:
 
     # Add in annotation section
     if annotations:
-        annotation_section = soup.new_tag('p')
+        annotation_section = Tag(name='p')
 
         # Iterate over the annotations, assuming the the index of the
         # list matches the natural ordering of the annotations
         for annotation_num, annotation in enumerate(annotations):
-            div = soup.new_tag('div')
+            div = Tag(name='div')
             div.string = '\t{}'.format(annotation)
-            div.string.wrap(soup.new_tag('small'))
+            div.string.wrap(Tag(name='small'))
 
             # Generate a named anchor element so that the original
             # location of the annotation in the song can be linked to
             # this location
-            a = soup.new_tag('a')
-            a.attrs['name'] = annotation_num + 1
+            a = Tag(name='a', attrs={'name': str(annotation_num + 1)})
             a.string = str(annotation_num + 1)
-            a.string.wrap(soup.new_tag('sup'))
+            a.string.wrap(Tag(name='sup'))
             div.small.insert_before(a)
             annotation_section.append(div)
 
@@ -1010,40 +998,34 @@ def htmlify_main_song_index_page() -> None:
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     html.append(make_head_element(2))
 
     # Create a body element and add in a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    h_tag = soup.new_tag('h1')
-    h_tag.string = 'Songs Index'
-    columns_div.append(h_tag)
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    h = Tag(name='h1')
+    h.string = 'Songs Index'
+    columns_div.append(h)
     row_div.append(columns_div)
     container_div.append(row_div)
-    container_div.append(soup.new_tag('p'))
+    container_div.append(Tag(name='p'))
 
     for letter in ascii_uppercase:
-        row_div = soup.new_tag('div')
-        row_div.attrs['class'] = 'row'
-        columns_div = soup.new_tag('div')
-        columns_div.attrs['class'] = 'col-xs-12'
-        div_tag = soup.new_tag('div')
-        a_tag = soup.new_tag('a', href=join('{0}.html'.format(letter.lower())))
-        a_tag.string = letter
-        bold_tag = soup.new_tag('strong')
-        bold_tag.attrs['style'] = 'font-size: 125%;'
-        a_tag.string.wrap(bold_tag)
-        div_tag.append(a_tag)
-        columns_div.append(div_tag)
+        row_div = Tag(name='div', attrs={'class': 'row'})
+        columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+        div = Tag(name='div')
+        a = Tag(name='a', attrs={'href': join('{0}.html'.format(letter.lower()))})
+        a.string = letter
+        bold = Tag(name='strong', attrs={'style': 'font-size: 125%;'})
+        a.string.wrap(bold)
+        div.append(a)
+        columns_div.append(div)
         row_div.append(columns_div)
         container_div.append(row_div)
 
