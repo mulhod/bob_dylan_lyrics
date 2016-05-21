@@ -1119,26 +1119,23 @@ def htmlify_song_index_page(letter: str) -> None:
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     html.append(make_head_element(2))
 
     # Create body element and add in a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(2))
 
     # Make a tag for the name of the song
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    h_tag = soup.new_tag('h1')
-    h_tag.string = letter
-    columns_div.append(h_tag)
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    h = Tag(name='h1')
+    h.string = letter
+    columns_div.append(h)
     row_div.append(columns_div)
     container_div.append(row_div)
-    container_div.append(soup.new_tag('p'))
+    container_div.append(Tag(name='p'))
 
     not_dylan = 'not written by or not performed by Bob Dylan'
     for song in sort_titles(song_files_dict, letter):
@@ -1148,11 +1145,9 @@ def htmlify_song_index_page(letter: str) -> None:
         # whether they were instrumentals, etc.
         song_info = song_files_dict[song]
 
-        row_div = soup.new_tag('div')
-        row_div.attrs['class'] = 'row'
-        columns_div = soup.new_tag('div')
-        columns_div.attrs['class'] = 'col-xs-12'
-        div_tag = soup.new_tag('div')
+        row_div = Tag(name='div', attrs={'class': 'row'})
+        columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+        div = Tag(name='div')
         if len(song_info) == 1:
             song_info = first_(song_info)
             album_links = and_join_album_links(song_info['album(s)'])
@@ -1161,26 +1156,26 @@ def htmlify_song_index_page(letter: str) -> None:
                 instrumental_or_not_dylan = song_info['file_id']
                 if instrumental_or_not_dylan != 'instrumental':
                     instrumental_or_not_dylan = not_dylan
-                div_tag.string = ('{0} ({1}, appeared on {2})'
-                                  .format(song, instrumental_or_not_dylan, album_links))
-                row_div.append(div_tag)
+                div.string = ('{0} ({1}, appeared on {2})'
+                              .format(song, instrumental_or_not_dylan, album_links))
+                row_div.append(div)
                 columns_div.append(row_div)
             else:
                 song_html_file_path = '../html/{0}.html'.format(song_info['file_id'])
-                a_tag = soup.new_tag('a', href=song_html_file_path)
-                a_tag.string = '{0}'.format(song)
-                div_tag.append(a_tag)
-                div_tag.append = ' (appeared on {0})'.format(album_links)
+                a = Tag(name='a', attrs={'href': song_html_file_path})
+                a.string = '{0}'.format(song)
+                div.append(a)
+                div.append = ' (appeared on {0})'.format(album_links)
 
         else:
-            div_tag.string = song
-            columns_div.append(div_tag)
+            div.string = song
+            columns_div.append(div)
 
             # Make an unordered list for the different versions of the
             # song
-            ul_tag = soup.new_tag('ul')
+            ul = Tag(name='ul')
             for i, version_info in enumerate(song_info):
-                li_tag = soup.new_tag('li')
+                li = Tag(name='li')
 
                 # Add in instrumental entries (but with no link to the
                 # song pages since they don't exist), but don't even add
@@ -1188,19 +1183,19 @@ def htmlify_song_index_page(letter: str) -> None:
                 # non-Dylan songs
                 if version_info['file_id'] == 'instrumental':
                     album_links = and_join_album_links(version_info['album(s)'])
-                    li_tag.string = 'Instrumental version (appeared on {0})'.format(album_links)
+                    li.string = 'Instrumental version (appeared on {0})'.format(album_links)
                 elif version_info['file_id'] == 'not_written_or_peformed_by_dylan':
                     continue
                 else:
                     album_links = and_join_album_links(version_info['album(s)'])
                     href = '../html/{0}.html'.format(version_info['file_id'])
-                    a_tag = soup.new_tag('a', href=href)
-                    a_tag.string = 'Version #{0}'.format(i + 1)
-                    li_tag.append(a_tag)
-                    li_tag.append(' (appeared on {0})'.format(album_links))
-                ul_tag.append(li_tag)
-            div_tag.append(ul_tag)
-        row_div.append(div_tag)
+                    a = Tag(name='a', attrs={'href': href})
+                    a.string = 'Version #{0}'.format(i + 1)
+                    li.append(a)
+                    li.append(' (appeared on {0})'.format(album_links))
+                ul.append(li)
+            div.append(ul)
+        row_div.append(div)
         columns_div.append(row_div)
         container_div.append(columns_div)
 
@@ -1253,32 +1248,29 @@ def htmlify_downloads_page() -> None:
     file_sizes_dict = {file_path: ceil(getsize(file_path)/1024) for file_path
                        in glob(join(file_dumps_dir_path, '*.txt'))}
 
-    html = soup.new_tag('html')
+    html = Tag(name='html')
     html.append(make_head_element(1))
 
     # Create body element and add in a navigation bar
-    body = soup.new_tag('body')
+    body = Tag(name='body')
     body.append(make_navbar_element(1))
 
     # Make a tag for download links
-    container_div = soup.new_tag('div')
-    container_div.attrs['class'] = 'container'
-    row_div = soup.new_tag('div')
-    row_div.attrs['class'] = 'row'
-    columns_div = soup.new_tag('div')
-    columns_div.attrs['class'] = 'col-xs-12'
-    h3 = soup.new_tag('h3')
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    h3 = Tag(name='h3')
     h3.string = 'Lyrics File Downloads'
     columns_div.append(h3)
     last_album = albums_dict.popitem()
     last_album_name = last_album[0]
     last_album_file_rel_path = join('..', albums_dir,
                                     '{0}.html'.format(last_album[1]['attrs']['file_id']))
-    last_album_a = soup.new_tag('a', href=last_album_file_rel_path)
+    last_album_a = Tag(name='a', attrs={'href': last_album_file_rel_path})
     last_album_a.string = last_album_name
-    i = soup.new_tag('i')
+    i = Tag(name='i')
     i.append(last_album_a)
-    ul = soup.new_tag('ul')
+    ul = Tag(name='ul')
     for file_name in [all_songs_file_name, all_songs_unique_file_name]:
         if 'unique' in file_name:
             text = 'All unique songs '
@@ -1288,7 +1280,7 @@ def htmlify_downloads_page() -> None:
                       'KiB)</a>'
                       .format(file_name, text, clean_up_html(str(i)),
                               file_sizes_dict[join(file_dumps_dir_path, file_name)]))
-        li = soup.new_tag('li')
+        li = Tag(name='li')
         li.string = download_a
         ul.append(li)
     columns_div.append(ul)
