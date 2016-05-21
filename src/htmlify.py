@@ -429,7 +429,7 @@ def generate_index_page() -> None:
             BeautifulSoup(markdowner.convert(home_markdown_file.read()), 'html.parser')
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     columns_div.append(home_page_content_html)
     row_div.append(columns_div)
     container_div.append(row_div)
@@ -532,7 +532,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
              with assumptions
     """
 
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-8'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-8'})
     ol = Tag(name='ol')
     if sides_dict:
         for side in sorted(sides_dict):
@@ -709,7 +709,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     # Add in elements for the heading
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     heading = Tag(name='h1')
     heading.string = name
     columns_div.append(heading)
@@ -718,7 +718,7 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
 
     # Add in the album attributes, including a picture of the album
     row_div = Tag(name='div', attrs={'class': 'row', 'style': 'padding-top:12px'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-4'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-4'})
     attrs_div = Tag(name='div')
     image_file_path = join('..', resources_dir, images_dir, attrs['image_file_name'])
     image = Tag(name='img',
@@ -861,7 +861,7 @@ def htmlify_song(name: str, song_id: str) -> None:
     # Make a tag for the name of the song
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     h_tag = Tag(name='h1')
     h_tag.string = name
     columns_div.append(h_tag)
@@ -893,7 +893,7 @@ def htmlify_song(name: str, song_id: str) -> None:
     # Add paragraph elements with sub-elements of type `div` to the
     # `body` element
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     for paragraph in paragraphs:
         paragraph_elem = Tag(name='p')
         for line_elem in paragraph:
@@ -1008,7 +1008,7 @@ def htmlify_main_song_index_page() -> None:
     # Make a tag for the name of the song
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     h = Tag(name='h1')
     h.string = 'Songs Index'
     columns_div.append(h)
@@ -1018,7 +1018,7 @@ def htmlify_main_song_index_page() -> None:
 
     for letter in ascii_uppercase:
         row_div = Tag(name='div', attrs={'class': 'row'})
-        columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+        columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
         div = Tag(name='div')
         a = Tag(name='a', attrs={'href': join('{0}.html'.format(letter.lower()))})
         a.string = letter
@@ -1129,7 +1129,7 @@ def htmlify_song_index_page(letter: str) -> None:
     # Make a tag for the name of the song
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     h = Tag(name='h1')
     h.string = letter
     columns_div.append(h)
@@ -1146,7 +1146,7 @@ def htmlify_song_index_page(letter: str) -> None:
         song_info = song_files_dict[song]
 
         row_div = Tag(name='div', attrs={'class': 'row'})
-        columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+        columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
         div = Tag(name='div')
         if len(song_info) == 1:
             song_info = first_(song_info)
@@ -1258,7 +1258,7 @@ def htmlify_downloads_page() -> None:
     # Make a tag for download links
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
-    columns_div = Tag(name='div', attrs={'class': 'col-xs-12'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
     h3 = Tag(name='h3')
     h3.string = 'Lyrics File Downloads'
     columns_div.append(h3)
