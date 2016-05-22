@@ -1,4 +1,0 @@
-beautifulsoup4=4.4.1
-jupyter=1.0.0
-requests=2.8.1
-cytoolz=0.7.5
