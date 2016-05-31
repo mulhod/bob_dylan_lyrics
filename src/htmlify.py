@@ -41,9 +41,6 @@ file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
 home_page_content_file_path = join(root_dir_path, resources_dir, 'home_page_content.md')
 
-# BeautifulSoup-related
-soup = BeautifulSoup('', 'html.parser')
-
 # Bootstrap/HTML/Javascript/CSS-related
 bootstrap_3_3_5_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5'
 bootstrap_style_sheet = join(bootstrap_3_3_5_url, 'css', 'bootstrap.min.css')
