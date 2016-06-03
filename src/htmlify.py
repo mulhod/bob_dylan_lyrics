@@ -14,6 +14,15 @@ from cytoolz import first as first_
 from typing import Any, Dict, List, Iterable, Union
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
+
+SongFilesDictType = Dict[str, List[Dict[str, Union[str, List[Dict[str, str]]]]]]
+file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
+
+# Lists for collecting song texts (used to create lyrics download files
+# at the end of the process)
+song_texts = []
+unique_song_texts = set()
+
 # Paths
 root_dir_path = dirname(dirname(realpath(__file__)))
 albums_dir = 'albums'
@@ -48,12 +57,6 @@ replace_single_quotes = SINGLE_QUOTES_RE.sub
 CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
                         '<': re.compile(r'&lt;'),
                         '&': re.compile(r'&amp;amp;')}
-
-# For writing files depending on all albums/songs
-SongFilesDictType = Dict[str, List[Dict[str, Union[str, List[Dict[str, str]]]]]]
-song_texts = []
-unique_song_texts = set()
-file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
 
 
 def read_songs_index(songs_index_path: str) -> tuple:
