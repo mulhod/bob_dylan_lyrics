@@ -349,7 +349,8 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
     search_button = Tag(name='button',
                         attrs={'type': 'submit',
                                'class': 'btn btn-default'})
-    search_button.string = 'Search'
+    glyph_icon = Tag(name='i', attrs={'class': 'glyphicon glyphicon-search'})
+    search_button.append(glyph_icon)
     search_form.append(search_button)
     navbar_collapse_div.append(search_form)
 
