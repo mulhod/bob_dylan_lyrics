@@ -11,7 +11,7 @@ from bs4.element import Tag
 from bs4 import BeautifulSoup
 from markdown import Markdown
 from cytoolz import first as first_
-from typing import Any, Dict, List, Iterable
+from typing import Any, Dict, List, Iterable, Union
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 # Paths
@@ -50,13 +50,13 @@ CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
                         '&': re.compile(r'&amp;amp;')}
 
 # For writing files depending on all albums/songs
+SongFilesDictType = Dict[str, List[Dict[str, Union[str, List[Dict[str, str]]]]]]
 song_texts = []
 unique_song_texts = set()
-song_files_dict = {}
 file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
 
 
-def read_songs_index(songs_index_path: str) -> OrderedDict:
+def read_songs_index(songs_index_path: str) -> tuple:
     """
     Read albums_and_songs_index.jsonlines file and make dictionary
     representation.
@@ -66,11 +66,14 @@ def read_songs_index(songs_index_path: str) -> OrderedDict:
                              songs (in JSON format)
     :type songs_index_path: str
 
-    :returns: ordered dictionary associating album names (str) to
-              dictionaries containing metadata attributes and ordered
-              song dictionaries, which, in turn, consist of song IDs
-              (str) mapped to dictionaries of song metadata
-    :rtype: OrderedDict
+    :returns: a tuple consisting of 1) an ordered dictionary associating
+              album names (str) to dictionaries containing metadata
+              attributes and ordered song dictionaries, which, in turn,
+              consist of song IDs (str) mapped to dictionaries of song
+              metadata, and 2) a dictionary mapping song names to lists
+              of dictionaries containing information about various
+              versions of songs
+    :rtype: tuple
 
     :raises: ValueError
     """
@@ -118,7 +121,61 @@ def read_songs_index(songs_index_path: str) -> OrderedDict:
     if not albums_dict:
         raise ValueError('No albums found in index file!')
 
-    return albums_dict
+    # Make a dictionary mapping song names to a list of song versions
+    # (file IDs, original album, etc.) for use in building the song
+    # index
+    song_files_dict = {}
+    for album_name, attrs_songs in albums_dict.items():
+        attrs = attrs_songs['attrs']
+        songs = attrs_songs['songs']
+        for song in songs:
+            song_attrs = songs[song]
+
+            # Add in song name/file ID and album name/file ID to
+            # `song_files_dict` (for the song index), indicating if the
+            # song is an instrumental or if it wouldn't be associated
+            # with an actual file ID for some other reason
+            if song_attrs['instrumental']:
+                song_file_id = 'instrumental'
+            elif song_attrs['written_and_performed_by']:
+                song_file_id = 'not_written_or_peformed_by_dylan'
+            else:
+                song_file_id = song_attrs['file_id']
+            if not song in song_files_dict:
+                file_album_dict = {'name': album_name,
+                                   'file_id': attrs['file_id']}
+                song_files_dict[song] = [{'file_id': song_file_id,
+                                          'album(s)': [file_album_dict]}]
+            else:
+
+                # Iterate over the entries in `song_files_dict` for a
+                # given song, each entry corresponding to a different
+                # `file_id` (basically, a different version of the same
+                # song) and, if an entry for the song's file ID is
+                # found, add its album to the list of albums associated
+                # with that file ID/version, and, if not, then add the
+                # file ID/version to the list of versions associated
+                # with the song (i.e., with its own list of albums)
+                # TODO: This assumes that all songs are attached to the
+                #       same exact name whenever they show up on an
+                #       album, but this is not strictly true, e.g.
+                #       "Crash on the Levee (Down in the Flood)".
+                found_file_id_in_song_dicts = False
+                if not song_file_id in file_id_types_to_skip:
+                    for file_ids_dict in song_files_dict[song]:
+                        if file_ids_dict['file_id'] == song_file_id:
+                            file_album_dict = {'name': album_name,
+                                               'file_id': attrs['file_id']}
+                            file_ids_dict['album(s)'].append(file_album_dict)
+                            found_file_id_in_song_dicts = True
+                            break
+                if not found_file_id_in_song_dicts:
+                    file_album_dict = {'name': album_name,
+                                       'file_id': attrs['file_id']}
+                    song_files_dict[song].append({'file_id': song_file_id,
+                                                  'album(s)': [file_album_dict]})
+
+    return albums_dict, song_files_dict
 
 
 def add_declaration(html_string: str) -> str:
@@ -617,13 +674,18 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     return columns_div
 
 
-def htmlify_everything(albums_dict: OrderedDict, make_downloads: bool = False) -> None:
+def htmlify_everything(albums_dict: OrderedDict,
+                       song_files_dict: SongFilesDictType,
+                       make_downloads: bool = False) -> None:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs.
 
     :param albums_dict: ordered dictionary of album metadata
     :type albums_dict: OrderedDict
+    :param song_files_dict: dictionary mapping song names to lists of
+                            versions
+    :type song_files_dict: dict
     :param make_downloads: True if lyrics file downloads should be
                            generated
     :type make_downloads: bool
@@ -675,7 +737,7 @@ def htmlify_everything(albums_dict: OrderedDict, make_downloads: bool = False) -
 
     # Generate the main index page
     sys.stderr.write('HTMLifying the main index page...\n')
-    htmlify_main_song_index_page(albums_dict)
+    htmlify_main_song_index_page(song_files_dict, albums_dict)
 
 
 def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
@@ -795,47 +857,6 @@ def htmlify_album(name: str, attrs: Dict[str, Any], songs: OrderedDict,
             song_text = remove_annotations(standardize_quotes(open(input_path).read()).strip())
             song_texts.append(song_text)
             unique_song_texts.add(song_text)
-
-        # Add in song name/file ID and album name/file ID to
-        # `song_files_dict` (for the song index), indicating if the song
-        # is an instrumental or if it wouldn't be associated with an
-        # actual file ID for some other reason
-        if song_attrs['instrumental']:
-            song_file_id = 'instrumental'
-        elif song_attrs['written_and_performed_by']:
-            song_file_id = 'not_written_or_peformed_by_dylan'
-        else:
-            song_file_id = song_attrs['file_id']
-        if not song in song_files_dict:
-            file_album_dict = {'name': name, 'file_id': attrs['file_id']}
-            song_files_dict[song] = [{'file_id': song_file_id,
-                                      'album(s)': [file_album_dict]}]
-        else:
-
-            # Iterate over the entries in `song_files_dict` for a given
-            # song, each entry corresponding to a different `file_id`
-            # (basically, a different version of the same song) and, if
-            # an entry for the song's file ID is found, add its album to
-            # the list of albums associated with that file ID/version,
-            # and, if not, then add the file ID/version to the list of
-            # versions associated with the song (i.e., with its own list
-            # of albums)
-            # TODO: This assumes that all songs are attached to the same
-            #       exact name whenever they show up on an album, but
-            #       this is not strictly true, e.g. "Crash on the Levee
-            #       (Down in the Flood)".
-            found_file_id_in_song_dicts = False
-            if not song_file_id in file_id_types_to_skip:
-                for file_ids_dict in song_files_dict[song]:
-                    if file_ids_dict['file_id'] == song_file_id:
-                        file_album_dict = {'name': name, 'file_id': attrs['file_id']}
-                        file_ids_dict['album(s)'].append(file_album_dict)
-                        found_file_id_in_song_dicts = True
-                        break
-            if not found_file_id_in_song_dicts:
-                file_album_dict = {'name': name, 'file_id': attrs['file_id']}
-                song_files_dict[song].append({'file_id': song_file_id,
-                                              'album(s)': [file_album_dict]})
 
 
 def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
@@ -997,10 +1018,14 @@ def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
         song_file.write(add_declaration(clean_up_html(str(html))))
 
 
-def htmlify_main_song_index_page(albums_dict: OrderedDict) -> None:
+def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
+                                 albums_dict: OrderedDict) -> None:
     """
     Generate the main song index HTML page.
 
+    :param song_files_dict: dictionary mapping song names to lists of
+                            versions
+    :type song_files_dict: dict
     :param albums_dict: ordered dictionary of album metadata
     :type albums_dict: OrderedDict
 
@@ -1044,7 +1069,7 @@ def htmlify_main_song_index_page(albums_dict: OrderedDict) -> None:
         container_div.append(row_div)
 
         # Generate the sub-index page for the letter
-        htmlify_song_index_page(letter, albums_dict)
+        htmlify_song_index_page(letter, song_files_dict, albums_dict)
 
     body.append(container_div)
     html.append(body)
@@ -1123,12 +1148,17 @@ def and_join_album_links(albums: List[Dict[str, str]]) -> str:
         return last_two
 
 
-def htmlify_song_index_page(letter: str, albums_dict: OrderedDict) -> None:
+def htmlify_song_index_page(letter: str,
+                            song_files_dict: SongFilesDictType,
+                            albums_dict: OrderedDict) -> None:
     """
     Generate a specific index page.
 
     :param letter: index letter
     :type letter: str
+    :param song_files_dict: dictionary mapping song names to lists of
+                            versions
+    :type song_files_dict: dict
     :param albums_dict: ordered dictionary of album metadata
     :type albums_dict: OrderedDict
 
@@ -1341,13 +1371,13 @@ def main():
     # constructing a dictionary of albums and the associated songs, etc.
     sys.stderr.write('Reading the albums_and_songs_index.jsonlines file and '
                      'building up index of albums and songs...\n')
-    albums_dict = read_songs_index(songs_and_albums_jsonl_file_path)
+    albums_dict, song_files_dict = read_songs_index(songs_and_albums_jsonl_file_path)
 
     # Generate HTML files for the main index page, albums, songs, etc.
     sys.stderr.write('Generating HTML files for the main page, albums, songs, '
                      'etc....\n')
     generate_index_page(albums_dict)
-    htmlify_everything(albums_dict, make_downloads=make_downloads)
+    htmlify_everything(albums_dict, song_files_dict, make_downloads=make_downloads)
 
     # Write raw lyrics files (for downloading), if requested
     if make_downloads:
