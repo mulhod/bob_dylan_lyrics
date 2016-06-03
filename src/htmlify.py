@@ -18,8 +18,6 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 root_dir_path = dirname(dirname(realpath(__file__)))
 albums_dir = 'albums'
 songs_dir = 'songs'
-text_dir = 'txt'
-html_dir = 'html'
 resources_dir = 'resources'
 images_dir = 'images'
 file_dumps_dir = 'full_lyrics_file_dumps'
@@ -31,22 +29,13 @@ custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
 all_songs_file_name = 'all_songs.txt'
 all_songs_unique_file_name = 'all_songs_unique.txt'
-text_dir_path = join(songs_dir, text_dir)
-html_dir_path = join(songs_dir, html_dir)
+text_dir_path = join(songs_dir, 'txt')
 song_index_dir_path = join(songs_dir, song_index_dir)
 songs_and_albums_jsonl_file_path = join(root_dir_path, 'albums_and_songs_index.jsonlines')
 songs_index_html_file_path = join(song_index_dir_path, song_index_html_file_name)
 file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
 home_page_content_file_path = join(root_dir_path, resources_dir, 'home_page_content.md')
-
-# Bootstrap/HTML/Javascript/CSS-related
-bootstrap_3_3_5_url = 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5'
-bootstrap_style_sheet = join(bootstrap_3_3_5_url, 'css', 'bootstrap.min.css')
-bootstrap_script_url = join(bootstrap_3_3_5_url, 'js', 'bootstrap.min.js')
-jquery_script_url = 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'
-
-decades = ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
 
 # Regular expression- and cleaning-related
 ANNOTATION_MARK_RE = re.compile(r'\*\*([0-9]+)\*\*')
@@ -59,8 +48,6 @@ replace_single_quotes = SINGLE_QUOTES_RE.sub
 CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
                         '<': re.compile(r'&lt;'),
                         '&': re.compile(r'&amp;amp;')}
-A_THE_RE = re.compile(r'^(the|a) ')
-clean = lambda x: x.strip('()').lower()
 
 # For writing files depending on all albums/songs
 song_texts = []
@@ -169,13 +156,16 @@ def make_head_element(level: int = 0) -> Tag:
                           'content': 'width=device-width, initial-scale=1'})
     head.append(meta_tag)
     head.append(Tag(name='link',
-                    attrs={'rel': 'stylesheet', 'href': bootstrap_style_sheet}))
+                    attrs={'rel': 'stylesheet',
+                           'href': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'}))
     head.append(Tag(name='link',
                     attrs={'rel': 'stylesheet',
                            'href': join(*['..']*level, resources_dir,
                                         custom_style_sheet_file_name)}))
-    head.append(Tag(name='script', attrs={'src': jquery_script_url}))
-    head.append(Tag(name='script', attrs={'src': bootstrap_script_url}))
+    head.append(Tag(name='script',
+                    attrs={'src': 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'}))
+    head.append(Tag(name='script',
+                    attrs={'src': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'}))
 
     return head
 
@@ -250,7 +240,7 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
     navbar_ul.append(index_li)
 
     # Add in dropdown menus for albums by decade
-    for decade in decades:
+    for decade in ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']:
         dropdown_li = Tag(name='li', attrs={'class': 'dropdown'})
         a_dropdown = Tag(name='a',
                          attrs={'href': '#',
@@ -868,7 +858,7 @@ def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
 
     input_path = join(text_dir_path, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
-    html_output_path = join(html_dir_path, html_file_name)
+    html_output_path = join(songs_dir, 'html', html_file_name)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -1086,10 +1076,13 @@ def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
     if not titles or not all(x for x in titles):
         raise ValueError('Received empty string!')
 
-    key_func = lambda x: A_THE_RE.sub(r'', clean(x))
+    clean = lambda x: x.strip('()').lower()
+    A_THE_RE = re.compile(r'^(the|a) ')
+    a_the_sub = A_THE_RE.sub
+    key_func = lambda x: a_the_sub(r'', clean(x))
     filter_func = None
     if filter_char:
-        filter_func = lambda x: filter_char.lower() == first_(A_THE_RE.sub(r'', clean(x)))
+        filter_func = lambda x: filter_char.lower() == first_(a_the_sub(r'', clean(x)))
     return filter(filter_func, sorted(titles, key=key_func))
 
 
