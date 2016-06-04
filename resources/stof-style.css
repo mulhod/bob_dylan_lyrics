@@ -5,6 +5,45 @@ body {
     margin:auto;
     width:80%;
 }
+
 h1 {
     color:gray;
-    }
+}
+
+
+/*Custom Google search engine settings*/
+
+
+
+/* Add a border between individual search results */
+.gs-webResult {
+    border: 1px solid #eee;
+    padding: 1em;
+}
+
+/* Change the font size of the title of search results */
+.gs-title a { 
+    font-size: 16px;  
+}
+
+/* Change the font size of snippets inside search results */
+.gs-snippet {
+    font-size: 14px;
+}
+
+/* Google Custom Search highlights matching words in bold, toggle that */
+.gs-title b, .gs-snippet b {
+    font-weight: normal;
+}
+
+/* Do no display the URL of web pages in search results */
+.gsc-url-top, .gsc-url-bottom {
+    display: none;
+}
+
+/* Highlight the pagination buttons at the bottom of search results */
+.gsc-cursor-page {
+    font-size: 1.5em;
+    padding: 4px 8px;
+    border: 2px solid #ccc;
+}

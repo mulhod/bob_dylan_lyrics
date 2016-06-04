@@ -228,6 +228,8 @@ def make_head_element(level: int = 0) -> Tag:
                     attrs={'src': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'}))
     head.append(Tag(name='script',
                     attrs={'src': join(*['..']*level, resources_dir, 'search.js')}))
+    head.append(Tag(name='script',
+                    attrs={'src': join(*['..']*level, resources_dir, 'analytics.js')}))
 
     return head
 
