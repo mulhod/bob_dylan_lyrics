@@ -10,31 +10,16 @@ h1 {
     color:gray;
 }
 
-
 /*Custom Google search engine settings*/
 
-.cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    width: auto;
-    height: 4px;
-    padding: 6px 27px;
-    min-width: 13px;
-    margin-top: -1px;
+.gsc-input-box {
+    width: 200px!important;
+	border-color: #746534!important;
+	height: 30px!important;
 }
 
-.gsc-input-box {
-    border: 1px solid #D9D9D9;
-    background: #fff;
-    height: 22px;
- }
-
-input.gsc-input {
-    font-size: 19px;
-    padding: 4px 9px;
-    border: 2px solid #D9D9D9;
-    width: 99%;
+input.gsc-search-button-v2 {
+    box-sizing: content-box;
 }
 
 /* Add a border between individual search results */
@@ -44,23 +29,13 @@ input.gsc-input {
 }
 
 /* Change the font size of the title of search results */
-.gs-title a { 
-    font-size: 16px;  
+.gs-title a {
+    font-size: 14px;
 }
 
 /* Change the font size of snippets inside search results */
 .gs-snippet {
     font-size: 14px;
-}
-
-/* Google Custom Search highlights matching words in bold, toggle that */
-.gs-title b, .gs-snippet b {
-    font-weight: normal;
-}
-
-/* Do no display the URL of web pages in search results */
-.gsc-url-top, .gsc-url-bottom {
-    display: none;
 }
 
 /* Highlight the pagination buttons at the bottom of search results */
