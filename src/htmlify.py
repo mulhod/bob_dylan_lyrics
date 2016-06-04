@@ -340,7 +340,9 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
     navbar_collapse_div.append(navbar_ul)
 
     # Add in search box
-    search_div = Tag(name='div', attrs={'class': 'col-md-3'})
+    search_div = Tag(name='div',
+                     attrs={'class': 'col-md-3',
+                            'style': 'border:0px solid;width:30%;height:auto;'})
     gcse_tag = Tag(name='gcse:search')
     search_form = Tag(name='form',
                       attrs={'class': 'navbar-form navbar-right',

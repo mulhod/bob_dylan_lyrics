@@ -13,7 +13,29 @@ h1 {
 
 /*Custom Google search engine settings*/
 
+.cse .gsc-search-button input.gsc-search-button-v2, input.gsc-search-button-v2 {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: auto;
+    height: 4px;
+    padding: 6px 27px;
+    min-width: 13px;
+    margin-top: -1px;
+}
 
+.gsc-input-box {
+    border: 1px solid #D9D9D9;
+    background: #fff;
+    height: 22px;
+ }
+
+input.gsc-input {
+    font-size: 19px;
+    padding: 4px 9px;
+    border: 2px solid #D9D9D9;
+    width: 99%;
+}
 
 /* Add a border between individual search results */
 .gs-webResult {
