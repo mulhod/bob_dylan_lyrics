@@ -226,6 +226,8 @@ def make_head_element(level: int = 0) -> Tag:
                     attrs={'src': 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'}))
     head.append(Tag(name='script',
                     attrs={'src': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'}))
+    head.append(Tag(name='script',
+                    attrs={'src': join(*['..']*level, resources_dir, 'search.js')}))
 
     return head
 
@@ -336,23 +338,14 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
     navbar_collapse_div.append(navbar_ul)
 
     # Add in search box
+    search_div = Tag(name='div', attrs={'class': 'col-md-3'})
+    gcse_tag = Tag(name='gcse:search')
     search_form = Tag(name='form',
-                      attrs={'class': 'navbar-form navbar-left',
+                      attrs={'class': 'navbar-form navbar-right',
                              'role': 'search'})
-    form_group_div = Tag(name='div', attrs={'class': 'form-group'})
-    search_input = Tag(name='input',
-                       attrs={'type': 'text',
-                              'class': 'form-control',
-                              'placeholder': 'Search'})
-    form_group_div.append(search_input)
-    search_form.append(form_group_div)
-    search_button = Tag(name='button',
-                        attrs={'type': 'submit',
-                               'class': 'btn btn-default'})
-    glyph_icon = Tag(name='i', attrs={'class': 'glyphicon glyphicon-search'})
-    search_button.append(glyph_icon)
-    search_form.append(search_button)
-    navbar_collapse_div.append(search_form)
+    gcse_tag.append(search_form)
+    search_div.append(gcse_tag)
+    navbar_collapse_div.append(search_div)
 
     container_div.append(navbar_collapse_div)
     top_level_nav.append(container_div)
