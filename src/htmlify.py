@@ -1326,15 +1326,15 @@ def htmlify_downloads_page(albums_dict: OrderedDict) -> None:
     ul = Tag(name='ul')
     for file_name in [all_songs_file_name, all_songs_unique_file_name]:
         if 'unique' in file_name:
-            text = 'All unique songs '
+            text = 'All unique songs'
         else:
-            text = 'All songs in the order in which they appeared on released albums '
-        download_a = ('<a href={0} download>{1}(up to and including {2}) ({3} '
-                      'KiB)</a>'.format(file_name,
-                                        text,
-                                        clean_up_html(str(i)),
-                                        file_sizes_dict[join(file_dumps_dir_path,
-                                                             file_name)]))
+            text = 'All songs in the order in which they appeared on released albums'
+        download_a = ('<a href={0} download>{1}</a> (up to and including {2}) '
+                      '({3} KiB)'.format(file_name,
+                                         text,
+                                         clean_up_html(str(i)),
+                                         file_sizes_dict[join(file_dumps_dir_path,
+                                                              file_name)]))
         li = Tag(name='li')
         li.string = download_a
         ul.append(li)
