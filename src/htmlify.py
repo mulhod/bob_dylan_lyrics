@@ -1034,7 +1034,7 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     :rtype: None
     """
 
-    sys.stderr.write('HTMLifying the main songs index page...')
+    sys.stderr.write('HTMLifying the main songs index page...\n')
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
