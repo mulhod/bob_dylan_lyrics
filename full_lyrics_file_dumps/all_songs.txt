@@ -324,18 +324,18 @@ Remember me to the one who lives there
 For she once was a true love of mine.
 Come, you masters of war, you that build the big guns,
 You that build the death planes, you that build all the bombs,
-You that hide behind walls, you that hide behind desks.
+You that hide behind walls, you that hide behind desks,
 I just want you to know I can see through your masks.
 You that never done nothing but build to destroy,
-You play with my world like it's your little toy.
+You play with my world like it's your little toy,
 You put a gun in my hand and you hide from my eyes
 And you turn and run farther when the fast bullets fly.
-Like Judas of old, you lie and deceive.
-A world war can be won you want me to believe.
+Like Judas of old, you lie and deceive,
+A world war can be won you want me to believe,
 But I see through your eyes and I see through your brain
 Like I see through the water that runs down my drain.
-You fasten all the triggers for the others to fire.
-Then you set back and watch when the death-count gets higher.
+You fasten all the triggers for the others to fire,
+Then you set back and watch when the death-count gets higher
 And you hide in your mansion while the young people's blood
 Flows out of their bodies and is buried in the mud.
 You've thrown the worst fear that can ever be hurled,
@@ -350,7 +350,7 @@ Let me ask you one question: Is your money that good?
 Will it buy you forgiveness? Do you think that it could?
 I think you will find, when your death takes its toll,
 All the money you made will never buy back your soul.
-And I hope that you die and your death will come soon.
+And I hope that you die and your death will come soon,
 I'll follow your casket on the pale afternoon
 And I'll watch while you're lowered down to your deathbed
 And I'll stand over your grave till I'm sure that you're dead.
@@ -2078,8 +2078,8 @@ The ghost of Belle Starr, she hands down her wits
 To Jezebel, the nun. She violently knits
 A bald wig for Jack the Ripper, who sits
 At the head of the Chamber of Commerce.
-Mama's in a factory, she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in a factory, she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
 The hysterical bride in the penny arcade,
 Screaming, she moans, "I have just been made!"
@@ -2089,8 +2089,8 @@ Now, the medicine man comes and he shuffles inside.
 He walks with a swagger and he says to the bride,
 "Stop all this weeping, swallow your pride.
 You will not die. It's not poison!"
-Mama's in the factory, she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in the factory, she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
 Well, John the Baptist, after torturing a thief,
 Looks up at his hero, the Commander-in-Chief,
@@ -2100,8 +2100,8 @@ The Commander-in-Chief answers him while chasing a fly,
 Saying, "Death to all those who would whimper and cry!"
 And, dropping a barbell, he points to the sky,
 Saying, "The sun's not yellow, it's chicken!"
-Mama's in the factory. she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in the factory. she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
 The king of the Philistines, his soldiers to save,
 Puts jawbones on their tombstones and flatters their graves,
@@ -2111,8 +2111,8 @@ Gypsy Davey with a blowtorch, he burns out their camps.
 With his faithful slave Pedro behind him he tramps
 With a fantastic collection of stamps
 To win friends and influence his uncle.
-Mama's in a factory, she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in a factory, she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in trouble with the tombstone blues.
 The geometry of innocent flesh on the bone
 Causes Galileo's math book to get thrown
@@ -2122,8 +2122,8 @@ I wish I could give Brother Bill his great thrill.
 I would set him in chains at the top of the hill,
 Then send out for some pillars and Cecil B. DeMille.
 He could die happily ever after.
-Mama's in the factory, she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in the factory, she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
 Where Ma Rainey and Beethoven once unwrapped their bedroll,
 Tuba players now rehearse around the flagpole
@@ -2133,8 +2133,8 @@ I wish I could write you a melody so plain
 That could hold you, dear lady, from going insane,
 That could ease you and cool you and cease the pain
 Of your useless and pointless knowledge.
-Mama's in the factory, she ain't got no shoes.
-Daddy's in the alley, he's looking for food.
+Mama's in the factory, she ain't got no shoes,
+Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
 Well, I ride on a mail-train, baby, can't buy a thrill.
 Well, I've been up all night leaning on the windowsill.
@@ -2194,7 +2194,7 @@ And you say, "For what reason?" And he says, "How?"
 And you say, "What does this mean?" And he screams back, "You're a cow!
 Give me some milk or else go home!"
 And you know something's happening, but you don't know what it is, do you, Mr. Jones?
-Well, you walk into the room like a camel and then you frown.
+Well, you walk into the room like a camel and then you frown,
 You put your eyes in your pocket and your nose on the ground.
 There oughtta be a law against you coming around,
 You should be made to wear earphones
@@ -5788,7 +5788,7 @@ And, when it finally––the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 So, now I'm going back again, I got to get to her somehow,
-All the people we used to know, they're an illusion to me now –
+All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
 But me, I'm still on the road, a-heading for another joint,
@@ -9364,3 +9364,311 @@ Don't fall apart on me tonight.
 Yesterday's just a memory,
 Tomorrow's never what it's supposed to be,
 And I need you, yeah, you, ah, I need you.
+God said to Abraham, "Kill me a son."
+Abe said, "Man, you must be putting me on."
+God said, "No." Abe said, "What?"
+God said, "You can do what you want, Abe, but
+Next time you see me coming you better run."
+Abe said, "Where you want this killing done?"
+God said, "On Highway 61."
+Georgia Sam, he had a bloody nose,
+Welfare Department wouldn't give him no clothes.
+He asked poor Howard, "Where can I go?"
+Howard said, "There's only one place I know."
+Sam said, "Tell me quick, man! I got to run."
+Howard just pointed off a-with his gun:
+"That way down Highway 61."
+Mack the Finger said to Louis the King,
+"I got forty red, white, and blue shoestrings
+And a thousand telephones that don't ring.
+Do you know where I can get rid of these things?"
+Louis the King said, "Let me think for a minute, son."
+Then said, "Yeah, I think it can be easily done.
+Take it on down to Highway 61."
+Fifth daughter on the twelfth night
+Told the first father that things weren't right.
+"My complexion," she said, "is much too white."
+He said, "Come over here, girl, step into the light."
+He –– "Yeah, you're right. Let me tell your mother this has been done."
+But the second mom was with the seventh son
+And they were both out on Highway 61.
+Roving gambler, he was very bored
+Trying to create a next world war.
+He found a promoter nearly fell on the floor.
+"No, I never did engage in this kinda thing before,
+But, yeah, I think it can be very easily done.
+We'll just put some bleachers out in the sun,
+Have it on Highway 61."
+I ain't gonna work on Maggie's farm no more,
+Said I ain't gonna work on Maggie's farm no more.
+Well, I wake up in the morning, fold my hands and pray for rain,
+Got a head full of ideas driving me insane.
+It's a shame the way she make me scrub the floor.
+Ain't gonna work on Maggie's farm no more.
+I ain't gonna work for Maggie's brother no more,
+No, I ain't gonna work for Maggie's brother no more.
+He fine you a nickel, he fine you a dime,
+Ask you with a grin, "You having a good time?"
+Then he fine you every time you slam the door.
+Ain't gonna work for Maggie's brother no more.
+I ain't gonna work for Maggie's pa no more,
+I ain't gonna work for Maggie's pa no more.
+Well, he puts his cigar out your face just for kicks,
+His bedroom window is made outta bricks.
+Well, the National Guard stands around his door.
+I ain't gonna work for Maggie's pa no more.
+I ain't gonna work for Maggie's ma no more,
+Said I ain't gonna work for Maggie's ma no more.
+Well, she talks to all the servants about man and God and law,
+Everybody tells me she's the brains behind pa.
+68, but says she's 24.
+I ain't gonna work for Maggie's ma no more.
+I ain't gonna work on Maggie's farm no more,
+No, I ain't gonna work on Maggie's farm no more.
+Well, I try my best to be just like I am,
+Everybody wants you to be just like them,
+They say "Sing!" while you slave -- I get bored.
+I ain't gonna work on Maggie's farm no more.
+Been so long since a strange woman has slept in my bed.
+Look how sweet she sleep, how free must be her dream.
+In another lifetime, she must have owned the world or been faithfully wed
+To some righteous king who wrote psalms beside moonlight stream.
+I and I, in creation where one's nature neither honor, nor forgive.
+I and I, one said to the other, "No man see my face and live."
+I think I'll go out and go for a walk --
+Not much happening here, nothing ever does.
+If she wake up now, you know, she'll just a-want me to talk.
+I got nothing to say, 'specially about whatever was.
+I and I, in creation where one's a-nature neither honor, nor forgive.
+I and I, one said to the other, "No man see my face and live."
+Outside of two men on the train tracks, there nobody in sight,
+And they're waiting for spring to come, smoking down the track.
+The world could come to an end tonight, but that's alright.
+She should still be there sleeping when I get back.
+I and I, in creation where one's nature neither honor, nor forgive.
+I and I, one said to the other, "No man see my face and live."
+Noontime and I'm still on the road, on the darkest part,
+Into the narrow lanes where I can't stumble or stay put.
+Someone else is speaking with my mouth, but I'm listening only to my heart.
+I've made shoes for everyone – even you – while I still go barefoot.
+I and I, creation where one's nature neither honor, nor forgive.
+I and I, one said to the other, "No man see my face and live."
+Man thinks, 'cause he rules the earth, he can do with it as he please
+And, if things don't change soon, he will.
+Oh, man has invented his doom, first step was touching the moon.
+Well, there's a woman on my block, she'll just sit there facing the hill,
+She say, "Who take away his license to kill?"
+Well, they take him and they teach him and they groom him for life
+And they set him on a path where he's bound to get ill.
+Then they bury him in stars, sell his body like they do used cars.
+Well, there's a woman on my block, she'll just sit there facing the hill,
+She say, "Who take away his license to kill?"
+Well, he's hell-bent for destruction, he's afraid and confused
+And his brain has been mismanaged with great skill.
+All he believes are his eyes and his eyes, they just tell him lies.
+Well, there's a woman on my block, she just sit there facing the hill,
+She'll say, "Who take away his license to kill?"
+May be noisemaker, spirit-maker,
+Heartbreaker, backbreaker,
+Leave no stone unturned.
+May be an actor in a plot,
+That might be all that you got
+Till your error you clearly learn.
+Well, he worships at an altar of a stagnant pool
+And, when he sees his reflection, he's fulfilled.
+Man is opposed to fair play:
+He wants it all and he wants it his way.
+Well, there's a woman on my block, she'll just sit there facing the hill,
+She say, "Who take away his license to kill?"
+<i>Thank you.</i>
+Go away from my window,
+Leave at your own chosen speed.
+I'm not the one you want, babe.
+I'm not the one you need.
+You say you're looking for someone
+Never weak, but always strong,
+To protect you and defend you
+Whether you are right or wrong,
+Someone to open each and every door.
+But, it ain't me, babe,
+It ain't me you're looking for, babe.
+Step lightly from the ledge, babe,
+Step lightly on the ground.
+I'm not the one you want, babe,
+I would only let you down.
+You say you're looking for someone
+Who will promise never to part,
+Someone to close his eyes for you,
+Someone to close his heart,
+Someone who will die for you and more.
+But, it ain't me, babe,
+No, no, no, it ain't me, babe,
+It ain't me you're looking for, babe.
+Go melt back into the night, babe,
+Everything inside is made of stone.
+There's nothing in here moving
+And, anyway, I'm not alone.
+You say you're looking for someone
+Pick you up every time you fall,
+Someone to get you flowers constantly
+And to come every time you call,
+A lover for your life, but nothing more.
+And it ain't me, babe,
+No, no, no, it ain't me, babe,
+It ain't me you're looking for, babe.
+Early one morning the sun was shining, I was a-laying in bed,
+Wondering if she'd changed at all, if her hair was still red.
+Her folks, they said that their lives together sure was gonna be rough,
+They never did like mama's homemade dress, papa's bankbook wasn't big enough.
+And he was standing on the side of the road, rain falling on his shoes,
+Heading out for the old East Coast, radio blasting the news straight on through,
+Tangled up in blue.
+She was married when they first met to a man four times her age,
+He left her penniless in a state of regret – it was time to bust outta the cage.
+And they drove that car as far as they could, abandoned it out west,
+Splitting up on a dark, sad night, both agreeing that it was best.
+She turned around to look at him as he was a-walking away,
+Saying, "I wish I could tell you all the things that I never learned how to say."
+He said, "That's alright, babe, I love you too,
+But we were tangled up in blue."
+He had a steady job and a pretty face and everything seemed to fit.
+One day he could just feel the waste, he put it all down and split
+And he drifted down to New Orleans where they treated him like a boy,
+He nearly went mad in Baton Rouge, he nearly drowned in Delacroix.
+And all the while he was alone, the past was close behind,
+He had a-one too many lovers and none of 'em were too refined – all except for you,
+But you were tangled up in blue.
+She was working in the blinding light and I stopped in for a drink,
+I just kept looking at her face so white, I didn't know what to think.
+Later on, when the crowd thinned out, I was getting ready to leave,
+She was standing there right beside my chair, said, "What's that you got up your sleeve?"
+I said, "Nothing, baby, and that's for sure." She leaned down into my face,
+I could feel the heat and the pulse of her as she bent down to tie the laces of my shoe,
+Tangled up in blue.
+I lived with them on Montague Street in a basement down the stairs,
+There was snow all winter and no heat, revolution was in the air,
+Till one day all of his slaves ran free, something inside of him died.
+The only thing I could do was be me and get on that train and ride.
+And, when it all came crashing down, I was already south,
+I didn't know whether the world was flat or round, I had the worst taste in my mouth that I ever knew,
+Tangled up in blue.
+So, now I'm going on back again, maybe tomorrow or maybe next year,
+I gotta find someone among the women and men whose destiny is unclear.
+Some're masters of illusion, some're ministers of the trade,
+All under strong delusion, all of their beds're unmade.
+Me, I'm still heading towards the sun, trying to stay outta the joint,
+We always did love the very same one, we just saw her from a different point of view,
+Tangled up in blue.
+Come, you masters of war, you that build the big guns,
+You that build the death planes, you that build the big bombs-a,
+You that hide behind walls, you that hide behind desks,
+I just want you to know I can a-see through your mask.
+You that never done nothing but build to destroy,
+You play with my world like it's your little toy,
+Put a gun in my hand and you hide from my eyes,
+And you turn and run farther when the fast bullets a-fly.
+Like Judas of old, you lie and deceive,
+A world war can be won, you want me to believe,
+But I see through your eyes and I see through your brain
+Like I see through the water that runs down my drain.
+You fasten the trigger for the others to fire,
+Then you set back and watch while the death count gets higher,
+You hide in your mansion while the young people's blood
+Flows outta their bodies and is buried in the mud.
+Let me ask you one question: Is your money that good?
+Will it buy you forgiveness? Do you think that it could?
+I think you will find, when your death takes its toll,
+All of your <i>[incomprehensible]</i> and let's talk about your soul.
+And I hope that you die and your death will come soon,
+I will follow your casket on the pale afternoon
+And I'll watch while you're lowered down to your deathbed
+And I'll stand over your grave till I'm sure that you're dead.
+You walk into the room with your pencil in your hand,
+See somebody naked, you say, "Who is that man?"
+You try so hard, but you don't understand
+What you'll say when you get home.
+Something is happening, but you don't know what it is, do you, Mr. Jones?
+You hand in a back door to go––"Is this––this where it is?"
+Somebody points his finger at you and says, "It's his."
+You say, "What's mine?", someone else says, "Where what is?"
+You say, "Oh, no, am I here all alone?"
+Something is happening, but you don't know what it is, do you, Mr. Jones?
+You hand in your ticket to go see the geek,
+Who walks up to you when he hears you speak
+And says, "How does it feel to be such a freak?"
+You say, "Impossible!" as he hand you a, a bone.
+Something is happening, but you don't know what it is, do you, Mr. Jones?
+You have many contacts out there among the lumberjacks,
+Get you facts when someone attacks your imagination.
+No one has any respect – anyway, they just expect
+You to sign your check to tax-deductible charity organizations, oh!
+You walk into the room like a camel and you frown,
+You put your eyes in your pocket, you put your nose in the ground.
+There oughtta be a law against you coming around –
+Remember, before you come, at least please first telephone.
+Something is happening, but you don't know what it is, do you, Mr. Jones?
+Something is happening, but you don't know what it is, do you, Mr. Jones?
+If you're traveling in the north country fair,
+Where the winds hit heavy on the borderline,
+Remember me to one who lives there –
+She once was a true love of mine.
+If you go when the snowflakes storm,
+When the rivers freeze and summer ends,
+See for me if she's wearing her coat so warm
+To keep her from the howling winds.
+See for me if her hair is hanging long,
+If it rolls and flows all down her breast.
+See for me if her hair is hanging long –
+That's the way I remember her best.
+I'm a-wondering if she remembers me at all,
+Many times I've often prayed
+In the darkness of my night,
+In the brightness of my day.
+So, if you're traveling in the north country fair,
+Where the winds hit heavy on the borderline,
+Remember me to one who lives there –
+She once was a true love of mine.
+Well, the sweet, pretty things are in bed now of course,
+The city fathers, they're trying to endorse
+Reincarnation of Paul Revere's horse,
+But the town has no need to be nervous.
+Well, the ghost of Belle Starr, she hand down her wits
+To Jezebel, the nun, she violently knits
+A bald wig for Jack the Ripper, who sits
+At the head of the Chamber of Commerce.
+Mama's in the factory, she ain't got no shoes,
+Dad's in the hallway looking hard for the fuze,
+I'm in the kitchen with the tombstone blues – oh, well!
+The hysterical bride in the penny arcade,
+Screaming, she moans, "I've just been made!"
+Send for the doctor, who pull down the shade,
+Saying, "Don't let the boys in."
+Well, the medicine man come and then he shuffles inside,
+Walk with a swagger and he say to the bride:
+"Stop all this weeping, swallow your pride.
+You won't die. It's not poison!"
+Mama's in a factory, she ain't got no shoes,
+Dad's in a alley looking hard for the fuze,
+I'm in the kitchen with the tombstone blues – oh, ah! Yeah!
+John the Baptist, after torturing a thief,
+Looks at his hero, the Commander-in-Chief.
+"Tell me, great hero, but please make it brief,
+Is there a hole for me to get sick in?"
+Well, the Commander-in-Chief answers him while chasing a fly:
+"Death to all those that––who would whimper and cry!"
+Dropping a barbell, he point to the sky.
+"The sun not yellow, it's chicken!"
+Oh, mama's in the factory, she ain't got no shoes,
+Dad's in the hallway looking hard for the fuze,
+I'm in the kitchen with the tombstone blues – oh, well!
+Where Ma Rainey and Beethoven once unwrapped their bedroll,
+Tuba players now rehearse around the flagpole,
+National Bank is selling road-maps to the soul
+To the old folks' home and the college.
+Well, I wish that I could write you a melody so plain
+That'd ease you, dear lady, from going insane,
+Ease you and cool you and cease the pain
+Of your useless and pointless knowledge.
+Mama in a factory ,she ain't got no shoes,
+Dad's in a hallway looking hard for the fuze,
+I'm in the kitchen with the tombstone blues – oh, yeah!
