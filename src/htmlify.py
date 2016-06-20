@@ -61,7 +61,7 @@ CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
 
 def generate_index_json_objects(songs_index_path: str):
     """
-    Generate index file JSON objects representing albums (or songs).
+    Generate album/song dictionaries.
 
     :param songs_index_path: path to file containing metadata describing
                              each album and the files related to it/its
