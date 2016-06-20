@@ -59,6 +59,25 @@ CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
                         '&': re.compile(r'&amp;amp;')}
 
 
+def generate_index_json_objects(songs_index_path: str):
+    """
+    Generate index file JSON objects representing albums (or songs).
+
+    :param songs_index_path: path to file containing metadata describing
+                             each album and the files related to it/its
+                             songs (in JSON format)
+    :type songs_index_path: str
+
+    :yields: album/song dictionary
+    :ytype: dict
+    """
+
+    with open(songs_index_path) as index_file:
+        for line in index_file:
+            if not line.startswith('#') and line.strip():
+                yield loads(line.strip())
+
+
 def read_songs_index(songs_index_path: str) -> tuple:
     """
     Read albums_and_songs_index.jsonlines file and make dictionary
@@ -82,8 +101,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
     """
 
     albums_dict = OrderedDict()
-    for album_or_song_dict in (loads(line.strip('\n')) for line in open(songs_index_path)
-                               if not line.startswith('#') and line.strip('\n')):
+    for album_or_song_dict in generate_index_json_objects(songs_index_path):
 
         if album_or_song_dict['type'] == 'album':
 
