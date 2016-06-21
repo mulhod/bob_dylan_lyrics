@@ -118,7 +118,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
             # album attributes, i.e., metadata, and 'songs' mapped to
             # an ordered dictionary of songs where the keys are song
             # names and the values are dictionaries containing the file
-            # IDs and a key 'from' mapped to the name/file ID of the
+            # IDs and a key 'source' mapped to the name/file ID of the
             # original album that the song came from (only if the song
             # came from a previous album; otherwise, this will be set
             # to None)
@@ -130,7 +130,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 OrderedDict((song_id,
                              {'actual_name': song_dict.get('actual_name', song_id),
                               'file_id': song_dict['file_id'],
-                                  'from': song_dict.get('from', ''),
+                                  'source': song_dict.get('source', ''),
                               'sung_by': song_dict.get('sung_by', ''),
                                   'instrumental': song_dict.get('instrumental', ''),
                               'written_and_performed_by':
@@ -562,7 +562,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
 
     # Make a list element for the song
     li = Tag(name='li')
-    from_song = song_dict['from']
+    source_dict = song_dict['source']
     sung_by = song_dict['sung_by']
     performed_by = song_dict['written_and_performed_by'].get('performed_by', '')
 
@@ -582,13 +582,13 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         song_file_path = join('..', songs_dir, 'html',
                               '{0}.html'.format(song_dict['file_id']))
         a_song = Tag(name='a', attrs={'href': song_file_path})
-    if from_song:
+    if source_dict:
         if not instrumental and not performed_by:
             a_song.string = song_name
             orig_album_file_path = join('..', albums_dir,
-                                        '{0}'.format(from_song['file_id']))
+                                        '{0}'.format(source_dict['file_id']))
             a_orig_album = Tag(name='a', attrs={'href': orig_album_file_path})
-            a_orig_album.string = from_song['name']
+            a_orig_album.string = source_dict['name']
             a_orig_album.string.wrap(Tag(name='i'))
 
             # Construct the string content of the list element
@@ -903,7 +903,7 @@ def htmlify_album(name: str,
 
         # HTMLify the song
         if (not song_attrs['instrumental'] and
-            not song_attrs['from'] and
+            not song_attrs['source'] and
             not song_attrs['written_and_performed_by']):
             htmlify_song(song, song_attrs['file_id'], albums_dict)
 
