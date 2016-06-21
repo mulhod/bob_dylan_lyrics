@@ -60,6 +60,12 @@ replace_single_quotes = SINGLE_QUOTES_RE.sub
 CLEANUP_REGEXES_DICT = {'>': re.compile(r'&gt;'),
                         '<': re.compile(r'&lt;'),
                         '&': re.compile(r'&amp;amp;')}
+A_THE_RE = re.compile(r'^(the|a) ')
+substitute_determiner = A_THE_RE.sub
+remove_determiner = lambda x: substitute_determiner(r'', x)
+strip_parens_and_lower_case = lambda x: x.strip('()').lower()
+clean_song_title = lambda x: remove_determiner(strip_parens_and_lower_case(x))
+get_song_title_index_letter = lambda x: first_(clean_song_title(x))
 
 
 def generate_index_json_objects(songs_index_path: str):
@@ -1164,15 +1170,10 @@ def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
     if not titles or not all(x for x in titles):
         raise ValueError('Received empty string!')
 
-    clean = lambda x: x.strip('()').lower()
-    A_THE_RE = re.compile(r'^(the|a) ')
-    a_the_sub = A_THE_RE.sub
-    key_func = lambda x: a_the_sub(r'', clean(x))
-    filter_func = None
-    if filter_char:
-        filter_func = \
-            lambda x: filter_char.lower() == first_(a_the_sub(r'', clean(x)))
-    return filter(filter_func, sorted(titles, key=key_func))
+    filter_func = (lambda x: filter_char.lower() == get_song_title_index_letter(x)
+                   if filter_char
+                   else None)
+    return filter(filter_func, sorted(titles, key=clean_song_title))
 
 
 def and_join_album_links(albums: List[Dict[str, str]]) -> str:
