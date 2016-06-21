@@ -122,7 +122,8 @@ def read_songs_index(songs_index_path: str) -> tuple:
             sorted_songs = sorted(songs.items(), key=lambda x: x[1]['index'])
             ordered_songs = \
                 OrderedDict((song_id,
-                             {'file_id': song_dict['file_id'],
+                             {'actual_name': song_dict.get('actual_name', song_id),
+                              'file_id': song_dict['file_id'],
                                   'from': song_dict.get('from', ''),
                               'sung_by': song_dict.get('sung_by', ''),
                                   'instrumental': song_dict.get('instrumental', ''),
@@ -155,7 +156,14 @@ def read_songs_index(songs_index_path: str) -> tuple:
         attrs = attrs_songs['attrs']
         songs = attrs_songs['songs']
         for song in songs:
+
             song_attrs = songs[song]
+
+            # Get "actual" name of song (some songs show up under
+            # slightly different names on different albums or show up
+            # more than once on a single album and thus require a
+            # different key)
+            song_name = song_attrs['actual_name']
 
             # Add in song name/file ID and album name/file ID to
             # `song_files_dict` (for the song index), indicating if the
@@ -167,11 +175,11 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 song_file_id = 'not_written_or_peformed_by_dylan'
             else:
                 song_file_id = song_attrs['file_id']
-            if not song in song_files_dict:
+            if not song_name in song_files_dict:
                 file_album_dict = {'name': album_name,
                                    'file_id': attrs['file_id']}
-                song_files_dict[song] = [{'file_id': song_file_id,
-                                          'album(s)': [file_album_dict]}]
+                song_files_dict[song_name] = [{'file_id': song_file_id,
+                                               'album(s)': [file_album_dict]}]
             else:
 
                 # Iterate over the entries in `song_files_dict` for a
@@ -188,7 +196,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 #       "Crash on the Levee (Down in the Flood)".
                 found_file_id_in_song_dicts = False
                 if not song_file_id in file_id_types_to_skip:
-                    for file_ids_dict in song_files_dict[song]:
+                    for file_ids_dict in song_files_dict[song_name]:
                         if file_ids_dict['file_id'] == song_file_id:
                             file_album_dict = {'name': album_name,
                                                'file_id': attrs['file_id']}
@@ -198,8 +206,8 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 if not found_file_id_in_song_dicts:
                     file_album_dict = {'name': album_name,
                                        'file_id': attrs['file_id']}
-                    song_files_dict[song].append({'file_id': song_file_id,
-                                                  'album(s)': [file_album_dict]})
+                    song_files_dict[song_name].append({'file_id': song_file_id,
+                                                       'album(s)': [file_album_dict]})
 
     return albums_dict, song_files_dict
 
