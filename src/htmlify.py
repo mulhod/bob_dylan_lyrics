@@ -644,7 +644,10 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     columns_div = Tag(name='div', attrs={'class': 'col-md-8'})
     ol = Tag(name='ol')
     if sides_dict:
-        for side in sorted(sides_dict):
+
+        # Iterate over the sides, treating them as integers (rather
+        # than strings)
+        for side in sorted(sides_dict, key=int):
 
             # Make sure the side is interpretable as an integer
             try:
@@ -878,8 +881,6 @@ def htmlify_album(name: str,
 
     # Add in an ordered list element for all songs (or several ordered
     # lists for each side, disc, etc.)
-    # NOTE: Deal with the possibility of a 'discs' attribute in
-    # addition to the 'sides' attribute
     row_div.append(generate_song_list(songs, attrs.get('sides', None)))
     container_div.append(row_div)
 
