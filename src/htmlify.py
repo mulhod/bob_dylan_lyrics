@@ -123,6 +123,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
             # came from a previous album; otherwise, this will be set
             # to None)
             attrs = album_or_song_dict['metadata']
+            attrs['with'] = attrs.get('with', '')
             songs = attrs['songs']
             del attrs['songs']
             sorted_songs = sorted(songs.items(), key=lambda x: x[1]['index'])
@@ -940,6 +941,12 @@ def htmlify_album(name: str,
     label_div = Tag(name='div')
     label_div.string = 'Label: {0}'.format(attrs['label'])
     attrs_div.append(label_div)
+    by_div = Tag(name='div')
+    if attrs['with']:
+        by_div.string = 'By Bob Dylan and {}'.format(attrs['with'])
+    else:
+        by_div.string = 'By Bob Dylan'
+    attrs_div.append(by_div)
     columns_div.append(attrs_div)
     row_div.append(columns_div)
 
