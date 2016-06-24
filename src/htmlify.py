@@ -130,9 +130,10 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 OrderedDict((song_id,
                              {'actual_name': song_dict.get('actual_name', song_id),
                               'file_id': song_dict['file_id'],
-                                  'source': song_dict.get('source', ''),
+                              'source': song_dict.get('source', ''),
                               'sung_by': song_dict.get('sung_by', ''),
                                   'instrumental': song_dict.get('instrumental', ''),
+                              'written_by': song_dict.get('written_by', ''),
                               'written_and_performed_by':
                                   song_dict.get('written_and_performed_by', {})})
                              for song_id, song_dict in sorted_songs)
@@ -565,18 +566,40 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     source_dict = song_dict['source']
     sung_by = song_dict['sung_by']
     performed_by = song_dict['written_and_performed_by'].get('performed_by', '')
+    written_by = song_dict['written_by']
 
     # If the song was sung by someone other than Bob Dylan, there will
     # be a "sung_by" key whose value will be the actual (and primary)
     # singer of the song, which should appear in a parenthetical
-    # comment. On the other hand, if the song was both performed by
-    # someone other than Bob Dylan (primarily, at least) and written by
-    # someone other than Bob Dyaln (primarily, again), then there will
-    # be a special "written_and_performed_by" key.
+    # comment. If the song was originally written by someone other than
+    # Bob Dylan or in partnership with Bob Dylan but the song is sung
+    # by Bob Dylan (primarily, at least), then there will be a
+    # "written_by" key that has this information. On the other hand, if
+    # the song was both performed by someone other than Bob Dylan
+    # (primarily, at least) and written by someone other than Bob Dylan
+    # (primarily, again), then there will be a special
+    # "written_and_performed_by" key.
     if sung_by:
         sung_by = ' (sung by {0})'.format(sung_by)
     elif performed_by:
         performed_by = ' (performed by {0})'.format(performed_by)
+    if written_by:
+        if written_by.startswith("Traditional"):
+            written_by = ' ()'.format(written_by)
+        elif 'arranged by' in written_by:
+            written_by = (' (originally written by {})'.format(written_by))
+        else:
+            authors = [author.strip() for author in written_by.split(",")]
+            if len(authors) == 1:
+                authors_string = authors[0]
+            elif len(authors) == 2:
+                authors_string = ' and '.join(authors)
+            else:
+                authors_string = ', and '.join([', '.join(authors[:-1]),
+                                            authors[-1]])
+            written_by = (' (original author{}: {})'
+                          .format('s' if len(authors) > 1 else '',
+                                  authors_string))
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
     if not instrumental and not performed_by:
         song_file_path = join('..', songs_dir, 'html',
@@ -591,24 +614,43 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             a_orig_album.string = source_dict['name']
             a_orig_album.string.wrap(Tag(name='i'))
 
-            # Construct the string content of the list element
-            # including information about the original song/album, a
-            # comment that the song is an instrumental song if that
-            # applies, and a comment that the song was sung by someone
-            # else if that applies
-            li.string = ('{0} (appeared on {1}{2})'
-                         .format(a_song, a_orig_album, sung_by))
+            # Construct the string content of the list element,
+            # including the song name itself, a comment about the
+            # song's original album, a comment about the song's
+            # authorship if the list of authors includes someone other
+            # than Bob Dylan, and a comment that the song was sung by
+            # someone else or is basically just not a Bob Dylan song,
+            # if either of those applies
+            li.string = ('{0} (appeared on {1}{2}){3}'
+                         .format(a_song, a_orig_album, sung_by,
+                                 written_by))
         else:
-            li.string = '{0}{1}{2}'.format(song_name, instrumental, performed_by)
+            # Construct the string content of the list element,
+            # including the song name itself, a comment that the song
+            # is an instrumental song if that applies, a comment about
+            # the song's authorship if the list of authors includes
+            # someone other than Bob Dylan, and a comment that the song
+            # was sung by someone else or is basically just not a Bob
+            # Dylan song, if either of those applies
+            li.string = '{0}{1}{2}{3}{4}'.format(song_name,
+                                                 instrumental,
+                                                 sung_by,
+                                                 performed_by,
+                                                 written_by)
     else:
 
-        # Construct the string content of the list element including a
-        # comment that the song is an instrumental song if that
-        # applies, and a comment that the song was sung by someone else
-        # or is basically just not a Bob Dylan song, if either of those
-        # applies
-        li.string = ('{0}{1}{2}{3}'
-                     .format(song_name, instrumental, sung_by, performed_by))
+        # Construct the string content of the list element, including
+        # the song name itself, a comment that the song is an
+        # instrumental song if that applies, a comment about the song's
+        # authorship if the list of authors includes someone other than
+        # Bob Dylan, and a comment that the song was sung by someone
+        # else or is basically just not a Bob Dylan song, if either of
+        # those applies
+        li.string = ('{0}{1}{2}{3}{4}'.format(song_name,
+                                              instrumental,
+                                              sung_by,
+                                              performed_by,
+                                              written_by))
         if not instrumental and not performed_by:
             li.string.wrap(a_song)
         
