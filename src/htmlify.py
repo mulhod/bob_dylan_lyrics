@@ -585,7 +585,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         performed_by = ' (performed by {0})'.format(performed_by)
     if written_by:
         if written_by.startswith("Traditional"):
-            written_by = ' ()'.format(written_by)
+            written_by = ' ({})'.format(written_by)
         elif 'arranged by' in written_by:
             written_by = (' (originally written by {})'.format(written_by))
         else:
@@ -646,14 +646,19 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         # Bob Dylan, and a comment that the song was sung by someone
         # else or is basically just not a Bob Dylan song, if either of
         # those applies
-        li.string = ('{0}{1}{2}{3}{4}'.format(song_name,
-                                              instrumental,
-                                              sung_by,
-                                              performed_by,
-                                              written_by))
         if not instrumental and not performed_by:
-            li.string.wrap(a_song)
-        
+            li.string = ('{0}{1}{2}{3}{4}'.format(a_song,
+                                                  instrumental,
+                                                  sung_by,
+                                                  performed_by,
+                                                  written_by))
+        else:
+            li.string = ('{0}{1}{2}{3}{4}'.format(song_name,
+                                                  instrumental,
+                                                  sung_by,
+                                                  performed_by,
+                                                  written_by))
+
     # Italicize/gray out song entries if they do not contain lyrics
     if instrumental or performed_by:
         li.string.wrap(Tag(name='i'))
