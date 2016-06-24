@@ -135,7 +135,8 @@ def read_songs_index(songs_index_path: str) -> tuple:
                                   'instrumental': song_dict.get('instrumental', ''),
                               'written_by': song_dict.get('written_by', ''),
                               'written_and_performed_by':
-                                  song_dict.get('written_and_performed_by', {})})
+                                  song_dict.get('written_and_performed_by', {}),
+                              'duet': song_dict.get('duet', '')})
                              for song_id, song_dict in sorted_songs)
             albums_dict[attrs['name']] = {'attrs': attrs,
                                           'songs': ordered_songs}
@@ -567,6 +568,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     sung_by = song_dict['sung_by']
     performed_by = song_dict['written_and_performed_by'].get('performed_by', '')
     written_by = song_dict['written_by']
+    duet = song_dict['duet']
 
     # If the song was sung by someone other than Bob Dylan, there will
     # be a "sung_by" key whose value will be the actual (and primary)
@@ -583,6 +585,10 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         sung_by = ' (sung by {0})'.format(sung_by)
     elif performed_by:
         performed_by = ' (performed by {0})'.format(performed_by)
+
+    # If the song was written by someone other than Bob Dylan or in
+    # partnership with Bob Dylan, make a parenthetical comment for the
+    # song's authorship
     if written_by:
         if written_by.startswith("Traditional"):
             written_by = ' ({})'.format(written_by)
@@ -600,12 +606,24 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             written_by = (' (original author{}: {})'
                           .format('s' if len(authors) > 1 else '',
                                   authors_string))
+
+    # If the song is an instrumental, prepare a parenthetical comment
+    # for that as well
     instrumental = ' (Instrumental)' if song_dict['instrumental'] else ''
+
+    # If the song was sung as a duet with somebody else, make a
+    # parenthetical comment for that too
+    if duet:
+        duet = ' (duet with {})'.format(duet)
+
+    # Make a link for the song file if the song is not an instrumental
+    # or was not performed by somebody else
     if not instrumental and not performed_by:
         song_file_path = join('..', songs_dir, 'html',
                               '{0}.html'.format(song_dict['file_id']))
         a_song = Tag(name='a', attrs={'href': song_file_path})
         a_song.string = song_name
+
     if source_dict:
         if not instrumental and not performed_by:
             orig_album_file_path = join('..', albums_dir,
@@ -620,10 +638,12 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             # authorship if the list of authors includes someone other
             # than Bob Dylan, and a comment that the song was sung by
             # someone else or is basically just not a Bob Dylan song,
-            # if either of those applies
-            li.string = ('{0} (appeared on {1}{2}){3}'
-                         .format(a_song, a_orig_album, sung_by,
-                                 written_by))
+            # if either of those applies, etc.
+            li.string = '{0} (appeared on {1}{2}){3}{4}'.format(a_song,
+                                                                a_orig_album,
+                                                                sung_by,
+                                                                written_by,
+                                                                duet)
         else:
             # Construct the string content of the list element,
             # including the song name itself, a comment that the song
@@ -631,12 +651,13 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             # the song's authorship if the list of authors includes
             # someone other than Bob Dylan, and a comment that the song
             # was sung by someone else or is basically just not a Bob
-            # Dylan song, if either of those applies
-            li.string = '{0}{1}{2}{3}{4}'.format(song_name,
-                                                 instrumental,
-                                                 sung_by,
-                                                 performed_by,
-                                                 written_by)
+            # Dylan song, if either of those applies, etc.
+            li.string = '{0}{1}{2}{3}{4}{5}'.format(song_name,
+                                                    instrumental,
+                                                    sung_by,
+                                                    performed_by,
+                                                    written_by,
+                                                    duet)
     else:
 
         # Construct the string content of the list element, including
@@ -645,14 +666,15 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         # authorship if the list of authors includes someone other than
         # Bob Dylan, and a comment that the song was sung by someone
         # else or is basically just not a Bob Dylan song, if either of
-        # those applies
-        li.string = ('{0}{1}{2}{3}{4}'
+        # those applies, etc.
+        li.string = ('{0}{1}{2}{3}{4}{5}'
                      .format(a_song if not instrumental and not performed_by
                                     else song_name,
                              instrumental,
                              sung_by,
                              performed_by,
-                             written_by))
+                             written_by,
+                             duet))
         
     # Italicize/gray out song entries if they do not contain lyrics
     if instrumental or performed_by:
