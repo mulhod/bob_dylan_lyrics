@@ -605,9 +605,9 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         song_file_path = join('..', songs_dir, 'html',
                               '{0}.html'.format(song_dict['file_id']))
         a_song = Tag(name='a', attrs={'href': song_file_path})
+        a_song.string = song_name
     if source_dict:
         if not instrumental and not performed_by:
-            a_song.string = song_name
             orig_album_file_path = join('..', albums_dir,
                                         '{0}'.format(source_dict['file_id']))
             a_orig_album = Tag(name='a', attrs={'href': orig_album_file_path})
@@ -646,13 +646,13 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
         # Bob Dylan, and a comment that the song was sung by someone
         # else or is basically just not a Bob Dylan song, if either of
         # those applies
-        li.string = ('{0}{1}{2}{3}{4}'.format(song_name,
-                                              instrumental,
-                                              sung_by,
-                                              performed_by,
-                                              written_by))
-        if not instrumental and not performed_by:
-            li.string.wrap(a_song)
+        li.string = ('{0}{1}{2}{3}{4}'
+                     .format(a_song if not instrumental and not performed_by
+                                    else song_name,
+                             instrumental,
+                             sung_by,
+                             performed_by,
+                             written_by))
         
     # Italicize/gray out song entries if they do not contain lyrics
     if instrumental or performed_by:
