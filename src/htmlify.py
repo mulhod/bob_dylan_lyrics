@@ -130,7 +130,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
             ordered_songs = \
                 OrderedDict((song_id,
                              {'actual_name': song_dict.get('actual_name', song_id),
-                              'file_id': song_dict['file_id'],
+                              'file_id': song_dict.get('file_id'),
                               'source': song_dict.get('source', ''),
                               'sung_by': song_dict.get('sung_by', ''),
                                   'instrumental': song_dict.get('instrumental', ''),
@@ -200,10 +200,6 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 # with that file ID/version, and, if not, then add the
                 # file ID/version to the list of versions associated
                 # with the song (i.e., with its own list of albums)
-                # TODO: This assumes that all songs are attached to the
-                #       same exact name whenever they show up on an
-                #       album, but this is not strictly true, e.g.
-                #       "Crash on the Levee (Down in the Flood)".
                 found_file_id_in_song_dicts = False
                 if not song_file_id in file_id_types_to_skip:
                     for file_ids_dict in song_files_dict[song_name]:
