@@ -10,6 +10,11 @@ h1 {
     color:gray;
 }
 
+comment {
+    color: gray;
+    font-size: 12px;
+}
+
 /*Custom Google search engine settings*/
 
 .gsc-input-box {

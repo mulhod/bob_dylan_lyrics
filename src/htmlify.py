@@ -124,6 +124,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
             # to None)
             attrs = album_or_song_dict['metadata']
             attrs['with'] = attrs.get('with', '')
+            attrs['live'] = attrs.get('live')
             songs = attrs['songs']
             del attrs['songs']
             sorted_songs = sorted(songs.items(), key=lambda x: x[1]['index'])
@@ -618,7 +619,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     # If the song was recorded live in concert, generate a
     # parenthetical comment
     if live:
-        live = (' (recorded live on {0} at {1})'
+        live = (' (recorded live {0} {1})'
                 .format(live['date'], live['location/concert']))
 
     # Make a link for the song file if the song is not an instrumental
@@ -631,11 +632,8 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
 
     if source_dict:
         if not instrumental and not performed_by:
-            orig_album_file_path = join('..', albums_dir,
-                                        '{0}'.format(source_dict['file_id']))
-            a_orig_album = Tag(name='a', attrs={'href': orig_album_file_path})
-            a_orig_album.string = source_dict['name']
-            a_orig_album.string.wrap(Tag(name='i'))
+
+            li.append(a_song)
 
             # Construct the string content of the list element,
             # including the song name itself, a comment about the
@@ -644,13 +642,28 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             # than Bob Dylan, and a comment that the song was sung by
             # someone else or is basically just not a Bob Dylan song,
             # if either of those applies, etc.
-            li.string = '{0} (appeared on {1}{2}){3}{4}{5}'.format(a_song,
-                                                                   a_orig_album,
-                                                                   sung_by,
-                                                                   written_by,
-                                                                   duet,
-                                                                   live)
+            orig_album_file_path = join('..', albums_dir,
+                                        '{0}'.format(source_dict['file_id']))
+            a_orig_album = Tag(name='a', attrs={'href': orig_album_file_path})
+            a_orig_album.string = source_dict['name']
+            a_orig_album.string.wrap(Tag(name='i'))
+            comment = Tag(name='comment')
+            comment.string = (' (appeared on {0}{1}){2}{3}{4}'
+                              .format(a_orig_album,
+                                      sung_by,
+                                      written_by,
+                                      duet,
+                                      live))
+            li.append(comment)
         else:
+
+            # Add in grayed-out and italicized song name
+            i_song = Tag(name='i')
+            gray = Tag(name='font', attrs={'color': '#726E6D'})
+            gray.string = song_name
+            i_song.append(gray)
+            li.append(i_song)
+
             # Construct the string content of the list element,
             # including the song name itself, a comment that the song
             # is an instrumental song if that applies, a comment about
@@ -658,36 +671,68 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             # someone other than Bob Dylan, and a comment that the song
             # was sung by someone else or is basically just not a Bob
             # Dylan song, if either of those applies, etc.
-            li.string = '{0}{1}{2}{3}{4}{5}{6}'.format(song_name,
-                                                       instrumental,
-                                                       sung_by,
-                                                       performed_by,
-                                                       written_by,
-                                                       duet,
-                                                       live)
+            comment = Tag(name='comment')
+            comment.string = '{0}{1}{2}{3}{4}{5}'.format(instrumental,
+                                                         sung_by,
+                                                         performed_by,
+                                                         written_by,
+                                                         duet,
+                                                         live)
+            comment.string.wrap(Tag(name='i'))
+            comment.string.wrap(Tag(name='font', attrs={'color': '#726E6D'}))
+            li.append(comment)
     else:
 
-        # Construct the string content of the list element, including
-        # the song name itself, a comment that the song is an
-        # instrumental song if that applies, a comment about the song's
-        # authorship if the list of authors includes someone other than
-        # Bob Dylan, and a comment that the song was sung by someone
-        # else or is basically just not a Bob Dylan song, if either of
-        # those applies, etc.
-        li.string = ('{0}{1}{2}{3}{4}{5}{6}'
-                     .format(a_song if not instrumental and not performed_by
-                                    else song_name,
-                             instrumental,
-                             sung_by,
-                             performed_by,
-                             written_by,
-                             duet,
-                             live))
-        
-    # Italicize/gray out song entries if they do not contain lyrics
-    if instrumental or performed_by:
-        li.string.wrap(Tag(name='i'))
-        li.string.wrap(Tag(name='font', attrs={'color': '#726E6D'}))
+        # If the song isn't an instrumental and there is an associated
+        # lyrics file, then just add the a-tag for the song into the
+        # list element; otherwise, gray out and italicize the text of
+        # the song name
+        if not instrumental and not performed_by:
+            
+            li.append(a_song)
+            
+            # Construct the string content of the list element,
+            # including the song name itself, a comment that the song
+            # is an instrumental song if that applies, a comment about
+            # the song's authorship if the list of authors includes
+            # someone other than Bob Dylan, and a comment that the song
+            # was sung by someone else or is basically just not a Bob
+            # Dylan song, if either of those applies, etc.
+            comment = Tag(name='comment')
+            comment.string = '{0}{1}{2}{3}{4}{5}'.format(instrumental,
+                                                         sung_by,
+                                                         performed_by,
+                                                         written_by,
+                                                         duet,
+                                                         live)
+
+        else:
+
+            # Add in grayed-out and italicized song name
+            i_song = Tag(name='i')
+            gray = Tag(name='font', attrs={'color': '#726E6D'})
+            gray.string = song_name
+            i_song.append(gray)
+            li.append(i_song)
+
+            # Construct the string content of the list element,
+            # including the song name itself, a comment that the song
+            # is an instrumental song if that applies, a comment about
+            # the song's authorship if the list of authors includes
+            # someone other than Bob Dylan, and a comment that the song
+            # was sung by someone else or is basically just not a Bob
+            # Dylan song, if either of those applies, etc.
+            comment = Tag(name='comment')
+            comment.string = '{0}{1}{2}{3}{4}{5}'.format(instrumental,
+                                                         sung_by,
+                                                         performed_by,
+                                                         written_by,
+                                                         duet,
+                                                         live)
+            comment.string.wrap(Tag(name='i'))
+            comment.string.wrap(Tag(name='font', attrs={'color': '#726E6D'}))
+
+        li.append(comment)
 
     return li
 
@@ -934,9 +979,11 @@ def htmlify_album(name: str,
     attrs_div.append(image)
     release_div = Tag(name='div')
     release_div.string = 'Released: {0}'.format(attrs['release_date'])
+    release_div.string.wrap(Tag(name='comment'))
     attrs_div.append(release_div)
     length_div = Tag(name='div')
     length_div.string = 'Length: {0}'.format(attrs['length'])
+    length_div.string.wrap(Tag(name='comment'))
     attrs_div.append(length_div)
     producers_string = attrs['producers']
     producers_string_template = \
@@ -944,16 +991,26 @@ def htmlify_album(name: str,
                                   else '(s)', '{0}')
     producers_div = Tag(name='div')
     producers_div.string = producers_string_template.format(producers_string)
+    producers_div.string.wrap(Tag(name='comment'))
     attrs_div.append(producers_div)
     label_div = Tag(name='div')
     label_div.string = 'Label: {0}'.format(attrs['label'])
+    label_div.string.wrap(Tag(name='comment'))
     attrs_div.append(label_div)
     by_div = Tag(name='div')
     if attrs['with']:
         by_div.string = 'By Bob Dylan and {}'.format(attrs['with'])
     else:
         by_div.string = 'By Bob Dylan'
+    by_div.string.wrap(Tag(name='comment'))
     attrs_div.append(by_div)
+    if attrs['live']:
+        live_div = Tag(name='div')
+        live_div.string = ('Recorded live {0} {1}'
+                           .format(attrs['live']['date'],
+                                   attrs['live']['location/concert']))
+        live_div.string.wrap(Tag(name='comment'))
+        attrs_div.append(live_div)
     columns_div.append(attrs_div)
     row_div.append(columns_div)
 
