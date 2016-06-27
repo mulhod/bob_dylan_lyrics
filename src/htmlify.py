@@ -1260,6 +1260,16 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     container_div.append(Tag(name='p'))
 
     for letter in ascii_uppercase:
+
+        # Attempt to generate the index page for the letter: if a value
+        # of False is returned, it means that no index page could be
+        # generated (no songs to index for the given letter) and,
+        # therefore, that this letter should be skipped.
+        if not htmlify_song_index_page(letter, song_files_dict, albums_dict):
+            print('Skipping generating an index page for {0} since no songs '
+                  'could be found...'.format(letter))
+            continue
+
         row_div = Tag(name='div', attrs={'class': 'row'})
         columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
         div = Tag(name='div')
@@ -1272,9 +1282,6 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
         columns_div.append(div)
         row_div.append(columns_div)
         container_div.append(row_div)
-
-        # Generate the sub-index page for the letter
-        htmlify_song_index_page(letter, song_files_dict, albums_dict)
 
     body.append(container_div)
     html.append(body)
@@ -1363,8 +1370,10 @@ def htmlify_song_index_page(letter: str,
     :param albums_dict: ordered dictionary of album metadata
     :type albums_dict: OrderedDict
 
-    :returns: None
-    :rtype: None
+    :returns: boolean value indicating whether a page was generated or
+              not (depending on whether or not there were any songs
+              found that started with the given letter)
+    :rtype: bool
     """
 
     # Make BeautifulSoup object and append head element containing
@@ -1388,7 +1397,12 @@ def htmlify_song_index_page(letter: str,
     container_div.append(Tag(name='p'))
 
     not_dylan = 'not written by or not performed by Bob Dylan'
+    no_songs = True
     for song in sort_titles(song_files_dict, letter):
+
+        # If the program gets here, there are songs; if not, the value
+        # will not change, i.e., it will be True
+        no_songs = False
 
         # Get information about the song, such as the different
         # versions of the song, their file IDs, which albums they
@@ -1461,6 +1475,9 @@ def htmlify_song_index_page(letter: str,
         columns_div.append(row_div)
         container_div.append(columns_div)
 
+    if no_songs:
+        return False
+
     body.append(container_div)
     html.append(body)
 
@@ -1468,6 +1485,8 @@ def htmlify_song_index_page(letter: str,
                                   '{0}.html'.format(letter.lower()))
     with open(letter_index_file_path, 'w') as letter_index_file:
         letter_index_file.write(add_declaration(clean_up_html(str(html))))
+
+    return True
 
 
 def write_big_lyrics_files() -> None:
