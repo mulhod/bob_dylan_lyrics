@@ -1406,19 +1406,23 @@ def htmlify_song_index_page(letter: str,
                 instrumental_or_not_dylan = song_info['file_id']
                 if instrumental_or_not_dylan != 'instrumental':
                     instrumental_or_not_dylan = not_dylan
-                div.string = ('{0} ({1}, appeared on {2})'
-                              .format(song, instrumental_or_not_dylan,
-                                      album_links))
+                div.append('{0} '.format(song))
+                comment = Tag(name='comment')
+                comment.string = ('({0}, appeared on {1})'
+                                  .format(instrumental_or_not_dylan,
+                                          album_links))
+                div.append(comment)
                 row_div.append(div)
                 columns_div.append(row_div)
             else:
                 song_html_file_path = ('../html/{0}.html'
                                        .format(song_info['file_id']))
-                a = Tag(name='a', attrs={'href': song_html_file_path})
-                a.string = '{0}'.format(song)
-                div.append(a)
-                div.append = ' (appeared on {0})'.format(album_links)
-
+                a_song = Tag(name='a', attrs={'href': song_html_file_path})
+                a_song.string = '{0} '.format(song)
+                div.append(a_song)
+                comment = Tag(name='comment')
+                comment.string = '(appeared on {0})'.format(album_links)
+                div.append(comment)
         else:
             div.string = song
             columns_div.append(div)
@@ -1435,8 +1439,10 @@ def htmlify_song_index_page(letter: str,
                 # non-Dylan songs
                 if version_info['file_id'] == 'instrumental':
                     album_links = and_join_album_links(version_info['album(s)'])
-                    li.string = ('Instrumental version (appeared on {0})'
-                                 .format(album_links))
+                    comment = Tag(name='comment')
+                    comment.string = ('Instrumental version (appeared on {0})'
+                                      .format(album_links))
+                    li.append(comment)
                 elif version_info['file_id'] == 'not_written_or_peformed_by_dylan':
                     continue
                 else:
@@ -1444,8 +1450,11 @@ def htmlify_song_index_page(letter: str,
                     href = '../html/{0}.html'.format(version_info['file_id'])
                     a = Tag(name='a', attrs={'href': href})
                     a.string = 'Version #{0}'.format(i + 1)
+                    a.string.wrap(Tag(name='comment'))
                     li.append(a)
-                    li.append(' (appeared on {0})'.format(album_links))
+                    comment = Tag(name='comment')
+                    comment.string = ' (appeared on {0})'.format(album_links)
+                    li.append(comment)
                 ul.append(li)
             div.append(ul)
         row_div.append(div)
