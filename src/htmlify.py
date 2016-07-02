@@ -465,9 +465,9 @@ def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
 
     :param line: original line (including annotations)
     :type line: str
-    :param annotation_nums: list of annotation values, i.e., the
-                            numbered part of each annotation
-    :type annotation_nums: list
+    :param annotations: list of annotation values, i.e., the numbered
+                        part of each annotation
+    :type annotations: list
 
     :returns: list of indices for zero-length annotations in line
     :rtype: list
