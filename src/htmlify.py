@@ -1045,7 +1045,7 @@ def htmlify_album(name: str,
             not song_attrs['instrumental'] and
             not song_attrs['written_and_performed_by']):
 
-            input_path = join(text_dir_path,
+            input_path = join(root_dir_path, text_dir_path,
                               '{0}.txt'.format(song_attrs['file_id']))
             with open(input_path) as song_file:
                 song_text = song_file.read()
