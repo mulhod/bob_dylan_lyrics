@@ -7,10 +7,10 @@ from string import ascii_uppercase
 from collections import OrderedDict
 from os.path import join, dirname, realpath, getsize
 
+import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from cytoolz import first as first_
 from typing import Any, Dict, List, Iterable, Union
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
@@ -42,7 +42,7 @@ text_dir_path = join(songs_dir, 'txt')
 song_index_dir_path = join(songs_dir, song_index_dir)
 songs_and_albums_jsonl_file_path = join(root_dir_path,
                                         'albums_and_songs_index.jsonlines')
-songs_index_html_file_path = join(song_index_dir_path,
+songs_index_html_file_path = join(root_dir_path, song_index_dir_path,
                                   song_index_html_file_name)
 file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
@@ -65,7 +65,7 @@ substitute_determiner = A_THE_RE.sub
 remove_determiner = lambda x: substitute_determiner(r'', x)
 strip_parens_and_lower_case = lambda x: x.strip('()').lower()
 clean_song_title = lambda x: remove_determiner(strip_parens_and_lower_case(x))
-get_song_title_index_letter = lambda x: first_(clean_song_title(x))
+get_song_title_index_letter = lambda x: cytoolz.first(clean_song_title(x))
 
 
 def generate_index_json_objects(songs_index_path: str):
@@ -186,7 +186,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 song_file_id = 'not_written_or_peformed_by_dylan'
             else:
                 song_file_id = song_attrs['file_id']
-            if not song_name in song_files_dict:
+            if song_name not in song_files_dict:
                 file_album_dict = {'name': album_name,
                                    'file_id': attrs['file_id']}
                 song_files_dict[song_name] = [{'file_id': song_file_id,
@@ -202,7 +202,7 @@ def read_songs_index(songs_index_path: str) -> tuple:
                 # file ID/version to the list of versions associated
                 # with the song (i.e., with its own list of albums)
                 found_file_id_in_song_dicts = False
-                if not song_file_id in file_id_types_to_skip:
+                if song_file_id not in file_id_types_to_skip:
                     for file_ids_dict in song_files_dict[song_name]:
                         if file_ids_dict['file_id'] == song_file_id:
                             file_album_dict = {'name': album_name,
@@ -487,7 +487,7 @@ def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
                 continue
         except IndexError:
             pass
-        if not part in annotations:
+        if part not in annotations:
             i += len(part)
 
     if len(annotations) != annotation_index:
@@ -507,12 +507,6 @@ def generate_index_page(albums_dict: OrderedDict) -> None:
     :returns: None
     :rtype: None
     """
-
-    # Relative paths
-    index_html_rel_path = main_index_html_file_name
-    downloads_html_rel_path = join(file_dumps_dir, downloads_file_name)
-    song_index_html_rel_path = join(songs_dir, song_index_dir,
-                                    song_index_html_file_name)
 
     html = Tag(name='html')
     
@@ -602,7 +596,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
                 authors_string = ' and '.join(authors)
             else:
                 authors_string = ', and '.join([', '.join(authors[:-1]),
-                                            authors[-1]])
+                                                authors[-1]])
             written_by = (' (original author{}: {})'
                           .format('s' if len(authors) > 1 else '',
                                   authors_string))
@@ -624,6 +618,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
 
     # Make a link for the song file if the song is not an instrumental
     # or was not performed by somebody else
+    a_song = None
     if not instrumental and not performed_by:
         song_file_path = join('..', songs_dir, 'html',
                               '{0}.html'.format(song_dict['file_id']))
@@ -822,7 +817,7 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                         added_songs += 1
                     if int(last) == index + 1:
                         break
-                except TypeError as e:
+                except TypeError:
                     raise ValueError('The "sides" attribute contains invalid '
                                      'song indices: {0}.'
                                      .format(sides_dict[side]))
@@ -1024,7 +1019,8 @@ def htmlify_album(name: str,
     html.append(body)
 
     # Write new HTML file for albums index page
-    album_file_path = join(albums_dir, '{}.html'.format(attrs['file_id']))
+    album_file_path = join(root_dir_path, albums_dir,
+                           '{}.html'.format(attrs['file_id']))
     with open(album_file_path, 'w') as album_file:
         album_file.write(add_declaration(clean_up_html(str(html))))
 
@@ -1078,7 +1074,7 @@ def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
 
     sys.stderr.write('HTMLifying {}...\n'.format(name))
 
-    input_path = join(text_dir_path, '{0}.txt'.format(song_id))
+    input_path = join(root_dir_path, text_dir_path, '{0}.txt'.format(song_id))
     html_file_name = '{0}.html'.format(song_id)
     html_output_path = join(songs_dir, 'html', html_file_name)
 
@@ -1176,8 +1172,7 @@ def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
                         # string that is being added
                         for j in range(len(annotation_inds)):
                             if j > i:
-                                annotation_inds[j] = \
-                                    annotation_inds[j] + len(a.string)
+                                annotation_inds[j] += len(a.string)
             else:
 
                 # Copy the contents of the line into the `div` element
@@ -1218,7 +1213,7 @@ def htmlify_song(name: str, song_id: str, albums_dict: OrderedDict) -> None:
     html.append(body)
 
     # Write out "prettified" HTML to the output file
-    with open(html_output_path, 'w') as song_file:
+    with open(join(root_dir_path, html_output_path), 'w') as song_file:
         song_file.write(add_declaration(clean_up_html(str(html))))
 
 
@@ -1348,7 +1343,7 @@ def and_join_album_links(albums: List[Dict[str, str]]) -> str:
     link = (lambda x: link_template.format(x['file_id'], x['name']))
 
     if len(albums) == 1:
-        return link(first_(albums))
+        return link(cytoolz.first(albums))
     else:
         last_two = ' and '.join([link(album) for album in albums[-2:]])
         if len(albums) > 2:
@@ -1413,7 +1408,7 @@ def htmlify_song_index_page(letter: str,
         columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
         div = Tag(name='div')
         if len(song_info) == 1:
-            song_info = first_(song_info)
+            song_info = cytoolz.first(song_info)
             album_links = and_join_album_links(song_info['album(s)'])
 
             if song_info['file_id'] in file_id_types_to_skip:
@@ -1481,7 +1476,7 @@ def htmlify_song_index_page(letter: str,
     body.append(container_div)
     html.append(body)
 
-    letter_index_file_path = join(song_index_dir_path,
+    letter_index_file_path = join(root_dir_path, song_index_dir_path,
                                   '{0}.html'.format(letter.lower()))
     with open(letter_index_file_path, 'w') as letter_index_file:
         letter_index_file.write(add_declaration(clean_up_html(str(html))))

@@ -1,3 +1,5 @@
 src/__pycache__
 Bob_Dylan_Lyrics.egg-info
 *.sublime*
+.idea
+.metadata
