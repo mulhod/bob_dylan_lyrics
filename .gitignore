@@ -3,7 +3,7 @@ src/__pycache__
 .idea/
 .metadata/
 Bob_Dylan_Lyrics.egg-info/
-dylan_lyrics/
+lyrics_docs/
 lyrics.sublime-project
 lyrics.sublime-workspace
 settings.jar
