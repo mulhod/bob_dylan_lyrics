@@ -1461,7 +1461,6 @@ def htmlify_song_index_page(letter: str,
                     href = '../html/{0}.html'.format(version_info['file_id'])
                     a = Tag(name='a', attrs={'href': href})
                     a.string = 'Version #{0}'.format(i + 1)
-                    a.string.wrap(Tag(name='comment'))
                     li.append(a)
                     comment = Tag(name='comment')
                     comment.string = ' (appeared on {0})'.format(album_links)
