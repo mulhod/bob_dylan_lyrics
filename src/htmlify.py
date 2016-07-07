@@ -1268,12 +1268,14 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
         row_div = Tag(name='div', attrs={'class': 'row'})
         columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
         div = Tag(name='div')
+        letter_tag = Tag(name='letter')
         a = Tag(name='a', attrs={'href': join('{0}.html'
                                               .format(letter.lower()))})
         a.string = letter
         bold = Tag(name='strong', attrs={'style': 'font-size: 125%;'})
         a.string.wrap(bold)
-        div.append(a)
+        letter_tag.append(a)
+        div.append(letter_tag)
         columns_div.append(div)
         row_div.append(columns_div)
         container_div.append(row_div)
