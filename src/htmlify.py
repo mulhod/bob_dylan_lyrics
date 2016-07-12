@@ -31,8 +31,10 @@ resources_dir = 'resources'
 images_dir = 'images'
 file_dumps_dir = 'full_lyrics_file_dumps'
 song_index_dir = 'song_index'
+album_index_dir = 'album_index'
 main_index_html_file_name = 'index.html'
 song_index_html_file_name = 'song_index.html'
+album_index_html_file_name = 'album_index.html'
 albums_index_html_file_name = 'albums.html'
 custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
@@ -44,6 +46,9 @@ songs_and_albums_jsonl_file_path = join(root_dir_path,
                                         'albums_and_songs_index.jsonlines')
 songs_index_html_file_path = join(root_dir_path, song_index_dir_path,
                                   song_index_html_file_name)
+album_index_dir_path = join(albums_dir, album_index_dir)
+albums_index_html_file_path = join(root_dir_path, album_index_dir_path,
+                                   album_index_html_file_name)
 file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
 home_page_content_file_path = join(root_dir_path, resources_dir,
@@ -64,8 +69,8 @@ A_THE_RE = re.compile(r'^(the|a) ')
 substitute_determiner = A_THE_RE.sub
 remove_determiner = lambda x: substitute_determiner(r'', x)
 strip_parens_and_lower_case = lambda x: x.strip('()').lower()
-clean_song_title = lambda x: remove_determiner(strip_parens_and_lower_case(x))
-get_song_title_index_letter = lambda x: cytoolz.first(clean_song_title(x))
+clean_title = lambda x: remove_determiner(strip_parens_and_lower_case(x))
+get_title_index_letter = lambda x: cytoolz.first(clean_title(x))
 
 
 def generate_index_json_objects(songs_index_path: str):
@@ -338,13 +343,20 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
     a_downloads.string = 'Downloads'
     downloads_li.append(a_downloads)
     navbar_ul.append(downloads_li)
-    index_li = Tag(name='li')
+    song_index_li = Tag(name='li')
     song_index_file_rel_path = join(up_levels, songs_dir, song_index_dir,
                                     song_index_html_file_name)
-    a_index = Tag(name='a', attrs={'href': song_index_file_rel_path})
-    a_index.string = 'All Songs'
-    index_li.append(a_index)
-    navbar_ul.append(index_li)
+    a_song_index = Tag(name='a', attrs={'href': song_index_file_rel_path})
+    a_song_index.string = 'All Songs'
+    song_index_li.append(a_song_index)
+    navbar_ul.append(song_index_li)
+    album_index_li = Tag(name='li')
+    album_index_file_rel_path = join(up_levels, albums_dir, album_index_dir,
+                                     album_index_html_file_name)
+    a_album_index = Tag(name='a', attrs={'href': album_index_file_rel_path})
+    a_album_index.string = 'All Albums'
+    album_index_li.append(a_album_index)
+    navbar_ul.append(album_index_li)
 
     # Add in dropdown menus for albums by decade
     for decade in ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']:
@@ -651,6 +663,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
                                       duet,
                                       live))
             li.append(comment)
+
         else:
 
             # Add in grayed-out and italicized song name
@@ -677,6 +690,7 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
             comment.string.wrap(Tag(name='i'))
             comment.string.wrap(Tag(name='font', attrs={'color': '#726E6D'}))
             li.append(comment)
+
     else:
 
         # If the song isn't an instrumental and there is an associated
@@ -906,9 +920,13 @@ def htmlify_everything(albums_dict: OrderedDict,
                       albums_dict,
                       make_downloads=make_downloads)
 
-    # Generate the main index page
-    sys.stderr.write('HTMLifying the main index page...\n')
+    # Generate the main song index page
+    sys.stderr.write('HTMLifying the main song index page...\n')
     htmlify_main_song_index_page(song_files_dict, albums_dict)
+
+    # Generate the main album index page
+    sys.stderr.write('HTMLifying the main album index page...\n')
+    htmlify_main_album_index_page(albums_dict)
 
 
 def htmlify_album(name: str,
@@ -1244,7 +1262,7 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     body = Tag(name='body')
     body.append(make_navbar_element(albums_dict, 2))
 
-    # Make a tag for the name of the song
+    # Make a container div for the index
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
     columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
@@ -1309,12 +1327,13 @@ def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
     """
 
     if not titles or not all(x for x in titles):
-        raise ValueError('Received empty string!')
+        raise ValueError('Received empty list or list containing at least one '
+                         'empty element!')
 
-    filter_func = (lambda x: filter_char.lower() == get_song_title_index_letter(x)
+    filter_func = (lambda x: filter_char.lower() == get_title_index_letter(x)
                    if filter_char
                    else None)
-    return filter(filter_func, sorted(titles, key=clean_song_title))
+    return filter(filter_func, sorted(titles, key=clean_title))
 
 
 def and_join_album_links(albums: List[Dict[str, str]]) -> str:
@@ -1358,7 +1377,7 @@ def htmlify_song_index_page(letter: str,
                             song_files_dict: SongFilesDictType,
                             albums_dict: OrderedDict) -> None:
     """
-    Generate a specific index page.
+    Generate a specific songs index page.
 
     :param letter: index letter
     :type letter: str
@@ -1383,7 +1402,7 @@ def htmlify_song_index_page(letter: str,
     body = Tag(name='body')
     body.append(make_navbar_element(albums_dict, 2))
 
-    # Make a tag for the name of the song
+    # Make a container div tag to store the content
     container_div = Tag(name='div', attrs={'class': 'container'})
     row_div = Tag(name='div', attrs={'class': 'row'})
     columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
@@ -1478,9 +1497,148 @@ def htmlify_song_index_page(letter: str,
     body.append(container_div)
     html.append(body)
 
-    letter_index_file_path = join(root_dir_path, song_index_dir_path,
-                                  '{0}.html'.format(letter.lower()))
-    with open(letter_index_file_path, 'w') as letter_index_file:
+    song_letter_index_file_path = join(root_dir_path, song_index_dir_path,
+                                       '{0}.html'.format(letter.lower()))
+    with open(song_letter_index_file_path, 'w') as letter_index_file:
+        letter_index_file.write(add_declaration(clean_up_html(str(html))))
+
+    return True
+
+
+def htmlify_main_album_index_page(albums_dict: OrderedDict):
+    """
+    Generate the main album index HTML page.
+
+    :param albums_dict: ordered dictionary of album metadata
+    :type albums_dict: OrderedDict
+
+    :returns: None
+    :rtype: None
+    """
+
+    sys.stderr.write('HTMLifying the main albums index page...\n')
+
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
+    html = Tag(name='html')
+    html.append(make_head_element(2))
+
+    # Create a body element and add in a navigation bar
+    body = Tag(name='body')
+    body.append(make_navbar_element(albums_dict, 2))
+
+    # Make a container div for the index
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
+    h = Tag(name='h1')
+    h.string = 'Albums Index'
+    columns_div.append(h)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    container_div.append(Tag(name='p'))
+
+    for letter in ascii_uppercase:
+
+        # Attempt to generate the index page for the letter: if a value
+        # of False is returned, it means that no index page could be
+        # generated (no albums to index for the given letter) and,
+        # therefore, that this letter should be skipped.
+        if not htmlify_album_index_page(letter, albums_dict):
+            print('Skipping generating an index page for {0} since no albums '
+                  'could be found...'.format(letter))
+            continue
+
+        row_div = Tag(name='div', attrs={'class': 'row'})
+        columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
+        div = Tag(name='div')
+        letter_tag = Tag(name='letter')
+        a = Tag(name='a', attrs={'href': join('{0}.html'
+                                              .format(letter.lower()))})
+        a.string = letter
+        bold = Tag(name='strong', attrs={'style': 'font-size: 125%;'})
+        a.string.wrap(bold)
+        letter_tag.append(a)
+        div.append(letter_tag)
+        columns_div.append(div)
+        row_div.append(columns_div)
+        container_div.append(row_div)
+
+    body.append(container_div)
+    html.append(body)
+
+    with open(albums_index_html_file_path, 'w') as albums_index_file:
+        albums_index_file.write(add_declaration(clean_up_html(str(html))))
+
+
+def htmlify_album_index_page(letter: str, albums_dict: OrderedDict) -> None:
+    """
+    Generate a specific albums index page.
+
+    :param letter: index letter
+    :type letter: str
+    :param albums_dict: ordered dictionary of album metadata
+    :type albums_dict: OrderedDict
+
+    :returns: boolean value indicating whether a page was generated or
+              not (depending on whether or not there were any albums
+              found that started with the given letter)
+    :rtype: bool
+    """
+
+    # Make BeautifulSoup object and append head element containing
+    # stylesheets, Javascript, etc.
+    html = Tag(name='html')
+    html.append(make_head_element(2))
+
+    # Create body element and add in a navigation bar
+    body = Tag(name='body')
+    body.append(make_navbar_element(albums_dict, 2))
+
+    # Make a container div tag to store the content
+    container_div = Tag(name='div', attrs={'class': 'container'})
+    row_div = Tag(name='div', attrs={'class': 'row'})
+    columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
+    h = Tag(name='h1')
+    h.string = letter
+    columns_div.append(h)
+    row_div.append(columns_div)
+    container_div.append(row_div)
+    container_div.append(Tag(name='p'))
+
+    no_albums = True
+    for album in sort_titles(albums_dict, letter):
+
+        # If the program gets here, there are albums; if not, the value
+        # will not change, i.e., it will be True
+        no_albums = False
+
+        # Get album metadata
+        album_info = albums_dict[album]['attrs']
+
+        row_div = Tag(name='div', attrs={'class': 'row'})
+        columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
+        div = Tag(name='div')
+        album_html_file_path = '../{0}.html'.format(album_info['file_id'])
+        a_album = Tag(name='a', attrs={'href': album_html_file_path})
+        a_album.string = '{0} '.format(album)
+        div.append(a_album)
+        comment = Tag(name='comment')
+        comment.string = '({0})'.format(album_info['release_date'].split()[-1])
+        div.append(comment)
+        row_div.append(div)
+        columns_div.append(row_div)
+        container_div.append(columns_div)
+
+    if no_albums:
+        return False
+
+    body.append(container_div)
+    html.append(body)
+
+    album_letter_index_file_path = join(root_dir_path, album_index_dir_path,
+                                        '{0}.html'.format(letter.lower()))
+    with open(album_letter_index_file_path, 'w') as letter_index_file:
         letter_index_file.write(add_declaration(clean_up_html(str(html))))
 
     return True
