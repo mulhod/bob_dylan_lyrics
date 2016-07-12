@@ -368,12 +368,13 @@ def make_navbar_element(albums_dict: OrderedDict, level: int = 0) -> Tag:
                          in albums_dict[album]['attrs']['release_date'].split()[-1][:3]]
         for album in decade_albums:
             album_file_name = '{0}.html'.format(albums_dict[album]['attrs']['file_id'])
+            year = albums_dict[album]['attrs']['release_date'].split()[-1]
             album_li = Tag(name='li')
             album_index_file_rel_path = join(albums_dir_rel_path, album_file_name)
             album_a = Tag(name='a',
                           attrs={'href': album_index_file_rel_path,
                                  'class': 'album'})
-            album_a.string = album
+            album_a.string = '{0} ({1})'.format(album, year)
             album_li.append(album_a)
             dropdown_menu_ul.append(album_li)
 
