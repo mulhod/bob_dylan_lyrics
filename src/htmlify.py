@@ -747,11 +747,13 @@ def generate_song_list_element(song_name: str, song_dict: Dict[str, Any]) -> Tag
     return li
 
 
-def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) -> Tag:
+def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None,
+                       discs_dict: Dict[str, str] = None) -> Tag:
     """
     Generate an HTML element representing an ordered list of songs.
 
-    If `sides_dict`
+    If `sides_dict` or `discs_dict` is specified, use this information
+    to break up the list into sections.
 
     :param songs: ordered dictionary of song names mapped to song
                   IDs/info regarding the source of the song (in cases
@@ -760,42 +762,55 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
     :param sides_dict: dictionary mapping side indices to song index
                        ranges, i.e., "1" -> "1-5"
     :type sides_dict: dict
+    :param discs_dict: dictionary mapping disc indices to song index
+                       ranges, i.e., "1" -> "1-5"
+    :type discs_dict: dict
 
     :returns: ordered list element
     :rtype: bs4.element.Tag
 
-    :raises: ValueError if information about sides contains conflicts
-             with assumptions
+    :raises: ValueError if information about sides/discs conflicts with
+             assumptions or if both `sides_dict` and `discs_dict` were
+             passed in
     """
+
+    if sides_dict and discs_dict:
+        raise ValueError('Both a `sides_dict` and a `discs_dict` were passed '
+                         'in while only one can be used at a time.')
 
     columns_div = Tag(name='div', attrs={'class': 'col-md-8'})
     ol = Tag(name='ol')
-    if sides_dict:
+    sections_dict = sides_dict or discs_dict
+    if sections_dict:
 
-        # Iterate over the sides, treating them as integers (rather
-        # than strings)
-        for side in sorted(sides_dict, key=int):
+        side_or_disc_str = 'Side' if sides_dict else 'Disc'
 
-            # Make sure the side is interpretable as an integer
+        # Iterate over the sides/discs, treating them as integers
+        # (rather than strings)
+        for section in sorted(sections_dict, key=int):
+
+            # Make sure the side/disc is interpretable as an integer
             try:
-                if int(side) < 1:
+                if int(section) < 1:
                     raise ValueError
             except ValueError:
-                raise ValueError('Each side ID should be interpretable as an '
-                                 'integer that is greater than zero. Offending'
-                                 ' side ID: "{0}".'.format(side))
+                raise ValueError('Each side/disc ID should be interpretable as'
+                                 ' an integer that is greater than zero. '
+                                 'Offending side/disc ID: "{0}".'
+                                 .format(section))
 
-            side_div = Tag(name='div')
-            side_div.string = "Side {0}".format(side)
-            ol.append(side_div)
+            section_div = Tag(name='div')
+            section_div.string = "{0} {1}".format(side_or_disc_str, section)
+            ol.append(section_div)
             ol.append(Tag(name='p'))
             inner_ol = Tag(name='ol')
 
-            # Each side will have an associated range of song numbers,
-            # e.g. "1-5" (unless a side contains only a single song, in
-            # which case it will simply be the song number by itself)
-            if '-' in sides_dict[side]:
-                first, last = sides_dict[side].split('-')
+            # Each side/disc will have an associated range of song
+            # indices, e.g. "1-5" (unless a side/disc contains only a
+            # single song, in which case it will simply be the song
+            # index by itself)
+            if '-' in sections_dict[section]:
+                first, last = sections_dict[section].split('-')
                 try:
                     if int(first) < 1:
                         raise ValueError
@@ -804,24 +819,25 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                     if int(last) <= int(first):
                         raise ValueError
                 except ValueError:
-                    raise ValueError("Each side's associated range should "
-                                     "consist of integer values greater than "
-                                     "zero and the second value should be "
-                                     "greater than the first. Offending range:"
-                                     " \"{0}\".".format(sides_dict[side]))
+                    raise ValueError("Each side's/disc's associated range "
+                                     "should consist of integer values greater"
+                                     " than zero and the second value should "
+                                     "be greater than the first. Offending "
+                                     "range: \"{0}\"."
+                                     .format(sections_dict[section]))
             else:
-                first = last = sides_dict[side]
+                first = last = sections_dict[section]
                 try:
                     if int(first) < 1:
                         raise ValueError
                 except ValueError:
-                    raise ValueError("Each side's associated range can consist"
-                                     " of a single value, but that value "
-                                     "should be an integer greater than zero. "
-                                     "Offending range: \"{0}\"."
-                                     .format(sides_dict[side]))
+                    raise ValueError("Each side's/disc's associated range can "
+                                     "consist of a single value, but that "
+                                     "value should be an integer greater than "
+                                     "zero. Offending range: \"{0}\"."
+                                     .format(sections_dict[section]))
 
-            # Get the expected number of songs for the given side
+            # Get the expected number of songs for the given side/disc
             expected_number_of_songs = int(last) - int(first) + 1
             added_songs = 0
             for index, song in enumerate(songs):
@@ -833,17 +849,18 @@ def generate_song_list(songs: OrderedDict, sides_dict: Dict[str, str] = None) ->
                     if int(last) == index + 1:
                         break
                 except TypeError:
-                    raise ValueError('The "sides" attribute contains invalid '
-                                     'song indices: {0}.'
-                                     .format(sides_dict[side]))
+                    raise ValueError('The "sides"/"discs" attribute contains '
+                                     'invalid song indices: {0}.'
+                                     .format(sections_dict[section]))
 
             # Make sure the correct number of songs were included
             if added_songs != expected_number_of_songs:
                 sys.stderr.write('The number of expected songs ({0}) for the '
-                                 'given side ({1}) does not equal the number '
-                                 'of songs actually included on the side '
-                                 '({2}).'.format(expected_number_of_songs, side,
-                                                 added_songs))
+                                 'given side/disc ({1}) does not equal the '
+                                 'number of songs actually included on the '
+                                 'side/disc ({2}).'
+                                 .format(expected_number_of_songs, section,
+                                         added_songs))
 
             ol.append(inner_ol)
             ol.append(Tag(name='p'))
@@ -1030,7 +1047,9 @@ def htmlify_album(name: str,
 
     # Add in an ordered list element for all songs (or several ordered
     # lists for each side, disc, etc.)
-    row_div.append(generate_song_list(songs, attrs.get('sides', None)))
+    row_div.append(generate_song_list(songs,
+                                      sides_dict=attrs.get('sides', None),
+                                      discs_dict=attrs.get('discs', None)))
     container_div.append(row_div)
 
     # Add content to body and put body in HTML element
