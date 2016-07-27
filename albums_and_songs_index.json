@@ -1,0 +1,3373 @@
+# Template that can be used to add in new albums:
+#{
+#    "type": "album",
+#    "metadata": {
+#        "name": "",
+#        "file_id": "",
+#        "image_file_name": "",
+#        "release_date": "",
+#        "length": "",
+#        "producers": "",
+#        "label": "",
+#        "sides": {
+#            "1": "-",
+#            "2": "-"
+#        },
+#        "songs": {
+#            "": {
+#                "index": 1,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 2,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 3,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 4,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 5,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 6,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 7,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 8,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 9,
+#                "file_id": ""
+#            },
+#            "": {
+#                "index": 10,
+#                "file_id": ""
+#            }
+#        }
+#    }
+#}
+
+[
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Bob Dylan",
+            "length": "36:54",
+            "songs": {
+                "Freight Train Blues": {
+                    "written_by": "John Lair, arranged by Bob Dylan",
+                    "file_id": "freight_train_blues_1",
+                    "index": 11
+                },
+                "Highway 51": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Curtis_Jones_(pianist)'>Curtis Jones</a>",
+                    "file_id": "highway_51_1",
+                    "index": 7
+                },
+                "Talkin' New York": {
+                    "file_id": "talkin_new_york_1",
+                    "index": 2
+                },
+                "Fixin' to Die": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Bukka_White'>Bukka White</a>",
+                    "file_id": "fixin_to_die_1",
+                    "index": 5
+                },
+                "See That My Grave Is Kept Clean": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Blind_Lemon_Jefferson'>Blind Lemon Jefferson</a>",
+                    "file_id": "see_that_my_grave_is_kept_clean_1",
+                    "index": 13
+                },
+                "Pretty Peggy-O": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "pretty_peggy-o_1",
+                    "index": 6
+                },
+                "You're No Good": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Jesse_Fuller'>Jesse Fuller</a>",
+                    "file_id": "youre_no_good_1",
+                    "index": 1
+                },
+                "Man of Constant Sorrow": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "man_of_constant_sorrow_1",
+                    "index": 4
+                },
+                "Gospel Plow": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "gospel_plow_1",
+                    "index": 8
+                },
+                "Baby, Let Me Follow You Down": {
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Reverend_Gary_Davis'>Gary Davis</a>, <a href='https://en.wikipedia.org/wiki/Eric_von_Schmidt'>Eric von Schmidt</a>, and <a href='https://en.wikipedia.org/wiki/Dave_Van_Ronk'>Dave Van Ronk</a>",
+                    "file_id": "baby_let_me_follow_you_down_1",
+                    "index": 9
+                },
+                "In My Time of Dyin'": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "in_my_time_of_dyin_1",
+                    "index": 3
+                },
+                "House of the Rising Sun": {
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Dave_Van_Ronk'>Dave Van Ronk</a>",
+                    "file_id": "house_of_the_rising_sun_1",
+                    "index": 10
+                },
+                "Song to Woody": {
+                    "file_id": "song_to_woody_1",
+                    "index": 12
+                }
+            },
+            "image_file_name": "Bob_Dylan.gif",
+            "release_date": "March 19, 1962",
+            "sides": {
+                "1": "1-7",
+                "2": "8-13"
+            },
+            "file_id": "bob_dylan",
+            "producers": "<a href='https://en.wikipedia.org/wiki/John_Hammond_(producer)'>John Hammond</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "The Freewheelin' Bob Dylan",
+            "length": "50:04",
+            "songs": {
+                "Masters of War": {
+                    "file_id": "masters_of_war_1",
+                    "index": 3
+                },
+                "Honey, Just Allow Me One More Chance": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Henry_Thomas_(blues_musician)'>Henry Thomas</a>",
+                    "file_id": "honey_just_allow_me_one_more_chance_1",
+                    "index": 12
+                },
+                "Down the Highway": {
+                    "file_id": "down_the_highway_1",
+                    "index": 4
+                },
+                "Bob Dylan's Dream": {
+                    "file_id": "bob_dylans_dream_1",
+                    "index": 8
+                },
+                "Corrina, Corrina": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "corrina_corrina_1",
+                    "index": 10
+                },
+                "A Hard Rain's A-Gonna Fall": {
+                    "file_id": "a_hard_rains_a-gonna_fall_1",
+                    "index": 6
+                },
+                "Oxford Town": {
+                    "file_id": "oxford_town_1",
+                    "index": 9
+                },
+                "Girl from the North Country": {
+                    "file_id": "girl_from_the_north_country_1",
+                    "index": 2
+                },
+                "Blowin' in the Wind": {
+                    "file_id": "blowin_in_the_wind_1",
+                    "index": 1
+                },
+                "Bob Dylan's Blues": {
+                    "file_id": "bob_dylans_blues_1",
+                    "index": 5
+                },
+                "I Shall Be Free": {
+                    "file_id": "i_shall_be_free_1",
+                    "index": 13
+                },
+                "Talkin' WWIII Blues": {
+                    "file_id": "talkin_wwiii_blues_1",
+                    "index": 11
+                },
+                "Don't Think Twice, It's Alright": {
+                    "file_id": "dont_think_twice_its_alright_1",
+                    "index": 7
+                }
+            },
+            "image_file_name": "The_Freewheelin_Bob_Dylan.jpg",
+            "release_date": "May 27, 1963",
+            "sides": {
+                "1": "1-6",
+                "2": "7-13"
+            },
+            "file_id": "the_freewheelin_bob_dylan",
+            "producers": "<a href='https://en.wikipedia.org/wiki/John_Hammond_(producer)'>John Hammond</a>, <a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "The Times They Are A-Changin'",
+            "length": "45:36",
+            "songs": {
+                "Restless Farewell": {
+                    "file_id": "restless_farewell_1",
+                    "index": 10
+                },
+                "Only a Pawn in Their Game": {
+                    "file_id": "only_a_pawn_in_their_game_1",
+                    "index": 6
+                },
+                "Ballad of Hollis Brown": {
+                    "file_id": "ballad_of_hollis_brown_1",
+                    "index": 2
+                },
+                "The Lonesome Death of Hattie Carroll": {
+                    "file_id": "the_lonesome_death_of_hattie_carroll_1",
+                    "index": 9
+                },
+                "When the Ship Comes In": {
+                    "file_id": "when_the_ship_comes_in_1",
+                    "index": 8
+                },
+                "Boots of Spanish Leather": {
+                    "file_id": "boots_of_spanish_leather_1",
+                    "index": 7
+                },
+                "The Times They Are A-Changin'": {
+                    "file_id": "the_times_they_are_a-changin_1",
+                    "index": 1
+                },
+                "North Country Blues": {
+                    "file_id": "north_country_blues_1",
+                    "index": 5
+                },
+                "One Too Many Mornings": {
+                    "file_id": "one_too_many_mornings_1",
+                    "index": 4
+                },
+                "With God on Our Side": {
+                    "file_id": "with_god_on_our_side_1",
+                    "index": 3
+                }
+            },
+            "image_file_name": "The_Times_They_Are_A-Changin.jpg",
+            "release_date": "January 13, 1964",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "the_times_they_are_a-changin",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Another Side of Bob Dylan",
+            "length": "50:37",
+            "songs": {
+                "All I Really Want to Do": {
+                    "file_id": "all_i_really_want_to_do_1",
+                    "index": 1
+                },
+                "My Back Pages": {
+                    "file_id": "my_back_pages_1",
+                    "index": 8
+                },
+                "To Ramona": {
+                    "file_id": "to_ramona_1",
+                    "index": 6
+                },
+                "Spanish Harlem Incident": {
+                    "file_id": "spanish_harlem_incident_1",
+                    "index": 3
+                },
+                "I Shall Be Free No.10": {
+                    "file_id": "i_shall_be_free_no_10_1",
+                    "index": 5
+                },
+                "Chimes of Freedom": {
+                    "file_id": "chimes_of_freedom_1",
+                    "index": 4
+                },
+                "Motorpsycho Nightmare": {
+                    "file_id": "motorpsycho_nightmare_1",
+                    "index": 7
+                },
+                "It Ain't Me, Babe": {
+                    "file_id": "it_aint_me_babe_1",
+                    "index": 11
+                },
+                "I Don't Believe You (She Acts Like We Never Have Met)": {
+                    "file_id": "i_dont_believe_you_she_acts_like_we_never_have_met_1",
+                    "index": 9
+                },
+                "Black Crow Blues": {
+                    "file_id": "black_crow_blues_1",
+                    "index": 2
+                },
+                "Ballad in Plain D": {
+                    "file_id": "ballad_in_plain_d_1",
+                    "index": 10
+                }
+            },
+            "image_file_name": "Another_Side_of_Bob_Dylan.jpg",
+            "release_date": "August 8, 1964",
+            "sides": {
+                "1": "1-6",
+                "2": "7-11"
+            },
+            "file_id": "another_side_of_bob_dylan",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Bringing It All Back Home",
+            "length": "47:14",
+            "songs": {
+                "Maggie's Farm": {
+                    "file_id": "maggies_farm_1",
+                    "index": 3
+                },
+                "On the Road Again": {
+                    "file_id": "on_the_road_again_1",
+                    "index": 6
+                },
+                "Bob Dylan's 115th Dream": {
+                    "file_id": "bob_dylans_115th_dream_1",
+                    "index": 7
+                },
+                "Mr. Tambourine Man": {
+                    "file_id": "mr_tambourine_man_1",
+                    "index": 8
+                },
+                "It's Alright, Ma (I'm Only Bleeding)": {
+                    "file_id": "its_alright_ma_im_only_bleeding_1",
+                    "index": 10
+                },
+                "Love Minus Zero/No Limit": {
+                    "file_id": "love_minus_zero_no_limit_1",
+                    "index": 4
+                },
+                "It's All Over Now, Baby Blue": {
+                    "file_id": "its_all_over_now_baby_blue_1",
+                    "index": 11
+                },
+                "Subterranean Homesick Blues": {
+                    "file_id": "subterranean_homesick_blues_1",
+                    "index": 1
+                },
+                "Outlaw Blues": {
+                    "file_id": "outlaw_blues_1",
+                    "index": 5
+                },
+                "Gates of Eden": {
+                    "file_id": "gates_of_eden_1",
+                    "index": 9
+                },
+                "She Belongs to Me": {
+                    "file_id": "she_belongs_to_me_1",
+                    "index": 2
+                }
+            },
+            "image_file_name": "Bringing_It_All_Back_Home.jpg",
+            "release_date": "March 22, 1965",
+            "sides": {
+                "1": "1-7",
+                "2": "8-11"
+            },
+            "file_id": "bringing_it_all_back_home",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Highway 61 Revisited",
+            "length": "51:26",
+            "songs": {
+                "Queen Jane Approximately": {
+                    "file_id": "queen_jane_approximately_1",
+                    "index": 6
+                },
+                "Ballad of a Thin Man": {
+                    "file_id": "ballad_of_a_thin_man_1",
+                    "index": 5
+                },
+                "From a Buick 6": {
+                    "file_id": "from_a_buick_6_1",
+                    "index": 4
+                },
+                "Like a Rolling Stone": {
+                    "file_id": "like_a_rolling_stone_1",
+                    "index": 1
+                },
+                "It Takes a Lot to Laugh, It Takes a Train to Cry": {
+                    "file_id": "it_takes_a_lot_to_laugh_it_takes_a_train_to_cry_1",
+                    "index": 3
+                },
+                "Highway 61 Revisited": {
+                    "file_id": "highway_61_revisited_1",
+                    "index": 7
+                },
+                "Desolation Row": {
+                    "file_id": "desolation_row_1",
+                    "index": 9
+                },
+                "Tombstone Blues": {
+                    "file_id": "tombstone_blues_1",
+                    "index": 2
+                },
+                "Just Like Tom Thumb's Blues": {
+                    "file_id": "just_like_tom_thumbs_blues_1",
+                    "index": 8
+                }
+            },
+            "image_file_name": "Highway_61_Revisited.jpg",
+            "release_date": "August 30, 1965",
+            "sides": {
+                "1": "1-5",
+                "2": "6-9"
+            },
+            "file_id": "highway_61_revisited",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>, <a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a> on <i><a href='../songs/html/like_a_rolling_stone_1.html'>Like a Rolling Stone</a></i>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Blonde on Blonde",
+            "length": "72:57",
+            "songs": {
+                "Stuck inside of Mobile with the Memphis Blues Again": {
+                    "file_id": "stuck_inside_of_mobile_with_the_memphis_blues_again_1",
+                    "index": 6
+                },
+                "Obviously 5 Believers": {
+                    "file_id": "obviously_5_believers_1",
+                    "index": 13
+                },
+                "Fourth Time Around": {
+                    "file_id": "fourth_time_around_1",
+                    "index": 12
+                },
+                "I Want You": {
+                    "file_id": "i_want_you_1",
+                    "index": 5
+                },
+                "Visions of Johanna": {
+                    "file_id": "visions_of_johanna_1",
+                    "index": 3
+                },
+                "Most Likely You Go Your Way (And I'll Go Mine)": {
+                    "file_id": "most_likely_you_go_your_way_and_ill_go_mine_1",
+                    "index": 9
+                },
+                "Just Like a Woman": {
+                    "file_id": "just_like_a_woman_1",
+                    "index": 8
+                },
+                "Rainy Day Women #12 & 35": {
+                    "file_id": "rainy_day_women_12_and_35_1",
+                    "index": 1
+                },
+                "Leopard-Skin Pill-Box Hat": {
+                    "file_id": "leopard-skin_pill-box_hat_1",
+                    "index": 7
+                },
+                "Pledging My Time": {
+                    "file_id": "pledging_my_time_1",
+                    "index": 2
+                },
+                "One of Us Must Know (Sooner or Later)": {
+                    "file_id": "one_of_us_must_know_sooner_or_later_1",
+                    "index": 4
+                },
+                "Absolutely Sweet Marie": {
+                    "file_id": "absolutely_sweet_marie_1",
+                    "index": 11
+                },
+                "Temporary Like Achilles": {
+                    "file_id": "temporary_like_achilles_1",
+                    "index": 10
+                },
+                "Sad Eyed Lady of the Lowlands": {
+                    "file_id": "sad_eyed_lady_of_the_lowlands_1",
+                    "index": 14
+                }
+            },
+            "image_file_name": "Blonde_on_Blonde.jpg",
+            "release_date": "May 16, 1966 (possibly as late as July, 1966)",
+            "sides": {
+                "4": "14",
+                "1": "1-4",
+                "2": "5-8",
+                "3": "9-13"
+            },
+            "file_id": "blonde_on_blonde",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Bob Dylan's Greatest Hits",
+            "length": "40:21",
+            "songs": {
+                "Positively 4th Street": {
+                    "file_id": "positively_4th_street_1",
+                    "index": 9
+                },
+                "Blowin' in the Wind": {
+                    "source": {
+                        "name": "The Freewheelin' Bob Dylan",
+                        "file_id": "the_freewheelin_bob_dylan"
+                    },
+                    "file_id": "blowin_in_the_wind_1",
+                    "index": 2
+                },
+                "Like a Rolling Stone": {
+                    "source": {
+                        "name": "Highway 61 Revisited",
+                        "file_id": "highway_61_revisited"
+                    },
+                    "file_id": "like_a_rolling_stone_1",
+                    "index": 5
+                },
+                "Rainy Day Women #12 & 35": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "rainy_day_women_12_and_35_1",
+                    "index": 1
+                },
+                "I Want You": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "i_want_you_1",
+                    "index": 8
+                },
+                "Subterranean Homesick Blues": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "subterranean_homesick_blues_1",
+                    "index": 7
+                },
+                "It Ain't Me, Babe": {
+                    "source": {
+                        "name": "Another Side of Bob Dylan",
+                        "file_id": "another_side_of_bob_dylan"
+                    },
+                    "file_id": "it_aint_me_babe_1",
+                    "index": 4
+                },
+                "The Times They Are A-Changin'": {
+                    "source": {
+                        "name": "The Times They Are A-Changin'",
+                        "file_id": "the_times_they_are_a-changin"
+                    },
+                    "file_id": "the_times_they_are_a-changin_1",
+                    "index": 3
+                },
+                "Just Like a Woman": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "just_like_a_woman_1",
+                    "index": 10
+                },
+                "Mr. Tambourine Man": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "mr_tambourine_man_1",
+                    "index": 6
+                }
+            },
+            "image_file_name": "Bob_Dylans_Greatest_Hits.jpg",
+            "release_date": "March 27, 1967",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "bob_dylans_greatest_hits",
+            "producers": "<a href='https://en.wikipedia.org/wiki/John_Hammond_(producer)'>John Hammond</a>, <a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>, <a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "John Wesley Harding",
+            "length": "38:24",
+            "songs": {
+                "As I Went Out One Morning": {
+                    "file_id": "as_i_went_out_one_morning_1",
+                    "index": 2
+                },
+                "I'll Be Your Baby Tonight": {
+                    "file_id": "ill_be_your_baby_tonight_1",
+                    "index": 12
+                },
+                "The Ballad of Frankie Lee and Judas Priest": {
+                    "file_id": "the_ballad_of_frankie_lee_and_judas_priest_1",
+                    "index": 5
+                },
+                "I Dreamed I Saw St. Augustine": {
+                    "file_id": "i_dreamed_i_saw_st_augustine_1",
+                    "index": 3
+                },
+                "John Wesley Harding": {
+                    "file_id": "john_wesley_harding_1",
+                    "index": 1
+                },
+                "Down along the Cove": {
+                    "file_id": "down_along_the_cove_1",
+                    "index": 11
+                },
+                "I Am a Lonesome Hobo": {
+                    "file_id": "i_am_a_lonesome_hobo_1",
+                    "index": 8
+                },
+                "Dear Landlord": {
+                    "file_id": "dear_landlord_1",
+                    "index": 7
+                },
+                "The Wicked Messenger": {
+                    "file_id": "the_wicked_messenger_1",
+                    "index": 10
+                },
+                "Drifter's Escape": {
+                    "file_id": "drifters_escape_1",
+                    "index": 6
+                },
+                "I Pity the Poor Immigrant": {
+                    "file_id": "i_pity_the_poor_immigrant_1",
+                    "index": 9
+                },
+                "All Along the Watchtower": {
+                    "file_id": "all_along_the_watchtower_1",
+                    "index": 4
+                }
+            },
+            "image_file_name": "John_Wesley_Harding.jpg",
+            "release_date": "December 27, 1967",
+            "sides": {
+                "1": "1-6",
+                "2": "7-12"
+            },
+            "file_id": "john_wesley_harding",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Nashville Skyline",
+            "length": "27:14",
+            "songs": {
+                "To Be Alone with You": {
+                    "file_id": "to_be_alone_with_you_1",
+                    "index": 3
+                },
+                "Peggy Day": {
+                    "file_id": "peggy_day_1",
+                    "index": 5
+                },
+                "Tonight I'll Be Staying Here with You": {
+                    "file_id": "tonight_ill_be_staying_here_with_you_1",
+                    "index": 10
+                },
+                "Girl from the North Country": {
+                    "duet": "<a href='https://en.wikipedia.org/wiki/Johnny_Cash'>Johnny Cash</a>",
+                    "file_id": "girl_from_the_north_country_2",
+                    "index": 1
+                },
+                "Country Pie": {
+                    "file_id": "country_pie_1",
+                    "index": 9
+                },
+                "Lay Lady Lay": {
+                    "file_id": "lay_lady_lay_1",
+                    "index": 6
+                },
+                "Nashville Skyline Rag": {
+                    "instrumental": 1,
+                    "file_id": "nashville_skyline_rag_1",
+                    "index": 2
+                },
+                "I Threw It All Away": {
+                    "file_id": "i_threw_it_all_away_1",
+                    "index": 4
+                },
+                "Tell Me That It Isn't True": {
+                    "file_id": "tell_me_that_it_isnt_true_1",
+                    "index": 8
+                },
+                "One More Night": {
+                    "file_id": "one_more_night_1",
+                    "index": 7
+                }
+            },
+            "image_file_name": "Nashville_Skyline.jpg",
+            "release_date": "April 9, 1969",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "nashville_skyline",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Self Portrait",
+            "length": "73:15",
+            "songs": {
+                "Little Sadie": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "little_sadie_1",
+                    "index": 8
+                },
+                "It Hurts Me Too": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "it_hurts_me_too_1",
+                    "index": 20
+                },
+                "Wigwam": {
+                    "instrumental": 1,
+                    "index": 23
+                },
+                "Early Mornin' Rain": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Gordon_Lightfoot'>Gordon Lightfoot</a>",
+                    "file_id": "early_mornin_rain_1",
+                    "index": 5
+                },
+                "Minstrel Boy": {
+                    "file_id": "minstrel_boy_1",
+                    "index": 21,
+                    "live": {
+                        "date": "on August 31, 1969",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Isle_of_Wight_Festival_1969'>Isle of Wight Festival</a>"
+                    }
+                },
+                "Blue Moon": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Lorenz_Hart'>Lorenz Hart</a>, <a href='https://en.wikipedia.org/wiki/Richard_Rodgers'>Richard Rodgers</a>",
+                    "file_id": "blue_moon_1",
+                    "index": 15
+                },
+                "In Search of Little Sadie": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "in_search_of_little_sadie_1",
+                    "index": 6
+                },
+                "The Mighty Quinn (Quinn the Eskimo)": {
+                    "file_id": "the_mighty_quinn_quinn_the_eskimo_1",
+                    "index": 17,
+                    "live": {
+                        "date": "on August 31, 1969",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Isle_of_Wight_Festival_1969'>Isle of Wight Festival</a>"
+                    }
+                },
+                "All the Tired Horses": {
+                    "file_id": "all_the_tired_horses_1",
+                    "index": 1
+                },
+                "Take a Message to Mary": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Felice_Bryant'>Felice Bryant</a>, <a href='https://en.wikipedia.org/wiki/Boudleaux_Bryant'>Boudleaux Bryant</a>",
+                    "file_id": "take_a_message_to_mary_1",
+                    "index": 19
+                },
+                "Woogie Boogie": {
+                    "instrumental": 1,
+                    "index": 9
+                },
+                "The Boxer": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Paul_Simon'>Paul Simon</a>",
+                    "file_id": "the_boxer_1",
+                    "index": 16
+                },
+                "Gotta Travel On": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Paul_Clayton_(folksinger)'>Paul Clayton</a>, Larry Ehrlich, David Lazar, Tom Six",
+                    "file_id": "gotta_travel_on_1",
+                    "index": 14
+                },
+                "She Belongs to Me": {
+                    "file_id": "she_belongs_to_me_2",
+                    "index": 22,
+                    "live": {
+                        "date": "on August 31, 1969",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Isle_of_Wight_Festival_1969'>Isle of Wight Festival</a>"
+                    }
+                },
+                "Days of 49": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Alan_Lomax'>Alan Lomax</a>, <a href='https://en.wikipedia.org/wiki/John_Lomax'>John Lomax</a>, Frank Warner",
+                    "file_id": "days_of_49_1",
+                    "index": 4
+                },
+                "Alberta #1": {
+                    "actual_name": "Alberta",
+                    "file_id": "alberta_1_1",
+                    "index": 2
+                },
+                "I Forgot More Than You'll Ever Know": {
+                    "written_by": "Cecil A. Null",
+                    "file_id": "i_forgot_more_than_youll_ever_know_1",
+                    "index": 3
+                },
+                "Let It Be Me": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Gilbert_B%C3%A9caud'>Gilbert B\u00e9caud</a>, Mann Curtis, <a href='https://en.wikipedia.org/wiki/Pierre_Delano%C3%AB'>Pierre Delano\u00eb</a>",
+                    "file_id": "let_it_be_me_1",
+                    "index": 7
+                },
+                "Take Me As I Am (Or Let Me Go)": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Boudleaux_Bryant'>Boudleaux Bryant</a>",
+                    "file_id": "take_me_as_i_am_or_let_me_go_1",
+                    "index": 18
+                },
+                "Like a Rolling Stone": {
+                    "file_id": "like_a_rolling_stone_2",
+                    "index": 12,
+                    "live": {
+                        "date": "on August 31, 1969",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Isle_of_Wight_Festival_1969'>Isle of Wight Festival</a>"
+                    }
+                },
+                "Copper Kettle (The Pale Moonlight)": {
+                    "written_by": "Alfred Frank Beddoe",
+                    "file_id": "copper_kettle_the_pale_moonlight_1",
+                    "index": 13
+                },
+                "Alberta #2": {
+                    "actual_name": "Alberta",
+                    "file_id": "alberta_2_1",
+                    "index": 24
+                },
+                "Living the Blues": {
+                    "file_id": "living_the_blues_1",
+                    "index": 11
+                },
+                "Belle Isle": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "belle_isle_1",
+                    "index": 10
+                }
+            },
+            "image_file_name": "Self_Portrait.jpg",
+            "release_date": "June 8, 1970",
+            "sides": {
+                "4": "19-24",
+                "1": "1-6",
+                "2": "7-12",
+                "3": "13-18"
+            },
+            "file_id": "self_portrait",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "New Morning",
+            "length": "35:21",
+            "songs": {
+                "Winterlude": {
+                    "file_id": "winterlude_1",
+                    "index": 5
+                },
+                "Sign on the Window": {
+                    "file_id": "sign_on_the_window_1",
+                    "index": 8
+                },
+                "One More Weekend": {
+                    "file_id": "one_more_weekend_1",
+                    "index": 9
+                },
+                "The Man in Me": {
+                    "file_id": "the_man_in_me_1",
+                    "index": 10
+                },
+                "Father of Night": {
+                    "file_id": "father_of_night_1",
+                    "index": 12
+                },
+                "Went to See the Gypsy": {
+                    "file_id": "went_to_see_the_gypsy_1",
+                    "index": 4
+                },
+                "Three Angels": {
+                    "file_id": "three_angels_1",
+                    "index": 11
+                },
+                "If Dogs Run Free": {
+                    "file_id": "if_dogs_run_free_1",
+                    "index": 6
+                },
+                "New Morning": {
+                    "file_id": "new_morning_1",
+                    "index": 7
+                },
+                "Time Passes Slowly": {
+                    "file_id": "time_passes_slowly_1",
+                    "index": 3
+                },
+                "If Not for You": {
+                    "file_id": "if_not_for_you_1",
+                    "index": 1
+                },
+                "Day of the Locusts": {
+                    "file_id": "day_of_the_locusts_1",
+                    "index": 2
+                }
+            },
+            "image_file_name": "New_Morning.jpg",
+            "release_date": "October 19, 1970",
+            "sides": {
+                "1": "1-6",
+                "2": "7-12"
+            },
+            "file_id": "new_morning",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Bob Dylan's Greatest Hits, Volume II",
+            "length": "77:31",
+            "songs": {
+                "Tomorrow Is a Long Time": {
+                    "file_id": "tomorrow_is_a_long_time_1",
+                    "index": 17
+                },
+                "Stuck inside of Mobile with the Memphis Blues Again": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "stuck_inside_of_mobile_with_the_memphis_blues_again_1",
+                    "index": 4
+                },
+                "If Not for You": {
+                    "source": {
+                        "name": "New Morning",
+                        "file_id": "new_morning"
+                    },
+                    "file_id": "if_not_for_you_1",
+                    "index": 15
+                },
+                "When I Paint My Masterpiece": {
+                    "file_id": "when_i_paint_my_masterpiece_1",
+                    "index": 18
+                },
+                "You Ain't Goin' Nowhere": {
+                    "file_id": "you_aint_goin_nowhere_1",
+                    "index": 20
+                },
+                "Lay Lady Lay": {
+                    "source": {
+                        "name": "Nashville Skyline",
+                        "file_id": "nashville_skyline"
+                    },
+                    "file_id": "lay_lady_lay_1",
+                    "index": 3
+                },
+                "It's All Over Now, Baby Blue": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "its_all_over_now_baby_blue_1",
+                    "index": 16
+                },
+                "She Belongs to Me": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "she_belongs_to_me_1",
+                    "index": 10
+                },
+                "All I Really Want to Do": {
+                    "source": {
+                        "name": "Another Side of Bob Dylan",
+                        "file_id": "another_side_of_bob_dylan"
+                    },
+                    "file_id": "all_i_really_want_to_do_1",
+                    "index": 6
+                },
+                "Tonight I'll Be Staying Here with You": {
+                    "source": {
+                        "name": "Nashville Skyline",
+                        "file_id": "nashville_skyline"
+                    },
+                    "file_id": "tonight_ill_be_staying_here_with_you_1",
+                    "index": 9
+                },
+                "Just Like Tom Thumb's Blues": {
+                    "source": {
+                        "name": "Highway 61 Revisited",
+                        "file_id": "highway_61_revisited"
+                    },
+                    "file_id": "just_like_tom_thumbs_blues_1",
+                    "index": 13
+                },
+                "A Hard Rain's A-Gonna Fall": {
+                    "source": {
+                        "name": "The Freewheelin' Bob Dylan",
+                        "file_id": "the_freewheelin_bob_dylan"
+                    },
+                    "file_id": "a_hard_rains_a-gonna_fall_1",
+                    "index": 14
+                },
+                "Down in the Flood": {
+                    "file_id": "down_in_the_flood_1",
+                    "index": 21
+                },
+                "Maggie's Farm": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "maggies_farm_1",
+                    "index": 8
+                },
+                "The Mighty Quinn (Quinn the Eskimo)": {
+                    "source": {
+                        "name": "Self Portrait",
+                        "file_id": "self_portrait"
+                    },
+                    "file_id": "the_mighty_quinn_quinn_the_eskimo_1",
+                    "index": 12
+                },
+                "My Back Pages": {
+                    "source": {
+                        "name": "Another Side of Bob Dylan",
+                        "file_id": "another_side_of_bob_dylan"
+                    },
+                    "file_id": "my_back_pages_1",
+                    "index": 7
+                },
+                "Watching the River Flow": {
+                    "file_id": "watching_the_river_flow_1",
+                    "index": 1
+                },
+                "I'll Be Your Baby Tonight": {
+                    "source": {
+                        "name": "John Wesley Harding",
+                        "file_id": "john_wesley_harding"
+                    },
+                    "file_id": "ill_be_your_baby_tonight_1",
+                    "index": 5
+                },
+                "Don't Think Twice, It's Alright": {
+                    "source": {
+                        "name": "The Freewheelin' Bob Dylan",
+                        "file_id": "the_freewheelin_bob_dylan"
+                    },
+                    "file_id": "dont_think_twice_its_alright_1",
+                    "index": 2
+                },
+                "I Shall Be Released": {
+                    "file_id": "i_shall_be_released_1",
+                    "index": 19
+                },
+                "All Along the Watchtower": {
+                    "source": {
+                        "name": "John Wesley Harding",
+                        "file_id": "john_wesley_harding"
+                    },
+                    "file_id": "all_along_the_watchtower_1",
+                    "index": 11
+                }
+            },
+            "image_file_name": "Bob_Dylan's_Greatest_Hits_Volume_II.jpg",
+            "release_date": "November 17, 1971",
+            "sides": {
+                "4": "15-21",
+                "1": "1-4",
+                "2": "5-9",
+                "3": "10-14"
+            },
+            "file_id": "bob_dylans_greatest_hits_volume_ii",
+            "producers": "<a href='https://en.wikipedia.org/wiki/John_Hammond_(producer)'>John Hammond</a>, <a href='https://en.wikipedia.org/wiki/Tom_Wilson_(record_producer)'>Tom Wilson</a>, <a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>, <a href='https://en.wikipedia.org/wiki/Leon_Russell'>Leon Russell</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Pat Garrett & Billy the Kid",
+            "length": "35:23",
+            "songs": {
+                "Billy 4": {
+                    "file_id": "billy_4_1",
+                    "index": 9
+                },
+                "Knockin' on Heaven's Door": {
+                    "file_id": "knockin_on_heavens_door_1",
+                    "index": 7
+                },
+                "Billy 7": {
+                    "file_id": "billy_7_1",
+                    "index": 10
+                },
+                "Final Theme": {
+                    "instrumental": 1,
+                    "index": 8
+                },
+                "Billy 1": {
+                    "file_id": "billy_1",
+                    "index": 3
+                },
+                "Turkey Chase": {
+                    "instrumental": 1,
+                    "index": 6
+                },
+                "Cantina Theme (Workin' for the Law)": {
+                    "instrumental": 1,
+                    "index": 2
+                },
+                "River Theme": {
+                    "instrumental": 1,
+                    "index": 5
+                },
+                "Bunkhouse Theme": {
+                    "instrumental": 1,
+                    "index": 4
+                },
+                "Main Title Theme (Billy)": {
+                    "instrumental": 1,
+                    "index": 1
+                }
+            },
+            "image_file_name": "Pat_Garrett_and_Billy_the_Kid.jpg",
+            "release_date": "July 13, 1973",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "pat_garrett_and_billy_the_kid",
+            "producers": "Gordon Carroll"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Dylan",
+            "length": "33:22",
+            "songs": {
+                "Spanish Is the Loving Tongue": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Charles_Badger_Clark'>Charles Badger Clark</a>",
+                    "file_id": "spanish_is_the_loving_tongue_1",
+                    "index": 9
+                },
+                "Sarah Jane": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "sarah_jane_1",
+                    "index": 3
+                },
+                "Mr. Bojangles": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Jerry_Jeff_Walker'>Jerry Jeff Walker</a>",
+                    "file_id": "mr_bojangles_1",
+                    "index": 5
+                },
+                "Can't Help Falling in Love": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/George_David_Weiss'>George Weiss</a>, <a href='https://en.wikipedia.org/wiki/Hugo_Peretti'>Hugo Peretti</a>, <a href='https://en.wikipedia.org/wiki/Luigi_Creatore'>Luigi Creatore</a>",
+                    "file_id": "cant_help_falling_in_love_1",
+                    "index": 2
+                },
+                "Big Yellow Taxi": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Joni_Mitchell'>Joni Mitchell</a>",
+                    "file_id": "big_yellow_taxi_1",
+                    "index": 7
+                },
+                "Mary Ann": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "mary_ann_1",
+                    "index": 6
+                },
+                "Lily of the West": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "lily_of_the_west_1",
+                    "index": 1
+                },
+                "A Fool Such As I": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Bill_Trader'>Bill Trader</a>",
+                    "file_id": "a_fool_such_as_i_1",
+                    "index": 8
+                },
+                "The Ballad of Ira Hayes": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Peter_LaFarge'>Peter LaFarge</a>",
+                    "file_id": "the_ballad_of_ira_hayes_1",
+                    "index": 4
+                }
+            },
+            "image_file_name": "Dylan.jpg",
+            "release_date": "November 19, 1973",
+            "sides": {
+                "1": "1-4",
+                "2": "5-9"
+            },
+            "file_id": "dylan",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Johnston'>Bob Johnston</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Asylum",
+            "with": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>",
+            "name": "Planet Waves",
+            "length": "42:12",
+            "songs": {
+                "Forever Young": {
+                    "file_id": "forever_young_1",
+                    "index": 6
+                },
+                "Dirge": {
+                    "file_id": "dirge_1",
+                    "index": 8
+                },
+                "On a Night Like This": {
+                    "file_id": "on_a_night_like_this_1",
+                    "index": 1
+                },
+                "Wedding Song": {
+                    "file_id": "wedding_song_1",
+                    "index": 11
+                },
+                "Something There Is about You": {
+                    "file_id": "something_there_is_about_you_1",
+                    "index": 5
+                },
+                "Tough Mama": {
+                    "file_id": "tough_mama_1",
+                    "index": 3
+                },
+                "Forever Young (2)": {
+                    "actual_name": "Forever Young",
+                    "file_id": "forever_young_2",
+                    "index": 7
+                },
+                "Going, Going, Gone": {
+                    "file_id": "going_going_gone_1",
+                    "index": 2
+                },
+                "Never Say Goodbye": {
+                    "file_id": "never_say_goodbye_1",
+                    "index": 10
+                },
+                "Hazel": {
+                    "file_id": "hazel_1",
+                    "index": 4
+                },
+                "You Angel You": {
+                    "file_id": "you_angel_you_1",
+                    "index": 9
+                }
+            },
+            "image_file_name": "Planet_Waves.jpg",
+            "release_date": "January 17, 1974",
+            "sides": {
+                "1": "1-6",
+                "2": "7-11"
+            },
+            "file_id": "planet_waves",
+            "producers": "Rob Fraboni"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Asylum",
+            "with": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>",
+            "name": "Before the Flood",
+            "length": "92:38",
+            "songs": {
+                "Highway 61 Revisited": {
+                    "file_id": "highway_61_revisited_2",
+                    "index": 19,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Endless Highway": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 9,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "The Shape I'm In": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 15,
+                    "live": {
+                        "date": "on February 14, 1974 (early show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Knockin' on Heaven's Door": {
+                    "file_id": "knockin_on_heavens_door_2",
+                    "index": 4,
+                    "live": {
+                        "date": "on January 30, 1974",
+                        "location/concert": "in New York City"
+                    }
+                },
+                "Up on Cripple Creek": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 7,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "When You Awake": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>, <a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 16,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Lay Lady Lay": {
+                    "file_id": "lay_lady_lay_2",
+                    "index": 2,
+                    "live": {
+                        "date": "on February 13, 1974",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Blowin' in the Wind": {
+                    "file_id": "blowin_in_the_wind_2",
+                    "index": 21,
+                    "live": {
+                        "date": "on February 13 & 14 (early show), 1974",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "It Ain't Me, Babe": {
+                    "file_id": "it_aint_me_babe_2",
+                    "index": 5,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Most Likely You Go Your Way (And I'll Go Mine)": {
+                    "file_id": "most_likely_you_go_your_way_and_ill_go_mine_2",
+                    "index": 1,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "The Weight": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 17,
+                    "live": {
+                        "date": "on February 13, 1974",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "The Night They Drove Old Dixie Down": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 10,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "It's Alright, Ma (I'm Only Bleeding)": {
+                    "file_id": "its_alright_ma_im_only_bleeding_2",
+                    "index": 14,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Ballad of a Thin Man": {
+                    "file_id": "ballad_of_a_thin_man_2",
+                    "index": 6,
+                    "live": {
+                        "date": "on February 14, 1974 (early show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Stage Fright": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 11,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Like a Rolling Stone": {
+                    "file_id": "like_a_rolling_stone_3",
+                    "index": 20,
+                    "live": {
+                        "date": "on February 13, 1974",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Rainy Day Women #12 & 35": {
+                    "file_id": "rainy_day_women_12_and_35_2",
+                    "index": 3,
+                    "live": {
+                        "date": "on February 13, 1974",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Just Like a Woman": {
+                    "file_id": "just_like_a_woman_2",
+                    "index": 13,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "Don't Think Twice, It's Alright": {
+                    "file_id": "dont_think_twice_its_alright_2",
+                    "index": 12,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "I Shall Be Released": {
+                    "sung_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>",
+                    "file_id": "i_shall_be_released_2",
+                    "index": 8,
+                    "live": {
+                        "date": "on February 14, 1974 (early show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "All Along the Watchtower": {
+                    "file_id": "all_along_the_watchtower_2",
+                    "index": 18,
+                    "live": {
+                        "date": "on February 14, 1974 (early show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                }
+            },
+            "image_file_name": "Before_the_Flood.jpg",
+            "release_date": "June 20, 1974",
+            "sides": {
+                "4": "18-21",
+                "1": "1-6",
+                "2": "7-11",
+                "3": "12-17"
+            },
+            "file_id": "before_the_flood",
+            "producers": "Bob Dylan and the Band"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Blood on the Tracks",
+            "length": "51:42",
+            "songs": {
+                "You're Gonna Make Me Lonesome When You Go": {
+                    "file_id": "youre_gonna_make_me_lonesome_when_you_go_1",
+                    "index": 5
+                },
+                "Meet Me in the Morning": {
+                    "file_id": "meet_me_in_the_morning_1",
+                    "index": 6
+                },
+                "Lily, Rosemary and the Jack of Hearts": {
+                    "file_id": "lily_rosemary_and_the_jack_of_hearts_1",
+                    "index": 7
+                },
+                "Tangled Up in Blue": {
+                    "file_id": "tangled_up_in_blue_1",
+                    "index": 1
+                },
+                "Idiot Wind": {
+                    "file_id": "idiot_wind_1",
+                    "index": 4
+                },
+                "If You See Her, Say Hello": {
+                    "file_id": "if_you_see_her_say_hello_1",
+                    "index": 8
+                },
+                "Simple Twist of Fate": {
+                    "file_id": "simple_twist_of_fate_1",
+                    "index": 2
+                },
+                "You're a Big Girl Now": {
+                    "file_id": "youre_a_big_girl_now_1",
+                    "index": 3
+                },
+                "Buckets of Rain": {
+                    "file_id": "buckets_of_rain_1",
+                    "index": 10
+                },
+                "Shelter from the Storm": {
+                    "file_id": "shelter_from_the_storm_1",
+                    "index": 9
+                }
+            },
+            "image_file_name": "Blood_on_the_Tracks.jpg",
+            "release_date": "January 20, 1975",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "blood_on_the_tracks",
+            "producers": "Bob Dylan"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "The Basement Tapes",
+            "length": "76:41",
+            "songs": {
+                "Yea! Heavy and a Bottle of Bread": {
+                    "file_id": "yea_heavy_and_a_bottle_of_bread_1",
+                    "index": 14
+                },
+                "Yazoo Street Scandal": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 4
+                },
+                "Lo and Behold!": {
+                    "file_id": "lo_and_behold_1",
+                    "index": 7
+                },
+                "Ain't No More Cane": {
+                    "written_by": "Traditional",
+                    "written_and_performed_by": {
+                        "written_by": "Traditional",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 15
+                },
+                "Too Much of Nothing": {
+                    "file_id": "too_much_of_nothing_1",
+                    "index": 13
+                },
+                "Million Dollar Bash": {
+                    "file_id": "million_dollar_bash_1",
+                    "index": 3
+                },
+                "Katie's Been Gone": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>, <a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 6
+                },
+                "This Wheel's on Fire": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Rick_Danko'>Rick Danko</a>, Bob Dylan",
+                    "file_id": "this_wheels_on_fire_1",
+                    "index": 24
+                },
+                "Goin' to Acapulco": {
+                    "file_id": "goin_to_acapulco_1",
+                    "index": 5
+                },
+                "Odds and Ends": {
+                    "file_id": "odds_and_ends_1",
+                    "index": 1
+                },
+                "Long Distance Operator": {
+                    "file_id": "long_distance_operator_1",
+                    "index": 23,
+                    "sung_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>"
+                },
+                "Tiny Montgomery": {
+                    "file_id": "tiny_montgomery_1",
+                    "index": 18
+                },
+                "Orange Juice Blues (Blues for Breakfast)": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 2
+                },
+                "Clothes Line Saga": {
+                    "file_id": "clothes_line_saga_1",
+                    "index": 9
+                },
+                "Crash on the Levee (Down in the Flood)": {
+                    "actual_name": "Down in the Flood",
+                    "file_id": "down_in_the_flood_2",
+                    "index": 16
+                },
+                "Open the Door, Homer": {
+                    "file_id": "open_the_door_homer_1",
+                    "index": 22
+                },
+                "Apple Suckling Tree": {
+                    "file_id": "apple_suckling_tree_1",
+                    "index": 10
+                },
+                "Please, Mrs. Henry": {
+                    "file_id": "please_mrs_henry_1",
+                    "index": 11
+                },
+                "Bessie Smith": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Rick_Danko'>Rick Danko</a>, <a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 8
+                },
+                "Nothing Was Delivered": {
+                    "file_id": "nothing_was_delivered_1",
+                    "index": 21
+                },
+                "Don't Ya Tell Henry": {
+                    "file_id": "dont_ya_tell_henry_1",
+                    "index": 20,
+                    "sung_by": "Levon Helm"
+                },
+                "Tears of Rage": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>",
+                    "file_id": "tears_of_rage_1",
+                    "index": 12
+                },
+                "Ruben Remus": {
+                    "written_and_performed_by": {
+                        "written_by": "<a href='https://en.wikipedia.org/wiki/Richard_Manuel'>Richard Manuel</a>, <a href='https://en.wikipedia.org/wiki/Robbie_Robertson'>Robbie Robertson</a>",
+                        "performed_by": "<a href='https://en.wikipedia.org/wiki/The_Band'>The Band</a>"
+                    },
+                    "index": 17
+                },
+                "You Ain't Goin' Nowhere": {
+                    "file_id": "you_aint_goin_nowhere_2",
+                    "index": 19
+                }
+            },
+            "image_file_name": "The_Basement_Tapes.jpg",
+            "release_date": "June 26, 1975",
+            "sides": {
+                "4": "19-24",
+                "1": "1-6",
+                "2": "7-12",
+                "3": "13-18"
+            },
+            "file_id": "the_basement_tapes",
+            "producers": "Bob Dylan, the Band"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Desire",
+            "length": "56:13",
+            "songs": {
+                "Oh, Sister": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "oh_sister_1",
+                    "index": 5
+                },
+                "Sara": {
+                    "file_id": "sara_1",
+                    "index": 9
+                },
+                "One More Cup of Coffee (Valley Below)": {
+                    "file_id": "one_more_cup_of_coffee_valley_below_1",
+                    "index": 4
+                },
+                "Black Diamond Bay": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "black_diamond_bay_1",
+                    "index": 8
+                },
+                "Romance in Durango": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "romance_in_durango_1",
+                    "index": 7
+                },
+                "Hurricane": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "hurricane_1",
+                    "index": 1
+                },
+                "Isis": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "isis_1",
+                    "index": 2
+                },
+                "Mozambique": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "mozambique_1",
+                    "index": 3
+                },
+                "Joey": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "joey_1",
+                    "index": 6
+                }
+            },
+            "image_file_name": "Desire.jpg",
+            "release_date": "January 5, 1976",
+            "sides": {
+                "1": "1-5",
+                "2": "6-9"
+            },
+            "file_id": "desire",
+            "producers": "Don DeVito"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Hard Rain",
+            "length": "51:06",
+            "songs": {
+                "Maggie's Farm": {
+                    "file_id": "maggies_farm_2",
+                    "index": 1
+                },
+                "Oh, Sister": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "oh_sister_2",
+                    "index": 4
+                },
+                "Lay Lady Lay": {
+                    "file_id": "lay_lady_lay_3",
+                    "index": 5
+                },
+                "Idiot Wind": {
+                    "file_id": "idiot_wind_2",
+                    "index": 9
+                },
+                "You're a Big Girl Now": {
+                    "file_id": "youre_a_big_girl_now_2",
+                    "index": 7
+                },
+                "I Threw It All Away": {
+                    "file_id": "i_threw_it_all_away_2",
+                    "index": 8
+                },
+                "Stuck inside of Mobile with the Memphis Blues Again": {
+                    "file_id": "stuck_inside_of_mobile_with_the_memphis_blues_again_2",
+                    "index": 3
+                },
+                "One Too Many Mornings": {
+                    "file_id": "one_too_many_mornings_2",
+                    "index": 2
+                },
+                "Shelter from the Storm": {
+                    "file_id": "shelter_from_the_storm_2",
+                    "index": 6
+                }
+            },
+            "image_file_name": "Hard_Rain.jpg",
+            "release_date": "September 13, 1976",
+            "sides": {
+                "1": "1-5",
+                "2": "6-9"
+            },
+            "file_id": "hard_rain",
+            "live": {
+                "date": "on May 23, 1976",
+                "location/concert": "at <a href='https://en.wikipedia.org/wiki/Hughes_Stadium_(Fort_Collins)'>Hughes Stadium</a> in <a href='https://en.wikipedia.org/wiki/Fort_Collins,_Colorado'>Fort Collins, Colorado</a>"
+            },
+            "producers": "Don DeVito, Bob Dylan"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Street-Legal",
+            "length": "50:18",
+            "songs": {
+                "Where Are You Tonight (Journey through Dark Heat)": {
+                    "file_id": "where_are_you_tonight_journey_through_dark_heat_1",
+                    "index": 9
+                },
+                "True Love Tends to Forget": {
+                    "file_id": "true_love_tends_to_forget_1",
+                    "index": 7
+                },
+                "Se\u00f1or (Tales of Yankee Power)": {
+                    "file_id": "senor_tales_of_yankee_power_1",
+                    "index": 6
+                },
+                "Is Your Love in Vain?": {
+                    "file_id": "is_your_love_in_vain_1",
+                    "index": 5
+                },
+                "No Time to Think": {
+                    "file_id": "no_time_to_think_1",
+                    "index": 3
+                },
+                "We Better Talk This Over": {
+                    "file_id": "we_better_talk_this_over_1",
+                    "index": 8
+                },
+                "Changing of the Guards": {
+                    "file_id": "changing_of_the_guards_1",
+                    "index": 1
+                },
+                "Baby, Stop Crying": {
+                    "file_id": "baby_stop_crying_1",
+                    "index": 4
+                },
+                "New Pony": {
+                    "file_id": "new_pony_1",
+                    "index": 2
+                }
+            },
+            "image_file_name": "Street-Legal.jpg",
+            "release_date": "June 15, 1978",
+            "sides": {
+                "1": "1-4",
+                "2": "5-9"
+            },
+            "file_id": "street_legal",
+            "producers": "Don DeVito"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "CBS/Sony",
+            "name": "Bob Dylan at Budokan",
+            "length": "99:41",
+            "songs": {
+                "Forever Young": {
+                    "file_id": "forever_young_3",
+                    "index": 21
+                },
+                "Is Your Love in Vain?": {
+                    "file_id": "is_your_love_in_vain_2",
+                    "index": 10
+                },
+                "Oh, Sister": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "oh_sister_3",
+                    "index": 14
+                },
+                "All I Really Want to Do": {
+                    "file_id": "all_i_really_want_to_do_2",
+                    "index": 18
+                },
+                "I Want You": {
+                    "file_id": "i_want_you_2",
+                    "index": 17
+                },
+                "Shelter from the Storm": {
+                    "file_id": "shelter_from_the_storm_3",
+                    "index": 2
+                },
+                "Maggie's Farm": {
+                    "file_id": "maggies_farm_3",
+                    "index": 6
+                },
+                "Like a Rolling Stone": {
+                    "file_id": "like_a_rolling_stone_4",
+                    "index": 8
+                },
+                "One More Cup of Coffee (Valley Below)": {
+                    "file_id": "one_more_cup_of_coffee_valley_below_2",
+                    "index": 7
+                },
+                "Simple Twist of Fate": {
+                    "file_id": "simple_twist_of_fate_2",
+                    "index": 15
+                },
+                "The Times They Are A-Changin'": {
+                    "file_id": "the_times_they_are_a-changin_2",
+                    "index": 22
+                },
+                "Don't Think Twice, It's Alright": {
+                    "file_id": "dont_think_twice_its_alright_3",
+                    "index": 5
+                },
+                "I Shall Be Released": {
+                    "file_id": "i_shall_be_released_3",
+                    "index": 9
+                },
+                "Love Minus Zero/No Limit": {
+                    "file_id": "love_minus_zero_no_limit_2",
+                    "index": 3
+                },
+                "Knockin' on Heaven's Door": {
+                    "file_id": "knockin_on_heavens_door_3",
+                    "index": 19
+                },
+                "Mr. Tambourine Man": {
+                    "file_id": "mr_tambourine_man_2",
+                    "index": 1
+                },
+                "It's Alright, Ma (I'm Only Bleeding)": {
+                    "file_id": "its_alright_ma_im_only_bleeding_3",
+                    "index": 20
+                },
+                "Just Like a Woman": {
+                    "file_id": "just_like_a_woman_3",
+                    "index": 13
+                },
+                "Ballad of a Thin Man": {
+                    "file_id": "ballad_of_a_thin_man_3",
+                    "index": 4
+                },
+                "Blowin' in the Wind": {
+                    "file_id": "blowin_in_the_wind_3",
+                    "index": 12
+                },
+                "Going, Going, Gone": {
+                    "file_id": "going_going_gone_2",
+                    "index": 11
+                },
+                "All Along the Watchtower": {
+                    "file_id": "all_along_the_watchtower_3",
+                    "index": 16
+                }
+            },
+            "image_file_name": "Bob_Dylan_at_Budokan.jpg",
+            "release_date": "April 23, 1979",
+            "sides": {
+                "4": "18-22",
+                "1": "1-5",
+                "2": "6-11",
+                "3": "12-17"
+            },
+            "file_id": "bob_dylan_at_budokan",
+            "live": {
+                "date": "on either February 28 or March 1, 1978",
+                "location/concert": "at <a href='https://en.wikipedia.org/wiki/Nippon_Budokan_Hall'>Nippon Budokan Hall</a> in <a href='https://en.wikipedia.org/wiki/Tokyo'>Tokyo, Japan</a>"
+            },
+            "producers": "Don DeVito"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Slow Train Coming",
+            "length": "46:19",
+            "songs": {
+                "When He Returns": {
+                    "file_id": "when_he_returns_1",
+                    "index": 9
+                },
+                "Gotta Serve Somebody": {
+                    "file_id": "gotta_serve_somebody_1",
+                    "index": 1
+                },
+                "When You Gonna Wake Up": {
+                    "file_id": "when_you_gonna_wake_up_1",
+                    "index": 7
+                },
+                "Do Right to Me Baby": {
+                    "file_id": "do_right_to_me_baby_1",
+                    "index": 6
+                },
+                "Precious Angel": {
+                    "file_id": "precious_angel_1",
+                    "index": 2
+                },
+                "I Believe in You": {
+                    "file_id": "i_believe_in_you_1",
+                    "index": 3
+                },
+                "Man Gave Names to All the Animals": {
+                    "file_id": "man_gave_names_to_all_the_animals_1",
+                    "index": 8
+                },
+                "Gonna Change My Way of Thinking": {
+                    "file_id": "gonna_change_my_way_of_thinking_1",
+                    "index": 5
+                },
+                "Slow Train": {
+                    "file_id": "slow_train_1",
+                    "index": 4
+                }
+            },
+            "image_file_name": "Slow_Train_Coming.jpg",
+            "release_date": "August 20, 1979",
+            "sides": {
+                "1": "1-4",
+                "2": "5-9"
+            },
+            "file_id": "slow_train_coming",
+            "producers": "Barry Beckett, Jerry Wexler"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Saved",
+            "length": "42:39",
+            "songs": {
+                "In the Garden": {
+                    "file_id": "in_the_garden_1",
+                    "index": 7
+                },
+                "Covenant Woman": {
+                    "file_id": "covenant_woman_1",
+                    "index": 3
+                },
+                "Solid Rock": {
+                    "file_id": "solid_rock_1",
+                    "index": 5
+                },
+                "Saved": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Tim_Drummond'>Tim Drummond</a>, Bob Dylan",
+                    "file_id": "saved_1",
+                    "index": 2
+                },
+                "Are You Ready": {
+                    "file_id": "are_you_ready_1",
+                    "index": 9
+                },
+                "What Can I Do for You?": {
+                    "file_id": "what_can_i_do_for_you_1",
+                    "index": 4
+                },
+                "Saving Grace": {
+                    "file_id": "saving_grace_1",
+                    "index": 8
+                },
+                "A Satisfied Mind": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Red_Hayes'>Red Hayes</a>, <a href='https://en.wikipedia.org/wiki/Jack_Rhodes'>Jack Rhodes</a>",
+                    "file_id": "a_satisfied_mind_1",
+                    "index": 1
+                },
+                "Pressing On": {
+                    "file_id": "pressing_on_1",
+                    "index": 6
+                }
+            },
+            "image_file_name": "Saved.jpg",
+            "release_date": "June 23, 1980",
+            "sides": {
+                "1": "1-5",
+                "2": "6-9"
+            },
+            "file_id": "saved",
+            "producers": "Barry Beckett, Jerry Wexler"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Shot of Love",
+            "length": "40:15",
+            "songs": {
+                "Heart of Mine": {
+                    "file_id": "heart_of_mine_1",
+                    "index": 2
+                },
+                "The Groom's Still Waiting at the Altar": {
+                    "file_id": "the_grooms_still_waiting_at_the_altar_1",
+                    "index": 6
+                },
+                "Lenny Bruce": {
+                    "file_id": "lenny_bruce_1",
+                    "index": 4
+                },
+                "In the Summertime": {
+                    "file_id": "in_the_summertime_1",
+                    "index": 8
+                },
+                "Watered Down Love": {
+                    "file_id": "watered_down_love_1",
+                    "index": 5
+                },
+                "Shot of Love": {
+                    "file_id": "shot_of_love_1",
+                    "index": 1
+                },
+                "Trouble": {
+                    "file_id": "trouble_1",
+                    "index": 9
+                },
+                "Dead Man, Dead Man": {
+                    "file_id": "dead_man_dead_man_1",
+                    "index": 7
+                },
+                "Every Grain of Sand": {
+                    "file_id": "every_grain_of_sand_1",
+                    "index": 10
+                },
+                "Property of Jesus": {
+                    "file_id": "property_of_jesus_1",
+                    "index": 3
+                }
+            },
+            "image_file_name": "Shot_of_Love.jpg",
+            "release_date": "August 10, 1981",
+            "sides": {
+                "1": "1-6",
+                "2": "7-10"
+            },
+            "file_id": "shot_of_love",
+            "producers": "Chuck Plotkin, Bob Dylan, Bumps Blackwell (on <a href='../songs/html/shot_of_love_1.html'><i>Shot of Love</i></a>)"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Infidels",
+            "length": "41:39",
+            "songs": {
+                "Don't Fall Apart on Me Tonight": {
+                    "file_id": "dont_fall_apart_on_me_tonight_1",
+                    "index": 8
+                },
+                "Neighborhood Bully": {
+                    "file_id": "neighborhood_bully_1",
+                    "index": 3
+                },
+                "Man of Peace": {
+                    "file_id": "man_of_peace_1",
+                    "index": 5
+                },
+                "Union Sundown": {
+                    "file_id": "union_sundown_1",
+                    "index": 6
+                },
+                "Jokerman": {
+                    "file_id": "jokerman_1",
+                    "index": 1
+                },
+                "Sweetheart Like You": {
+                    "file_id": "sweetheart_like_you_1",
+                    "index": 2
+                },
+                "I and I": {
+                    "file_id": "i_and_i_1",
+                    "index": 7
+                },
+                "License to Kill": {
+                    "file_id": "license_to_kill_1",
+                    "index": 4
+                }
+            },
+            "image_file_name": "Infidels.png",
+            "release_date": "October 27, 1983",
+            "sides": {
+                "1": "1-4",
+                "2": "5-8"
+            },
+            "file_id": "infidels",
+            "producers": "Bob Dylan, Mark Knopfler"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Real Live",
+            "length": "50:15",
+            "songs": {
+                "Highway 61 Revisited": {
+                    "file_id": "highway_61_revisited_3",
+                    "index": 1,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "Maggie's Farm": {
+                    "file_id": "maggies_farm_4",
+                    "index": 2,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "Girl from the North Country": {
+                    "file_id": "girl_from_the_north_country_3",
+                    "index": 9,
+                    "live": {
+                        "date": "on July 8, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Slane_Castle'>Slane Castle</a>, <a href='https://en.wikipedia.org/wiki/Ireland'>Ireland</a>"
+                    }
+                },
+                "I and I": {
+                    "file_id": "i_and_i_2",
+                    "index": 3,
+                    "live": {
+                        "date": "on July 8, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Slane_Castle'>Slane Castle</a>, <a href='https://en.wikipedia.org/wiki/Ireland'>Ireland</a>"
+                    }
+                },
+                "Masters of War": {
+                    "file_id": "masters_of_war_2",
+                    "index": 7,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "Ballad of a Thin Man": {
+                    "file_id": "ballad_of_a_thin_man_4",
+                    "index": 8,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "Tangled Up in Blue": {
+                    "file_id": "tangled_up_in_blue_2",
+                    "index": 6,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "It Ain't Me, Babe": {
+                    "file_id": "it_aint_me_babe_3",
+                    "index": 5,
+                    "live": {
+                        "date": "on July 7, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Wembley_Stadium'>Wembley Stadium</a>"
+                    }
+                },
+                "Tombstone Blues": {
+                    "file_id": "tombstone_blues_2",
+                    "index": 10,
+                    "live": {
+                        "date": "on July 5, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/St_James%27_Park'>St. James' Park</a>, <a href='https://en.wikipedia.org/wiki/Newcastle_upon_Tyne'>Newcastle</a>"
+                    }
+                },
+                "License to Kill": {
+                    "file_id": "license_to_kill_2",
+                    "index": 4,
+                    "live": {
+                        "date": "on July 5, 1984",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/St_James%27_Park'>St. James' Park</a>, <a href='https://en.wikipedia.org/wiki/Newcastle_upon_Tyne'>Newcastle</a>"
+                    }
+                }
+            },
+            "image_file_name": "Real_Live.jpg",
+            "release_date": "November 29, 1984",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "real_live_1",
+            "live": {
+                "date": "in 1984",
+                "location/concert": "during Bob Dylan's <a href='https://en.wikipedia.org/wiki/Bob_Dylan_1984_European_Tour'>European Tour</a>"
+            },
+            "producers": "Glyn Johns"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Empire Burlesque",
+            "length": "46:24",
+            "songs": {
+                "Never Gonna Be the Same Again": {
+                    "file_id": "never_gonna_be_the_same_again_1",
+                    "index": 5
+                },
+                "Emotionally Yours": {
+                    "file_id": "emotionally_yours_1",
+                    "index": 7
+                },
+                "Something's Burning, Baby": {
+                    "file_id": "somethings_burning_baby_1",
+                    "index": 9
+                },
+                "When the Night Comes Falling from the Sky": {
+                    "file_id": "when_the_night_comes_falling_from_the_sky_1",
+                    "index": 8
+                },
+                "Tight Connection to My Heart (Has Anybody Seen My Love)": {
+                    "file_id": "tight_connection_to_my_heart_has_anybody_seen_my_love_1",
+                    "index": 1
+                },
+                "Clean-Cut Kid": {
+                    "file_id": "clean_cut_kid_1",
+                    "index": 4
+                },
+                "I'll Remember You": {
+                    "file_id": "ill_remember_you_1",
+                    "index": 3
+                },
+                "Seeing the Real You at Last": {
+                    "file_id": "seeing_the_real_you_at_last_1",
+                    "index": 2
+                },
+                "Dark Eyes": {
+                    "file_id": "dark_eyes_1",
+                    "index": 10
+                },
+                "Trust Yourself": {
+                    "file_id": "trust_yourself_1",
+                    "index": 6
+                }
+            },
+            "image_file_name": "Empire_Burlesque.jpg",
+            "release_date": "June 10, 1985",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "empire_burlesque",
+            "producers": "Bob Dylan"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Biograph",
+            "length": "214:50",
+            "songs": {
+                "It's All Over Now, Baby Blue": {
+                    "file_id": "its_all_over_now_baby_blue_2",
+                    "index": 32,
+                    "live": {
+                        "date": "on May 17, 1966",
+                        "location/concert": "in a <a href='https://en.wikipedia.org/wiki/Manchester,_England'>Manchester, England</a> concert, mistakenly known as the <a href='https://en.wikipedia.org/wiki/Royal_Albert_Hall'>Royal Albert Hall concert</a>"
+                    }
+                },
+                "Solid Rock": {
+                    "source": {
+                        "name": "Saved",
+                        "file_id": "saved"
+                    },
+                    "file_id": "solid_rock_1",
+                    "index": 52
+                },
+                "Quinn the Eskimo (The Mighty Quinn)": {
+                    "actual_name": "The Mighty Quinn (Quinn the Eskimo)",
+                    "file_id": "the_mighty_quinn_quinn_the_eskimo_2",
+                    "index": 22
+                },
+                "Dear Landlord": {
+                    "source": {
+                        "name": "John Wesley Harding",
+                        "file_id": "john_wesley_harding"
+                    },
+                    "file_id": "dear_landlord_1",
+                    "index": 24
+                },
+                "Masters of War": {
+                    "source": {
+                        "name": "The Freewheelin' Bob Dylan",
+                        "file_id": "the_freewheelin_bob_dylan"
+                    },
+                    "file_id": "masters_of_war_1",
+                    "index": 8
+                },
+                "The Times They Are A-Changin'": {
+                    "source": {
+                        "name": "The Times They Area A-Changin'",
+                        "file_id": "the_times_they_are_a-changin"
+                    },
+                    "file_id": "the_times_they_are_a-changin_1",
+                    "index": 6
+                },
+                "Can You Please Crawl Out Your Window?": {
+                    "file_id": "can_you_please_crawl_out_your_window_1",
+                    "index": 33
+                },
+                "Knockin' on Heaven's Door": {
+                    "source": {
+                        "name": "Pat Garrett & Billy the Kid",
+                        "file_id": "pat_garrett_and_billy_the_kid"
+                    },
+                    "file_id": "knockin_on_heavens_door_1",
+                    "index": 50
+                },
+                "Baby, I'm in the Mood for You": {
+                    "file_id": "baby_im_in_the_mood_for_you_1",
+                    "index": 38
+                },
+                "Positively 4th Street": {
+                    "file_id": "positively_4th_street_2",
+                    "index": 34
+                },
+                "Caribbean Wind": {
+                    "file_id": "caribbean_wind_1",
+                    "index": 36
+                },
+                "It Ain't Me, Babe": {
+                    "source": {
+                        "name": "Another Side of Bob Dylan",
+                        "file_id": "another_side_of_bob_dylan"
+                    },
+                    "file_id": "it_aint_me_babe_1",
+                    "index": 25
+                },
+                "Tombstone Blues": {
+                    "source": {
+                        "name": "Highway 61 Revisited",
+                        "file_id": "highway_61_revisited"
+                    },
+                    "file_id": "tombstone_blues_1",
+                    "index": 12
+                },
+                "Just Like a Woman": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "just_like_a_woman_1",
+                    "index": 43
+                },
+                "Heart of Mine": {
+                    "file_id": "heart_of_mine_2",
+                    "index": 41,
+                    "live": {
+                        "date": "on November 10, 1981",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/New_Orleans,_Louisiana'>New Orleans, Louisiana</a>"
+                    }
+                },
+                "On a Night Like This": {
+                    "source": {
+                        "name": "Planet Waves",
+                        "file_id": "planet_waves"
+                    },
+                    "file_id": "on_a_night_like_this_1",
+                    "index": 42
+                },
+                "I Shall Be Released": {
+                    "source": {
+                        "name": "Bob Dylan's Greatest Hits, Volume II",
+                        "file_id": "bob_dylans_greatest_hits_volume_ii"
+                    },
+                    "file_id": "i_shall_be_released_1",
+                    "index": 49
+                },
+                "To Ramona": {
+                    "source": {
+                        "name": "Another Side of Bob Dylan",
+                        "file_id": "another_side_of_bob_dylan"
+                    },
+                    "file_id": "to_ramona_1",
+                    "index": 28
+                },
+                "I Don't Believe You (She Acts Like We Never Have Met)": {
+                    "file_id": "i_dont_believe_you_she_acts_like_we_never_have_met_2",
+                    "index": 19
+                },
+                "If Not for You": {
+                    "source": {
+                        "name": "New Morning",
+                        "file_id": "new_morning"
+                    },
+                    "file_id": "if_not_for_you_1",
+                    "index": 3
+                },
+                "I Believe in You": {
+                    "source": {
+                        "name": "Slow Train Coming",
+                        "file_id": "slow_train_coming"
+                    },
+                    "file_id": "i_believe_in_you_1",
+                    "index": 47
+                },
+                "Baby, Let Me Follow You Down": {
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Reverend_Gary_Davis'>Gary Davis</a>, <a href='https://en.wikipedia.org/wiki/Eric_von_Schmidt'>Eric von Schmidt</a>, and <a href='https://en.wikipedia.org/wiki/Dave_Van_Ronk'>Dave Van Ronk</a>",
+                    "source": {
+                        "name": "Bob Dylan",
+                        "file_id": "bob_dylan"
+                    },
+                    "file_id": "baby_let_me_follow_you_down_1",
+                    "index": 2
+                },
+                "Isis": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "isis_2",
+                    "index": 35,
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a> as part of the <a href='https://en.wikipedia.org/wiki/Rolling_Thunder_Revue'>Rolling Thunder Revue</a>"
+                    }
+                },
+                "Romance in Durango": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "romance_in_durango_2",
+                    "index": 44,
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a> as part of the <a href='https://en.wikipedia.org/wiki/Rolling_Thunder_Revue'>Rolling Thunder Revue</a>"
+                    }
+                },
+                "Abandoned Love": {
+                    "file_id": "abandoned_love_1",
+                    "index": 30
+                },
+                "Forever Young": {
+                    "file_id": "forever_young_4",
+                    "index": 53
+                },
+                "I'll Keep It with Mine": {
+                    "file_id": "ill_keep_it_with_mine_1",
+                    "index": 5
+                },
+                "Blowin' in the Wind": {
+                    "source": {
+                        "name": "The Freewheelin' Bob Dylan",
+                        "file_id": "the_freewheelin_bob_dylan"
+                    },
+                    "file_id": "blowin_in_the_wind_1",
+                    "index": 7
+                },
+                "I Want You": {
+                    "source": {
+                        "name": "Blonde on Blonde",
+                        "file_id": "blonde_on_blonde"
+                    },
+                    "file_id": "i_want_you_1",
+                    "index": 40
+                },
+                "Subterranean Homesick Blues": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "subterranean_homesick_blues_1",
+                    "index": 18
+                },
+                "Visions of Johanna": {
+                    "file_id": "visions_of_johanna_2",
+                    "index": 20
+                },
+                "Time Passes Slowly": {
+                    "source": {
+                        "name": "New Morning",
+                        "file_id": "new_morning"
+                    },
+                    "file_id": "time_passes_slowly_1",
+                    "index": 48
+                },
+                "Every Grain of Sand": {
+                    "source": {
+                        "name": "Shot of Love",
+                        "file_id": "shot_of_love"
+                    },
+                    "file_id": "every_grain_of_sand_1",
+                    "index": 21
+                },
+                "Million Dollar Bash": {
+                    "source": {
+                        "name": "The Basement Tapes",
+                        "file_id": "the_basement_tapes"
+                    },
+                    "file_id": "million_dollar_bash_1",
+                    "index": 27
+                },
+                "Mixed-Up Confusion": {
+                    "file_id": "mixed_up_confusion_1",
+                    "index": 11
+                },
+                "Lay Down Your Weary Tune": {
+                    "file_id": "lay_down_your_weary_tune_1",
+                    "index": 17
+                },
+                "I Wanna Be Your Lover": {
+                    "file_id": "i_wanna_be_your_lover_1",
+                    "index": 39
+                },
+                "Groom's Still Waiting at the Altar": {
+                    "actual_name": "The Groom's Still Waiting at the Altar",
+                    "source": {
+                        "name": "Shot of Love",
+                        "file_id": "shot_of_love"
+                    },
+                    "file_id": "the_grooms_still_waiting_at_the_altar_1",
+                    "index": 13
+                },
+                "You Angel You": {
+                    "source": {
+                        "name": "Planet Waves",
+                        "file_id": "planet_waves"
+                    },
+                    "file_id": "you_angel_you_1",
+                    "index": 26
+                },
+                "I'll Be Your Baby Tonight": {
+                    "source": {
+                        "name": "John Wesley Harding",
+                        "file_id": "john_wesley_harding"
+                    },
+                    "file_id": "ill_be_your_baby_tonight_1",
+                    "index": 4
+                },
+                "Se\u00f1or (Tales of Yankee Power)": {
+                    "source": {
+                        "name": "Street-Legal",
+                        "file_id": "street_legal"
+                    },
+                    "file_id": "senor_tales_of_yankee_power_1",
+                    "index": 45
+                },
+                "Lay Lady Lay": {
+                    "source": {
+                        "name": "Nashville Skyline",
+                        "file_id": "nashville_skyline"
+                    },
+                    "file_id": "lay_lady_lay_1",
+                    "index": 1
+                },
+                "Up to Me": {
+                    "file_id": "up_to_me_1",
+                    "index": 37
+                },
+                "You're a Big Girl Now": {
+                    "file_id": "youre_a_big_girl_now_3",
+                    "index": 29
+                },
+                "Percy's Song": {
+                    "file_id": "percys_song_1",
+                    "index": 10
+                },
+                "Gotta Serve Somebody": {
+                    "source": {
+                        "name": "Slow Train Coming",
+                        "file_id": "slow_train_coming"
+                    },
+                    "file_id": "gotta_serve_somebody_1",
+                    "index": 46
+                },
+                "Tangled Up in Blue": {
+                    "source": {
+                        "name": "Blood on the Tracks",
+                        "file_id": "blood_on_the_tracks"
+                    },
+                    "file_id": "tangled_up_in_blue_1",
+                    "index": 31
+                },
+                "Jet Pilot": {
+                    "file_id": "jet_pilot_1",
+                    "index": 16
+                },
+                "Like a Rolling Stone": {
+                    "source": {
+                        "name": "Highway 61 Revisited",
+                        "file_id": "highway_61_revisited"
+                    },
+                    "file_id": "like_a_rolling_stone_1",
+                    "index": 15
+                },
+                "The Lonesome Death of Hattie Carroll": {
+                    "source": {
+                        "name": "The Times They Are A-Changin'",
+                        "file_id": "the_times_they_are_a-changin"
+                    },
+                    "file_id": "the_lonesome_death_of_hattie_carroll_1",
+                    "index": 9
+                },
+                "Mr. Tambourine Man": {
+                    "source": {
+                        "name": "Bringing It All Back Home",
+                        "file_id": "bringing_it_all_back_home"
+                    },
+                    "file_id": "mr_tambourine_man_1",
+                    "index": 23
+                },
+                "Most Likely You Go Your Way (And I'll Go Mine)": {
+                    "source": {
+                        "name": "Before the Flood",
+                        "file_id": "before_the_flood"
+                    },
+                    "file_id": "most_likely_you_go_your_way_and_ill_go_mine_2",
+                    "index": 14,
+                    "live": {
+                        "date": "on February 14, 1974 (late show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                },
+                "All Along the Watchtower": {
+                    "source": {
+                        "name": "Before the Flood",
+                        "file_id": "before_the_flood"
+                    },
+                    "file_id": "all_along_the_watchtower_2",
+                    "index": 51,
+                    "live": {
+                        "date": "on February 14, 1974 (early show)",
+                        "location/concert": "in Los Angeles"
+                    }
+                }
+            },
+            "image_file_name": "Biograph.png",
+            "release_date": "November 7, 1985",
+            "sides": {
+                "7": "33-37",
+                "10": "49-53",
+                "1": "1-5",
+                "2": "6-10",
+                "3": "11-16",
+                "8": "38-43",
+                "4": "17-21",
+                "5": "22-27",
+                "9": "44-48",
+                "6": "28-32"
+            },
+            "file_id": "biograph",
+            "producers": "Jeff Rosen"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Knocked Out Loaded",
+            "length": "36:11",
+            "songs": {
+                "Brownsville Girl": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Sam_Shepard'>Sam Shepard</a>",
+                    "file_id": "brownsville_girl_1",
+                    "index": 6
+                },
+                "Precious Memories": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "precious_memories_1",
+                    "index": 4
+                },
+                "Got My Mind Made Up": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Tom_Petty'>Tom Petty</a>",
+                    "file_id": "got_my_mind_made_up_1",
+                    "index": 7
+                },
+                "Maybe Someday": {
+                    "file_id": "maybe_someday_1",
+                    "index": 5
+                },
+                "They Killed Him": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Kris_Kristofferson'>Kris Kristofferson</a>",
+                    "file_id": "they_killed_him_1",
+                    "index": 2
+                },
+                "You Wanna Ramble": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Junior_Parker'>Little Junior Parker</a>",
+                    "file_id": "you_wanna_ramble_1",
+                    "index": 1
+                },
+                "Driftin' Too Far from the Shore": {
+                    "file_id": "driftin_too_far_from_the_shore_1",
+                    "index": 3
+                },
+                "Under Your Spell": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Carole_Bayer_Sager'>Carole Bayer Sager</a>",
+                    "file_id": "under_your_spell_1",
+                    "index": 8
+                }
+            },
+            "image_file_name": "Knocked_Out_Loaded.jpg",
+            "release_date": "July 14, 1986",
+            "sides": {
+                "1": "1-5",
+                "2": "6-8"
+            },
+            "file_id": "knocked_out_loaded",
+            "producers": "Bob Dylan"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Dylan & the Dead",
+            "length": "43:07",
+            "songs": {
+                "Gotta Serve Somebody": {
+                    "file_id": "gotta_serve_somebody_2",
+                    "index": 3,
+                    "live": {
+                        "date": "on July 26, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Anaheim,_California'>Anaheim, California</a>"
+                    }
+                },
+                "Knockin' on Heaven's Door": {
+                    "file_id": "knockin_on_heavens_door_4",
+                    "index": 7,
+                    "live": {
+                        "date": "on July 26, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Anaheim,_California'>Anaheim, California</a>"
+                    }
+                },
+                "I Want You": {
+                    "file_id": "i_want_you_3",
+                    "index": 2,
+                    "live": {
+                        "date": "on July 24, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Oakland,_California'>Oakland, California</a>"
+                    }
+                },
+                "Queen_Jane_Approximately": {
+                    "file_id": "queen_jane_approximately_2",
+                    "index": 4,
+                    "live": {
+                        "date": "on July 19, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Eugene,_Oregon'>Eugene, Oregon</a>"
+                    }
+                },
+                "All Along the Watchtower": {
+                    "file_id": "all_along_the_watchtower_4",
+                    "index": 6,
+                    "live": {
+                        "date": "on July 26, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Anaheim,_California'>Anaheim, California</a>"
+                    }
+                },
+                "Slow Train": {
+                    "file_id": "slow_train_2",
+                    "index": 1,
+                    "live": {
+                        "date": "on July 4, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Foxborough,_Massachusetts'>Foxborough, Massachusetts</a>"
+                    }
+                },
+                "Joey": {
+                    "file_id": "joey_2",
+                    "index": 5,
+                    "live": {
+                        "date": "on July 4, 1987",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Foxborough,_Massachusetts'>Foxborough, Massachusetts</a>"
+                    }
+                }
+            },
+            "image_file_name": "Dylan_and_the_Dead.jpg",
+            "release_date": "February 6, 1989",
+            "sides": {
+                "1": "1-4",
+                "2": "5-7"
+            },
+            "file_id": "dylan_and_the_dead",
+            "live": {
+                "date": "in 1987",
+                "location/concert": "during the \"Dylan & the Dead\" tour"
+            },
+            "producers": "John Cutler, <a href='https://en.wikipedia.org/wiki/Jerry_Garcia'>Jerry Garcia</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Down in the Groove",
+            "length": "32:10",
+            "songs": {
+                "Had a Dream about You, Baby": {
+                    "file_id": "had_a_dream_about_you_baby_1",
+                    "index": 5
+                },
+                "Ugliest Girl in the World": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>",
+                    "file_id": "ugliest_girl_in_the_world_1",
+                    "index": 6
+                },
+                "Silvio": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>",
+                    "file_id": "silvio_1",
+                    "index": 7
+                },
+                "Let's Stick Together": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Wilbert_Harrison'>Wilbert Harrison</a>",
+                    "file_id": "lets_stick_together_1",
+                    "index": 1
+                },
+                "Shenandoah": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "shenandoah_1",
+                    "index": 9
+                },
+                "Death Is Not the End": {
+                    "file_id": "death_is_not_the_end_1",
+                    "index": 4
+                },
+                "When Did You Leave Heaven?": {
+                    "written_by": "Walter Bullock, <a href='https://en.wikipedia.org/wiki/Richard_A._Whiting'>Richard Whiting</a>",
+                    "file_id": "when_did_you_leave_heaven_1",
+                    "index": 2
+                },
+                "Sally Sue Brown": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Arthur_Alexander'>Arthur June Alexander</a>, Earl Montgomery, Tom Stafford",
+                    "file_id": "sally_sue_brown_1",
+                    "index": 3
+                },
+                "Ninety Miles an Hour (Down a Dead End Street)": {
+                    "written_by": "Hal Blair, <a href='https://en.wikipedia.org/wiki/Don_Robertson_(songwriter)'>Don Robertson</a>",
+                    "file_id": "ninety_miles_an_hour_down_a_dead_end_street_1",
+                    "index": 8
+                },
+                "Rank Strangers to Me": {
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Albert_E._Brumley'>Albert E. Brumley</a>",
+                    "file_id": "rank_strangers_to_me_1",
+                    "index": 10
+                }
+            },
+            "image_file_name": "Down_in_the_Groove.jpg",
+            "release_date": "May 30, 1988",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "down_in_the_groove",
+            "producers": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Mark_Knopfler'>Mark Knopfler</a> (on <a href='../songs/html/death_is_not_the_end_1.html'>Death Is Not the End</a>)"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Oh Mercy",
+            "length": "38:46",
+            "songs": {
+                "Everything Is Broken": {
+                    "file_id": "everything_is_broken_1",
+                    "index": 3
+                },
+                "Man in the Long Black Coat": {
+                    "file_id": "man_in_the_long_black_coat_1",
+                    "index": 5
+                },
+                "Most of the Time": {
+                    "file_id": "most_of_the_time_1",
+                    "index": 6
+                },
+                "What Good Am I?": {
+                    "file_id": "what_good_am_i_1",
+                    "index": 7
+                },
+                "Political World": {
+                    "file_id": "political_world_1",
+                    "index": 1
+                },
+                "Where Teardrops Fall": {
+                    "file_id": "where_teardrops_fall_1",
+                    "index": 2
+                },
+                "Disease of Conceit": {
+                    "file_id": "disease_of_conceit_1",
+                    "index": 8
+                },
+                "Ring Them Bells": {
+                    "file_id": "ring_them_bells_1",
+                    "index": 4
+                },
+                "Shooting Star": {
+                    "file_id": "shooting_star_1",
+                    "index": 10
+                },
+                "What Was It You Wanted?": {
+                    "file_id": "what_was_it_you_wanted_1",
+                    "index": 9
+                }
+            },
+            "image_file_name": "Oh_Mercy.jpg",
+            "release_date": "September 18, 1989",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "oh_mercy",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Daniel_Lanois'>Daniel Lanois</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "Under the Red Sky",
+            "length": "35:21",
+            "songs": {
+                "10,000 Men": {
+                    "file_id": "10000_men_1",
+                    "index": 6
+                },
+                "Unbelievable": {
+                    "file_id": "unbelievable_1",
+                    "index": 3
+                },
+                "T.V. Talkin' Song": {
+                    "file_id": "tv_talkin_song_1",
+                    "index": 5
+                },
+                "Handy Dandy": {
+                    "file_id": "handy_dandy_1",
+                    "index": 9
+                },
+                "God Knows": {
+                    "file_id": "god_knows_1",
+                    "index": 8
+                },
+                "Cat's in the Well": {
+                    "file_id": "cats_in_the_well_1",
+                    "index": 10
+                },
+                "Wiggle Wiggle": {
+                    "file_id": "wiggle_wiggle_1",
+                    "index": 1
+                },
+                "Under the Red Sky": {
+                    "file_id": "under_the_red_sky_1",
+                    "index": 2
+                },
+                "Born in Time": {
+                    "file_id": "born_in_time_1",
+                    "index": 4
+                },
+                "2 x 2": {
+                    "file_id": "2_x_2_1",
+                    "index": 7
+                }
+            },
+            "image_file_name": "Under_the_Red_Sky.jpg",
+            "release_date": "September 10, 1990",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "file_id": "under_the_red_sky",
+            "producers": "Bob Dylan (credited as \"Jack Frost\"), <a href='https://en.wikipedia.org/wiki/Don_Was'>Don Was</a>, <a href='https://en.wikipedia.org/wiki/David_Was'>David Was</a>"
+        },
+        "type": "album"
+    },
+    {
+        "metadata": {
+            "label": "Columbia",
+            "name": "The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991",
+            "length": "229:37",
+            "discs": {
+                "1": "1-22",
+                "2": "23-42",
+                "3": "43-58"
+            },
+            "image_file_name": "The_Bootleg_Series_Volumes_1-3_Rare_and_Unreleased_1961-1991.jpg",
+            "release_date": "March 26, 1991",
+            "songs": {
+                "Sitting on a Barbed Wire Fence": {
+                    "file_id": "sitting_on_a_barbed_wire_fence_1",
+                    "index": 30
+                },
+                "Talkin' John Birch Paranoid Blues": {
+                    "file_id": "talkin_john_birch_paranoid_blues_1",
+                    "index": 16,
+                    "live": {
+                        "date": "on October 26, 1963",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Carnegie_Hall'>Carnegie Hall</a> in <a href='https://en.wikipedia.org/wiki/New_York_City'>New York City</a>"
+                    }
+                },
+                "Series of Dreams": {
+                    "file_id": "series_of_dreams_1",
+                    "index": 58
+                },
+                "Kingsport Town": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "kingsport_town_1",
+                    "index": 12
+                },
+                "Idiot Wind": {
+                    "file_id": "idiot_wind_3",
+                    "index": 42
+                },
+                "Suze (The Cough Song)": {
+                    "file_id": "suze_the_cough_song_1",
+                    "index": 25
+                },
+                "Man on the Street": {
+                    "file_id": "man_on_the_street_1",
+                    "index": 3
+                },
+                "I'll Keep It with Mine": {
+                    "file_id": "ill_keep_it_with_mine_2",
+                    "index": 33
+                },
+                "The Times They Are A-Changin'": {
+                    "file_id": "the_times_they_are_a-changin_3",
+                    "index": 21
+                },
+                "She's Your Lover Now": {
+                    "file_id": "shes_your_lover_now_1",
+                    "index": 34
+                },
+                "Talkin' Bear Mountain Picnic Massacre Blues": {
+                    "file_id": "talkin_bear_mountain_picnic_massacre_blues_1",
+                    "index": 6
+                },
+                "I Shall Be Released": {
+                    "file_id": "i_shall_be_released_4",
+                    "index": 35
+                },
+                "Last Thoughts on Woody Guthrie": {
+                    "file_id": "last_thoughts_on_woody_guthrie_1",
+                    "index": 22,
+                    "live": {
+                        "date": "on April 12, 1963",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/The_Town_Hall_(New_York_City)'>The Town Hall</a> in <a href='https://en.wikipedia.org/wiki/New_York_City'>New York City</a>"
+                    }
+                },
+                "When the Night Comes Falling from the Sky": {
+                    "file_id": "when_the_night_comes_falling_from_the_sky_2",
+                    "index": 57
+                },
+                "No More Auction Block": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "no_more_auction_block_1",
+                    "index": 4,
+                    "live": {
+                        "date": "in October, 1962",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/The_Gaslight_Cafe'>The Gaslight Cafe</a> in <a href='https://en.wikipedia.org/wiki/Greenwich_Village'>Greenwich Village, New York</a>"
+                    }
+                },
+                "You Changed My Life": {
+                    "file_id": "you_changed_my_life_1",
+                    "index": 49
+                },
+                "Rambling, Gambling Willie": {
+                    "file_id": "rambling_gambling_willie_1",
+                    "index": 8
+                },
+                "Hard Times in New York Town": {
+                    "file_id": "hard_times_in_new_york_town_1",
+                    "index": 1
+                },
+                "He Was a Friend of Mine": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "he_was_a_friend_of_mine_1",
+                    "index": 2
+                },
+                "Call Letter Blues": {
+                    "file_id": "call_letter_blues_1",
+                    "index": 41
+                },
+                "Need a Woman": {
+                    "file_id": "need_a_woman_1",
+                    "index": 50
+                },
+                "Angelina": {
+                    "file_id": "angelina_1",
+                    "index": 51
+                },
+                "It Takes a Lot to Laugh, It Takes a Train to Cry": {
+                    "file_id": "it_takes_a_lot_to_laugh_it_takes_a_train_to_cry_2",
+                    "index": 32
+                },
+                "If Not for You": {
+                    "file_id": "if_not_for_you_2",
+                    "index": 37
+                },
+                "Paths of Victory": {
+                    "file_id": "paths_of_victory_1",
+                    "index": 15
+                },
+                "Santa-Fe": {
+                    "file_id": "santa_fe_1",
+                    "index": 36
+                },
+                "Walls of Red Wing": {
+                    "file_id": "walls_of_red_wing_1",
+                    "index": 14
+                },
+                "Eternal Circle": {
+                    "file_id": "eternal_circle_1",
+                    "index": 24
+                },
+                "Quit Your Low Down Ways": {
+                    "file_id": "quit_your_low_down_ways_1",
+                    "index": 10
+                },
+                "Golden Loom": {
+                    "file_id": "golden_loom_1",
+                    "index": 44
+                },
+                "Subterranean Homesick Blues": {
+                    "file_id": "subterranean_homesick_blues_2",
+                    "index": 28
+                },
+                "If You Gotta Go, Go Now (Or Else You Got to Stay All Night)": {
+                    "file_id": "if_you_gotta_go_go_now_or_else_you_got_to_stay_all_night_1",
+                    "index": 29
+                },
+                "Ye Shall Be Changed": {
+                    "file_id": "ye_shall_be_changed_1",
+                    "index": 47
+                },
+                "Seven Days": {
+                    "file_id": "seven_days_1",
+                    "index": 46,
+                    "live": {
+                        "date": "on April 21, 1976",
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/Tampa,_Florida'>Tampa, Florida</a>"
+                    }
+                },
+                "Catfish": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "file_id": "catfish_1",
+                    "index": 45
+                },
+                "Lord Protect My Child": {
+                    "file_id": "lord_protect_my_child_1",
+                    "index": 54
+                },
+                "Every Grain of Sand": {
+                    "file_id": "every_grain_of_sand_2",
+                    "index": 48
+                },
+                "Moonshiner": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "moonshiner_1",
+                    "index": 19
+                },
+                "Tell Me": {
+                    "file_id": "tell_me_1",
+                    "index": 53
+                },
+                "Let Me Die in My Footsteps": {
+                    "file_id": "let_me_die_in_my_footsteps_1",
+                    "index": 7
+                },
+                "Only a Hobo": {
+                    "file_id": "only_a_hobo_1",
+                    "index": 18
+                },
+                "Seven Curses": {
+                    "file_id": "seven_curses_1",
+                    "index": 23
+                },
+                "Who Killed Davey Moore?": {
+                    "file_id": "who_killed_davey_moore_1",
+                    "index": 17,
+                    "live": {
+                        "date": "on October 27, 1963",
+                        "location/concert": "at <a href='https://en.wikipedia.org/wiki/Carnegie_Hall'>Carnegie Hall</a> in <a href='https://en.wikipedia.org/wiki/New_York_City'>New York City</a>"
+                    }
+                },
+                "Mama, You Been on My Mind": {
+                    "file_id": "mama_you_been_on_my_mind_1",
+                    "index": 26
+                },
+                "Wallflower": {
+                    "file_id": "wallflower_1",
+                    "index": 38
+                },
+                "Nobody 'Cept You": {
+                    "file_id": "nobody_cept_you_1",
+                    "index": 39
+                },
+                "Someone's Got a Hold of My Heart": {
+                    "file_id": "someones_got_a_hold_of_my_heart_1",
+                    "index": 52
+                },
+                "When the Ship Comes In": {
+                    "file_id": "when_the_ship_comes_in_2",
+                    "index": 20
+                },
+                "House Carpenter": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "house_carpenter_1",
+                    "index": 5
+                },
+                "Talkin' Hava Negeilah Blues": {
+                    "file_id": "talkin_hava_negeilah_blues_1",
+                    "index": 9
+                },
+                "Farewell, Angelina": {
+                    "file_id": "farewell_angelina_1",
+                    "index": 27
+                },
+                "If You See Her, Say Hello": {
+                    "file_id": "if_you_see_her_say_hello_2",
+                    "index": 43
+                },
+                "Tangled Up in Blue": {
+                    "file_id": "tangled_up_in_blue_3",
+                    "index": 40
+                },
+                "Like a Rolling Stone": {
+                    "file_id": "like_a_rolling_stone_5",
+                    "index": 31
+                },
+                "Worried Blues": {
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "worried_blues_1",
+                    "index": 11
+                },
+                "Blind Willie McTell": {
+                    "file_id": "blind_willie_mctell_1",
+                    "index": 56
+                },
+                "Foot of Pride": {
+                    "file_id": "foot_of_pride_1",
+                    "index": 55
+                },
+                "Walkin' Down the Line": {
+                    "file_id": "walkin_down_the_line_1",
+                    "index": 13
+                }
+            },
+            "file_id": "the_bootleg_series_volumes_1-3_rare_and_unreleased_1961-1991",
+            "producers": "Jeff Rosen"
+        },
+        "type": "album"
+    }
+]
