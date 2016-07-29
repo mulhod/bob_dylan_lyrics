@@ -1,25 +1,38 @@
+"""
+Command-line utility (and module consisting of functions/methods) for
+"HTMLifying" raw song lyrics text files accompanied by album/song
+metadata and some other content, including images and homepage content.
+
+Usage:
+
+    ```htmlify```
+
+        - Will generate all of the website pages.
+
+    ```htmlify --make_downloads```
+
+        - Will generate all of the website pages and also generate the
+          lyrics downloads files, which contain collections of the raw
+          lyrics files.
+"""
 import re
 import sys
 from math import ceil
 from glob import glob
-from json import loads
-from string import ascii_uppercase
-from collections import OrderedDict
+from itertools import chain
 from os.path import join, getsize
+from string import ascii_uppercase
 
 import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from typing import Any, Dict, List, Iterable, Tuple, Optional
+from typing import Dict, List, Optional
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 from src import (Album, Song, SongFilesDictType, IndexDictType,
                  file_id_types_to_skip, root_dir_path, albums_dir, songs_dir,
-                 resources_dir, images_dir, file_dumps_dir, song_index_dir,
-                 album_index_dir, main_index_html_file_name,
-                 song_index_html_file_name, album_index_html_file_name,
-                 albums_index_html_file_name, custom_style_sheet_file_name,
+                 resources_dir, images_dir, albums_index_html_file_name,
                  downloads_file_name, all_songs_file_name,
                  all_songs_unique_file_name, text_dir_path,
                  song_index_dir_path, songs_and_albums_index_json_file_path,
@@ -27,413 +40,10 @@ from src import (Album, Song, SongFilesDictType, IndexDictType,
                  albums_index_html_file_path, file_dumps_dir_path,
                  main_index_html_file_path, home_page_content_file_path,
                  ANNOTATION_MARK_RE, remove_inline_annotation_marks,
-                 replace_double_quotes, replace_single_quotes,
-                 CLEANUP_REGEXES_DICT, clean_title, get_title_index_letter)
-
-
-# Lists for collecting song texts (used to create lyrics download files
-# at the end of the process)
-song_texts = []
-unique_song_texts = set()
-
-
-def read_json_index_file(file_path: str) -> IndexDictType:
-    """
-    Read the albums/songs index file (JSON format), stripping out any
-    comments.
-
-    :param file_path: path to index JSON file
-    :type file_path: str
-
-    :returns: a list of dictionaries containing information about
-              albums, song indices, etc.
-    :rtype: IndexDictType
-    """
-
-    return loads('\n'.join([line for line in open(file_path)
-                            if not line.startswith('#')]))
-
-
-def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictType]:
-    """
-    Read albums_and_songs_index.jsonlines file and make dictionary
-    representation.
-
-    :param index_json_path: path to JSON file containing metadata
-                            describing each album and the files
-                            related to it/its songs (in JSON format)
-    :type index_json_path: str
-
-    :returns: a tuple consisting of 1) an ordered dictionary
-              associating album names (str) to dictionaries containing
-              metadata attributes and ordered song dictionaries, which,
-              in turn, consist of song IDs (str) mapped to dictionaries
-              of song metadata, and 2) a dictionary mapping song names
-              to lists of dictionaries containing information about
-              various versions of songs
-    :rtype: Tuple[List[Album], SongFilesDictType]
-
-    :raises: ValueError
-    """
-
-    albums = []
-    for collection in read_json_index_file(index_json_path):
-
-        if collection['type'] == 'album':
-
-            albums.append(Album(collection['type'], collection['metadata']))
-
-        elif collection['type'] == 'song':
-
-            # Define the actions to take when an entry only contains a
-            # single song (when this comes up eventually)
-            # NOTE: Remember to deal with adding the lyrics of the song
-            # in question to the list of song lyrics.
-            pass
-
-        else:
-            raise ValueError('Encountered a JSON object whose "type" attribute'
-                             ' is neither "album" nor "song".')
-
-    if not albums:
-        raise ValueError('No albums/song collections found in index file!')
-
-    # Make a dictionary mapping song names to a list of song versions
-    # (file IDs, original album, etc.) for use in building the song
-    # index
-    song_files_dict = {}
-    for album in albums:
-        for song in album.songs:
-
-            # Get the name of the song (some songs show up under
-            # slightly different names on different albums or show up
-            # more than once on a single album and thus require a
-            # different key)
-            song_name = song.actual_name if song.actual_name else song.name
-
-            # Add in song name/file ID and album name/file ID to
-            # `song_files_dict` (for the song index), indicating if the
-            # song is an instrumental or if it wouldn't be associated
-            # with an actual file ID for some other reason
-            if song.instrumental:
-                song_file_id = 'instrumental'
-            elif song.written_and_performed_by:
-                song_file_id = 'not_written_or_peformed_by_dylan'
-            else:
-                song_file_id = song.file_id
-
-            file_album_dict = {'name': album.name, 'file_id': album.file_id}
-            if song_name not in song_files_dict:
-                song_files_dict[song_name] = [{'file_id': song_file_id,
-                                               'album(s)': [file_album_dict]}]
-            else:
-
-                # Iterate over the entries in `song_files_dict` for a
-                # given song, each entry corresponding to a different
-                # `file_id` (basically, a different version of the same
-                # song) and, if an entry for the song's file ID is
-                # found, add its album to the list of albums associated
-                # with that file ID/version, and, if not, then add the
-                # file ID/version to the list of versions associated
-                # with the song (i.e., with its own list of albums)
-                found_file_id_in_song_dicts = False
-                if song_file_id not in file_id_types_to_skip:
-                    for file_ids_dict in song_files_dict[song_name]:
-                        if file_ids_dict['file_id'] == song_file_id:
-                            file_ids_dict['album(s)'].append(file_album_dict)
-                            found_file_id_in_song_dicts = True
-                            break
-                if not found_file_id_in_song_dicts:
-                    song_files_dict[song_name].append({'file_id': song_file_id,
-                                                       'album(s)': [file_album_dict]})
-
-    return albums, song_files_dict
-
-
-def add_declaration(html_string: str) -> str:
-    """
-    Add in the declaration, i.e., "<!DOCTYPE html>", to the beginning
-    of a string representation of an HTML file and return the new
-    string.
-
-    :param html_string: 
-    :type html_string: str
-
-    :returns: HTML string
-    :rtype: str
-    """
-
-    return str(BeautifulSoup('<!DOCTYPE html>\n{0}'.format(html_string),
-                             'html.parser'))
-
-
-def make_head_element(level: int = 0) -> Tag:
-    """
-    Make a head element including stylesheets, Javascript, etc.
-
-    :param level: number of levels down (from the root) the file for
-                  which this head element will be used is located, if
-                  any
-    :type level: int
-
-    :returns: HTML head element
-    :rtype: Tag
-    """
-
-    head = Tag(name='head')
-    head.append(Tag(name='meta', attrs={'charset': "utf-8"}))
-    meta_tag = Tag(name='meta',
-                   attrs={'name': 'viewport',
-                          'content': 'width=device-width, initial-scale=1'})
-    head.append(meta_tag)
-    head.append(Tag(name='link',
-                    attrs={'rel': 'stylesheet',
-                           'href': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'}))
-    head.append(Tag(name='link',
-                    attrs={'rel': 'stylesheet',
-                           'href': join(*['..']*level, resources_dir,
-                                        custom_style_sheet_file_name)}))
-    head.append(Tag(name='script',
-                    attrs={'src': 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'}))
-    head.append(Tag(name='script',
-                    attrs={'src': 'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'}))
-    head.append(Tag(name='script',
-                    attrs={'src': join(*['..']*level, resources_dir,
-                                       'search.js')}))
-    head.append(Tag(name='script',
-                    attrs={'src': join(*['..']*level, resources_dir,
-                                       'analytics.js')}))
-
-    return head
-
-
-def make_navbar_element(albums: List[Album], level: int = 0) -> Tag:
-    """
-    Generate a navigation bar element to insert into webpages for
-    songs, albums, etc.
-
-    :param albums: list of Album objects
-    :type albums: List[Album]
-    :param level: number of levels down (from the root) the file for
-                  which this navigation bar will be used is located, if
-                  any
-    :type level: int
-
-    :returns: HTML head element
-    :rtype: Tag
-    """
-
-    up_levels = join('', *['..']*level)
-
-    # Create a navigation element in which to put in buttons and
-    # dropdown menus, etc.
-    top_level_nav = Tag(name='nav', attrs={'class': 'navbar navbar-default'})
-    container_div = Tag(name='div', attrs={'class': 'container-fluid'})
-    navbar_header_div = Tag(name='div', attrs={'class': 'navbar-header'})
-    navbar_collapse_button = Tag(name='button',
-                                 attrs={'type': 'button',
-                                        'class': 'navbar-toggle collapsed',
-                                        'data-toggle': 'collapse',
-                                        'data-target': '#bs-example-navbar-collapse-1',
-                                        'aria-expanded': 'false'})
-    button_span1 = Tag(name='span', attrs={'class': 'sr-only'})
-    button_span1.string = 'Toggle navigation'
-    button_span2 = Tag(name='span', attrs={'class': 'icon-bar'})
-    button_span3 = Tag(name='span', attrs={'class': 'icon-bar'})
-    button_span4 = Tag(name='span', attrs={'class': 'icon-bar'})
-    navbar_collapse_button.append(button_span1)
-    navbar_collapse_button.append(button_span2)
-    navbar_collapse_button.append(button_span3)
-    navbar_collapse_button.append(button_span4)
-    navbar_header_div.append(navbar_collapse_button)
-    
-    # Add in 'Bob Dylan Lyrics' button/link and buttons/links for the
-    # downloads page and the songs index
-    main_index_file_rel_path = join(up_levels, main_index_html_file_name)
-    a_site = Tag(name='a',
-                 attrs={'href': main_index_file_rel_path,
-                        'class': 'navbar-brand'})
-    a_site.string = 'Bob Dylan Lyrics'
-    navbar_header_div.append(a_site)
-    container_div.append(navbar_header_div)
-    navbar_collapse_div = Tag(name='div',
-                              attrs={'class': 'navbar-collapse collapse',
-                                     'id': 'bs-example-navbar-collapse-1',
-                                     'aria-expanded': 'false',
-                                     'style': 'height: 1px'})
-    navbar_ul = Tag(name='ul', attrs={'class': 'nav navbar-nav'})
-    downloads_li = Tag(name='li')
-    downloads_file_rel_path = join(up_levels, file_dumps_dir,
-                                   downloads_file_name)
-    a_downloads = Tag(name='a', attrs={'href': downloads_file_rel_path})
-    a_downloads.string = 'Downloads'
-    downloads_li.append(a_downloads)
-    navbar_ul.append(downloads_li)
-    song_index_li = Tag(name='li')
-    song_index_file_rel_path = join(up_levels, songs_dir, song_index_dir,
-                                    song_index_html_file_name)
-    a_song_index = Tag(name='a', attrs={'href': song_index_file_rel_path})
-    a_song_index.string = 'All Songs'
-    song_index_li.append(a_song_index)
-    navbar_ul.append(song_index_li)
-    album_index_li = Tag(name='li')
-    album_index_file_rel_path = join(up_levels, albums_dir, album_index_dir,
-                                     album_index_html_file_name)
-    a_album_index = Tag(name='a', attrs={'href': album_index_file_rel_path})
-    a_album_index.string = 'All Albums'
-    album_index_li.append(a_album_index)
-    navbar_ul.append(album_index_li)
-
-    # Add in dropdown menus for albums by decade
-    for decade in ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']:
-        dropdown_li = Tag(name='li', attrs={'class': 'dropdown'})
-        a_dropdown = Tag(name='a',
-                         attrs={'href': '#',
-                                'class': 'dropdown-toggle',
-                                'data-toggle': 'dropdown',
-                                'role': 'button',
-                                'aria-haspopup': 'true',
-                                'aria-expanded': 'false'})
-        a_dropdown.string = decade
-        caret_span = Tag(name='span', attrs={'class': 'caret'})
-        a_dropdown.append(caret_span)
-        dropdown_li.append(a_dropdown)
-        dropdown_menu_ul = Tag(name='ul', attrs={'class': 'dropdown-menu'})
-        
-        # Add albums from the given decade into the decade dropdown menu
-        albums_dir_rel_path = join(up_levels, albums_dir)
-        decade_albums = [album for album in albums
-                         if decade[:3] in album.release_date.split()[-1][:3]]
-        for album in decade_albums:
-            album_file_name = '{0}.html'.format(album.file_id)
-            year = album.release_date.split()[-1]
-            album_li = Tag(name='li')
-            album_index_file_rel_path = join(albums_dir_rel_path, album_file_name)
-            album_a = Tag(name='a',
-                          attrs={'href': album_index_file_rel_path,
-                                 'class': 'album'})
-            album_a.string = '{0} ({1})'.format(album.name, year)
-            album_li.append(album_a)
-            dropdown_menu_ul.append(album_li)
-
-        dropdown_li.append(dropdown_menu_ul)
-        navbar_ul.append(dropdown_li)
-
-    navbar_collapse_div.append(navbar_ul)
-
-    # Add in search box
-    search_div = Tag(name='div',
-                     attrs={'class': 'col-md-3',
-                            'style': 'border:0px solid;width:30%;height:auto;'})
-    gcse_tag = Tag(name='gcse:search')
-    search_form = Tag(name='form',
-                      attrs={'class': 'navbar-form navbar-right',
-                             'role': 'search'})
-    gcse_tag.append(search_form)
-    search_div.append(gcse_tag)
-    navbar_collapse_div.append(search_div)
-
-    container_div.append(navbar_collapse_div)
-    top_level_nav.append(container_div)
-
-    return top_level_nav
-
-
-def remove_annotations(text: str) -> str:
-    """
-    Remove inline annotation marks and footnotes from a string
-    containing raw lyrics text file(s).
-
-    :param text: lyrics text
-    :type text: str
-
-    :returns: lyrics text
-    :rtype: str
-
-    :raises ValueError: if `text` is empty
-    """
-
-    if not text:
-        raise ValueError('"text" is empty!')
-
-    # Remove footnotes and inline annotation marks
-    text = '\n'.join([line for line in text.split('\n')
-                      if not line.startswith('**')])
-    text = remove_inline_annotation_marks(text)
-
-    return text
-
-
-def standardize_quotes(text: str) -> str:
-    """
-    Replace all single/double stylized quotes with their unstylized
-    counterparts.
-
-    :param text: input text
-    :type text: str
-
-    :returns: output text
-    :rtype: str
-    """
-
-    return replace_single_quotes(r"'", replace_double_quotes(r'"', text))
-
-
-def clean_up_html(html: str) -> str:
-    """
-    Clean up HTML generated via BeautifulSoup by converting
-    "&lt;"/"&gt;" character sequences to "<"/">".
-
-    :param html: input HTML
-    :type html: str
-
-    :returns: output HTML
-    :rtype: str
-    """
-
-    for sub, regex in CLEANUP_REGEXES_DICT.items():
-        html = regex.sub(sub, html)
-
-    return html
-
-
-def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
-    """
-    Get list of annotation indices in a sentence (treating the
-    annotations themselves as zero-length entities).
-
-    :param line: original line (including annotations)
-    :type line: str
-    :param annotations: list of annotation values, i.e., the numbered
-                        part of each annotation
-    :type annotations: list
-
-    :returns: list of indices for zero-length annotations in line
-    :rtype: list
-    """
-
-    indices = []
-
-    # Figure out the indices of the zero-length annotations
-    i = 0
-    annotation_index = 0
-    line = line.strip().split('**')
-    for part in line:
-        try:
-            if part == annotations[annotation_index]:
-                indices.append(i)
-                annotation_index += 1
-                continue
-        except IndexError:
-            pass
-        if part not in annotations:
-            i += len(part)
-
-    if len(annotations) != annotation_index:
-        raise ValueError('One or more annotations were not found. annotations '
-                         '= {0}, line = "{1}".'.format(annotations, line))
-
-    return indices
+                 generate_lyrics_download_files, and_join_album_links,
+                 sort_titles, read_songs_index, remove_annotations,
+                 standardize_quotes, clean_up_html, find_annotation_indices,
+                 add_html_declaration, make_head_element, make_navbar_element)
 
 
 def generate_index_page(albums: List[Album]) -> None:
@@ -477,7 +87,7 @@ def generate_index_page(albums: List[Album]) -> None:
     html.append(body)
 
     with open(main_index_html_file_path, 'w') as index_file:
-        index_file.write(add_declaration(clean_up_html(str(html))))
+        index_file.write(add_html_declaration(clean_up_html(str(html))))
 
 
 def generate_song_list_element(song: Song) -> Tag:
@@ -776,12 +386,11 @@ def generate_song_list(songs: List[Song],
 
             # Make sure the correct number of songs were included
             if added_songs != expected_number_of_songs:
-                sys.stderr.write('The number of expected songs ({0}) for the '
-                                 'given side/disc ({1}) does not equal the '
-                                 'number of songs actually included on the '
-                                 'side/disc ({2}).'
-                                 .format(expected_number_of_songs, section,
-                                         added_songs))
+                print('The number of expected songs ({0}) for the given '
+                      'side/disc ({1}) does not equal the number of songs '
+                      'actually included on the side/disc ({2}).'
+                      .format(expected_number_of_songs, section, added_songs),
+                      file=sys.stderr)
 
             ol.append(inner_ol)
             ol.append(Tag(name='p'))
@@ -793,8 +402,10 @@ def generate_song_list(songs: List[Song],
     return columns_div
 
 
-def htmlify_everything(albums: List[Album], song_files_dict: SongFilesDictType,
-                       make_downloads: bool = False) -> None:
+def htmlify_everything(albums: List[Album],
+                       song_files_dict: SongFilesDictType,
+                       make_downloads: bool = False) \
+    -> Optional[Dict[str, List[str]]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs.
@@ -808,12 +419,14 @@ def htmlify_everything(albums: List[Album], song_files_dict: SongFilesDictType,
                            generated
     :type make_downloads: bool
 
-    :returns: None
-    :rtype: None
+    :returns: None or a dictionary with `song_texts` and
+              `unique_song_texts` keys associated with lists of song
+              lyrics
+    :rtype: Optional[Dict[str, List[str]]]
     """
 
     # Generate index page for albums
-    sys.stderr.write('HTMLifying the albums index page...\n')
+    print('HTMLifying the albums index page...', file=sys.stderr)
 
     # Make HTML element for albums index page
     index_html = Tag(name='html')
@@ -844,24 +457,37 @@ def htmlify_everything(albums: List[Album], song_files_dict: SongFilesDictType,
     # Write new HTML file for albums index page
     with open(join(root_dir_path,
                    albums_index_html_file_name), 'w') as albums_index:
-        albums_index.write(add_declaration(index_html.prettify(formatter="html")))
+        (albums_index
+         .write(add_html_declaration(index_html.prettify(formatter="html"))))
 
     # Generate pages for albums
-    sys.stderr.write('HTMLifying the individual album pages...\n')
-    [htmlify_album(album, albums, make_downloads=make_downloads)
-     for album in albums]
+    print('HTMLifying the individual album pages...', file=sys.stderr)
+    if make_downloads:
+        lyrics_dicts = [htmlify_album(album, albums, make_downloads=True)
+                        for album in albums]
+    else:
+        [htmlify_album(album, albums) for album in albums]
 
     # Generate the main song index page
-    sys.stderr.write('HTMLifying the main song index page...\n')
+    print('HTMLifying the main song index page...', file=sys.stderr)
     htmlify_main_song_index_page(song_files_dict, albums)
 
     # Generate the main album index page
-    sys.stderr.write('HTMLifying the main album index page...\n')
+    print('HTMLifying the main album index page...', file=sys.stderr)
     htmlify_main_album_index_page(albums)
+
+    if make_downloads:
+        return dict(song_texts=list(chain(*[lyrics['song_texts'] for lyrics
+                                            in lyrics_dicts])),
+                    unique_song_texts=list(chain(*[lyrics['unique_song_texts']
+                                                   for lyrics
+                                                   in lyrics_dicts])))
+
+    return
 
 
 def htmlify_album(album: Album, albums: List[Album],
-                  make_downloads: bool = False) -> None:
+                  make_downloads: bool = False) -> Optional[Dict[str, List[str]]]:
     """
     Generate HTML pages for a particular album and its songs.
 
@@ -873,11 +499,14 @@ def htmlify_album(album: Album, albums: List[Album],
                            generated
     :type make_downloads: bool
 
-    :returns: None
-    :rtype: None
+    :returns: None or dictionary with `song_texts` and
+              `unique_song_texts` keys associated with lists of song
+              lyrics
+    :rtype: Optional[Dict[str, List[str]]]
     """
 
-    sys.stderr.write('HTMLifying index page for {}...\n'.format(album.name))
+    print('HTMLifying index page for {}...'.format(album.name),
+          file=sys.stderr)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -962,7 +591,7 @@ def htmlify_album(album: Album, albums: List[Album],
     album_file_path = join(root_dir_path, albums_dir,
                            '{}.html'.format(album.file_id))
     with open(album_file_path, 'w') as album_file:
-        album_file.write(add_declaration(clean_up_html(str(html))))
+        album_file.write(add_html_declaration(clean_up_html(str(html))))
 
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
@@ -970,6 +599,9 @@ def htmlify_album(album: Album, albums: List[Album],
     # optionally, add song texts to the
     # `song_texts`/`unique_song_texts` lists so that lyrics file
     # downloads can be generated at the end of processing
+    if make_downloads:
+        song_texts = []
+        unique_song_texts = set()
     for song in album.songs:
 
         # HTMLify the song
@@ -994,6 +626,12 @@ def htmlify_album(album: Album, albums: List[Album],
                 song_texts.append(no_annotations_song_text)
                 unique_song_texts.add(no_annotations_song_text)
 
+    if make_downloads:
+        return dict(song_texts=song_texts,
+                    unique_song_texts=unique_song_texts)
+
+    return
+
 
 def htmlify_song(song: Song, albums: List[Album]) -> None:
     """
@@ -1011,7 +649,7 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
 
     file_id = song.file_id
     name = song.name
-    sys.stderr.write('HTMLifying {}...\n'.format(name))
+    print('HTMLifying {}...'.format(name), file=sys.stderr)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -1153,7 +791,7 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
     # Write out "prettified" HTML to the output file
     html_output_path = join(songs_dir, 'html', '{0}.html'.format(file_id))
     with open(join(root_dir_path, html_output_path), 'w') as song_file:
-        song_file.write(add_declaration(clean_up_html(str(html))))
+        song_file.write(add_html_declaration(clean_up_html(str(html))))
 
 
 def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
@@ -1171,7 +809,7 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     :rtype: None
     """
 
-    sys.stderr.write('HTMLifying the main songs index page...\n')
+    print('HTMLifying the main songs index page...', file=sys.stderr)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -1223,73 +861,7 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     html.append(body)
 
     with open(songs_index_html_file_path, 'w') as songs_index_file:
-        songs_index_file.write(add_declaration(clean_up_html(str(html))))
-
-
-def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
-    """
-    Sort a list of strings (ignoring leading "The" or "A" or
-    parentheses).
-
-    :param titles: an iterable collection of strings (song titles,
-                   album titles)
-    :type titles: Iterable[str]
-    :param filter_char: character on which to filter the strings, i.e.
-                        strings not beginning with this character --
-                        after being cleaned -- will be filtered out
-    :type filter_char: str
-
-    :returns: string generator
-    :rtype: filter
-
-    :raises: ValueError if any of the strings are empty or there are no
-             strings at all
-    """
-
-    if not titles:
-        raise ValueError('Received empty list!')
-
-    filter_func = (lambda x: filter_char.lower() == get_title_index_letter(x)
-                   if filter_char
-                   else None)
-    return filter(filter_func, sorted(titles, key=clean_title))
-
-
-def and_join_album_links(albums: List[Dict[str, str]]) -> str:
-    """
-    Concatenate one or more albums together such that if it's two, then
-    then they are concatenated by the word "and" padded by spaces, if
-    there's more than two, they're separated by a comma followed by a
-    space except for the last two which are separated with the word
-    "and" as above, and, if there's only one, there's no need to do any
-    special concatenation. Also, each album name should be wrapped in
-    an "a" tag with "href" pointing to the album's index page.
-
-    :param albums: list of dictionaries containing the album names/file
-                   IDs (in 'file_id'/'name' keys)
-    :type albums: list
-
-    :returns: string representing the concatenation of album titles,
-              with each one being surrounded by a link tag pointing to
-              the album's index page
-    :rtype: str
-
-    :raises: ValueError if there are no albums or expected keys in the
-             album dictionaries are not present
-    """
-
-    if not len(albums): raise ValueError('No albums!')
-
-    link_template = '<a href="../../albums/{0}.html">{1}</a>'
-    link = (lambda x: link_template.format(x['file_id'], x['name']))
-
-    if len(albums) == 1:
-        return link(cytoolz.first(albums))
-    else:
-        last_two = ' and '.join([link(album) for album in albums[-2:]])
-        if len(albums) > 2:
-            return ', '.join([link(album) for album in albums[:-2]] + [last_two])
-        return last_two
+        songs_index_file.write(add_html_declaration(clean_up_html(str(html))))
 
 
 def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
@@ -1418,7 +990,7 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
     song_letter_index_file_path = join(root_dir_path, song_index_dir_path,
                                        '{0}.html'.format(letter.lower()))
     with open(song_letter_index_file_path, 'w') as letter_index_file:
-        letter_index_file.write(add_declaration(clean_up_html(str(html))))
+        letter_index_file.write(add_html_declaration(clean_up_html(str(html))))
 
     return True
 
@@ -1434,7 +1006,7 @@ def htmlify_main_album_index_page(albums: List[Album]):
     :rtype: None
     """
 
-    sys.stderr.write('HTMLifying the main albums index page...\n')
+    print('HTMLifying the main albums index page...', file=sys.stderr)
 
     # Make BeautifulSoup object and append head element containing
     # stylesheets, Javascript, etc.
@@ -1486,7 +1058,7 @@ def htmlify_main_album_index_page(albums: List[Album]):
     html.append(body)
 
     with open(albums_index_html_file_path, 'w') as albums_index_file:
-        albums_index_file.write(add_declaration(clean_up_html(str(html))))
+        albums_index_file.write(add_html_declaration(clean_up_html(str(html))))
 
 
 def htmlify_album_index_page(letter: str, albums: List[Album]) -> None:
@@ -1558,40 +1130,9 @@ def htmlify_album_index_page(letter: str, albums: List[Album]) -> None:
     album_letter_index_file_path = join(root_dir_path, album_index_dir_path,
                                         '{0}.html'.format(letter.lower()))
     with open(album_letter_index_file_path, 'w') as letter_index_file:
-        letter_index_file.write(add_declaration(clean_up_html(str(html))))
+        letter_index_file.write(add_html_declaration(clean_up_html(str(html))))
 
     return True
-
-
-def write_big_lyrics_files() -> None:
-    """
-    Process the raw lyrics files stored in `song_texts` and
-    `unique_song_texts` (i.e., after `htmlify_song` has been run on
-    each song) and then write big files containing all of the lyrics
-    files in the order in which they were added.
-
-    :returns: None
-    :rtype: None
-    """
-
-    newline_join = '\n'.join
-
-    # Write big file with all songs (even duplicates)
-    song_text_lines = newline_join(song_texts).split('\n')
-    song_text = newline_join([line.strip() for line in song_text_lines
-                              if line.strip()])
-    song_text_path = join(file_dumps_dir_path, all_songs_file_name)
-    with open(song_text_path, 'w') as song_text_file:
-        song_text_file.write(song_text)
-
-    # Write big file with all songs (no duplicates)
-    unique_song_text_lines = newline_join(unique_song_texts).split('\n')
-    unique_song_text = newline_join([line.strip() for line
-                                     in unique_song_text_lines if line.strip()])
-    unique_song_text_path = join(file_dumps_dir_path,
-                                 all_songs_unique_file_name)
-    with open(unique_song_text_path, 'w') as unique_song_text_file:
-        unique_song_text_file.write(unique_song_text)
 
 
 def htmlify_downloads_page(albums: List[Album]) -> None:
@@ -1653,7 +1194,7 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
 
     with open(join(file_dumps_dir_path,
                    downloads_file_name), 'w') as downloads_file:
-        downloads_file.write(add_declaration(clean_up_html(str(html))))
+        downloads_file.write(add_html_declaration(clean_up_html(str(html))))
 
 
 def main():
@@ -1664,7 +1205,7 @@ def main():
                                         'albums_and_songs_index.jsonlines '
                                         'file and on the raw text files that '
                                         'contain the lyrics.')
-    parser.add_argument('--generate_lyrics_download_files', '-make_downloads',
+    parser.add_argument('--make_downloads',
                         help='Generate download files containing all of the '
                              'lyrics (both all of the songs concatenated '
                              'together and all of the unique songs in the '
@@ -1674,29 +1215,34 @@ def main():
     args = parser.parse_args()
 
     # Arguments
-    make_downloads = args.generate_lyrics_download_files
+    make_downloads = args.make_downloads
 
     # Read in contents of the albums_and_songs_index.jsonlines file,
     # constructing a dictionary of albums and the associated songs,
     # etc.
-    sys.stderr.write('Reading the albums_and_songs_index.jsonlines file and '
-                     'building up index of albums and songs...\n')
+    print('Reading the albums_and_songs_index.jsonlines file and building up '
+          'index of albums and songs...',
+          file=sys.stderr)
     albums, song_files_dict = \
         read_songs_index(songs_and_albums_index_json_file_path)
 
     # Generate HTML files for the main index page, albums, songs, etc.
-    sys.stderr.write('Generating HTML files for the main page, albums, songs, '
-                     'etc....\n')
+    print('Generating HTML files for the main page, albums, songs, etc....',
+          file=sys.stderr)
     generate_index_page(albums)
-    htmlify_everything(albums, song_files_dict, make_downloads=make_downloads)
+    if make_downloads:
+        lyrics_dict = htmlify_everything(albums, song_files_dict,
+                                         make_downloads=True)
+    else:
+        htmlify_everything(albums, song_files_dict)
 
     # Write raw lyrics files (for downloading), if requested
     if make_downloads:
-        sys.stderr.write('Generating the full lyrics download files...\n')
-        write_big_lyrics_files()
+        print('Generating the full lyrics download files...', file=sys.stderr)
+        generate_lyrics_download_files(lyrics_dict)
         htmlify_downloads_page(albums)
 
-    sys.stderr.write('Program complete.\n')
+    print('Program complete.', file=sys.stderr)
 
 
 if __name__ == '__main__':
