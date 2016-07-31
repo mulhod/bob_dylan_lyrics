@@ -30,12 +30,12 @@ from markdown import Markdown
 from typing import Dict, List, Optional
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-from src import (Album, Song, SongFilesDictType, IndexDictType,
-                 file_id_types_to_skip, root_dir_path, albums_dir, songs_dir,
-                 resources_dir, images_dir, albums_index_html_file_name,
-                 downloads_file_name, all_songs_file_name,
-                 all_songs_unique_file_name, text_dir_path,
-                 song_index_dir_path, songs_and_albums_index_json_file_path,
+from src import (Album, Song, SongFilesDictType, file_id_types_to_skip,
+                 root_dir_path, albums_dir, songs_dir, resources_dir,
+                 images_dir, albums_index_html_file_name, downloads_file_name,
+                 all_songs_file_name, all_songs_unique_file_name,
+                 text_dir_path, song_index_dir_path,
+                 songs_and_albums_index_json_file_path,
                  songs_index_html_file_path, album_index_dir_path,
                  albums_index_html_file_path, file_dumps_dir_path,
                  main_index_html_file_path, home_page_content_file_path,

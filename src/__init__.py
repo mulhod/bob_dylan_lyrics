@@ -10,14 +10,13 @@ import re
 from json import loads
 from operator import itemgetter
 from os.path import dirname, realpath, join
-from typing import Dict, List, Union, MutableMapping, Any, Iterable, Tuple
+from typing import Dict, List, Union, Any, Iterable, Tuple
 
 import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 
 SongFilesDictType = Dict[str, List[Dict[str, Union[str, int, List[Dict[str, str]]]]]]
-IndexDictType = List[SongFilesDictType]
 SongDictType = Dict[str, Union[str, Dict[str, str]]]
 
 file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
