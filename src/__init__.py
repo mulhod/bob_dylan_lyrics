@@ -9,7 +9,6 @@ HTML.
 import re
 from json import loads
 from operator import itemgetter
-from collections import OrderedDict
 from os.path import dirname, realpath, join
 from typing import Dict, List, Union, MutableMapping, Any, Iterable, Tuple
 
@@ -101,6 +100,38 @@ class Album():
                       in sorted(metadata.get('songs').items(),
                                 key=lambda x: itemgetter(1)(x).get('index'))]
 
+    def __str__(self):
+        """
+        Function for representing an object as a string.
+        """
+
+        attrs_dict = dict(type_=self.type_,
+                          name=self.name,
+                          file_id=self.file_id,
+                          length=self.length,
+                          image_file_name=self.image_file_name,
+                          release_date=self.release_date,
+                          producers=self.producers,
+                          label=self.label)
+
+        # Add in a key for `sides`/`discs` if specified
+        sections = (('sides', self.sides) if self.sides
+                    else (('discs', self.discs) if self.discs else None))
+        if sections:
+            attrs_dict[sections[0]] = sections[1]
+
+        # Add in keys for other possibly-present attributes
+        if self.with_:
+            attrs_dict['with_'] = self.with_
+        if self.live:
+            attrs_dict['live'] = self.live
+
+        sorted_keys = ['name', 'file_id', 'image_file_name', 'length', 'label',
+                       'release_date', 'producers', 'discs', 'sides', 'type_',
+                       'with', 'live']
+        return '\n'.join(['{0}: {1}'.format(key, attrs_dict[key]) for key
+                          in sorted_keys if key in attrs_dict])
+
 
 class Song():
     """
@@ -120,6 +151,40 @@ class Song():
             metadata.get('written_and_performed_by', {})
         self.duet = metadata.get('duet', '')
         self.live = metadata.get('live', '')
+
+    def __str__(self):
+        """
+        Function for representing an object as a string.
+        """
+
+        attrs_dict = dict(name=self.name)
+
+        # Add in keys for other possibly-present attributes
+        if self.file_id:
+            attrs_dict['file_id'] = self.file_id
+        if self.actual_name:
+            attrs_dict['actual_name'] = self.actual_name
+        if self.live:
+            attrs_dict['live'] = self.live
+        if self.source:
+            attrs_dict['source'] = self.source
+        if self.sung_by:
+            attrs_dict['sung_by'] = self.sung_by
+        if self.instrumental:
+            attrs_dict['instrumental'] = self.instrumental
+        if self.written_by:
+            attrs_dict['written_by'] = self.written_by
+        if self.written_and_performed_by:
+            attrs_dict['written_and_performed_by'] = \
+                self.written_and_performed_by
+        if self.duet:
+            attrs_dict['duet'] = self.duet
+
+        sorted_keys = ['name', 'actual_name', 'file_id', 'source', 'live',
+                       'instrumental', 'duet', 'sung_by', 'written_by',
+                       'written_and_performed_by']
+        return '\n'.join(['{0}: {1}'.format(key, attrs_dict[key]) for key
+                          in sorted_keys if key in attrs_dict])
 
 
 def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:

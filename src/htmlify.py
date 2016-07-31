@@ -1214,9 +1214,6 @@ def main():
                         default=False)
     args = parser.parse_args()
 
-    # Arguments
-    make_downloads = args.make_downloads
-
     # Read in contents of the albums_and_songs_index.jsonlines file,
     # constructing a dictionary of albums and the associated songs,
     # etc.
@@ -1227,20 +1224,18 @@ def main():
         read_songs_index(songs_and_albums_index_json_file_path)
 
     # Generate HTML files for the main index page, albums, songs, etc.
+    # and write raw lyrics files (for downloading), if requested
     print('Generating HTML files for the main page, albums, songs, etc....',
           file=sys.stderr)
     generate_index_page(albums)
-    if make_downloads:
-        lyrics_dict = htmlify_everything(albums, song_files_dict,
-                                         make_downloads=True)
+    if args.make_downloads:
+        print('Generating the lyrics download files...', file=sys.stderr)
+        generate_lyrics_download_files(htmlify_everything(albums,
+                                                          song_files_dict,
+                                                          make_downloads=True))
+        htmlify_downloads_page(albums)
     else:
         htmlify_everything(albums, song_files_dict)
-
-    # Write raw lyrics files (for downloading), if requested
-    if make_downloads:
-        print('Generating the full lyrics download files...', file=sys.stderr)
-        generate_lyrics_download_files(lyrics_dict)
-        htmlify_downloads_page(albums)
 
     print('Program complete.', file=sys.stderr)
 
