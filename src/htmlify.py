@@ -42,8 +42,9 @@ from src import (Album, Song, SongFilesDictType, file_id_types_to_skip,
                  ANNOTATION_MARK_RE, remove_inline_annotation_marks,
                  generate_lyrics_download_files, and_join_album_links,
                  sort_titles, read_songs_index, remove_annotations,
-                 standardize_quotes, clean_up_html, find_annotation_indices,
-                 add_html_declaration, make_head_element, make_navbar_element)
+                 standardize_quotes, clean_up_html, prepare_html,
+                 find_annotation_indices, add_html_declaration,
+                 make_head_element, make_navbar_element)
 
 
 def generate_index_page(albums: List[Album]) -> None:
@@ -87,7 +88,7 @@ def generate_index_page(albums: List[Album]) -> None:
     html.append(body)
 
     with open(main_index_html_file_path, 'w') as index_file:
-        index_file.write(add_html_declaration(clean_up_html(str(html))))
+        index_file.write(prepare_html(html))
 
 
 def generate_song_list_element(song: Song) -> Tag:
@@ -591,7 +592,7 @@ def htmlify_album(album: Album, albums: List[Album],
     album_file_path = join(root_dir_path, albums_dir,
                            '{}.html'.format(album.file_id))
     with open(album_file_path, 'w') as album_file:
-        album_file.write(add_html_declaration(clean_up_html(str(html))))
+        album_file.write(prepare_html(html))
 
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
@@ -791,7 +792,7 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
     # Write out "prettified" HTML to the output file
     html_output_path = join(songs_dir, 'html', '{0}.html'.format(file_id))
     with open(join(root_dir_path, html_output_path), 'w') as song_file:
-        song_file.write(add_html_declaration(clean_up_html(str(html))))
+        song_file.write(prepare_html(html))
 
 
 def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
@@ -861,7 +862,7 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
     html.append(body)
 
     with open(songs_index_html_file_path, 'w') as songs_index_file:
-        songs_index_file.write(add_html_declaration(clean_up_html(str(html))))
+        songs_index_file.write(prepare_html(html))
 
 
 def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
@@ -990,7 +991,7 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
     song_letter_index_file_path = join(root_dir_path, song_index_dir_path,
                                        '{0}.html'.format(letter.lower()))
     with open(song_letter_index_file_path, 'w') as letter_index_file:
-        letter_index_file.write(add_html_declaration(clean_up_html(str(html))))
+        letter_index_file.write(prepare_html(html))
 
     return True
 
@@ -1058,7 +1059,7 @@ def htmlify_main_album_index_page(albums: List[Album]):
     html.append(body)
 
     with open(albums_index_html_file_path, 'w') as albums_index_file:
-        albums_index_file.write(add_html_declaration(clean_up_html(str(html))))
+        albums_index_file.write(prepare_html(html))
 
 
 def htmlify_album_index_page(letter: str, albums: List[Album]) -> None:
@@ -1130,7 +1131,7 @@ def htmlify_album_index_page(letter: str, albums: List[Album]) -> None:
     album_letter_index_file_path = join(root_dir_path, album_index_dir_path,
                                         '{0}.html'.format(letter.lower()))
     with open(album_letter_index_file_path, 'w') as letter_index_file:
-        letter_index_file.write(add_html_declaration(clean_up_html(str(html))))
+        letter_index_file.write(prepare_html(html))
 
     return True
 
@@ -1194,7 +1195,7 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
 
     with open(join(file_dumps_dir_path,
                    downloads_file_name), 'w') as downloads_file:
-        downloads_file.write(add_html_declaration(clean_up_html(str(html))))
+        downloads_file.write(prepare_html(html))
 
 
 def main():

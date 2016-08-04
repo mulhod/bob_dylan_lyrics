@@ -385,20 +385,20 @@ def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictTy
     return albums, song_files_dict
 
 
-def add_html_declaration(html_string: str) -> str:
+def add_html_declaration(html: str) -> str:
     """
     Add in the declaration, i.e., "<!DOCTYPE html>", to the beginning
     of a string representation of an HTML file and return the new
     string.
 
-    :param html_string: raw HTML content
-    :type html_string: str
+    :param html: raw HTML content
+    :type html: str
 
     :returns: HTML string
     :rtype: str
     """
 
-    return str(BeautifulSoup('<!DOCTYPE html>\n{0}'.format(html_string),
+    return str(BeautifulSoup('<!DOCTYPE html>\n{0}'.format(html),
                              'html.parser'))
 
 
@@ -458,6 +458,20 @@ def clean_up_html(html: str) -> str:
         html = regex.sub(sub, html)
 
     return html
+
+
+def prepare_html(html: Tag) -> str:
+    """
+    Clean up HTML and add a declaration.
+
+    :param html: input Tag object representing a full HTML page
+    :type html: str
+
+    :returns: output HTML
+    :rtype: str
+    """
+
+    return add_html_declaration(clean_up_html(str(html)))
 
 
 def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
