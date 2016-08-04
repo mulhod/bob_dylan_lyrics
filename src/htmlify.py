@@ -20,7 +20,7 @@ import sys
 from math import ceil
 from glob import glob
 from itertools import chain
-from os.path import join, getsize
+from os.path import join, getsize, exists
 from string import ascii_uppercase
 
 import cytoolz
@@ -405,8 +405,8 @@ def generate_song_list(songs: List[Song],
 
 def htmlify_everything(albums: List[Album],
                        song_files_dict: SongFilesDictType,
-                       make_downloads: bool = False) \
-    -> Optional[Dict[str, List[str]]]:
+                       make_downloads: bool = False,
+                       allow_file_not_found_error: bool = False) -> Optional[Dict[str, List[str]]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs.
@@ -419,6 +419,9 @@ def htmlify_everything(albums: List[Album],
     :param make_downloads: True if lyrics file downloads should be
                            generated
     :type make_downloads: bool
+    :param allow_file_not_found_error: skip songs after encountering
+                                       one that does not exist ye
+    :type allow_file_not_found_error: bool
 
     :returns: None or a dictionary with `song_texts` and
               `unique_song_texts` keys associated with lists of song
@@ -464,10 +467,14 @@ def htmlify_everything(albums: List[Album],
     # Generate pages for albums
     print('HTMLifying the individual album pages...', file=sys.stderr)
     if make_downloads:
-        lyrics_dicts = [htmlify_album(album, albums, make_downloads=True)
-                        for album in albums]
+        lyrics_dicts = \
+            [htmlify_album(album, albums, make_downloads=True,
+                           allow_file_not_found_error=allow_file_not_found_error)
+             for album in albums]
     else:
-        [htmlify_album(album, albums) for album in albums]
+        [htmlify_album(album, albums,
+                       allow_file_not_found_error=allow_file_not_found_error)
+         for album in albums]
 
     # Generate the main song index page
     print('HTMLifying the main song index page...', file=sys.stderr)
@@ -488,7 +495,8 @@ def htmlify_everything(albums: List[Album],
 
 
 def htmlify_album(album: Album, albums: List[Album],
-                  make_downloads: bool = False) -> Optional[Dict[str, List[str]]]:
+                  make_downloads: bool = False,
+                  allow_file_not_found_error: bool = False) -> Optional[Dict[str, List[str]]]:
     """
     Generate HTML pages for a particular album and its songs.
 
@@ -499,6 +507,9 @@ def htmlify_album(album: Album, albums: List[Album],
     :param make_downloads: True if lyrics file downloads should be
                            generated
     :type make_downloads: bool
+    :param allow_file_not_found_error: skip songs after encountering
+                                       one that does not exist ye
+    :type allow_file_not_found_error: bool
 
     :returns: None or dictionary with `song_texts` and
               `unique_song_texts` keys associated with lists of song
@@ -609,7 +620,12 @@ def htmlify_album(album: Album, albums: List[Album],
         if (not song.instrumental and
             not song.source and
             not song.written_and_performed_by):
-            htmlify_song(song, albums)
+            try:
+                htmlify_song(song, albums)
+            except FileNotFoundError as e:
+                if allow_file_not_found_error:
+                    break
+                raise e
 
         # Add song text to the `song_texts`/`unique_song_texts` lists
         # for the lyrics file downloads
@@ -646,6 +662,8 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
 
     :returns: None
     :rtype: None
+
+    :raises: FileNotFoundError if the song text file does not exist
     """
 
     file_id = song.file_id
@@ -674,6 +692,10 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
     # Process lines from raw lyrics file into different paragraph
     # elements
     input_path = join(root_dir_path, text_dir_path, '{0}.txt'.format(file_id))
+    if not exists(input_path):
+        print("Song file does not exist yet: {}".format(input_path),
+              file=sys.stderr)
+        raise FileNotFoundError
     with open(input_path) as raw_song_lyrics_file:
         song_lines = \
             standardize_quotes(raw_song_lyrics_file.read()).strip().splitlines()
@@ -1213,6 +1235,14 @@ def main():
                              'order of their appearance).',
                         action='store_true',
                         default=False)
+    parser.add_argument('--allow_file_not_found_error',
+                        help='Don\'t fail if a song lyrics text file is not '
+                             'found (useful if not all songs from an album '
+                             'entry in the index file have been added yet, but'
+                             ' you want to htmlify all of the songs that are '
+                             'available).',
+                        action='store_true',
+                        default=False)
     args = parser.parse_args()
 
     # Read in contents of the albums_and_songs_index.jsonlines file,
@@ -1229,14 +1259,18 @@ def main():
     print('Generating HTML files for the main page, albums, songs, etc....',
           file=sys.stderr)
     generate_index_page(albums)
+    allow_file_not_found_error = args.allow_file_not_found_error
     if args.make_downloads:
         print('Generating the lyrics download files...', file=sys.stderr)
-        generate_lyrics_download_files(htmlify_everything(albums,
-                                                          song_files_dict,
-                                                          make_downloads=True))
+        generate_lyrics_download_files(
+            htmlify_everything(albums,
+                               song_files_dict,
+                               make_downloads=True,
+                               allow_file_not_found_error=allow_file_not_found_error))
         htmlify_downloads_page(albums)
     else:
-        htmlify_everything(albums, song_files_dict)
+        htmlify_everything(albums, song_files_dict,
+                           allow_file_not_found_error=allow_file_not_found_error)
 
     print('Program complete.', file=sys.stderr)
 
