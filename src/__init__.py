@@ -209,7 +209,7 @@ def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:
                               if line.strip()])
     song_text_path = join(file_dumps_dir_path, all_songs_file_name)
     with open(song_text_path, 'w') as song_text_file:
-        song_text_file.write(song_text)
+        print(song_text, file=song_text_file, end='')
 
     # Write big file with all songs (no duplicates)
     unique_song_text_lines = \
@@ -219,7 +219,7 @@ def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:
     unique_song_text_path = join(file_dumps_dir_path,
                                  all_songs_unique_file_name)
     with open(unique_song_text_path, 'w') as unique_song_text_file:
-        unique_song_text_file.write(unique_song_text)
+        print(unique_song_text, file=unique_song_text_file, end='')
 
 
 def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
