@@ -1,64 +1,65 @@
 # Template that can be used to add in new albums:
-#{
-#    "type": "album",
-#    "metadata": {
-#        "name": "",
-#        "file_id": "",
-#        "image_file_name": "",
-#        "release_date": "",
-#        "length": "",
-#        "producers": "",
-#        "label": "",
-#        "sides": {
-#            "1": "-",
-#            "2": "-"
-#        },
-#        "songs": {
-#            "": {
-#                "index": 1,
-#                "file_id": ""
+#    {
+#        "type": "album",
+#        "metadata": {
+#            "name": "",
+#            "file_id": "",
+#            "image_file_name": "",
+#            "release_date": "",
+#            "length": "",
+#            "producers": "",
+#            "label": "",
+#            "sides": {
+#                "1": "-",
+#                "2": "-"
 #            },
-#            "": {
-#                "index": 2,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 3,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 4,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 5,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 6,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 7,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 8,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 9,
-#                "file_id": ""
-#            },
-#            "": {
-#                "index": 10,
-#                "file_id": ""
+#            "songs": {
+#                "": {
+#                    "index": 1,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 2,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 3,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 4,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 5,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 6,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 7,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 8,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 9,
+#                    "file_id": ""
+#                },
+#                "": {
+#                    "index": 10,
+#                    "file_id": ""
+#                }
 #            }
 #        }
 #    }
-#}
 
 [
+
     {
         "metadata": {
             "label": "Columbia",
@@ -3371,4 +3372,5 @@
         },
         "type": "album"
     }
+
 ]
