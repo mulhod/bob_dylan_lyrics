@@ -2052,12 +2052,12 @@ To be on your own,
 With no direction home,
 Like a complete unknown,
 Like a rolling stone?
-The sweet, pretty things are in bed now of course.
+The sweet, pretty things are in bed now of course,
 The city fathers, they're trying to endorse
 The reincarnation of Paul Revere's horse,
 But the town has no need to be nervous.
 The ghost of Belle Starr, she hands down her wits
-To Jezebel, the nun. She violently knits
+To Jezebel, the nun, she violently knits
 A bald wig for Jack the Ripper, who sits
 At the head of the Chamber of Commerce.
 Mama's in a factory, she ain't got no shoes,
@@ -2067,10 +2067,10 @@ The hysterical bride in the penny arcade,
 Screaming, she moans, "I have just been made!"
 Then sends out for the doctor, who pulls down the shade
 And says, "My advice is to not let the boys in."
-Now, the medicine man comes and he shuffles inside.
+Now, the medicine man comes and he shuffles inside,
 He walks with a swagger and he says to the bride,
-"Stop all this weeping, swallow your pride.
-You will not die. It's not poison!"
+"Stop all this weeping, swallow your pride,
+You will not die, it's not poison!"
 Mama's in the factory, she ain't got no shoes,
 Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
@@ -2080,7 +2080,7 @@ Saying, "Tell me, great hero, but please make it brief,
 Is there a hole for me to get sick in?"
 The Commander-in-Chief answers him while chasing a fly,
 Saying, "Death to all those who would whimper and cry!"
-And, dropping a barbell, he points to the sky,
+And, dropping a barbell, he points to the sky
 Saying, "The sun's not yellow, it's chicken!"
 Mama's in the factory. she ain't got no shoes,
 Daddy's in the alley, he's looking for food,
@@ -2089,7 +2089,7 @@ The king of the Philistines, his soldiers to save,
 Puts jawbones on their tombstones and flatters their graves,
 Puts the pied-pipers in prison and fattens the slaves,
 Then sends 'em out to the jungle.
-Gypsy Davey with a blowtorch, he burns out their camps.
+Gypsy Davy with a blowtorch, he burns out their camps,
 With his faithful slave Pedro behind him he tramps
 With a fantastic collection of stamps
 To win friends and influence his uncle.
@@ -2100,7 +2100,7 @@ The geometry of innocent flesh on the bone
 Causes Galileo's math book to get thrown
 At Delilah, who's sitting worthlessly alone,
 But the tears on her cheeks are from laughter.
-I wish I could give Brother Bill his great thrill.
+I wish I could give Brother Bill his great thrill,
 I would set him in chains at the top of the hill,
 Then send out for some pillars and Cecil B. DeMille.
 He could die happily ever after.
@@ -9625,8 +9625,8 @@ Send for the doctor, who pull down the shade,
 Saying, "Don't let the boys in."
 Well, the medicine man come and then he shuffles inside,
 Walk with a swagger and he say to the bride:
-"Stop all this weeping, swallow your pride.
-You won't die. It's not poison!"
+"Stop all this weeping, swallow your pride,
+You won't die, it's not poison!"
 Mama's in a factory, she ain't got no shoes,
 Dad's in a alley looking hard for the fuze,
 I'm in the kitchen with the tombstone blues – oh, ah! Yeah!
@@ -9634,7 +9634,7 @@ John the Baptist, after torturing a thief,
 Looks at his hero, the Commander-in-Chief.
 "Tell me, great hero, but please make it brief,
 Is there a hole for me to get sick in?"
-Well, the Commander-in-Chief answers him while chasing a fly:
+Well, the Commander-in-Chief answers him while chasing a fly.
 "Death to all those that––who would whimper and cry!"
 Dropping a barbell, he point to the sky.
 "The sun not yellow, it's chicken!"
@@ -10277,12 +10277,12 @@ Well, I'm too old to lose, babe, I'm too young to win,
 Now I feel like a stranger in a world I'm living in.
 But I'm walking and wandering – my poor feet don't ever stop! –
 Seeing my reflection, I'm hung over, hung down, hung up!
-The sweet, pretty things are in bed now of course.
+The sweet, pretty things are in bed now of course,
 The city fathers, they're trying to endorse
 The reincarnation of Paul Revere's horse,
 But the town has no need to be nervous.
 The ghost of Belle Starr, she hands down her wits
-To Jezebel, the nun. She violently knits
+To Jezebel, the nun, she violently knits
 A bald wig for Jack the Ripper, who sits
 At the head of the Chamber of Commerce.
 Mama's in a factory, she ain't got no shoes,
@@ -10292,10 +10292,10 @@ The hysterical bride in the penny arcade,
 Screaming, she moans, "I have just been made!"
 Then sends out for the doctor, who pulls down the shade
 And says, "My advice is to not let the boys in."
-Now, the medicine man comes and he shuffles inside.
+Now, the medicine man comes and he shuffles inside,
 He walks with a swagger and he says to the bride,
-"Stop all this weeping, swallow your pride.
-You will not die. It's not poison!"
+"Stop all this weeping, swallow your pride,
+You will not die, it's not poison!"
 Mama's in the factory, she ain't got no shoes,
 Daddy's in the alley, he's looking for food,
 I'm in the kitchen with the tombstone blues.
@@ -10305,7 +10305,7 @@ Saying, "Tell me, great hero, but please make it brief,
 Is there a hole for me to get sick in?"
 The Commander-in-Chief answers him while chasing a fly,
 Saying, "Death to all those who would whimper and cry!"
-And, dropping a barbell, he points to the sky,
+And, dropping a barbell, he points to the sky
 Saying, "The sun's not yellow, it's chicken!"
 Mama's in the factory. she ain't got no shoes,
 Daddy's in the alley, he's looking for food,
@@ -10314,7 +10314,7 @@ The king of the Philistines, his soldiers to save,
 Puts jawbones on their tombstones and flatters their graves,
 Puts the pied-pipers in prison and fattens the slaves,
 Then sends 'em out to the jungle.
-Gypsy Davey with a blowtorch, he burns out their camps.
+Gypsy Davy with a blowtorch, he burns out their camps,
 With his faithful slave Pedro behind him he tramps
 With a fantastic collection of stamps
 To win friends and influence his uncle.
@@ -10325,7 +10325,7 @@ The geometry of innocent flesh on the bone
 Causes Galileo's math book to get thrown
 At Delilah, who's sitting worthlessly alone,
 But the tears on her cheeks are from laughter.
-I wish I could give Brother Bill his great thrill.
+I wish I could give Brother Bill his great thrill,
 I would set him in chains at the top of the hill,
 Then send out for some pillars and Cecil B. DeMille.
 He could die happily ever after.
@@ -14866,3 +14866,33 @@ I'd already gone the distance,
 I's just thinking of a series of dreams,
 Just thinking of a series of dreams,
 Just thinking of a series of dreams.
+Frankie was a good girl, everybody know,
+Paid one hundred dollars for Albert's new suite of clothes.
+He was her man, but he done her wrong.
+Albert said, "I'm leaving you, won't be gone for long.
+Don't wait up for me, a-worry about me when I'm gone."
+He was her man, but he done her wrong.
+Frankie went down to the corner saloon, get a bucket of beer,
+Said to the bartender, "Has my loving man been here?"
+He was her man, but he done her wrong.
+"Well, I ain't gonna tell you no story, I ain't gonna tell you no lie,
+I saw Albert an hour ago with a gal named Alice Fry1."
+He was her man, he done her wrong.
+Frankie went down to Twelfth Street, look up through the window high,
+She saw her Albert there a-loving up Alice Fry.
+He was her man, he done her wrong.
+Frankie pulled out a pistol, pulled out a .442,
+Gun went off a-rootie-toot-toot3 and Albert fell on the floor.
+He was her man, but he done her wrong.
+Frankie got down upon her knees, took a-Albert into her lap,
+Started to hug and kiss him, but there was no bringing him back.
+He was her man, he done her wrong.
+"Give me a thousand policemen, throw me into a cell,
+I shot my Albert dead and now I'm going to hell.
+He was my man, but he done me wrong."
+Judge said to the jury, "Plain as a thing can be,
+A woman shot her lover down, murder in the second degree."
+He was her man, but he done her wrong.
+Frankie went to the scaffold calm as a girl could be,
+Turned her eyes up towards the heavens, said, "Nearer, my God, to Thee."
+He was her man, but he done her wrong.

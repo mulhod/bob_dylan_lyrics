@@ -3371,6 +3371,89 @@
             "producers": "Jeff Rosen"
         },
         "type": "album"
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Good As I Been to You",
+            "file_id": "good_as_i_been_to_you",
+            "image_file_name": "Good_As_I_Been_to_You.jpg",
+            "release_date": "November 3, 1992",
+            "length": "55:31",
+            "producers": "Debbie Gold",
+            "label": "Columbia",
+            "sides": {
+                "1": "1-7",
+                "2": "8-13"
+            },
+            "songs": {
+                "Frankie & Albert": {
+                    "index": 1,
+                    "file_id": "frankie_and_albert_1",
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Mississippi_John_Hurt'>Mississippi John Hurt</a>"
+                },
+                "Jim Jones": {
+                    "index": 2,
+                    "file_id": "jim_jones_1",
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/The_Bushwackers_(band)'>Mick Slocum</a>"
+                },
+                "Blackjack Davey": {
+                    "index": 3,
+                    "file_id": "blackjack_davey_1",
+                    "written_by": "Traditional"
+                },
+                "Canadee-i-o": {
+                    "index": 4,
+                    "file_id": "canadee-i-o_1",
+                    "written_by": "Traditional"
+                },
+                "Sittin' on Top of the World": {
+                    "index": 5,
+                    "file_id": "sittin_on_top_of_the_world_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Walter_Vinson'>Walter Vinson</a> and Lonnie Chatmon of the <a href='https://en.wikipedia.org/wiki/Mississippi_Sheiks'>Mississippi Sheiks</a>"
+                },
+                "Little Maggie": {
+                    "index": 6,
+                    "file_id": "little_maggie_1",
+                    "written_by": "Traditional"
+                },
+                "Hard Times": {
+                    "index": 7,
+                    "file_id": "hard_times_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Stephen_Foster'>Stephen Foster</a>"
+                },
+                "Step It Up and Go": {
+                    "index": 8,
+                    "file_id": "step_it_up_and_go_1",
+                    "written_by": "Traditional"
+                },
+                "Tomorrow Night": {
+                    "index": 9,
+                    "file_id": "tomorrow_night_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Sam_Coslow'>Sam Coslow</a> and <a href='https://en.wikipedia.org/wiki/Will_Grosz'>Will Grosz</a>"
+                },
+                "Arthur McBride": {
+                    "index": 10,
+                    "file_id": "arthur_mcbride_1",
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Paul_Brady'>Paul Brady</a>"
+                },
+                "You're Gonna Quit Me": {
+                    "index": 11,
+                    "file_id": "youre_gonna_quit_me_1",
+                    "written_by": "Traditional/authorship uncertain"
+                },
+                "Diamond Joe": {
+                    "index": 12,
+                    "file_id": "diamond_joe_1",
+                    "written_by": "Authorship uncertain, though according to one source it may have been writen by Cisco Houston in the 1950s"
+                },
+                "Froggie Went A-Courtin'": {
+                    "index": 13,
+                    "file_id": "froggie_went_a-courtin_1",
+                    "written_by": "Traditional"
+                }
+            }
+        }
     }
 
 ]
