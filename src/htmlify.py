@@ -701,16 +701,26 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
             standardize_quotes(raw_song_lyrics_file.read()).strip().splitlines()
     paragraphs = []
     current_paragraph = []
-    annotations = []
+    footnotes = []
+    footnote_indices = []
     for line_ind, line in enumerate(song_lines):
-        if line.strip():
+        line = line.strip()
+        if line:
 
-            # If the line begins with two asterisks in a row, that
-            # means that it is an annotation line
-            if line.startswith('**'):
-                annotations.append(line.strip().split(' ', 1)[1])
+            # If the line begins with an element that both starts with
+            # and ends with two asterisks in a row, that means that it
+            # is a footnote line
+            split_line = line.split(' ', 1)
+            if split_line[0].startswith('**') and split_line[0].endswith('**'):
+                try:
+                    footnote_indices.append(int(split_line[0].replace('*', '')))
+                except ValueError:
+                    raise ValueError('{} contains what appears to be a '
+                                     'footnote line but it seems to not be '
+                                     'formatted correctly: {}'.format(name, line))
+                footnotes.append(split_line[1])
                 continue
-            current_paragraph.append(line.strip())
+            current_paragraph.append(line)
             if len(song_lines) == line_ind + 1:
                 paragraphs.append(current_paragraph)
                 current_paragraph = []
@@ -718,10 +728,17 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
             paragraphs.append(current_paragraph)
             current_paragraph = []
 
+    # Make sure that the footnotes line up correctly in terms of
+    # numbering
+    if footnote_indices != list(range(1, len(footnotes) + 1)):
+        raise ValueError('The footnote indices for {} do not seem to be '
+                         'numbered correctly.'.format(name))
+
     # Add paragraph elements with sub-elements of type `div` to the
     # `body` element
     row_div = Tag(name='div', attrs={'class': 'row'})
     columns_div = Tag(name='div', attrs={'class': 'col-md-12'})
+    annotation_nums = []
     for paragraph in paragraphs:
         paragraph_elem = Tag(name='p')
         for line_elem in paragraph:
@@ -730,12 +747,22 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
             div = Tag(name='div')
 
             # Check if line has annotations
-            annotation_nums = ANNOTATION_MARK_RE.findall(line_elem)
-            if annotation_nums:
+            annotations = ANNOTATION_MARK_RE.findall(line_elem)
+            if annotations:
+
+                # If there are multiple annotations on a single line,
+                # raise an error since it is not supported currently
+                if len(annotations) > 1:
+                    raise ValueError('There are multiple annotations in a line'
+                                     ' in {}.'.format(name))
+
+                # Add the annotation number to the list of annotation
+                # numbers for the entire song
+                annotation_nums.extend([int(annotation.replace('*', ''))
+                                        for annotation in annotations])
 
                 # Get indices for the annotations in the given line
-                annotation_inds = find_annotation_indices(line_elem,
-                                                          annotation_nums)
+                annotation_inds = find_annotation_indices(line_elem, annotations)
 
                 # Remove annotation marks from the line
                 line_elem = remove_inline_annotation_marks(line_elem)
@@ -747,7 +774,16 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
                 # Iterate over the annotations, generating anchor
                 # elements that link the annotation to the note at the
                 # bottom of the page
-                for i, annotation_num in enumerate(annotation_nums):
+                # NOTE: Despite the fact that the code below is set up
+                # to deal with multiple annotations on a single line,
+                # the situation where there are multiple annotations on
+                # a single line actually presents difficulties that are
+                # not currently dealt with correctly. Therefore,
+                # multiple annotations on a single line will trigger an
+                # error before this point, which means that the list of
+                # annotations will always consist of only one
+                # annotation. 
+                for i, annotation_num in enumerate(annotations):
                     href = '#{0}'.format(annotation_num)
                     a = Tag(name='a', attrs={'href': href})
                     a.string = annotation_num
@@ -766,9 +802,9 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
 
                         # After putting annotations back into the
                         # contents of the `div`, the indices of the
-                        # annotations after will necessarily change as
-                        # they will be pushed back by the length of the
-                        # string that is being added
+                        # annotations afterwards will necessarily
+                        # change as they will be pushed back by the
+                        # length of the string that is being added
                         for j in range(len(annotation_inds)):
                             if j > i:
                                 annotation_inds[j] += len(a.string)
@@ -782,28 +818,33 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
 
         columns_div.append(paragraph_elem)
 
-    # Add in annotation section
-    if annotations:
-        annotation_section = Tag(name='p')
+    # Make sure that the footnotes and annotations line up correctly
+    if footnote_indices or annotation_nums:
+        if footnote_indices != annotation_nums:
+            raise ValueError('The footnotes and annotations in {} do not match'
+                             ' up correctly.'.format(name))
 
-        # Iterate over the annotations, assuming the the index of the
-        # list matches the natural ordering of the annotations
-        for annotation_num, annotation in enumerate(annotations):
+
+    # Add in the footnotes section (if there are any)
+    if footnotes:
+        footnotes_section = Tag(name='p')
+
+        # Iterate over the footnotes, assuming the the index of the
+        # list matches the natural ordering of the footnotes
+        for footnote_index, footnote in enumerate(footnotes):
             div = Tag(name='div')
-            div.string = '\t{}'.format(annotation)
+            div.string = '\t{}'.format(footnote)
             div.string.wrap(Tag(name='small'))
 
-            # Generate a named anchor element so that the original
-            # location of the annotation in the song can be linked to
-            # this location
-            a = Tag(name='a', attrs={'name': str(annotation_num + 1)})
-            a.string = str(annotation_num + 1)
+            # Generate a named anchor element for the footnote
+            a = Tag(name='a', attrs={'name': str(footnote_index + 1)})
+            a.string = str(footnote_index + 1)
             a.string.wrap(Tag(name='sup'))
             div.small.insert_before(a)
-            annotation_section.append(div)
+            footnotes_section.append(div)
 
-        # Insert annotation section at the next index
-        columns_div.append(annotation_section)
+        # Insert footnotes section at the next index
+        columns_div.append(footnotes_section)
 
     # Add content to body and put body in HTML element
     row_div.append(columns_div)

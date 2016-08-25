@@ -479,6 +479,12 @@ def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
     Get list of annotation indices in a sentence (treating the
     annotations themselves as zero-length entities).
 
+    Note that, despite the fact that this function can deal with lines
+    that have multiple annotations, the presence of multiple
+    annotations on the same line is problematic and is not dealt with
+    correctly. Thus, this function should only be used in cases where
+    there is only one annotation maximum.
+
     :param line: original line (including annotations)
     :type line: str
     :param annotations: list of annotation values, i.e., the numbered
