@@ -406,7 +406,7 @@ def generate_song_list(songs: List[Song],
 def htmlify_everything(albums: List[Album],
                        song_files_dict: SongFilesDictType,
                        make_downloads: bool = False,
-                       allow_file_not_found_error: bool = False) -> Optional[Dict[str, List[str]]]:
+                       allow_file_not_found_error: bool = False) -> Optional[List[str]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs.
@@ -423,10 +423,8 @@ def htmlify_everything(albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or a dictionary with `song_texts` and
-              `unique_song_texts` keys associated with lists of song
-              lyrics
-    :rtype: Optional[Dict[str, List[str]]]
+    :returns: None or list of song lyrics
+    :rtype: Optional[List[str]]
     """
 
     # Generate index page for albums
@@ -467,10 +465,11 @@ def htmlify_everything(albums: List[Album],
     # Generate pages for albums
     print('HTMLifying the individual album pages...', file=sys.stderr)
     if make_downloads:
-        lyrics_dicts = \
+        song_texts = \
             [htmlify_album(album, albums, make_downloads=True,
                            allow_file_not_found_error=allow_file_not_found_error)
              for album in albums]
+        song_texts = list(chain(*song_texts))
     else:
         [htmlify_album(album, albums,
                        allow_file_not_found_error=allow_file_not_found_error)
@@ -485,18 +484,14 @@ def htmlify_everything(albums: List[Album],
     htmlify_main_album_index_page(albums)
 
     if make_downloads:
-        return dict(song_texts=list(chain(*[lyrics['song_texts'] for lyrics
-                                            in lyrics_dicts])),
-                    unique_song_texts=list(chain(*[lyrics['unique_song_texts']
-                                                   for lyrics
-                                                   in lyrics_dicts])))
+        return song_texts
 
     return
 
 
 def htmlify_album(album: Album, albums: List[Album],
                   make_downloads: bool = False,
-                  allow_file_not_found_error: bool = False) -> Optional[Dict[str, List[str]]]:
+                  allow_file_not_found_error: bool = False) -> Optional[List[str]]:
     """
     Generate HTML pages for a particular album and its songs.
 
@@ -511,10 +506,8 @@ def htmlify_album(album: Album, albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or dictionary with `song_texts` and
-              `unique_song_texts` keys associated with lists of song
-              lyrics
-    :rtype: Optional[Dict[str, List[str]]]
+    :returns: None or list of song texts
+    :rtype: Optional[List[str]]
     """
 
     print('HTMLifying index page for {}...'.format(album.name),
@@ -636,16 +629,12 @@ def htmlify_album(album: Album, albums: List[Album],
             input_path = join(root_dir_path, text_dir_path,
                               '{0}.txt'.format(song.file_id))
             with open(input_path) as song_file:
-                song_text = song_file.read()
-                standardized_song_text = standardize_quotes(song_text).strip()
-                no_annotations_song_text = \
-                    remove_annotations(standardized_song_text)
-                song_texts.append(no_annotations_song_text)
-                unique_song_texts.add(no_annotations_song_text)
+                song_texts.append(remove_annotations(
+                                      standardize_quotes(
+                                          song_file.read()).strip()))
 
     if make_downloads:
-        return dict(song_texts=song_texts,
-                    unique_song_texts=unique_song_texts)
+        return song_texts
 
     return
 

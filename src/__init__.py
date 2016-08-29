@@ -186,16 +186,14 @@ class Song():
                           in sorted_keys if key in attrs_dict])
 
 
-def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:
+def generate_lyrics_download_files(song_texts: List[str]) -> None:
     """
     Generate lyrics download files containing 1) all of the lyrics
     files in the order in which they were added 2) all of the unique
     lyrics.
 
-    :param lyrics_dict: dictionary containing `song_texts` and
-                        `unique_song_texts` keys associated with lists
-                        of song lyrics
-    :type lyrics_dict: Dict[str, List[str]]
+    :param song_texts: list of song texts
+    :type song_texts: List[str]
 
     :returns: None
     :rtype: None
@@ -204,7 +202,7 @@ def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:
     newline_join = '\n'.join
 
     # Write big file with all songs (even duplicates)
-    song_text_lines = newline_join(lyrics_dict['song_texts']).split('\n')
+    song_text_lines = newline_join(song_texts).split('\n')
     song_text = newline_join([line.strip() for line in song_text_lines
                               if line.strip()])
     song_text_path = join(file_dumps_dir_path, all_songs_file_name)
@@ -212,8 +210,7 @@ def generate_lyrics_download_files(lyrics_dict: Dict[str, List[str]]) -> None:
         print(song_text, file=song_text_file, end='')
 
     # Write big file with all songs (no duplicates)
-    unique_song_text_lines = \
-        newline_join(lyrics_dict['unique_song_texts']).split('\n')
+    unique_song_text_lines = newline_join(set(song_texts)).split('\n')
     unique_song_text = newline_join([line.strip() for line
                                      in unique_song_text_lines if line.strip()])
     unique_song_text_path = join(file_dumps_dir_path,
