@@ -3454,6 +3454,70 @@
                 }
             }
         }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "World Gone Wrong",
+            "file_id": "world_gone_wrong",
+            "image_file_name": "World_Gone_Wrong.jpg",
+            "release_date": "October 26, 1993",
+            "length": "43:51",
+            "producers": "Bob Dylan",
+            "label": "Columbia",
+            "sides": {
+                "1": "1-5",
+                "2": "6-10"
+            },
+            "songs": {
+                "World Gone Wrong": {
+                    "index": 1,
+                    "file_id": "world_gone_wrong_1"
+                },
+                "Love Henry": {
+                    "index": 2,
+                    "file_id": "love_henry_1"
+                },
+                "Ragged & Dirty": {
+                    "index": 3,
+                    "file_id": "ragged_and_dirty_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Willie_Brown_(musician)'>Willie Brown</a>"
+                },
+                "Blood in My Eyes": {
+                    "index": 4,
+                    "file_id": "blood_in_my_eyes_1"
+                },
+                "Broke Down Engine": {
+                    "index": 5,
+                    "file_id": "broke_down_engine_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Blind_Willie_McTell'>Blind Willie McTell</a>"
+                },
+                "Delia": {
+                    "index": 6,
+                    "file_id": "delia_1",
+                    "written_by": "Traditional, arranged by Bob Dylan"
+                },
+                "Stack A Lee": {
+                    "index": 7,
+                    "file_id": "stack_a_lee_1",
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Frank_Hutchison'>Frank Hutchison</a>"
+                },
+                "Two Soldiers": {
+                    "index": 8,
+                    "file_id": "two_soldiers_1"
+                },
+                "Jack-A-Roe": {
+                    "index": 9,
+                    "file_id": "jack-a-roe_1",
+                    "written_by": "Traditional, arranged by Bob Dylan"
+                },
+                "Lone Pilgrim": {
+                    "index": 10,
+                    "file_id": "lone_pilgrim_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Benjamin_Franklin_White'>Benjamin Franklin White</a> and <a href='http://www.gmahalloffame.org/speaker-lineup/adger-m-pace/'>Adger M. Pace</a>"
+                }
+            }
+        }
     }
 
 ]
