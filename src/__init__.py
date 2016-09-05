@@ -36,6 +36,7 @@ album_index_html_file_name = 'album_index.html'
 albums_index_html_file_name = 'albums.html'
 custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
+all_songs_with_metadata_file_name = 'all_songs_with_metadata.txt'
 all_songs_file_name = 'all_songs.txt'
 all_songs_unique_file_name = 'all_songs_unique.txt'
 text_dir_path = join(songs_dir, 'txt')
@@ -186,14 +187,18 @@ class Song():
                           in sorted_keys if key in attrs_dict])
 
 
-def generate_lyrics_download_files(song_texts: List[str]) -> None:
+def generate_lyrics_download_files(song_tuples: List[Tuple[str, str, str]]) -> None:
     """
-    Generate lyrics download files containing 1) all of the lyrics
-    files in the order in which they were added 2) all of the unique
-    lyrics.
+    Generate lyrics download files containing:
 
-    :param song_texts: list of song texts
-    :type song_texts: List[str]
+    1) all of the song lyrics separated by metadata including the song
+       name and the album name in the order in which they appeared,
+    2) all of the song lyrics in the order in which they appeared (with
+       no metadata),
+    2) all of the unique song lyrics (no metadata)
+
+    :param song_tuples: list of song name/album name/lyrics tuples
+    :type song_tuples: List[Tuple[str, str, str]]
 
     :returns: None
     :rtype: None
@@ -201,8 +206,21 @@ def generate_lyrics_download_files(song_texts: List[str]) -> None:
 
     newline_join = '\n'.join
 
+    # Write big file with all of the songs + some metadata
+    song_text_with_metadata_lines = []
+    for song_tuple in song_tuples:
+        song_text_with_metadata_lines.append('Song name: {}'.format(song_tuple[0]))
+        song_text_with_metadata_lines.append('Album name: {}'.format(song_tuple[1]))
+        song_text_with_metadata_lines.append('Lyrics:\n\n{}\n'.format(song_tuple[2]))
+    song_text_with_metadata = newline_join(song_text_with_metadata_lines).strip()
+    song_text_with_metadata_path = join(file_dumps_dir_path,
+                                        all_songs_with_metadata_file_name)
+    with open(song_text_with_metadata_path, 'w') as song_text_with_metadata_file:
+        print(song_text_with_metadata, file=song_text_with_metadata_file, end='')
+
     # Write big file with all songs (even duplicates)
-    song_text_lines = newline_join(song_texts).split('\n')
+    song_text_lines = (newline_join([song_tuple[2] for song_tuple in song_tuples])
+                       .split('\n'))
     song_text = newline_join([line.strip() for line in song_text_lines
                               if line.strip()])
     song_text_path = join(file_dumps_dir_path, all_songs_file_name)
@@ -210,7 +228,9 @@ def generate_lyrics_download_files(song_texts: List[str]) -> None:
         print(song_text, file=song_text_file, end='')
 
     # Write big file with all songs (no duplicates)
-    unique_song_text_lines = newline_join(set(song_texts)).split('\n')
+    unique_song_text_lines = (newline_join(set([song_tuple[2] for song_tuple
+                                                in song_tuples]))
+                              .split('\n'))
     unique_song_text = newline_join([line.strip() for line
                                      in unique_song_text_lines if line.strip()])
     unique_song_text_path = join(file_dumps_dir_path,

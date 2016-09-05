@@ -27,15 +27,15 @@ import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 from src import (Album, Song, SongFilesDictType, file_id_types_to_skip,
                  root_dir_path, albums_dir, songs_dir, resources_dir,
                  images_dir, albums_index_html_file_name, downloads_file_name,
-                 all_songs_file_name, all_songs_unique_file_name,
-                 text_dir_path, song_index_dir_path,
-                 songs_and_albums_index_json_file_path,
+                 all_songs_with_metadata_file_name, all_songs_file_name,
+                 all_songs_unique_file_name, text_dir_path,
+                 song_index_dir_path, songs_and_albums_index_json_file_path,
                  songs_index_html_file_path, album_index_dir_path,
                  albums_index_html_file_path, file_dumps_dir_path,
                  main_index_html_file_path, home_page_content_file_path,
@@ -406,10 +406,11 @@ def generate_song_list(songs: List[Song],
 def htmlify_everything(albums: List[Album],
                        song_files_dict: SongFilesDictType,
                        make_downloads: bool = False,
-                       allow_file_not_found_error: bool = False) -> Optional[List[str]]:
+                       allow_file_not_found_error: bool = False) -> Optional[List[Tuple[str, str, str]]]:
     """
     Create HTML files for the main index page, each album's index page,
-    and the pages for all songs.
+    and the pages for all songs and, optionally, return a list of song
+    name/album name/lyrics tuples.
 
     :param albums: list of Album objects
     :type albums: List[Album]
@@ -423,8 +424,8 @@ def htmlify_everything(albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or list of song lyrics
-    :rtype: Optional[List[str]]
+    :returns: None or list of song nane/album name/lyrics tuples
+    :rtype: Optional[List[Tuple[str, str, str]]]
     """
 
     # Generate index page for albums
@@ -491,9 +492,10 @@ def htmlify_everything(albums: List[Album],
 
 def htmlify_album(album: Album, albums: List[Album],
                   make_downloads: bool = False,
-                  allow_file_not_found_error: bool = False) -> Optional[List[str]]:
+                  allow_file_not_found_error: bool = False) -> Optional[List[Tuple[str, str, str]]]:
     """
-    Generate HTML pages for a particular album and its songs.
+    Generate HTML pages for a particular album and its songs and,
+    optionally, return a list of song name/album name/lyrics tuples.
 
     :param album: Album object
     :type name: Album
@@ -506,8 +508,8 @@ def htmlify_album(album: Album, albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or list of song texts
-    :rtype: Optional[List[str]]
+    :returns: None or list of song name/album/lyrics tuples
+    :rtype: Optional[List[Tuple[str, str, str]]]
     """
 
     print('HTMLifying index page for {}...'.format(album.name),
@@ -601,12 +603,11 @@ def htmlify_album(album: Album, albums: List[Album],
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
     # the song will simply reuse the original lyrics file) and,
-    # optionally, add song texts to the
-    # `song_texts`/`unique_song_texts` lists so that lyrics file
-    # downloads can be generated at the end of processing
+    # optionally, add song name/text tuples to the `song_lyrics_tuples`
+    # list so that lyrics download files can be generated at the end of
+    # processing
     if make_downloads:
-        song_texts = []
-        unique_song_texts = set()
+        song_lyrics_tuples = []
     for song in album.songs:
 
         # HTMLify the song
@@ -620,8 +621,8 @@ def htmlify_album(album: Album, albums: List[Album],
                     break
                 raise e
 
-        # Add song text to the `song_texts`/`unique_song_texts` lists
-        # for the lyrics file downloads
+        # Add song name/song text tuple to the `song_lyrics_tuples` list
+        # for the lyrics download files
         if (make_downloads and
             not song.instrumental and
             not song.written_and_performed_by):
@@ -629,12 +630,12 @@ def htmlify_album(album: Album, albums: List[Album],
             input_path = join(root_dir_path, text_dir_path,
                               '{0}.txt'.format(song.file_id))
             with open(input_path) as song_file:
-                song_texts.append(remove_annotations(
-                                      standardize_quotes(
-                                          song_file.read()).strip()))
+                song_text = \
+                    remove_annotations(standardize_quotes(song_file.read())).strip()
+                song_lyrics_tuples.append((song.name, album.name, song_text))
 
     if make_downloads:
-        return song_texts
+        return song_lyrics_tuples
 
     return
 
@@ -1225,12 +1226,16 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
     i = Tag(name='i')
     i.append(last_album_a)
     ul = Tag(name='ul')
-    for file_name in [all_songs_file_name, all_songs_unique_file_name]:
-        if 'unique' in file_name:
-            text = 'All unique songs'
-        else:
+    for file_name in [all_songs_with_metadata_file_name, all_songs_file_name,
+                      all_songs_unique_file_name]:
+        if file_name == 'all_songs_with_metadata.txt':
+            text = ('All songs in the order in which they appeared on released'
+                    ' albums + metadata, including song names and album names')
+        elif file_name == 'all_songs.txt':
             text = ('All songs in the order in which they appeared on released'
                     ' albums')
+        elif file_name == 'all_songs_unique.txt':
+            text = 'All unique songs'
         download_a = ('<a href={0} download>{1}</a> (up to and including {2}) '
                       '({3} KiB)'
                       .format(file_name, text, clean_up_html(str(i)),
