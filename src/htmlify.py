@@ -981,9 +981,9 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 instrumental_or_not_dylan = song_info['file_id']
                 if instrumental_or_not_dylan != 'instrumental':
                     instrumental_or_not_dylan = not_dylan
-                div.append('{0} '.format(song))
+                div.append(song)
                 comment = Tag(name='comment')
-                comment.string = ('({0}, appeared on {1})'
+                comment.string = (' ({0}, appeared on {1})'
                                   .format(instrumental_or_not_dylan,
                                           album_links))
                 div.append(comment)
@@ -993,10 +993,10 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 song_html_file_path = \
                     '../html/{0}.html'.format(song_info['file_id'])
                 a_song = Tag(name='a', attrs={'href': song_html_file_path})
-                a_song.string = '{0} '.format(song)
+                a_song.string = song
                 div.append(a_song)
                 comment = Tag(name='comment')
-                comment.string = '(appeared on {0})'.format(album_links)
+                comment.string = ' (appeared on {0})'.format(album_links)
                 div.append(comment)
         else:
             div.string = song
