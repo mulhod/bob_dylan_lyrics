@@ -1236,8 +1236,8 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
                     ' albums')
         elif file_name == 'all_songs_unique.txt':
             text = 'All unique songs'
-        download_a = ('<a href={0} download>{1}</a> (up to and including {2}) '
-                      '({3} KiB)'
+        download_a = ('<a href={0} download>{0}</a>: {1} (up to and including '
+                      '{2}) ({3} KiB)'
                       .format(file_name, text, clean_up_html(str(i)),
                               file_sizes_dict[join(file_dumps_dir_path,
                                                    file_name)]))
