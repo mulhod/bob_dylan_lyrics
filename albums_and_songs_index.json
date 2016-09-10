@@ -1350,7 +1350,7 @@
                     "index": 4,
                     "live": {
                         "date": "on January 30, 1974",
-                        "location/concert": "in New York City"
+                        "location/concert": "in <a href='https://en.wikipedia.org/wiki/New_York_City'>New York City</a>"
                     }
                 },
                 "Up on Cripple Creek": {
@@ -2773,7 +2773,7 @@
                 "6": "28-32"
             },
             "file_id": "biograph",
-            "producers": "Jeff Rosen"
+            "producers": "<a href='https://en.wikipedia.org/wiki/Jeff_Rosen'>Jeff Rosen</a>"
         },
         "type": "album"
     },
@@ -3368,7 +3368,7 @@
                 }
             },
             "file_id": "the_bootleg_series_volumes_1-3_rare_and_unreleased_1961-1991",
-            "producers": "Jeff Rosen"
+            "producers": "<a href='https://en.wikipedia.org/wiki/Jeff_Rosen'>Jeff Rosen</a>"
         },
         "type": "album"
     },
@@ -3639,6 +3639,68 @@
                     },
                     "index": 14,
                     "file_id": "knockin_on_heavens_door_1"
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "MTV Unplugged",
+            "file_id": "mtv_unplugged",
+            "image_file_name": "MTV_Unplugged.jpg",
+            "release_date": "May 2, 1995",
+            "length": "69:24",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Jeff_Rosen'>Jeff Rosen</a>",
+            "label": "Columbia",
+            "live": {
+                "date": "on November 17 and 18, 1994",
+                "location/concert": "at <a href='https://en.wikipedia.org/wiki/Sony_Music_Studios'>Sony Music Studios</a> in <a href=''https://en.wikipedia.org/wiki/New_York_City''>New York City</a>"
+            },
+            "songs": {
+                "Tombstone Blues": {
+                    "index": 1,
+                    "file_id": "tombstone_blues_3"
+                },
+                "Shooting Star": {
+                    "index": 2,
+                    "file_id": "shooting_star_2"
+                },
+                "All Along the Watchtower": {
+                    "index": 3,
+                    "file_id": "all_along_the_watchtower_5"
+                },
+                "The Times They Are a-Changin'": {
+                    "index": 4,
+                    "file_id": "the_times_they_are_a-changin_4"
+                },
+                "John Brown": {
+                    "index": 5,
+                    "file_id": "john_brown_1"
+                },
+                "Rainy Day Women #12 & 35": {
+                    "index": 6,
+                    "file_id": "rainy_day_women_12_and_35_3"
+                },
+                "Desolation Row": {
+                    "index": 7,
+                    "file_id": "desolation_row_2"
+                },
+                "Dignity": {
+                    "index": 8,
+                    "file_id": "dignity_2"
+                },
+                "Knockin' on Heaven's Door": {
+                    "index": 9,
+                    "file_id": "knockin_on_heavens_door_5"
+                },
+                "Like a Rolling Stone": {
+                    "index": 10,
+                    "file_id": "like_a_rolling_stone_6"
+                },
+                "With God on Our Side": {
+                    "index": 11,
+                    "file_id": "with_god_on_our_side_2"
                 }
             }
         }
