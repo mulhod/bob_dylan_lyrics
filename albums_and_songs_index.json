@@ -3704,6 +3704,68 @@
                 }
             }
         }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Time Out of Mind",
+            "file_id": "time_out_of_mind",
+            "image_file_name": "Time_Out_of_Mind.jpg",
+            "release_date": "September 30, 1997",
+            "length": "72:50",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Daniel_Lanois'>Daniel Lanois</a> (in association with <a href='https://en.wikipedia.org/wiki/Bob_Dylan'>Jack Frost</a> productions)",
+            "label": "Columbia",
+            "sides": {
+                "1": "1-6",
+                "2": "7-11"
+            },
+            "songs": {
+                "Love Sick": {
+                    "index": 1,
+                    "file_id": "love_sick_1"
+                },
+                "Dirt Road Blues": {
+                    "index": 2,
+                    "file_id": "dirt_road_blues_1"
+                },
+                "Standing in the Doorway": {
+                    "index": 3,
+                    "file_id": "standing_in_the_doorway_1"
+                },
+                "Million Miles": {
+                    "index": 4,
+                    "file_id": "million_miles_1"
+                },
+                "Tryin' to Get to Heaven": {
+                    "index": 5,
+                    "file_id": "tryin_to_get_to_heaven_1"
+                },
+                "'Til I Fell in Love with You": {
+                    "index": 6,
+                    "file_id": "til_i_fell_in_love_with_you_1"
+                },
+                "Not Dark Yet": {
+                    "index": 7,
+                    "file_id": "not_dark_yet_1"
+                },
+                "Cold Irons Bound": {
+                    "index": 8,
+                    "file_id": "cold_irons_bound_1"
+                },
+                "Make You Feel My Love": {
+                    "index": 9,
+                    "file_id": "make_you_feel_my_love_1"
+                },
+                "Can't Wait": {
+                    "index": 10,
+                    "file_id": "cant_wait_1"
+                },
+                "Highlands": {
+                    "index": 11,
+                    "file_id": "highlands_1"
+                }
+            }
+        }
     }
 
 ]
