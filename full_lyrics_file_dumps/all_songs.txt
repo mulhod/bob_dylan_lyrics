@@ -1583,20 +1583,20 @@ And try to avoid the scandals.
 Don't wanna be a bum,
 You better chew gum,
 The pump don't work 'cause the vandals took the handles.
-She's got everything she needs, she's an artist, she don't look back.
-She's got everything she needs, she's an artist, she don't look back.
+She's got everything she needs, she's an artist, she don't look back,
+She's got everything she needs, she's an artist, she don't look back,
 She can take the dark out of the nighttime and paint the daytime black.
-You will start out standing, proud to steal her anything she sees.
-You will start out standing, proud to steal her anything she sees.
+You will start out standing, proud to steal her anything she sees,
+You will start out standing, proud to steal her anything she sees,
 But you will wind up peeking through her keyhole down upon your knees.
-She never stumbles – she's got no place to fall.
-She never stumbles – she's got no place to fall.
-She's nobody's child – the law can't touch her at all.
-She wears an Egyptian ring – it sparkles before she speaks.
-She wears an Egyptian ring – it sparkles before she speaks.
-She's a hypnotist collector. You are a walking antique.
-Bow down to her on Sunday, salute her when her birthday comes.
-Bow down to her on Sunday, salute her when her birthday comes.
+She never stumbles, she's got no place to fall,
+She never stumbles, she's got no place to fall,
+She's nobody's child, the law can't touch her at all.
+She wears an Egyptian ring, it sparkles before she speaks,
+She wears an Egyptian ring, it sparkles before she speaks,
+She's a hypnotist collector, you are a walking antique.
+Bow down to her on Sunday, salute her when her birthday comes,
+Bow down to her on Sunday, salute her when her birthday comes,
 For Halloween buy her a trumpet and for Christmas give her a drum.
 I ain't gonna work on Maggie's farm no more,
 No, I ain't gonna work on Maggie's farm no more.
@@ -3966,7 +3966,7 @@ Who's gonna let it roll?
 Who's gonna throw that minstrel boy a coin,
 Who's gonna let it down easy to save his soul?
 She's got everything she needs, she's an artist, she don't look back,
-She's got everything she needs, she's an artist, she don't look back:
+She's got everything she needs, she's an artist, she don't look back,
 She'll take the dark out of the nighttime and turn the daytime black.
 You will start out standing, proud to steal her anything she sees,
 You will start out standing, proud to steal her anything she sees,
@@ -3976,7 +3976,7 @@ She never stumbles, she got no place to fall,
 She's nobody's child, the law can't touch her at all.
 She wears an Egyptian ring and it sparkles just before she speaks,
 She wears an Egyptian ring, it sparkles before she speaks,
-She's a hypnotist collector – you are a walking antique.
+She's a hypnotist collector, you are a walking antique.
 Bow down to her on Sunday, salute her when her birthday comes,
 Bow down to her on Sunday, salute her when her birthday comes,
 For Halloween buy her a trumpet and for Christmas buy her a drum,
@@ -4522,20 +4522,20 @@ Throw my ticket out the window.
 Throw my suitcase out there too.
 Throw my troubles out the door, I don't need them anymore
 'Cause tonight I'll be staying here with you.
-She's got everything she needs, she's an artist, she don't look back.
-She's got everything she needs, she's an artist, she don't look back.
+She's got everything she needs, she's an artist, she don't look back,
+She's got everything she needs, she's an artist, she don't look back,
 She can take the dark out of the nighttime and paint the daytime black.
-You will start out standing, proud to steal her anything she sees.
-You will start out standing, proud to steal her anything she sees.
+You will start out standing, proud to steal her anything she sees,
+You will start out standing, proud to steal her anything she sees,
 But you will wind up peeking through her keyhole down upon your knees.
-She never stumbles – she's got no place to fall.
-She never stumbles – she's got no place to fall.
-She's nobody's child – the law can't touch her at all.
-She wears an Egyptian ring – it sparkles before she speaks.
-She wears an Egyptian ring – it sparkles before she speaks.
-She's a hypnotist collector. You are a walking antique.
-Bow down to her on Sunday, salute her when her birthday comes.
-Bow down to her on Sunday, salute her when her birthday comes.
+She never stumbles, she's got no place to fall,
+She never stumbles, she's got no place to fall,
+She's nobody's child, the law can't touch her at all.
+She wears an Egyptian ring, it sparkles before she speaks,
+She wears an Egyptian ring, it sparkles before she speaks,
+She's a hypnotist collector, you are a walking antique.
+Bow down to her on Sunday, salute her when her birthday comes,
+Bow down to her on Sunday, salute her when her birthday comes,
 For Halloween buy her a trumpet and for Christmas give her a drum.
 "There must be some way out of here," said the joker to the thief,
 "There's too much confusion, I can't get no relief.
@@ -16919,3 +16919,18 @@ Well, my heart's in the Highlands at the break of day,
 Over the hills and far away,
 There's a way to get there and I'll figure it out somehow,
 But I'm already there in my mind and that's good enough for now.
+She's got everything she needs, she's an artist, she don't look back,
+She's got everything she needs, she's an artist, she don't look back,
+She can take the dark out of the nighttime and paint the daytime black.
+You will start out standing, proud to steal her anything she sees,
+You will start out standing, proud to steal her anything she sees,
+But you will wind up peeking through her keyhole down upon your knees.
+She never stumbles, she got no place to fall,
+She never stumbles, she got no place to fall,
+She's nobody's child, the law can't touch her at all.
+She wears an Egyptian red ring, it sparkles before she speaks,
+She wears an Egyptian red ring, it sparkles before she speaks,
+She's a hypnotist collector, you are a walking antique.
+Bow down to her on Sunday, salute her when her birthday comes,
+Bow down to her on Sunday, salute her when her birthday comes,
+For Halloween give her a trumpet and for Christmas buy her a drum.

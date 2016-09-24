@@ -463,8 +463,8 @@
                     "file_id": "obviously_5_believers_1",
                     "index": 13
                 },
-                "Fourth Time Around": {
-                    "file_id": "fourth_time_around_1",
+                "4th Time Around": {
+                    "file_id": "4th_time_around_1",
                     "index": 12
                 },
                 "I Want You": {
@@ -3763,6 +3763,89 @@
                 "Highlands": {
                     "index": 11,
                     "file_id": "highlands_1"
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "The Bootleg Series Vol. 4: Bob Dylan Live 1966, The \"Royal Albert Hall\" Concert",
+            "file_id": "the_bootleg_series_vol_4_bob_dylan_live_1966",
+            "image_file_name": "The_Bootleg_Series_Vol_4_Bob_Dylan_Live_1966.jpg",
+            "release_date": "October 13, 1998",
+            "live": {
+                "date": "on May 17, 1966",
+                "location/concert": "at the <a href='https://en.wikipedia.org/wiki/Free_Trade_Hall'>Free Trade Hall</a> in <a href='https://en.wikipedia.org/wiki/Manchester'>Manchester</a>, England"
+            },
+            "length": "95:18",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Jeff_Rosen'>Jeff Rosen</a>",
+            "label": "Columbia",
+            "discs": {
+                "1": "1-7",
+                "2": "8-15"
+            },
+            "songs": {
+                "She Belongs to Me": {
+                    "index": 1,
+                    "file_id": "she_belongs_to_me_3"
+                },
+                "4th Time Around": {
+                    "index": 2,
+                    "file_id": "4th_time_around_2"
+                },
+                "Visions of Johanna": {
+                    "index": 3,
+                    "file_id": "visions_of_johanna_3"
+                },
+                "It's All Over Now, Baby Blue": {
+                    "index": 4,
+                    "file_id": "its_all_over_now_baby_blue_3"
+                },
+                "Desolation Row": {
+                    "index": 5,
+                    "file_id": "desolation_row_3"
+                },
+                "Just Like a Woman": {
+                    "index": 6,
+                    "file_id": "just_like_a_woman_4"
+                },
+                "Mr. Tambourine Man": {
+                    "index": 7,
+                    "file_id": "mr_tambourine_man_3"
+                },
+                "Tell Me, Momma": {
+                    "index": 8,
+                    "file_id": "tell_me_momma_1"
+                },
+                "I Don't Believe You (She Acts Like We Never Have Met)": {
+                    "index": 9,
+                    "file_id": "i_dont_believe_you_she_acts_like_we_never_have_met_3"
+                },
+                "Baby, Let Me Follow You Down": {
+                    "index": 10,
+                    "file_id": "baby_let_me_follow_you_down_2",
+                    "written_by": "Traditional, arranged by <a href='https://en.wikipedia.org/wiki/Reverend_Gary_Davis'>Gary Davis</a>, <a href='https://en.wikipedia.org/wiki/Eric_von_Schmidt'>Eric von Schmidt</a>, and <a href='https://en.wikipedia.org/wiki/Dave_Van_Ronk'>Dave Van Ronk</a>"
+                },
+                "Just Like Tom Thumb's Blues": {
+                    "index": 11,
+                    "file_id": "just_like_tom_thumbs_blues_2"
+                },
+                "Leopard-Skin Pill-Box Hat": {
+                    "index": 12,
+                    "file_id": "leopard-skin_pill-box_hat_2"
+                },
+                "One Too Many Mornings": {
+                    "index": 13,
+                    "file_id": "one_too_many_mornings_3"
+                },
+                "Ballad of a Thin Man": {
+                    "index": 14,
+                    "file_id": "ballad_of_a_thin_man_5"
+                },
+                "Like a Rolling Stone": {
+                    "index": 15,
+                    "file_id": "like_a_rolling_stone_7"
                 }
             }
         }
