@@ -7,7 +7,10 @@ in album/song metadata, and generally pre-/post-processing raw text or
 HTML.
 """
 import re
+import random
 from json import loads
+from itertools import chain
+from datetime import datetime
 from operator import itemgetter
 from os.path import dirname, realpath, join
 from typing import Dict, List, Union, Any, Iterable, Tuple
@@ -19,6 +22,7 @@ from bs4 import BeautifulSoup
 SongFilesDictType = Dict[str, List[Dict[str, Union[str, int, List[Dict[str, str]]]]]]
 SongDictType = Dict[str, Union[str, Dict[str, str]]]
 
+date_format = "%B %d, %Y"
 file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
 
 # Paths
@@ -219,24 +223,26 @@ def generate_lyrics_download_files(song_tuples: List[Tuple[str, str, str]]) -> N
         print(song_text_with_metadata, file=song_text_with_metadata_file, end='')
 
     # Write big file with all songs (even duplicates)
-    song_text_lines = (newline_join([song_tuple[2] for song_tuple in song_tuples])
-                       .split('\n'))
-    song_text = newline_join([line.strip() for line in song_text_lines
-                              if line.strip()])
+    song_text = newline_join(chain(*[[line.strip()
+                                      for line in song_tuple[2].strip().split("\n")
+                                      if line.strip()]
+                                     for song_tuple in song_tuples]))
     song_text_path = join(file_dumps_dir_path, all_songs_file_name)
     with open(song_text_path, 'w') as song_text_file:
         print(song_text, file=song_text_file, end='')
 
-    # Write big file with all songs (no duplicates)
-    unique_song_text_lines = (newline_join(set([song_tuple[2] for song_tuple
-                                                in song_tuples]))
-                              .split('\n'))
-    unique_song_text = newline_join([line.strip() for line
-                                     in unique_song_text_lines if line.strip()])
+    # Write big file with all unique lines from all songs (ensure order
+    # doesn't change if all else stays the same)
+    random.seed(1)
+    lines = list(set(chain(*[[line.strip()
+                              for line in song_tuple[2].strip().split("\n")
+                              if line.strip()]
+                             for song_tuple in song_tuples])))
+    random.shuffle(lines)
     unique_song_text_path = join(file_dumps_dir_path,
                                  all_songs_unique_file_name)
     with open(unique_song_text_path, 'w') as unique_song_text_file:
-        print(unique_song_text, file=unique_song_text_file, end='')
+        print(newline_join(lines), file=unique_song_text_file, end='')
 
 
 def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
@@ -305,9 +311,38 @@ def and_join_album_links(albums: List[Dict[str, str]]) -> str:
         return last_two
 
 
+def get_date(date_string):
+    """
+    Convert date string representation into a datetime.datetime object.
+
+    :param date_string: string representing date in form e.g. "May 2,
+                        1992"; the string representation can contain
+                        some extra content afterwards, but the first
+                        portion should be a value in the format
+                        specified above, separated by a space from
+                        whatever comes afterwards
+    :type date_string: str
+
+    :returns: datetime object representing the date
+    :rtype: datetime.datetime
+
+    :raises: ValueError if `date_string` is invalid
+    """
+
+    date_string_split = date_string.split()
+    if len(date_string_split) < 3:
+        raise ValueError("Invalid date string: {}".format(date_string))
+
+    # Only use first 3 elements of date string (i.e., to filter out any
+    # succeeding parenthetical content, perhaps)
+    date_string = " ".join(date_string_split[:3])
+
+    return datetime.strptime(date_string, date_format)
+
+
 def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictType]:
     """
-    Read albums_and_songs_index.jsonlines file and make dictionary
+    Read albums/songs index JSON file and make dictionary
     representation.
 
     :param index_json_path: path to JSON file containing metadata
@@ -328,8 +363,9 @@ def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictTy
     """
 
     albums = []
-    for collection in loads('\n'.join([line for line in open(index_json_path)
-                                       if not line.startswith('#')])):
+    for collection in sorted(loads('\n'.join([line for line in open(index_json_path)
+                                              if not line.startswith('#')])),
+                             key=lambda x: get_date(x["metadata"]["release_date"])):
 
         if collection['type'] == 'album':
 
