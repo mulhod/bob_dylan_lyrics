@@ -975,7 +975,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
         div = Tag(name='div')
         if len(song_info) == 1:
             song_info = cytoolz.first(song_info)
-            album_links = and_join_album_links(song_info['album(s)'])
+            album_links = and_join_album_links(sorted(song_info['album(s)'],
+                                                      key=lambda x: x['file_id']))
 
             if song_info['file_id'] in file_id_types_to_skip:
                 instrumental_or_not_dylan = song_info['file_id']
@@ -1013,7 +1014,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 # add in entries for the songs that have been deemed as
                 # non-Dylan songs
                 if version_info['file_id'] == 'instrumental':
-                    album_links = and_join_album_links(version_info['album(s)'])
+                    album_links = \
+                        and_join_album_links(sorted(version_info['album(s)']))
                     comment = Tag(name='comment')
                     comment.string = ('Instrumental version (appeared on {0})'
                                       .format(album_links))
@@ -1021,7 +1023,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 elif version_info['file_id'] == 'not_written_or_peformed_by_dylan':
                     continue
                 else:
-                    album_links = and_join_album_links(version_info['album(s)'])
+                    album_links = \
+                        and_join_album_links(sorted(version_info['album(s)']))
                     href = '../html/{0}.html'.format(version_info['file_id'])
                     a = Tag(name='a', attrs={'href': href})
                     a.string = 'Version #{0}'.format(i + 1)

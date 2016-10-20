@@ -233,16 +233,16 @@ def generate_lyrics_download_files(song_tuples: List[Tuple[str, str, str]]) -> N
 
     # Write big file with all unique lines from all songs (ensure order
     # doesn't change if all else stays the same)
-    random.seed(1)
-    lines = list(set(chain(*[[line.strip()
-                              for line in song_tuple[2].strip().split("\n")
-                              if line.strip()]
-                             for song_tuple in song_tuples])))
-    random.shuffle(lines)
+    unique_song_text = \
+        newline_join(sorted(set(chain(*[[line.strip()
+                                         for line in song_tuple[2].strip().split("\n")
+                                         if line.strip()]
+                                        for song_tuple in song_tuples])),
+                            key=lambda x: x[-1]))
     unique_song_text_path = join(file_dumps_dir_path,
                                  all_songs_unique_file_name)
     with open(unique_song_text_path, 'w') as unique_song_text_file:
-        print(newline_join(lines), file=unique_song_text_file, end='')
+        print(unique_song_text, file=unique_song_text_file, end='')
 
 
 def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
