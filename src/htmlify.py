@@ -1015,7 +1015,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 # non-Dylan songs
                 if version_info['file_id'] == 'instrumental':
                     album_links = \
-                        and_join_album_links(sorted(version_info['album(s)']))
+                        and_join_album_links(sorted(version_info['album(s)'],
+                                                    key=lambda x: x['file_id']))
                     comment = Tag(name='comment')
                     comment.string = ('Instrumental version (appeared on {0})'
                                       .format(album_links))
@@ -1024,7 +1025,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                     continue
                 else:
                     album_links = \
-                        and_join_album_links(sorted(version_info['album(s)']))
+                        and_join_album_links(sorted(version_info['album(s)'],
+                                                    key=lambda x: x['file_id']))
                     href = '../html/{0}.html'.format(version_info['file_id'])
                     a = Tag(name='a', attrs={'href': href})
                     a.string = 'Version #{0}'.format(i + 1)

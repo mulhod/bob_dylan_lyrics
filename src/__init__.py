@@ -7,7 +7,6 @@ in album/song metadata, and generally pre-/post-processing raw text or
 HTML.
 """
 import re
-import random
 from json import loads
 from itertools import chain
 from datetime import datetime
