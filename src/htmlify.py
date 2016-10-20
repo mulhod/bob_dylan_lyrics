@@ -466,11 +466,11 @@ def htmlify_everything(albums: List[Album],
     # Generate pages for albums
     print('HTMLifying the individual album pages...', file=sys.stderr)
     if make_downloads:
-        song_texts = \
-            [htmlify_album(album, albums, make_downloads=True,
-                           allow_file_not_found_error=allow_file_not_found_error)
-             for album in albums]
-        song_texts = list(chain(*song_texts))
+        song_texts = list(chain(*[htmlify_album(album,
+                                                albums,
+                                                True,
+                                                allow_file_not_found_error)
+                                  for album in albums]))
     else:
         [htmlify_album(album, albums,
                        allow_file_not_found_error=allow_file_not_found_error)
@@ -1291,8 +1291,8 @@ def main():
     print('Reading the albums_and_songs_index.jsonlines file and building up '
           'index of albums and songs...',
           file=sys.stderr)
-    albums, song_files_dict = \
-        read_songs_index(songs_and_albums_index_json_file_path)
+    (albums,
+     song_files_dict) = read_songs_index(songs_and_albums_index_json_file_path)
 
     # Generate HTML files for the main index page, albums, songs, etc.
     # and write raw lyrics files (for downloading), if requested
