@@ -2306,9 +2306,9 @@ Song name: Mr. Tambourine Man
 Album name: Bringing It All Back Home
 Lyrics:
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though I know that evening's empire has returned into sand,
@@ -2318,22 +2318,23 @@ My weariness amazes me, I'm branded on my feet,
 I have no one to meet,
 And the ancient, empty street's too dead for dreaming.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
-Take me on a trip upon your magic, swirling ship.
+Take me on a trip upon your magic, swirling ship,
 My senses have been stripped,
 My hands can't feel to grip,
 My toes, too numb to step, wait only for my boot-heels to be wandering.
-I'm ready to go anywhere, I'm ready for to fade
-Into my own parade.
-Cast your dancing spell my way – I promise to go under it.
+I'm ready to go anywhere,
+I'm ready for to fade
+Into my own parade,
+Cast your dancing spell my way, I promise to go under it.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though you might hear laughing, spinning, swinging madly across the sun,
@@ -2341,13 +2342,13 @@ It's not aimed at anyone,
 It's just escaping on the run, and but for the sky there are no fences facing.
 And if you hear vague traces of skipping reels of rhyme
 To your tambourine in time,
-It's just a ragged clown behind –
+It's just a ragged clown behind,
 I wouldn't pay it any mind,
 It's just a shadow you're seeing that he's chasing.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 And take me disappearing through the smoke-rings of my mind,
@@ -2359,12 +2360,13 @@ Far from the twisted reach of crazy sorrow.
 Yes, to dance beneath the diamond sky with one hand waving free,
 Silhouetted by the sea,
 Circled by the circus sands,
-With all memory and fate driven deep beneath the waves,
+With all memory and fate
+Driven deep beneath the waves,
 Let me forget about today until tomorrow.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Song name: Gates of Eden
@@ -3811,9 +3813,9 @@ Song name: Mr. Tambourine Man
 Album name: Bob Dylan's Greatest Hits
 Lyrics:
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though I know that evening's empire has returned into sand,
@@ -3823,22 +3825,23 @@ My weariness amazes me, I'm branded on my feet,
 I have no one to meet,
 And the ancient, empty street's too dead for dreaming.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
-Take me on a trip upon your magic, swirling ship.
+Take me on a trip upon your magic, swirling ship,
 My senses have been stripped,
 My hands can't feel to grip,
 My toes, too numb to step, wait only for my boot-heels to be wandering.
-I'm ready to go anywhere, I'm ready for to fade
-Into my own parade.
-Cast your dancing spell my way – I promise to go under it.
+I'm ready to go anywhere,
+I'm ready for to fade
+Into my own parade,
+Cast your dancing spell my way, I promise to go under it.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though you might hear laughing, spinning, swinging madly across the sun,
@@ -3846,13 +3849,13 @@ It's not aimed at anyone,
 It's just escaping on the run, and but for the sky there are no fences facing.
 And if you hear vague traces of skipping reels of rhyme
 To your tambourine in time,
-It's just a ragged clown behind –
+It's just a ragged clown behind,
 I wouldn't pay it any mind,
 It's just a shadow you're seeing that he's chasing.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 And take me disappearing through the smoke-rings of my mind,
@@ -3864,12 +3867,13 @@ Far from the twisted reach of crazy sorrow.
 Yes, to dance beneath the diamond sky with one hand waving free,
 Silhouetted by the sea,
 Circled by the circus sands,
-With all memory and fate driven deep beneath the waves,
+With all memory and fate
+Driven deep beneath the waves,
 Let me forget about today until tomorrow.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Song name: Subterranean Homesick Blues
@@ -9878,7 +9882,7 @@ Album name: Bob Dylan at Budokan
 Lyrics:
 
 Hey, Mr. Tambourine Man, play a song for me,
-I'm not sleepy and there is no place I'm going to,
+I'm not sleepy and there is no place I'm going to.
 Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
@@ -9890,26 +9894,30 @@ I have no one to meet,
 And the ancient, empty street's too dead for dreaming.
 
 Hey, Mr. Tambourine Man, play a song for me,
-I'm not sleepy and there is no place I'm going to,
+I'm not sleepy and there is no place I'm going to.
 Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Take me disappearing through the smoke-rings of my mind,
-Down the foggy ruins of time, far past the frozen leaves,
-The haunted, frightened trees, out to the windy beach,
+Down the foggy ruins of time,
+Far past the frozen leaves,
+The haunted, frightened trees,
+Out to the windy beach,
 Far from the twisted reach of crazy sorrow.
 Yes, to dance beneath the diamond sky with one hand waving free,
-Silhouetted by the sea, circled by the circus sands,
-With all memory and fate driven deep beneath the waves,
+Silhouetted by the sea,
+Circled by the circus sands,
+With all memory and fate
+Driven deep beneath the waves,
 Let me forget about today until tomorrow.
 
 Hey, Mr. Tambourine Man, play a song for me,
-I'm not sleepy and there is no place I'm going to,
+I'm not sleepy and there is no place I'm going to.
 Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Hey, Mr. Tambourine Man, play a song for me,
-I'm not sleepy and there is no place I'm going to,
+I'm not sleepy and there is no place I'm going to.
 Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
@@ -14082,9 +14090,9 @@ Song name: Mr. Tambourine Man
 Album name: Biograph
 Lyrics:
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though I know that evening's empire has returned into sand,
@@ -14094,22 +14102,23 @@ My weariness amazes me, I'm branded on my feet,
 I have no one to meet,
 And the ancient, empty street's too dead for dreaming.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
-Take me on a trip upon your magic, swirling ship.
+Take me on a trip upon your magic, swirling ship,
 My senses have been stripped,
 My hands can't feel to grip,
 My toes, too numb to step, wait only for my boot-heels to be wandering.
-I'm ready to go anywhere, I'm ready for to fade
-Into my own parade.
-Cast your dancing spell my way – I promise to go under it.
+I'm ready to go anywhere,
+I'm ready for to fade
+Into my own parade,
+Cast your dancing spell my way, I promise to go under it.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Though you might hear laughing, spinning, swinging madly across the sun,
@@ -14117,13 +14126,13 @@ It's not aimed at anyone,
 It's just escaping on the run, and but for the sky there are no fences facing.
 And if you hear vague traces of skipping reels of rhyme
 To your tambourine in time,
-It's just a ragged clown behind –
+It's just a ragged clown behind,
 I wouldn't pay it any mind,
 It's just a shadow you're seeing that he's chasing.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 And take me disappearing through the smoke-rings of my mind,
@@ -14135,12 +14144,13 @@ Far from the twisted reach of crazy sorrow.
 Yes, to dance beneath the diamond sky with one hand waving free,
 Silhouetted by the sea,
 Circled by the circus sands,
-With all memory and fate driven deep beneath the waves,
+With all memory and fate
+Driven deep beneath the waves,
 Let me forget about today until tomorrow.
 
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 I'm not sleepy and there is no place I'm going to.
-Hey, Mr. Tambourine Man, play a song for me.
+Hey, Mr. Tambourine Man, play a song for me,
 In the jingle-jangle morning I'll come following you.
 
 Song name: Dear Landlord
@@ -22511,3 +22521,70 @@ Please don't let on that you knew me when I was hungry and it was your world.
 You fake just like a woman – yes, you do!
 You make love like a woman – yes, you do!
 And then you ache just like a woman, but you break just like a little girl.
+
+Song name: Mr. Tambourine Man
+Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
+Lyrics:
+
+Hey, Mr. Tambourine Man, play a song for me,
+I'm not sleepy and there is no place I'm going to.
+Hey, Mr. Tambourine Man, play a song for me,
+In the jingle-jangle morning I'll come following you.
+
+Though I know that evening's empire has returned into sand,
+Vanished from my hand,
+Left me blindly here to stand, but still not sleeping,
+My weariness amazes me, I'm branded on my feet,
+I have no one to meet,
+And the ancient, empty street's too dead for dreaming.
+
+Hey, Mr. Tambourine Man, play a song for me,
+I'm not sleepy and there is no place I'm going to.
+Hey, Mr. Tambourine Man, play a song for me,
+In the jingle-jangle morning I'll come following you.
+
+Take me on a trip upon your magic, swirling ship,
+My senses have been stripped,
+My hands can't feel to grip,
+My toes, too numb to step, wait only for my boot-heels to be wandering.
+I'm ready to go anywhere,
+I'm ready for to fade
+Into my own parade,
+Cast your dancing spell my way, I promise to go under it.
+
+Hey, Mr. Tambourine Man, play a song for me,
+I'm not sleepy and there is no place I'm going to.
+Hey, Mr. Tambourine Man, play a song for me,
+In the jingle-jangle morning I'll come following you.
+
+Though you might hear laughing, spinning, swinging madly across the sun,
+It's not aimed at anyone,
+It's just escaping on the run, and but for the sky there are no fences facing.
+And if you hear vague traces of skipping reels of rhyme
+To your tambourine in time,
+It's just a ragged clown behind,
+I wouldn't pay it any mind,
+Besides it's just a shadow you're seeing that he's chasing.
+
+Hey, Mr. Tambourine Man, play a song for me,
+I'm not sleepy and there is no place I'm going to.
+Hey, Mr. Tambourine Man, play a song for me,
+In the jingle-jangle morning I'll come following you.
+
+And take me disappearing through the smoke-rings of my mind,
+Down the foggy ruins of time,
+Far past the frozen leaves,
+The haunted, frightened trees,
+Out to the windy beach,
+Far from the twisted reach of crazy sorrow.
+Yes, to dance beneath the diamond sky with one hand waving free,
+Silhouetted by the sea,
+Circled by the circus sands,
+With all memory and fate
+Driven deep beneath the waves,
+Let me forget about today until tomorrow.
+
+Hey, Mr. Tambourine Man, play a song for me,
+I'm not sleepy and there is no place I'm going to.
+Hey, Mr. Tambourine Man, play a song for me,
+In the jingle-jangle morning I'll come following you.
