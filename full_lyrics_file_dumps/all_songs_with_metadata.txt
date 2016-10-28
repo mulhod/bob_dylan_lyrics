@@ -252,10 +252,10 @@ Song name: Baby, Let Me Follow You Down
 Album name: Bob Dylan
 Lyrics:
 
-I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.
+<i>I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.</i>
 
 Baby, let me follow you down,
-Baby, let me follow you down.
+Baby, let me follow you down,
 Well, I'll do anything in this God-Almighty world
 If you just let me follow you down.
 
@@ -547,7 +547,7 @@ Song name: Bob Dylan's Blues
 Album name: The Freewheelin' Bob Dylan
 Lyrics:
 
-Unlike most of the songs nowadays are being written uptown in Tin Pan Alley – that's where most of the folk songs come from nowadays, this–this is a song–this wasn't written up there, this was written somewhere down in the United States.
+<i>Unlike most of the songs nowadays are being written uptown in Tin Pan Alley – that's where most of the folk songs come from nowadays, this–this is a song–this wasn't written up there, this was written somewhere down in the United States.</i>
 
 Well, the Lone Ranger and Tonto were riding down the line,
 Fixing everybody's troubles – everybody's 'cept mine.
@@ -13206,10 +13206,10 @@ Song name: Baby, Let Me Follow You Down
 Album name: Biograph
 Lyrics:
 
-I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.
+<i>I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.</i>
 
 Baby, let me follow you down,
-Baby, let me follow you down.
+Baby, let me follow you down,
 Well, I'll do anything in this God-Almighty world
 If you just let me follow you down.
 
@@ -22679,3 +22679,41 @@ And, if anybody asks me,
 I'll say, "It's easily done,
 Just pick anyone
 And pretend that you never have met."
+
+Song name: Baby, Let Me Follow You Down
+Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
+Lyrics:
+
+Baby, let me follow you down,
+Baby, let me follow you down,
+Well, I'll do anything in this God-Almighty world
+If you just let me follow you down.
+
+I'll buy you a diamond ring,
+Yes, I'll buy you a wedding gown,
+Well, I'll do anything in this God-Almighty world
+If you just let me follow you down.
+
+Can I come home with you?
+Baby, can I come home with you?
+Well, I'll do anything in this God-Almighty world
+If you just let me come home with you.
+
+I'll buy you rope and twine,
+Honey, just for you to climb,
+Yes, I'll do anything in this God-Almighty world
+If you just once drive me outta my mind.
+
+I'll buy you a [incomprehensible] skirt,
+I'll buy you a velvet shirt,
+Yes, I'll do anything in this God-Almighty world
+If it just don't make me hurts.
+
+Baby, let me follow you down,
+Baby, let me follow you down,
+Well, I'll do anything in this God-Almighty world
+If you just let me follow you down.
+Baby, let me follow you down,
+Baby, let me follow you down,
+Well, I'll do anything in this God-Almighty world
+If you just let me follow you down.
