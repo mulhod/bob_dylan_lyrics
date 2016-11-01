@@ -2245,17 +2245,17 @@ We'll just put some bleachers out in the sun
 And have it on Highway 61."
 When you're lost in the rain in Juarez and it's Easter-time too
 And your gravity fails and negativity don't pull you through,
-Don't put on any airs when you're down on Rue Morgue Avenue:
+Don't put on any airs when you're down on Rue Morgue Avenue,
 They got some hungry women there and they really make a mess outta you.
-Now, if you see Saint Annie, please tell her "Thanks a lot".
+Now, if you see Saint Annie, please tell her "Thanks a lot",
 I cannot move, my fingers are all in a knot.
 I don't have the strength to get up and take another shot
 And my best friend, my doctor, won't even say what it is I've got.
-Sweet Melinda, the peasants call her the "Goddess of Gloom".
-She speaks good English and she invites you up into her room.
+Sweet Melinda, the peasants call her the "Goddess of Gloom",
+She speaks good English and she invites you up into her room
 And you're so kind and careful not to go to her too soon
 As she takes your voice and leaves you howling at the moon.
-Up on Housing Project Hill it's either fortune or fame.
+Up on Housing Project Hill it's either fortune or fame,
 You must pick one or the other though neither of them are to be what they claim.
 If you're looking to get silly, you better go back to from where you came
 Because the cops don't need you and, man, they expect the same.
@@ -2263,7 +2263,7 @@ Now, all the authorities, they just stand around and boast
 How they blackmailed the sergeant-at-arms into leaving his post
 And picking up Angel, who just arrived here from the coast,
 Who looked so fine at first, but left looking just like a ghost.
-I started out on burgundy, but soon hit the harder stuff.
+I started out on burgundy, but soon hit the harder stuff,
 Everybody said they'd stand behind me when the game got rough,
 But the joke was on me, there was nobody even there to bluff.
 I'm going back to New York City, I do believe I've had enough.
@@ -2552,7 +2552,7 @@ And here I sit so patiently waiting to find out what price
 You have to pay to get out of going through all these things twice.
 Oh, mama, is this really the end,
 To be stuck here inside of Mobile with the Memphis blues again?
-Well, I see you got your brand-new leopard-skin pill-box hat.
+Well, I see you got your brand-new leopard-skin pill-box hat,
 Yes, I see you got your brand-new leopard-skin pill-box hat.
 Well, you must tell me, baby, how your head feels under something like that,
 Under your brand-new leopard-skin pill-box hat.
@@ -2561,16 +2561,16 @@ Yes, I just wanna see if it's really the expensive kind.
 You know, it balances on your head just like a mattress balances on a bottle of wine,
 Your brand-new leopard-skin pill-box hat.
 Well, if you wanna see the sunrise, honey, I know where.
-We'll go out and see it sometime. We'll both just sit there and stare,
+We'll go out and see it sometime, we'll both just sit there and stare,
 Me with my belt wrapped around my head and you just sitting there
 In your brand-new leopard-skin pill-box hat.
 Well, I asked the doctor if I could see you. "It's bad for your health," he said.
-Yes, I disobeyed his orders. I came to see you, but I found him there instead.
+Yes, I disobeyed his orders, I came to see you, but I found him there instead.
 You know, I don't mind him cheating on me, but I sure wish he'd take that off his head,
 Your brand-new leopard-skin pill-box hat.
-Well, I see you got a new boyfriend – no, I never seen him before.
-Well, I saw you making love with him – you forgot to close the garage door.
-You might think he loves you for your money, but I know what he really loves you for.
+Well, I see you got a new boyfriend, no, I never seen him before.
+Well, I saw you making love with him, you forgot to close the garage door.
+You might think he loves you for your money, but I know what he really loves you for,
 It's your brand-new leopard-skin pill-box hat.
 Nobody feels any pain tonight as I stand inside the rain.
 Everybody knows that baby's got new clothes,
@@ -4580,17 +4580,17 @@ Whoa, come all without, come all within,
 You'll not see nothing like the mighty Quinn!
 When you're lost in the rain in Juarez and it's Easter-time too
 And your gravity fails and negativity don't pull you through,
-Don't put on any airs when you're down on Rue Morgue Avenue:
+Don't put on any airs when you're down on Rue Morgue Avenue,
 They got some hungry women there and they really make a mess outta you.
-Now, if you see Saint Annie, please tell her "Thanks a lot".
+Now, if you see Saint Annie, please tell her "Thanks a lot",
 I cannot move, my fingers are all in a knot.
 I don't have the strength to get up and take another shot
 And my best friend, my doctor, won't even say what it is I've got.
-Sweet Melinda, the peasants call her the "Goddess of Gloom".
-She speaks good English and she invites you up into her room.
+Sweet Melinda, the peasants call her the "Goddess of Gloom",
+She speaks good English and she invites you up into her room
 And you're so kind and careful not to go to her too soon
 As she takes your voice and leaves you howling at the moon.
-Up on Housing Project Hill it's either fortune or fame.
+Up on Housing Project Hill it's either fortune or fame,
 You must pick one or the other though neither of them are to be what they claim.
 If you're looking to get silly, you better go back to from where you came
 Because the cops don't need you and, man, they expect the same.
@@ -4598,7 +4598,7 @@ Now, all the authorities, they just stand around and boast
 How they blackmailed the sergeant-at-arms into leaving his post
 And picking up Angel, who just arrived here from the coast,
 Who looked so fine at first, but left looking just like a ghost.
-I started out on burgundy, but soon hit the harder stuff.
+I started out on burgundy, but soon hit the harder stuff,
 Everybody said they'd stand behind me when the game got rough,
 But the joke was on me, there was nobody even there to bluff.
 I'm going back to New York City, I do believe I've had enough.
@@ -17273,3 +17273,49 @@ Baby, let me follow you down,
 Baby, let me follow you down,
 Well, I'll do anything in this God-Almighty world
 If you just let me follow you down.
+When you're lost in the rain in Juarez and it's Easter-time too
+And your gravity's down and negativity don't get you through,
+Just don't put on any airs when you're down on Rue Morgue Avenue,
+They got some hungry women there and they really make a mess outta you.
+Now, if you see Saint Annie, please tell her "Thanks a lot",
+I cannot move, my fingers, they're all even in a knot.
+I don't have the strength to get up and take another shot
+And my best friend, the doctor, he won't even tell me what it is that I've gots.
+Sweet Melinda, the peasants call her the "Goddess of Gloom",
+She speaks good English and she invites you up into her room
+And you're so kind and careful not to go to her too soon
+And she steals your voice and leaves you screaming at the moon.
+Up on Housing Project Hill it's either fortune or fame,
+You must pick up one or the other, neither of them are to be what they claim.
+If you're looking to get silly, you better go back to from where you came
+Because the cops don't need you and, man, they expect the same.
+Now, all the authorities, they just stand around and boast
+How they blackmailed the sergeant-at-arms into getting up and leaving his post
+And picking up Angel, who just arrived from the coast,
+Who looked so fine at first, but left looking just like a ghost.
+Alright!
+I started out on burgundy, but soon hit the harder stuff,
+Everybody said they'd stand behind me when the game got rough,
+Yes, but the joke was on me, there was nobody even there to call my bluff.
+I'm going back to New York City, I do believe I've had enough.
+<i>This is ca––this is called "Yes–" – this is, uh, this is called "Yes, I See You've Got Your Brand-New Leopard-Skin Pill-Box Hat."</i>
+Well, I see you got your brand-new leopard-skin pill-box hat,
+Yes, I see you got your brand-new leopard-skin pill-box hat.
+Well, you must tell me, baby, how your head feels under something like that,
+Under your brand-new leopard-skin pill-box hat.
+Well, you wear it so pretty. Honey, can I jump on it sometime?
+Yes, I just wanna see if it's really the expensive kind.
+You know, it balances on your head just like a mattress balances on a bottle of wine,
+Your brand-new leopard-skin pill-box hat.
+Well, if you wanna see the sunrise, honey, I know where,
+Yes, we'll go out and see it sometime, we'll both just sit there and stare,
+Me with my belt wrapped around my head and you just sitting there
+In your brand-new leopard-skin pill-box hat.
+Well, I asked the doctor if I could see you. "It's bad for your health," he said.
+Yes, I disobeyed his orders, I came to see you, but I found him there instead.
+You know, I don't mind him cheating on me, but I sure wish he'd get that off his head,
+Your brand-new leopard-skin pill-box hat.
+Well, I see you got a new boyfriend, no, I never seen him before.
+Well, I saw you making love with him, you forgot to close the garage door.
+You might think he loves you for your money, but I know what he really loves you for,
+It's your brand-new leopard-skin pill-box hat.
