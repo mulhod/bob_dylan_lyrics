@@ -302,11 +302,11 @@ def and_join_album_links(albums: List[Dict[str, Union[str, datetime]]]) -> str:
 
     if len(albums) == 1:
         return link(cytoolz.first(albums))
+    elif len(albums) == 2:
+        return ' and '.join([link(album) for album in albums[-2:]])
     else:
         last_two = ', and '.join([link(album) for album in albums[-2:]])
-        if len(albums) > 2:
-            return ', '.join([link(album) for album in albums[:-2]] + [last_two])
-        return last_two
+        return ', '.join([link(album) for album in albums[:-2]] + [last_two])
 
 
 def get_date(date_string):
