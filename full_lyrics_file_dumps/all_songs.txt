@@ -800,17 +800,17 @@ So, now as I'm leaving, I'm weary as hell,
 The confusion I'm feeling ain't no tongue can tell,
 The words fill my head and fall to the floor,
 That, if God's on our side, He'll stop the next war.
-Down the street the dogs are barking and the day is getting dark.
-As the night comes in falling, the dogs'll lose their bark
+Down the street the dogs are barking and the day is getting dark,
+As the night comes in falling, the dogs'll lose their bark,
 And the silent night will shatter from the sounds inside my mind.
 Yes, I'm one too many mornings and a thousand miles behind.
 From the crossroads of my doorstep my eyes start to fade
 And I turn my head back to the room where my love and I have laid
-And I gaze back to the street, the sidewalk, and the sign.
+And I gaze back to the street, the sidewalk, and the sign
 And I'm one too many mornings and a thousand miles behind.
 It's a restless, hungry feeling that don't mean no one no good
 When everything I'm saying you can say it just as good.
-You're right from your side, I'm right from mine.
+You're right from your side, I'm right from mine,
 We're both just one too many mornings and a thousand miles behind.
 Come gather 'round, friends, and I'll tell you a tale
 Of when the red iron ore pits run aplenty.
@@ -2009,7 +2009,7 @@ How does it feel
 To be without a home,
 Like a complete unknown,
 Like a rolling stone?
-Oh, you gone to the finest school – alright, Ms. Lonely,
+Oh, you gone to the finest school, alright, Ms. Lonely,
 But you know you only used to get juiced in it.
 Nobody's ever taught you how to live out on the street
 And now you're gonna have to get used to it.
@@ -2144,7 +2144,7 @@ Well, she don't make me nervous, she don't talk too much.
 She walks like Bo Diddley and she don't need no crutch.
 She keeps this .410 all loaded with lead.
 Well, if I fall down dying, you know, she bound to put a blanket on my bed.
-You walk into the room with your pencil in your hand.
+You walk into the room with your pencil in your hand,
 You see somebody naked and you, you say, "Who is that man?"
 You try so hard, but you don't understand
 Just what you will say when you get home
@@ -2153,7 +2153,7 @@ You raise up your head and you ask, "Is this where it is?"
 And somebody points to you and says, "It's his."
 And you say, "What's mine?" And somebody else says, "Where what is?"
 And you say, "Oh, my God, am I here all alone?"
-But, something is happening and you don't know what it is, do you, Mr. Jones?
+But something is happening and you don't know what it is, do you, Mr. Jones?
 You hand in your ticket and you go watch the geek,
 Who immediately walks up to you when he hears you speak
 And says, "How does it feel to be such a freak?"
@@ -2161,19 +2161,19 @@ And you say "Impossible!" as he hands you a bone.
 And something is happening here, but you don't know what it is, do you, Mr. Jones?
 You have many contacts among the lumberjacks
 To get you facts when someone attacks your imagination.
-But, nobody has any respect, anyway they already expect you
+But nobody has any respect, anyway they already expect you
 To all give a check to tax-deductible charity organizations.
-Oh, you been with the professors and they've all liked your looks.
-With great lawyers you have discussed lepers and crooks.
-You been through all of F. Scott Fitzgerald's books.
+Oh, you been with the professors and they've all liked your looks,
+With great lawyers you have discussed lepers and crooks,
+You been through all of F. Scott Fitzgerald's books,
 You're very well-read, it's well-known.
 But something is happening here and you don't know what it is, do you, Mr. Jones?
-Well, the sword swallower, he comes up to you and then he kneels.
+Well, the sword swallower, he comes up to you and then he kneels,
 He crosses himself and then he clicks his high heels
-And without further notice he asks you how it feels.
+And without further notice he asks you how it feels
 And he says, "Here is your throat back. Thanks for the loan."
 And you know something is happening, but you don't know what it is, do you, Mr. Jones?
-Now, you see this one-eyed midget shouting the word "Now!"
+Now, you see this one-eyed midget shouting the word "now"
 And you say, "For what reason?" And he says, "How?"
 And you say, "What does this mean?" And he screams back, "You're a cow!
 Give me some milk or else go home!"
@@ -2903,7 +2903,7 @@ How does it feel
 To be without a home,
 Like a complete unknown,
 Like a rolling stone?
-Oh, you gone to the finest school – alright, Ms. Lonely,
+Oh, you gone to the finest school, alright, Ms. Lonely,
 But you know you only used to get juiced in it.
 Nobody's ever taught you how to live out on the street
 And now you're gonna have to get used to it.
@@ -5420,7 +5420,7 @@ It ain't me you're looking for, babe.
 You walk into the room with your pencil in your hand,
 See somebody naked, you say, "Who's that man?"
 You try so hard, but you don't understand
-What you're gonna say when you get home –
+What you're gonna say when you get home
 'Cause something is happening and you don't know what it is, do you, Mr. Jones?
 You raise up your head, say, "Is this where it is?"
 Somebody points to you and says, "It's his."
@@ -5434,17 +5434,17 @@ You say, "Impossible!" as he hands you the bone.
 And something is happening, but you don't know what it is, do you, Mr. Jones?
 You have many contacts all among the lumberjacks
 To get you facts when someone attacks your imagination.
-No one has any respect – anyway, they expect
+No one has any respect, anyway they expect
 You to give your check to tax-deductible charity organizations.
 You've been with professors, they've all liked your looks,
 With great lawyers you've discussed lepers and crooks,
-You've been through all of F. Scott Fitzgerald's books –
+You've been through all of F. Scott Fitzgerald's books,
 You're very well-read, it's well-known.
-But, still, something's happening and you don't know what it is, do you, Mr. Jones?
+But still something's happening and you don't know what it is, do you, Mr. Jones?
 You crawl into the room like a camel and you frown,
 Put your eyes in your pocket and your nose in the ground.
 There ought to be a law against you coming around,
-You should be made to be wearing a telephone –
+You should be made to be wearing a telephone
 'Cause something is happening and you don't know what it is, do you, Mr. Jones?
 They say everything can be replaced,
 They say every distance is not near,
@@ -6930,7 +6930,7 @@ Till I gaze back to the streets, the sidewalks, and the sign
 And know I'm one too many mornings and a thousand miles behind.
 It's a restless, hungry feeling and it don't mean no one no good
 When everything that I'm saying you could say it just as good.
-You are right from your side and I'm right from mine;
+You are right from your side and I'm right from mine,
 We're both one too many mornings and a thousand miles behind.
 I've no right to be here if you've no right to stay
 Until we're both one too many mornings and a thousand miles away.
@@ -7569,14 +7569,14 @@ The wind howls like a hammer,
 The night blows cold and rainy,
 My love, she's like some raven
 At my window with a broken wing.
-You walk into the room with your pencil in your hand.
+You walk into the room with your pencil in your hand,
 You see someone naked and you say, "Who is that man?"
 You try so hard, but you don't understand
 Just what you're gonna say when you get home.
-But, something is happening, but you don't know what it is, do you, Mr. Jones?
+But something is happening, but you don't know what it is, do you, Mr. Jones?
 You sneak into the window and you say, "Is this where it is?"
 Somebody points his finger at you and says, "It's his."
-And you say, "What's mine?", someone else says, "Where what is?"
+And you say, "What's mine?" Someone else says, "Where what is?"
 You say, "Oh, my God, am I here all alone?"
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 You hand in your ticket to go see the geek,
@@ -7586,18 +7586,18 @@ And you say, "Impossible!" as he hands you a bone.
 Something is happening and you don't know what it is, do you, Mr. Jones?
 You have many contacts out there among the lumberjacks
 To get you facts if someone attacks your imagination.
-And no one has any respect – anyway, they just expect
+And no one has any respect, anyway they just expect
 You to hand over your check to tax-deductible charity organizations.
 The sword swallower walks up to you and he kneels,
 He crosses himself and then he clicks his high heels,
 And without further notice asks you how it feels
-And says, "Here's your throat back, thanks for the loan."
+And says, "Here's your throat back. Thanks for the loan."
 Something is happening and you don't know what it is, do you, Mr. Jones?
 You crawl into the room like a camel and you frown,
 You put your eyes in your pocket and you put your nose into the ground.
 There oughtta be a law against you coming around,
 You got to be made to be wearing a telephone.
-But, something is happening and you don't know what it is, do you, Mr. Jones?
+But something is happening and you don't know what it is, do you, Mr. Jones?
 Well, it ain't no use to sit and wonder why, babe,
 If'n you don't know by now,
 It ain't no use to sit and wonder why, babe,
@@ -9578,22 +9578,22 @@ What you'll say when you get home.
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 You hand in a back door to go––"Is this––this where it is?"
 Somebody points his finger at you and says, "It's his."
-You say, "What's mine?", someone else says, "Where what is?"
+You say, "What's mine?" Someone else says, "Where what is?"
 You say, "Oh, no, am I here all alone?"
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 You hand in your ticket to go see the geek,
 Who walks up to you when he hears you speak
 And says, "How does it feel to be such a freak?"
-You say, "Impossible!" as he hand you a, a bone.
+You say, "Impossible!" as he hand you a--a bone.
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 You have many contacts out there among the lumberjacks,
 Get you facts when someone attacks your imagination.
-No one has any respect – anyway, they just expect
+No one has any respect, anyway they just expect
 You to sign your check to tax-deductible charity organizations, oh!
 You walk into the room like a camel and you frown,
 You put your eyes in your pocket, you put your nose in the ground.
-There oughtta be a law against you coming around –
-Remember, before you come, at least please first telephone.
+There oughtta be a law against you coming around,
+Remember before you come, at least please first telephone.
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 Something is happening, but you don't know what it is, do you, Mr. Jones?
 If you're traveling in the north country fair,
@@ -10426,7 +10426,7 @@ How does it feel
 To be without a home,
 Like a complete unknown,
 Like a rolling stone?
-Oh, you gone to the finest school – alright, Ms. Lonely,
+Oh, you gone to the finest school, alright, Ms. Lonely,
 But you know you only used to get juiced in it.
 Nobody's ever taught you how to live out on the street
 And now you're gonna have to get used to it.
@@ -17319,3 +17319,120 @@ Well, I see you got a new boyfriend, no, I never seen him before.
 Well, I saw you making love with him, you forgot to close the garage door.
 You might think he loves you for your money, but I know what he really loves you for,
 It's your brand-new leopard-skin pill-box hat.
+<i>...if you only just wouldn't clap so hard.</i>
+Down the street the dogs are barking and the day is getting dark,
+As the night comes in a-falling, the dogs will lose their bark,
+And the silent night will shatter from the sounds inside my mind.
+Yes, I'm one too many mornings and a thousand miles behind.
+From the crossroads of my doorsteps my eyes, they begin to fade
+And I turn my head back to the room where my love and I have laid
+And I gaze back to the streets, the sidewalks, and the sign
+And I'm one too many mornings and a thousand miles behind.
+It's a restless, hungry feeling that don't mean no one no good
+When everything I'm saying you can say it just as good.
+Yes, you're right from your side and I'm right from mine,
+We're both just one too many mornings and a thousand miles behind!
+You walk into the room with your pencil in your hand,
+You see somebody naked, you say, "Who is that man?"
+You try so hard, but you don't understand
+Just what you're gonna say when you get home,
+Yes, because you know something is happening, but you don't know what it is, do you, Mr. Jones?
+You walk in so politely, you say, "Is this where it is?"
+And somebody points to you and says, "It's his."
+You say, "What's mine?" Somebody else says, "Where what is?"
+And you say, "Oh, my God, am I here all alone?"
+Yes, but, you know something's happening, but you don't know what it is, do you, Mr. Jones?
+You hand in your money to go watch the geek,
+Who suddenly walks up to you when he hears you speak,
+Saying, "How does it feel to be such a freak?"
+You say, "Impossible!" as he hands you a bone.
+Yes, but you know something's happening, it's just that you don't know what it is, do you, Mr. Jones?
+You have many contacts out there among the lumberjacks
+To get you facts when someone attacks your imagination.
+Yes, nobody has any respect, anyway they already expect
+You just to give away your check to tax-deductible charity organizations.
+Oh, you been with the professors, they've all liked your looks,
+With great lawyers and scholars you've discussed lepers and crooks,
+You been through all of F. Scott Fitzgerald's books,
+You're very-well read, it's well-known.
+Yes, but something's happening and you don't know what it is, do you, Mr. Jones?
+The sword swallower walks up to you and then he kneels,
+He crosses himself and he clicks his high heels,
+And without further notice he tells you how it feels
+And says, "Here's your throat back. Thanks for the loan!"
+Yes, and you think something's happening, but you don't know what it is, do you, Mr. Jones?
+You see this one-eyed midget shouting the word "now"
+And you say, "For what reason?" And he says, "How?"
+And you say, "Oh, my God, what does that mean?" And he screams back, "You're a cow!
+Give me some milk or else go home!"
+Yes, now you're positive something's happening and you wish you knew what it was, don't you, Mr. Jones?
+You walk into the room like a camel and then you frown,
+You put your eyes in your pockets and your nose into the ground.
+There oughtta be a law against you coming around,
+You should be made to be wearing at all times a telephone,
+Yes, because something is happening and you don't know what it is, do you, Mr. Jones?
+<i>I don't believe you.</i>
+<i>You're a liar!</i>
+<p>
+<i>Play fucking loud!</i>
+Once upon a time you dressed so fine,
+Threw the bums a dime in your prime, didn't you?
+People'd call, say, "Beware, doll,
+You're bound to fall." You thought they were all kidding you.
+You used to laugh about
+Everybody that was hanging out.
+Now you don't talk so loud,
+Now you don't seem so proud
+About having to be scrounging for your next meal.
+How does it feel?
+How does it feel
+To be one your own,
+No direction home,
+Like a complete unknown,
+Like a rolling stone?
+Well, you gone to the finest school, alright, Ms. Lonely,
+But you know you only used to get juiced in it.
+Nobody's ever taught you how to live out on the street,
+You find out now you're gonna have to get used to it.
+You said you'd never compromise
+With the mystery tramp, but now you realize
+He's not selling any alibis
+As you stare into the vacuum of his eyes
+And say, "Do you wanna make a deal?"
+How does it feel?
+How does it feel
+To be on your own,
+No direction home,
+Like a complete unknown,
+Like a rolling stone?
+Well, you never turned around to see the frowns
+On the jugglers and the clowns when they all came down to do tricks for you.
+You never understood that it ain't no good,
+You shouldn't let other people get your kicks for you.
+You used to ride the chrome horse with your diplomat,
+Who carried on his shoulder a Siamese cat.
+Ain't it hard when you discover that
+He really wasn't where it's at
+After he's taken everything he can steal?
+How does it feel?
+How does it feel
+To be on your own,
+With no direction home,
+Like a complete unknown,
+Like a rolling stone?
+Princess on the steeple and all the pretty people,
+They're all drinking and thinking that they got it made,
+Exchanging all precious gifts and things,
+But you'd better take your diamond ring down and pawn it, babe.
+You used to be so amused
+At Napoleon in rags and the language that he used.
+Go to him now, he calls you, you can't refuse.
+When you ain't got nothing, you got nothing to lose.
+You're invisible now, you got no secrets to conceal.
+How does it feel?
+Oh, how does it feel
+To be on your own,
+With no direction home,
+Like a complete unknown,
+Like a rolling stone?
+<i>Thank you.</i>
