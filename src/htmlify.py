@@ -30,12 +30,13 @@ from markdown import Markdown
 from typing import Dict, List, Optional, Tuple
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-from src import (Album, Song, SongFilesDictType, file_id_types_to_skip,
-                 root_dir_path, albums_dir, songs_dir, resources_dir,
-                 images_dir, albums_index_html_file_name, downloads_file_name,
-                 all_songs_with_metadata_file_name, all_songs_file_name,
-                 all_songs_unique_file_name, text_dir_path,
-                 song_index_dir_path, songs_and_albums_index_json_file_path,
+from src import (Album, Song, SongsRelatedAlbumsDictType,
+                 file_id_types_to_skip, root_dir_path, albums_dir, songs_dir,
+                 resources_dir, images_dir, albums_index_html_file_name,
+                 downloads_file_name, all_songs_with_metadata_file_name,
+                 all_songs_file_name, all_songs_unique_file_name,
+                 text_dir_path, song_index_dir_path,
+                 songs_and_albums_index_json_file_path,
                  songs_index_html_file_path, album_index_dir_path,
                  albums_index_html_file_path, file_dumps_dir_path,
                  main_index_html_file_path, home_page_content_file_path,
@@ -160,8 +161,8 @@ def generate_song_list_element(song: Song) -> Tag:
     # If the song was recorded live in concert, generate a
     # parenthetical comment
     if live:
-        live = (' (recorded live {0} {1})'
-                .format(live['date'], live['location/concert']))
+        live = ' (recorded live {0} {1})'.format(live['date'],
+                                                 live['location/concert'])
 
     # Make a link for the song file if the song is not an instrumental
     # or was not performed by somebody else
@@ -404,9 +405,10 @@ def generate_song_list(songs: List[Song],
 
 
 def htmlify_everything(albums: List[Album],
-                       song_files_dict: SongFilesDictType,
+                       song_files_dict: SongsRelatedAlbumsDictType,
                        make_downloads: bool = False,
-                       allow_file_not_found_error: bool = False) -> Optional[List[Tuple[str, str, str]]]:
+                       allow_file_not_found_error: bool = False) \
+    -> Optional[List[Tuple[str, str, str]]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs and, optionally, return a list of song
@@ -416,7 +418,7 @@ def htmlify_everything(albums: List[Album],
     :type albums: List[Album]
     :param song_files_dict: dictionary mapping song names to lists of
                             versions
-    :type song_files_dict: dict
+    :type song_files_dict: SongsRelatedAlbumsDictType
     :param make_downloads: True if lyrics file downloads should be
                            generated
     :type make_downloads: bool
@@ -848,14 +850,14 @@ def htmlify_song(song: Song, albums: List[Album]) -> None:
         print(prepare_html(html), file=song_file, end='')
 
 
-def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
+def htmlify_main_song_index_page(song_files_dict: SongsRelatedAlbumsDictType,
                                  albums: List[Album]) -> None:
     """
     Generate the main song index HTML page.
 
     :param song_files_dict: dictionary mapping song names to lists of
                             versions
-    :type song_files_dict: dict
+    :type song_files_dict: SongsRelatedAlbumsDictType
     :param albums: list of Album objects
     :type albums: List[Album]
 
@@ -918,7 +920,8 @@ def htmlify_main_song_index_page(song_files_dict: SongFilesDictType,
         print(prepare_html(html), file=songs_index_file, end='')
 
 
-def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
+def htmlify_song_index_page(letter: str,
+                            song_files_dict: SongsRelatedAlbumsDictType,
                             albums: List[Album]) -> None:
     """
     Generate a specific songs index page.
@@ -927,7 +930,7 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
     :type letter: str
     :param song_files_dict: dictionary mapping song names to lists of
                             versions
-    :type song_files_dict: dict
+    :type song_files_dict: SongsRelatedAlbumsDictType
     :param albums: list of Album objects
     :type albums: List[Album]
 
@@ -957,6 +960,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
     container_div.append(row_div)
     container_div.append(Tag(name='p'))
 
+    # Iterate over all songs (not versions of songs, but a more
+    # abstract sense of "songs")
     not_dylan = 'not written by or not performed by Bob Dylan'
     no_songs = True
     for song in sort_titles(list(song_files_dict), letter):
@@ -976,7 +981,8 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
         if len(song_info) == 1:
             song_info = cytoolz.first(song_info)
             album_links = and_join_album_links(sorted(song_info['album(s)'],
-                                                      key=lambda x: x['file_id']))
+                                                      key=lambda x:
+                                                          x['release_date']))
 
             if song_info['file_id'] in file_id_types_to_skip:
                 instrumental_or_not_dylan = song_info['file_id']
@@ -1014,9 +1020,9 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 # add in entries for the songs that have been deemed as
                 # non-Dylan songs
                 if version_info['file_id'] == 'instrumental':
-                    album_links = \
-                        and_join_album_links(sorted(version_info['album(s)'],
-                                                    key=lambda x: x['file_id']))
+                    album_links = and_join_album_links(
+                                      sorted(version_info['album(s)'],
+                                             key=lambda x: x['release_date']))
                     comment = Tag(name='comment')
                     comment.string = ('Instrumental version (appeared on {0})'
                                       .format(album_links))
@@ -1024,9 +1030,9 @@ def htmlify_song_index_page(letter: str, song_files_dict: SongFilesDictType,
                 elif version_info['file_id'] == 'not_written_or_peformed_by_dylan':
                     continue
                 else:
-                    album_links = \
-                        and_join_album_links(sorted(version_info['album(s)'],
-                                                    key=lambda x: x['file_id']))
+                    album_links = and_join_album_links(
+                                      sorted(version_info['album(s)'],
+                                             key=lambda x: x['release_date']))
                     href = '../html/{0}.html'.format(version_info['file_id'])
                     a = Tag(name='a', attrs={'href': href})
                     a.string = 'Version #{0}'.format(i + 1)

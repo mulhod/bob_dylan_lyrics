@@ -18,11 +18,9 @@ import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 
-SongFilesDictType = Dict[str, List[Dict[str, Union[str, int, List[Dict[str, str]]]]]]
-SongDictType = Dict[str, Union[str, Dict[str, str]]]
-
-date_format = "%B %d, %Y"
-file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
+AlbumDictType = Dict[str, Union[str, datetime]]
+SongRelatedAlbumsDictType = Dict[str, Union[str, List[AlbumDictType]]]
+SongsRelatedAlbumsDictType = Dict[str, List[SongRelatedAlbumsDictType]]
 
 # Paths
 root_dir_path = dirname(dirname(realpath(__file__)))
@@ -55,6 +53,9 @@ file_dumps_dir_path = join(root_dir_path, file_dumps_dir)
 main_index_html_file_path = join(root_dir_path, main_index_html_file_name)
 home_page_content_file_path = join(root_dir_path, resources_dir,
                                    'home_page_content.md')
+
+file_id_types_to_skip = ['instrumental', 'not_written_or_peformed_by_dylan']
+date_format = "%B %d, %Y"
 
 # Regular expression- and cleaning-related
 ANNOTATION_MARK_RE = re.compile(r'\*\*([0-9]+)\*\*')
@@ -269,7 +270,7 @@ def sort_titles(titles: Iterable[str], filter_char: str = None) -> List[str]:
     return filter(filter_func, sorted(titles, key=clean_title))
 
 
-def and_join_album_links(albums: List[Dict[str, str]]) -> str:
+def and_join_album_links(albums: List[Dict[str, Union[str, datetime]]]) -> str:
     """
     Concatenate one or more albums together such that if it's two, then
     then they are concatenated by the word "and" padded by spaces, if
@@ -294,8 +295,10 @@ def and_join_album_links(albums: List[Dict[str, str]]) -> str:
 
     if not len(albums): raise ValueError('No albums!')
 
-    link_template = '<a href="../../albums/{0}.html">{1}</a>'
-    link = (lambda x: link_template.format(x['file_id'], x['name']))
+    link_template = '<a href="../../albums/{0}.html">{1} ({2})</a>'
+    link = (lambda x: link_template.format(x['file_id'],
+                                           x['name'],
+                                           x['release_date'].year))
 
     if len(albums) == 1:
         return link(cytoolz.first(albums))
@@ -335,7 +338,8 @@ def get_date(date_string):
     return datetime.strptime(date_string, date_format)
 
 
-def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictType]:
+def read_songs_index(index_json_path: str) -> Tuple[List[Album],
+                                                    SongsRelatedAlbumsDictType]:
     """
     Read albums/songs index JSON file and make dictionary
     representation.
@@ -352,7 +356,7 @@ def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictTy
               of song metadata, and 2) a dictionary mapping song names
               to lists of dictionaries containing information about
               various versions of songs
-    :rtype: Tuple[List[Album], SongFilesDictType]
+    :rtype: Tuple[List[Album], SongsRelatedAlbumsDictType]
 
     :raises: ValueError
     """
@@ -405,7 +409,8 @@ def read_songs_index(index_json_path: str) -> Tuple[List[Album], SongFilesDictTy
             else:
                 song_file_id = song.file_id
 
-            file_album_dict = {'name': album.name, 'file_id': album.file_id}
+            file_album_dict = {'name': album.name, 'file_id': album.file_id,
+                               'release_date': get_date(album.release_date)}
             if song_name not in song_files_dict:
                 song_files_dict[song_name] = [{'file_id': song_file_id,
                                                'album(s)': [file_album_dict]}]
