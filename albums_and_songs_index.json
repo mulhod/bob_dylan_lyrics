@@ -3849,6 +3849,64 @@
                 }
             }
         }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "The Essential Bob Dylan",
+            "file_id": "the_essential_bob_dylan",
+            "image_file_name": "The_Essential_Bob_Dylan.jpg",
+            "release_date": "October 31, 2000",
+            "length": "135:58",
+            "producers": "Various",
+            "label": "Columbia/Legacy",
+            "discs": {
+                "1": "1-16",
+                "2": "1-16"
+            },
+            "songs": {
+                "": {
+                    "index": 1,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 2,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 3,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 4,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 5,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 6,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 7,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 8,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 9,
+                    "file_id": ""
+                },
+                "": {
+                    "index": 10,
+                    "file_id": ""
+                }
+            }
+        }
     }
 
 ]
