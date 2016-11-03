@@ -10,4 +10,4 @@ chmod a+x Miniconda3-latest-Linux-x86_64.sh
 - Once Conda is installed, you can create a Conda environment named "dylan_lyrics", for example, with the following command: `conda create --yes -n dylan_lyrics python=3.5 entrypoints`
 - Then, initialize the environment by running `source activate dylan_lyrics`
 - If not using a virtual environment, just begin at the next step after installing the `entrypoints` package via `pip` or `conda`.
-- After cloning this repository, change into its root directory and then run `setup.py` or `pip` to install `bob_dylan_lyrics` and all of the packages we need, i.e., `python setup.py install` or `pip install .` or (`python setup.py develop` or `pip install -e .`, if you want the package to be installed in editable mode).
+- After cloning this repository, change into its root directory and then run `pip` to install `bob_dylan_lyrics` and all required packages, e.g., `pip install .` (or `pip install -e .` if you want the package to be installed in editable mode).
