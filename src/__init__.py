@@ -12,7 +12,7 @@ from itertools import chain
 from datetime import datetime
 from operator import itemgetter
 from os.path import dirname, realpath, join
-from typing import Dict, List, Union, Any, Iterable, Tuple
+from typing import Dict, List, Union, Any, Iterable, Tuple, Optional
 
 import cytoolz
 from bs4.element import Tag
