@@ -4119,6 +4119,240 @@
                 }
             }
         }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Love and Theft",
+            "file_id": "love_and_theft",
+            "image_file_name": "Love_and_Theft.jpg",
+            "release_date": "September 11, 2001",
+            "length": "57:25",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Dylan'>Jack Frost (Bob Dylan's pseudonym)</a>",
+            "label": "Columbia",
+            "songs": {
+                "Tweedle Dee & Tweedle Dum": {
+                    "index": 1,
+                    "file_id": "tweedle_dee_and_tweedle_dum_1"
+                },
+                "Mississippi": {
+                    "index": 2,
+                    "file_id": "mississippi_1"
+                },
+                "Summer Days": {
+                    "index": 3,
+                    "file_id": "summer_days_1"
+                },
+                "Bye and Bye": {
+                    "index": 4,
+                    "file_id": "bye_and_bye_1"
+                },
+                "Lonesome Day Blues": {
+                    "index": 5,
+                    "file_id": "lonesome_day_blues_1"
+                },
+                "Floater (Too Much to Ask)": {
+                    "index": 6,
+                    "file_id": "floater_too_much_to_ask_1"
+                },
+                "High Water (For Charley Patton)": {
+                    "index": 7,
+                    "file_id": "high_water_for_charley_patton_1"
+                },
+                "Moonlight": {
+                    "index": 8,
+                    "file_id": "moonlight_1"
+                },
+                "Honest with Me": {
+                    "index": 9,
+                    "file_id": "honest_with_me_1"
+                },
+                "Po' Boy": {
+                    "index": 10,
+                    "file_id": "po_boy_1"
+                },
+                "Cry a While": {
+                    "index": 11,
+                    "file_id": "cry_a_while_1"
+                },
+                "Sugar Baby": {
+                    "index": 12,
+                    "file_id": "sugar_baby_1"
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Modern Times",
+            "file_id": "modern_times",
+            "image_file_name": "Modern_Times.jpg",
+            "release_date": "August 29, 2006",
+            "length": "63:04",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Dylan'>Jack Frost (Bob Dylan's pseudonym)</a>",
+            "label": "Columbia",
+            "songs": {
+                "Thunder on the Mountain": {
+                    "index": 1,
+                    "file_id": "thunder_on_the_mountain_1"
+                },
+                "Spirit on the Water": {
+                    "index": 2,
+                    "file_id": "spirit_on_the_water_1"
+                },
+                "Rollin' and Tumblin'": {
+                    "index": 3,
+                    "file_id": "rollin_and_tumblin_1"
+                },
+                "When the Deal Goes Down": {
+                    "index": 4,
+                    "file_id": "when_the_deal_goes_down_1"
+                },
+                "Someday Baby": {
+                    "index": 5,
+                    "file_id": "someday_baby_1"
+                },
+                "Workingman's Blues #2": {
+                    "index": 6,
+                    "file_id": "workingmans_blues_2_1"
+                },
+                "Beyond the Horizon": {
+                    "index": 7,
+                    "file_id": "beyond_the_horizon_1"
+                },
+                "Nettie Moore": {
+                    "index": 8,
+                    "file_id": "nettie_moore_1"
+                },
+                "The Levee's Gonna Break": {
+                    "index": 9,
+                    "file_id": "the_levees_gonna_break_1"
+                },
+                "Ain't Talkin'": {
+                    "index": 10,
+                    "file_id": "aint_talkin_1"
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Together through Life",
+            "file_id": "together_through_life",
+            "image_file_name": "Together_through_Life.jpg",
+            "release_date": "April 28, 2009",
+            "length": "45:33",
+            "producers": "<a href='https://en.wikipedia.org/wiki/Bob_Dylan'>Jack Frost (Bob Dylan's pseudonym)</a>",
+            "label": "Columbia",
+            "songs": {
+                "Beyond Here Lies Nothin'": {
+                    "index": 1,
+                    "file_id": "beyond_here_lies_nothin_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "Life Is Hard": {
+                    "index": 2,
+                    "file_id": "life_is_hard_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "My Wife's Home Town": {
+                    "index": 3,
+                    "file_id": "my_wifes_home_town_1",
+                    "written_by": "<a href='https://en.wikipedia.org/wiki/Willie_Dixon'>Willie Dixon</a>, Bob Dylan, and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "If You Ever Go to Houston": {
+                    "index": 4,
+                    "file_id": "if_you_ever_go_to_houston_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "Forgetful Heart": {
+                    "index": 5,
+                    "file_id": "forgetful_heart_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "Jolene": {
+                    "index": 6,
+                    "file_id": "jolene_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "This Dream of You": {
+                    "index": 7,
+                    "file_id": "this_dream_of_you_1"
+                },
+                "Shake Shake Mama": {
+                    "index": 8,
+                    "file_id": "shake_shake_mama_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "I Feel a Change Comin' On": {
+                    "index": 9,
+                    "file_id": "i_feel_a_change_comin_on_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "It's All Good": {
+                    "index": 10,
+                    "file_id": "its_all_good_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
+            "name": "Tempest",
+            "file_id": "tempest",
+            "image_file_name": "Tempest.jpg",
+            "release_date": "September 10, 2012",
+            "length": " 68:31",
+            "producers": "Bob Dylan",
+            "label": "Columbia",
+            "songs": {
+                "Duquesne Whistle": {
+                    "index": 1,
+                    "file_id": "duquesne_whistle_1",
+                    "written_by": "Bob Dylan and <a href='https://en.wikipedia.org/wiki/Robert_Hunter_(lyricist)'>Robert Hunter</a>"
+                },
+                "Soon After Midnight": {
+                    "index": 2,
+                    "file_id": "soon_after_midnight_1"
+                },
+                "Narrow Way": {
+                    "index": 3,
+                    "file_id": "narrow_way_1"
+                },
+                "Long and Wasted Years": {
+                    "index": 4,
+                    "file_id": "long_and_wasted_years_1"
+                },
+                "Pay in Blood": {
+                    "index": 5,
+                    "file_id": "pay_in_blood_1"
+                },
+                "Scarlet Town": {
+                    "index": 6,
+                    "file_id": "scarlet_town_1"
+                },
+                "Early Roman Kings": {
+                    "index": 7,
+                    "file_id": "early_roman_kings_1"
+                },
+                "Tin Angel": {
+                    "index": 8,
+                    "file_id": "tin_angel_1"
+                },
+                "Tempest": {
+                    "index": 9,
+                    "file_id": "tempest_1"
+                },
+                "Roll on John": {
+                    "index": 10,
+                    "file_id": "roll_on_john_1"
+                }
+            }
+        }
     }
 
 ]
