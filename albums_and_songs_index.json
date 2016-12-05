@@ -4185,6 +4185,205 @@
     {
         "type": "album",
         "metadata": {
+            "name": "The Bootleg Series Vol. 5: Bob Dylan Live 1975, The Rolling Thunder Revue",
+            "file_id": "the_bootleg_series_vol_5_bob_dylan_live_1975_the_rolling_thunder_revue",
+            "image_file_name": "The_Bootleg_Series_Vol_5_Bob_Dylan_Live_1975_The_Rolling_Thunder_Revue.jpg",
+            "release_date": "November 26, 2002",
+            "length": "102:00",
+            "producers": "Steve Berkowitz and Jeff Rosen",
+            "label": "Columbia",
+            "discs": {
+                "1": "1-11",
+                "2": "12-22"
+            },
+            "songs": {
+                "Tonight I'll Be Staying Here With You": {
+                    "index": 1,
+                    "file_id": "tonight_ill_be_staying_here_with_you_2",
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a>"
+                    }
+                },
+                "It Ain't Me Babe": {
+                    "index": 2,
+                    "file_id": "it_aint_me_babe_4",
+                    "live": {
+                        "date": "on November 20, 1975",
+                        "location/concert": "Harvard Square Theatre in <a href='https://en.wikipedia.org/wiki/Cambridge,_Massachusetts'>Cambridge, Massachusetts</a>"
+                    }
+                },
+                "A Hard Rain's a-Gonna Fall": {
+                    "index": 3,
+                    "file_id": "a_hard_rains_a-gonna_fall_2",
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a>"
+                    }
+                },
+                "The Lonesome Death of Hattie Carroll": {
+                    "index": 4,
+                    "file_id": "the_lonesome_death_of_hattie_carroll_2",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Romance in Durango": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "index": 5,
+                    "file_id": "romance_in_durango_3",
+                    "live": {
+                        "date": "on November 20, 1975",
+                        "location/concert": "Harvard Square Theatre in <a href='https://en.wikipedia.org/wiki/Cambridge,_Massachusetts'>Cambridge, Massachusetts</a>"
+                    }
+                },
+                "Isis": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "index": 6,
+                    "file_id": "isis_3",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Mr. Tambourine Man": {
+                    "index": 7,
+                    "file_id": "mr_tambourine_man_4",
+                    "live": {
+                        "date": "on November 21, 1975 (early show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Simple Twist of Fate": {
+                    "index": 8,
+                    "file_id": "simple_twist_of_fate_3",
+                    "live": {
+                        "date": "on November 20, 1975",
+                        "location/concert": "Harvard Square Theatre in <a href='https://en.wikipedia.org/wiki/Cambridge,_Massachusetts'>Cambridge, Massachusetts</a>"
+                    }
+                },
+                "Blowin' in the Wind": {
+                    "index": 9,
+                    "file_id": "blowin_in_the_wind_4",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Mama, You Been on My Mind": {
+                    "index": 10,
+                    "file_id": "mama_you_been_on_my_mind_2",
+                    "live": {
+                        "date": "on November 20, 1975",
+                        "location/concert": "Harvard Square Theatre in <a href='https://en.wikipedia.org/wiki/Cambridge,_Massachusetts'>Cambridge, Massachusetts</a>"
+                    }
+                },
+                "I Shall Be Released": {
+                    "index": 11,
+                    "file_id": "i_shall_be_released_5",
+                    "live": {
+                        "date": "on November 21, 1975 (early show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "It's All Over Now, Baby Blue": {
+                    "index": 12,
+                    "file_id": "its_all_over_now_baby_blue_4",
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a>"
+                    }
+                },
+                "Love Minus Zero/No Limit": {
+                    "index": 13,
+                    "file_id": "love_minus_zero_no_limit_3",
+                    "live": {
+                        "date": "on December 4, 1975",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Montreal_Forum'>Montreal Forum</a> in <a href='https://en.wikipedia.org/wiki/Montreal'>Montreal, Canada</a>"
+                    }
+                },
+                "Tangled Up in Blue": {
+                    "index": 14,
+                    "file_id": "tangled_up_in_blue_4",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "The Water Is Wide": {
+                    "written_by": "Traditional",
+                    "index": 15,
+                    "file_id": "the_water_is_wide_1",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "It Takes a Lot to Laugh, It Takes a Train to Cry": {
+                    "index": 16,
+                    "file_id": "it_takes_a_lot_to_laugh_it_takes_a_train_to_cry_3",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Oh, Sister": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "index": 17,
+                    "file_id": "oh_sister_4",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Hurricane": {
+                    "written_by": "Bob Dylan, <a href='https://en.wikipedia.org/wiki/Jacques_Levy'>Jacques Levy</a>",
+                    "index": 18,
+                    "file_id": "hurricane_2",
+                    "live": {
+                        "date": "on November 19, 1975",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Worcester_Memorial_Auditorium'>Worcester Memorial Auditorium</a> in <a href='https://en.wikipedia.org/wiki/Worcester,_Massachusetts'>Worcester, Massachusetts</a>"
+                    }
+                },
+                "One More Cup of Coffee (Valley Below)": {
+                    "index": 19,
+                    "file_id": "one_more_cup_of_coffee_valley_below_3",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Sara": {
+                    "index": 20,
+                    "file_id": "sara_2",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Just Like a Woman": {
+                    "index": 21,
+                    "file_id": "just_like_a_woman_5",
+                    "live": {
+                        "date": "on November 21, 1975 (late show)",
+                        "location/concert": "Boston Music Hall in <a href='https://en.wikipedia.org/wiki/Boston'>Boston, Massachusetts</a>"
+                    }
+                },
+                "Knockin' on Heaven's Door": {
+                    "index": 22,
+                    "file_id": "knockin_on_heavens_door_6",
+                    "live": {
+                        "date": "on November 20, 1975",
+                        "location/concert": "Harvard Square Theatre in <a href='https://en.wikipedia.org/wiki/Cambridge,_Massachusetts'>Cambridge, Massachusetts</a>"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
             "name": "The Best of Bob Dylan",
             "file_id": "the_best_of_bob_dylan",
             "image_file_name": "The_Best_of_Bob_Dylan.jpg",
