@@ -197,8 +197,8 @@
                     "file_id": "talkin_wwiii_blues_1",
                     "index": 11
                 },
-                "Don't Think Twice, It's Alright": {
-                    "file_id": "dont_think_twice_its_alright_1",
+                "Don't Think Twice, It's All Right": {
+                    "file_id": "dont_think_twice_its_all_right_1",
                     "index": 7
                 }
             },
@@ -1089,12 +1089,12 @@
                     "file_id": "ill_be_your_baby_tonight_1",
                     "index": 5
                 },
-                "Don't Think Twice, It's Alright": {
+                "Don't Think Twice, It's All Right": {
                     "source": {
                         "name": "The Freewheelin' Bob Dylan",
                         "file_id": "the_freewheelin_bob_dylan"
                     },
-                    "file_id": "dont_think_twice_its_alright_1",
+                    "file_id": "dont_think_twice_its_all_right_1",
                     "index": 2
                 },
                 "I Shall Be Released": {
@@ -1480,8 +1480,8 @@
                         "location/concert": "in Los Angeles"
                     }
                 },
-                "Don't Think Twice, It's Alright": {
-                    "file_id": "dont_think_twice_its_alright_2",
+                "Don't Think Twice, It's All Right": {
+                    "file_id": "dont_think_twice_its_all_right_2",
                     "index": 12,
                     "live": {
                         "date": "on February 14, 1974 (late show)",
@@ -1942,8 +1942,8 @@
                     "file_id": "the_times_they_are_a-changin_2",
                     "index": 22
                 },
-                "Don't Think Twice, It's Alright": {
-                    "file_id": "dont_think_twice_its_alright_3",
+                "Don't Think Twice, It's All Right": {
+                    "file_id": "dont_think_twice_its_all_right_3",
                     "index": 5
                 },
                 "I Shall Be Released": {
@@ -3879,7 +3879,7 @@
                         "name": "The Freewheelin' Bob Dylan",
                         "file_id": "the_freewheelin_bob_dylan"
                     },
-                    "file_id": "dont_think_twice_its_alright_1"
+                    "file_id": "dont_think_twice_its_all_right_1"
                 },
                 "The Times They Are a-Changin'": {
                     "index": 3,
@@ -4190,7 +4190,7 @@
             "image_file_name": "The_Bootleg_Series_Vol_5_Bob_Dylan_Live_1975_The_Rolling_Thunder_Revue.jpg",
             "release_date": "November 26, 2002",
             "length": "102:00",
-            "producers": "Steve Berkowitz and Jeff Rosen",
+            "producers": "Steve Berkoiwtz and Jeff Rosen",
             "label": "Columbia",
             "discs": {
                 "1": "1-11",
