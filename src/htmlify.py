@@ -1299,7 +1299,8 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
             text = "All unique songs"
         download_a = ("<a href={0} download>{0}</a>: {1} (up to and including "
                       "{2}) ({3} KiB)"
-                      .format(file_name, text, clean_up_html(str(i)), file_path))
+                      .format(file_name, text, clean_up_html(str(i)),
+                              file_sizes_dict[file_path]))
         li = Tag(name="li")
         li.string = download_a
         ul.append(li)
