@@ -15,7 +15,6 @@ Usage:
           lyrics downloads files, which contain collections of the raw
           lyrics files.
 """
-import re
 import sys
 from math import ceil
 from glob import glob
@@ -27,27 +26,31 @@ import cytoolz
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
-from src import (Album, Song, SongsRelatedAlbumsDictType,
-                 file_id_types_to_skip, root_dir_path, albums_dir, songs_dir,
-                 resources_dir, images_dir, albums_index_html_file_name,
-                 downloads_file_name, all_songs_with_metadata_file_name,
-                 all_songs_with_metadata_csv_file_name,
-                 all_songs_with_metadata_jsonlines_file_name,
-                 all_songs_file_name, all_songs_unique_file_name,
-                 text_dir_path, song_index_dir_path,
-                 songs_and_albums_index_json_file_path,
-                 songs_index_html_file_path, album_index_dir_path,
-                 albums_index_html_file_path, file_dumps_dir_path,
-                 main_index_html_file_path, home_page_content_file_path,
-                 ANNOTATION_MARK_RE, remove_inline_annotation_marks,
-                 generate_lyrics_download_files, and_join_album_links,
-                 sort_titles, read_songs_index, remove_annotations,
-                 standardize_quotes, clean_up_html, prepare_html,
-                 find_annotation_indices, add_html_declaration,
-                 make_head_element, make_navbar_element, newline_join)
+from bob_dylan_lyrics import (Album, Song, SongsRelatedAlbumsDictType,
+                              file_id_types_to_skip, root_dir_path, albums_dir,
+                              songs_dir, resources_dir, images_dir,
+                              albums_index_html_file_name, downloads_file_name,
+                              all_songs_with_metadata_file_name,
+                              all_songs_with_metadata_csv_file_name,
+                              all_songs_with_metadata_jsonlines_file_name,
+                              all_songs_file_name, all_songs_unique_file_name,
+                              text_dir_path, song_index_dir_path,
+                              songs_and_albums_index_json_file_path,
+                              songs_index_html_file_path, album_index_dir_path,
+                              albums_index_html_file_path, file_dumps_dir_path,
+                              main_index_html_file_path,
+                              home_page_content_file_path, ANNOTATION_MARK_RE,
+                              remove_inline_annotation_marks,
+                              generate_lyrics_download_files,
+                              and_join_album_links, sort_titles,
+                              read_songs_index, remove_annotations,
+                              standardize_quotes, clean_up_html, prepare_html,
+                              find_annotation_indices, add_html_declaration,
+                              make_head_element, make_navbar_element,
+                              newline_join)
 
 
 def generate_index_page(albums: List[Album]) -> None:
@@ -410,7 +413,7 @@ def htmlify_everything(albums: List[Album],
                        song_files_dict: SongsRelatedAlbumsDictType,
                        make_downloads: bool = False,
                        allow_file_not_found_error: bool = False) \
-    -> Optional[List[Tuple[str, str, str, str]]]:
+    -> Optional[List[Dict[str, str]]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs and, optionally, return a list of song
@@ -429,7 +432,7 @@ def htmlify_everything(albums: List[Album],
     :type allow_file_not_found_error: bool
 
     :returns: None or list of song name/album name/year/lyrics tuples
-    :rtype: Optional[List[Tuple[str, str, str]]]
+    :rtype: Optional[List[Dict[str, str]]]
     """
 
     # Generate index page for albums
@@ -471,6 +474,7 @@ def htmlify_everything(albums: List[Album],
     print("HTMLifying the individual album pages...", file=sys.stderr)
     htmlify_album_kwargs = \
         {"allow_file_not_found_error": allow_file_not_found_error}
+    song_dicts = None
     if make_downloads:
         htmlify_album_kwargs["make_downloads"] = True
         song_dicts = list(chain(*[htmlify_album(album, albums,
@@ -496,13 +500,14 @@ def htmlify_everything(albums: List[Album],
 
 def htmlify_album(album: Album, albums: List[Album],
                   make_downloads: bool = False,
-                  allow_file_not_found_error: bool = False) -> Optional[Dict[str, str]]:
+                  allow_file_not_found_error: bool = False) \
+    -> Optional[List[Dict[str, str]]]:
     """
     Generate HTML pages for a particular album and its songs and,
     optionally, return a list of song lyrics dictionaries.
 
     :param album: Album object
-    :type name: Album
+    :type album: Album
     :param albums: list of all Album objects
     :type albums: List[Album]
     :param make_downloads: True if lyrics file downloads should be
@@ -547,7 +552,7 @@ def htmlify_album(album: Album, albums: List[Album],
     attrs_div = Tag(name="div")
     image_file_path = join("..", resources_dir, images_dir, album.image_file_name)
     image = Tag(name="img",
-                attrs={"src": image_file_path,
+                attrs={"bob_dylan_lyrics": image_file_path,
                        "width": "300px",
                        "style": "padding-bottom:10px"})
     attrs_div.append(image)
@@ -610,8 +615,7 @@ def htmlify_album(album: Album, albums: List[Album],
     # optionally, add song name/text dictionaries to the
     # `song_lyrics_dicts` list so that lyrics download files can be
     # generated at the end of processing
-    if make_downloads:
-        song_lyrics_dicts = []
+    song_lyrics_dicts = []
     for song in album.songs:
 
         # HTMLify the song
@@ -956,7 +960,7 @@ def htmlify_main_song_index_page(song_files_dict: SongsRelatedAlbumsDictType,
 
 def htmlify_song_index_page(letter: str,
                             song_files_dict: SongsRelatedAlbumsDictType,
-                            albums: List[Album]) -> None:
+                            albums: List[Album]) -> bool:
     """
     Generate a specific songs index page.
 
@@ -1160,7 +1164,7 @@ def htmlify_main_album_index_page(albums: List[Album]):
         print(prepare_html(html), file=albums_index_file, end="")
 
 
-def htmlify_album_index_page(letter: str, albums: List[Album]) -> None:
+def htmlify_album_index_page(letter: str, albums: List[Album]) -> bool:
     """
     Generate a specific albums index page.
 
@@ -1297,6 +1301,9 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
                     " albums")
         elif file_name == all_songs_unique_file_name:
             text = "All unique songs"
+        else:
+            raise RuntimeError("`text` seems to be unset in "
+                               "`htmlify_downloads_page`?")
         download_a = ("<a href={0} download>{0}</a>: {1} (up to and including "
                       "{2}) ({3} KiB)"
                       .format(file_name, text, clean_up_html(str(i)),

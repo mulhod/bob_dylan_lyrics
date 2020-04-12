@@ -1,9 +1,6 @@
-src/__pycache__
+__pycache__
 .eggs/
 .idea/
 .metadata/
-Bob_Dylan_Lyrics.egg-info/
+*.egg-info/
 lyrics_docs/
-lyrics.sublime-project
-lyrics.sublime-workspace
-settings.jar

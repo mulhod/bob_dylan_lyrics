@@ -12,7 +12,7 @@ from datetime import datetime
 from json import loads, dumps
 from operator import itemgetter
 from os.path import dirname, realpath, join
-from typing import Dict, List, Union, Any, Iterable, Tuple, Optional
+from typing import Dict, List, Union, Any, Iterable, Tuple
 
 import cytoolz
 import pandas as pd
@@ -64,7 +64,7 @@ date_format = "%B %d, %Y"
 ANNOTATION_MARK_RE = re.compile(r"\*\*([0-9]+)\*\*")
 replace_inline_annotation_marks = ANNOTATION_MARK_RE.sub
 remove_inline_annotation_marks = lambda x: replace_inline_annotation_marks("", x)
-DOUBLE_QUOTES_RE = re.compile(r"“|”")
+DOUBLE_QUOTES_RE = re.compile(r"[“”]")
 SINGLE_QUOTES_RE = re.compile(r"‘")
 replace_double_quotes = DOUBLE_QUOTES_RE.sub
 replace_single_quotes = SINGLE_QUOTES_RE.sub
@@ -616,14 +616,14 @@ def make_head_element(level: int = 0) -> Tag:
                            "href": join(*[".."]*level, resources_dir,
                                         custom_style_sheet_file_name)}))
     head.append(Tag(name="script",
-                    attrs={"src": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"}))
+                    attrs={"bob_dylan_lyrics": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"}))
     head.append(Tag(name="script",
-                    attrs={"src": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}))
+                    attrs={"bob_dylan_lyrics": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}))
     head.append(Tag(name="script",
-                    attrs={"src": join(*[".."]*level, resources_dir,
+                    attrs={"bob_dylan_lyrics": join(*[".."]*level, resources_dir,
                                        "search.js")}))
     head.append(Tag(name="script",
-                    attrs={"src": join(*[".."]*level, resources_dir,
+                    attrs={"bob_dylan_lyrics": join(*[".."]*level, resources_dir,
                                        "analytics.js")}))
 
     return head

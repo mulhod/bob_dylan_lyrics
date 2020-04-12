@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def readme():
     return open('README.md').read()
@@ -7,8 +7,12 @@ def reqs():
     with open('requirements.txt') as f:
         return f.read().splitlines()
 
-setup(name = 'Bob Dylan Lyrics',
-      description='Repository of Bob Dylan lyrics project. The aim is not only to provide all of the lyrics, but to make sure the lyrics are correct and also to supply the lyrics with interpretations and punctuation (which they often lack elsewhere).',
+setup(name='bob_dylan_lyrics',
+      description='Repository of Bob Dylan lyrics project. The aim is not '
+                  'only to provide all of the lyrics, but to make sure the '
+                  'lyrics are correct and also to supply the lyrics with '
+                  'interpretations and punctuation (which they often lack '
+                  'elsewhere).',
       url='https://github.com/mulhod/bob_dylan_lyrics',
       long_description=readme(),
       version='0.1',
@@ -16,7 +20,9 @@ setup(name = 'Bob Dylan Lyrics',
       author_email='mulhodm@gmail.com',
       include_package_data=True,
       install_requires=reqs(),
-      entry_points={'console_scripts': ['htmlify = src.htmlify:main']},
+      packages=find_packages(),
+      entry_points={'console_scripts':
+                        ['htmlify = bob_dylan_lyrics.htmlify:main']},
       keywords='bob dylan lyrics',
       classifiers=['Intended Audience :: Science/Research',
                    'Intended Audience :: Developers',
