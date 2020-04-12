@@ -252,7 +252,7 @@ Song name: Baby, Let Me Follow You Down
 Album name: Bob Dylan
 Lyrics:
 
-<i>I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.</i>
+I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.
 
 Baby, let me follow you down,
 Baby, let me follow you down,
@@ -547,7 +547,7 @@ Song name: Bob Dylan's Blues
 Album name: The Freewheelin' Bob Dylan
 Lyrics:
 
-<i>Unlike most of the songs nowadays are being written uptown in Tin Pan Alley – that's where most of the folk songs come from nowadays, this–this is a song–this wasn't written up there, this was written somewhere down in the United States.</i>
+Unlike most of the songs nowadays are being written uptown in Tin Pan Alley – that's where most of the folk songs come from nowadays, this–this is a song–this wasn't written up there, this was written somewhere down in the United States.
 
 Well, the Lone Ranger and Tonto were riding down the line,
 Fixing everybody's troubles – everybody's 'cept mine.
@@ -5056,7 +5056,7 @@ Seeking out the poorer quarters where the ragged people go,
 Looking for the places only they would know.
 
 Asking only workman's wages, I come looking for a job,
-But I get no offers, just a come-on from the whores on 7<sup>th</sup> avenue –
+But I get no offers, just a come-on from the whores on 7th avenue –
 I do declare
 There were times when I was so lonesome
 I took some comfort there.
@@ -7885,8 +7885,8 @@ She fluttered her false eyelashes and whispered in his ear,
 "Sorry, darling, that I'm late," but he didn't seem to hear:
 He was staring into space over at the jack of hearts.
 
-<i>I know I've seen that face somewhere</i>, Big Jim was thinking to himself,
-<i>Maybe down in Mexico or a picture upon somebody's shelf</i>.
+I know I've seen that face somewhere, Big Jim was thinking to himself,
+Maybe down in Mexico or a picture upon somebody's shelf.
 But then the crowd began to stamp their feet and the house lights a-did dim
 And in the darkness of the room there was only Jim and him,
 Staring at the butterfly, who just drew the jack of hearts.
@@ -8256,7 +8256,7 @@ Underneath that apple suckling tree, oh, yeah!
 Now, I wish to my soul that I had seven years, uh-huh,
 I wish to my soul I had seven years, uh-huh,
 St. Bartholomew's burying ground won't catch your name, but he has the hound,
-<i>[incoherent]</i> on the avenue, oh, yeah!
+[incoherent] on the avenue, oh, yeah!
 
 Underneath that apple suckling tree, oh, yeah!
 Under that apple suckling tree, oh, yeah!
@@ -8428,13 +8428,13 @@ Tell 'em––everybody down in old Frisco
 That Tiny Montgomery's coming down to say hello.
 
 Skinny Moo and T-Bone Frank,
-They're all gonna take on down by the <i>bounded</i> bank.
+They're all gonna take on down by the bounded bank.
 One bird-book and a buzzard and a crow,
 Tell 'em all that Tiny's gonna say hello.
 
 Scratch your dad, do that bird,
 Suck that pig and bring it on home.
-<i>Pink</i> that <i>dream</i> and nose that <i>dough</i>,
+Pink that dream and nose that dough,
 Tell 'em all that Tiny says hello.
 
 Now, he's a king of the drunk and he squeezes, too,
@@ -8443,11 +8443,11 @@ Join the monk, C.I.O.,
 Tell 'em all that Tiny Montgomery says hello.
 
 Now, grease that gig and play it blank,
-<i>Hang</i> on and go on out and gas that dog,
-Trick on in, flower that <i>smoll</i>,
+Hang on and go on out and gas that dog,
+Trick on in, flower that smoll,
 Take it on down to give me grow.
 Now, play that low and pick it up,
-Take it on in in a <i>bowl-cup</i>.
+Take it on in in a bowl-cup.
 Three-legged man and a hot-lipped hoe,
 Tell 'em all Montgomery says hello.
 
@@ -10131,7 +10131,7 @@ I try my best to be just like I am,
 Everybody wants you to be just like them,
 They say "Sing!" while you slave -- I get bored.
 
-<i>Thank you, that was called "Maggie's Farm".</i>
+Thank you, that was called "Maggie's Farm".
 
 Song name: One More Cup of Coffee (Valley Below)
 Album name: Bob Dylan at Budokan
@@ -10158,7 +10158,7 @@ But her heart is like an ocean, so mysterious and dark.
 One more cup of coffee for the road,
 One more cup of coffee before I go to the valley below.
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: Like a Rolling Stone
 Album name: Bob Dylan at Budokan
@@ -10228,7 +10228,7 @@ With no direction home,
 Like a complete unknown,
 Like a rolling stone?
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: I Shall Be Released
 Album name: Bob Dylan at Budokan
@@ -10259,13 +10259,13 @@ I shall be released,
 I shall be released,
 I shall be released.
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: Is Your Love in Vain?
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>Here's an unrecorded song. See if you can guess which one it is.</i>
+Here's an unrecorded song. See if you can guess which one it is.
 
 Do you love me or are you just extending goodwill?
 Do you need me half as bad as you say or are you just feeling guilt?
@@ -10290,7 +10290,7 @@ Are you willing to risk it all or is your love in vain?
 Can you cook and sew, make flowers grow, do you understand my pain?
 Are you willing to risk it all or is your love in vain?
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: Going, Going, Gone
 Album name: Bob Dylan at Budokan
@@ -10414,7 +10414,7 @@ Song name: Simple Twist of Fate
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>Here's a simple love story, happened to me.</i>
+Here's a simple love story, happened to me.
 
 They sat together in the park as the evening sky got dark,
 She looked at him, he felt a spark tingle to her bones,
@@ -10446,13 +10446,13 @@ She should've caught me in my prime, she would've stayed with me
 'Stead of going back off to sea and leaving me to meditate,
 They call, that simple twist of fate.
 
-<i>Alright, that's straight from Chicago.</i>
+Alright, that's straight from Chicago.
 
 Song name: All Along the Watchtower
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>This is from the Mojave Desert.</i>
+This is from the Mojave Desert.
 
 "There must be some way outta here," said the joker to the thief,
 "There's too much confusion, I can't get no relief.
@@ -10469,7 +10469,7 @@ While all the women came and went, barefoot servants too.
 Outside in the distance a wildcat did growl,
 Two riders were approaching, the wind began to howl.
 
-<i>Thanks.</i>
+Thanks.
 
 Song name: I Want You
 Album name: Bob Dylan at Budokan
@@ -10540,7 +10540,7 @@ Is, baby, be friends with you,
 Friends with you,
 Friends with you.
 
-<i>Alright, thank you.</i>
+Alright, thank you.
 
 Song name: Knockin' on Heaven's Door
 Album name: Bob Dylan at Budokan
@@ -10573,13 +10573,13 @@ Knock––knock––knocking on heaven's door,
 Knock––knock––knocking on heaven's door,
 Knock––knock––knocking on heaven's door.
 
-<i>Alright, thank you very much.</i>
+Alright, thank you very much.
 
 Song name: It's Alright, Ma (I'm Only Bleeding)
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>This is called "It's Alright, Ma (I'm Only Bleeding)".</i>
+This is called "It's Alright, Ma (I'm Only Bleeding)".
 
 Darkness at the break of noon
 Shadows even the silver spoon,
@@ -10670,13 +10670,13 @@ And, if my thought-dreams could be seen,
 They'd probably put my head in a guillotine,
 But it's alright, ma, it's life and life only.
 
-<i>Thank––</i>
+Thank––
 
 Song name: Forever Young
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>Alright, once again, it's that time of the hour we have to run.</i>
+Alright, once again, it's that time of the hour we have to run.
 
 May God bless and keep you always, may your wishes all come true,
 May you always do for others and let others do for you.
@@ -10706,7 +10706,7 @@ Song name: The Times They Are A-Changin'
 Album name: Bob Dylan at Budokan
 Lyrics:
 
-<i>Thank you, you're so very kind, you really are. We will play you this song – I wrote this also about fifteen years ago, it still means a lot to me, I know it means a lot to you, too.</i>
+Thank you, you're so very kind, you really are. We will play you this song – I wrote this also about fifteen years ago, it still means a lot to me, I know it means a lot to you, too.
 
 Come gather round, people, wherever you roam,
 Admit that the waters around you have grown,
@@ -10743,7 +10743,7 @@ The order is a-rapidly fading
 And the first one now will later be last
 For the times, they are a-changing.
 
-<i>Thank you. I'll be here for four more nights, then we'll see you again.</i>
+Thank you. I'll be here for four more nights, then we'll see you again.
 
 Song name: Gotta Serve Somebody
 Album name: Slow Train Coming
@@ -11822,7 +11822,7 @@ Trouble, trouble, trouble, nothing but trouble.
 
 Trouble in the water, trouble in the air,
 Go all the way to the other side of the world, you'll find trouble there,
-Revolution <i>[incoherent]</i> no solution for trouble,
+Revolution [incoherent] no solution for trouble,
 Trouble,
 Trouble, trouble, trouble, nothing but trouble.
 
@@ -12491,7 +12491,7 @@ He wants it all and he wants it his way.
 Well, there's a woman on my block, she'll just sit there facing the hill,
 She say, "Who take away his license to kill?"
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: It Ain't Me, Babe
 Album name: Real Live
@@ -13206,7 +13206,7 @@ Song name: Baby, Let Me Follow You Down
 Album name: Biograph
 Lyrics:
 
-<i>I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.</i>
+I first heard this from Rick von Schmidt. He lives in Cambridge. Rick's a blues guitar player. I met him one day in the green pastures of Harvard University.
 
 Baby, let me follow you down,
 Baby, let me follow you down,
@@ -14567,7 +14567,7 @@ Song name: Isis
 Album name: Biograph
 Lyrics:
 
-<i>Here's a song about marriage. This is called "Isis". This is for a man if he's still here.</i>
+Here's a song about marriage. This is called "Isis". This is for a man if he's still here.
 
 I married Isis on the fifth day of May,
 But I could not hold on to her very long,
@@ -17284,7 +17284,7 @@ Song name: House Carpenter
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>Here's a story 'bout a ghost come back from out in the sea, come to take his bride away from the house carpenter.</i>
+Here's a story 'bout a ghost come back from out in the sea, come to take his bride away from the house carpenter.
 
 "Well met, well met, my own, true love."
 "Well met, well met," cried she.
@@ -17516,7 +17516,7 @@ Song name: Talkin' Hava Negeilah Blues
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>Here's a foreign song I learned in Utah.</i>
+Here's a foreign song I learned in Utah.
 
 Ha–va–
 Hava–na–
@@ -17745,7 +17745,7 @@ Song name: Talkin' John Birch Paranoid Blues
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>This is called "Talking John Birch Blues" and there ain't nothing wrong with this song!</i>
+This is called "Talking John Birch Blues" and there ain't nothing wrong with this song!
 
 Well, I was feeling sad and kinda blue,
 I didn't know what I was a-gonna do.
@@ -18028,7 +18028,7 @@ Song name: Last Thoughts on Woody Guthrie
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>There's this book coming out and they asked me to write, uh, something about Woody, uh, sort of like, "What does Woody Guthrie mean to you in 25 words?" And, uh, I couldn't do it, I wrote out five pages. And, uh, I have it here–it's, uh–have it here by accident, actually. Ha, but, but, uh, I'd–I'd like to say this out loud, so, uh, if you could sorta roll along with this thing here, this is called "Last Thoughts on Woody Guthrie".</i>
+There's this book coming out and they asked me to write, uh, something about Woody, uh, sort of like, "What does Woody Guthrie mean to you in 25 words?" And, uh, I couldn't do it, I wrote out five pages. And, uh, I have it here–it's, uh–have it here by accident, actually. Ha, but, but, uh, I'd–I'd like to say this out loud, so, uh, if you could sorta roll along with this thing here, this is called "Last Thoughts on Woody Guthrie".
 
 Um, when your head gets twisted and your mind grows numb,
 When you think you're too old, too young, too smart, or too dumb,
@@ -18495,7 +18495,7 @@ To be out on your own,
 So unknown,
 Like a rolling stone?
 
-<i>My voice is gone, man. You wanna try it again?</i>
+My voice is gone, man. You wanna try it again?
 
 Song name: It Takes a Lot to Laugh, It Takes a Train to Cry
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
@@ -18588,7 +18588,7 @@ But it's just like a dead man's last pistol shot, baby.
 Oh, your mouth used to be so naked, your eyes used to be blue,
 Your hurts used to be so nameless and your tears used to be so few.
 Now your mouth cries wolf while your––
-<i>What?</i>
+What?
 
 Song name: I Shall Be Released
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
@@ -18656,7 +18656,7 @@ Song name: If Not for You
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>Ready, George?</i>
+Ready, George?
 
 If not for you,
 Babe, I couldn't find the door,
@@ -18843,7 +18843,7 @@ Going down the back roads, heading south,
 Idiot wind blowing every time you move your teeth,
 You're an idiot, babe, it's a wonder that you still know how to breathe.
 
-Eyed through the <i>I Ching</i> yesterday, it said there'd be some thunder at the whelm,
+Eyed through the I Ching yesterday, it said there'd be some thunder at the whelm,
 I haven't tasted peace and quiet for so long it seems like living hell.
 There's a lone soldier on the hill, watching 'fore them raindrops pour,
 You'd never know it to look at him, but in the final shot he won the war
@@ -18971,7 +18971,7 @@ Song name: Seven Days
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
 Lyrics:
 
-<i>This is a somewhat new song called "Seven Days".</i>
+This is a somewhat new song called "Seven Days".
 
 Seven days,
 Seven more days she'll be coming,
@@ -19017,7 +19017,7 @@ And then a whistle will be blowing,
 She'll be coming forth,
 My beautiful comrade from the north.
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: Ye Shall Be Changed
 Album name: The Bootleg Series Volumes 1-3 (Rare & Unreleased) 1961-1991
@@ -21690,7 +21690,7 @@ Song name: Like a Rolling Stone
 Album name: MTV Unplugged
 Lyrics:
 
-<i>We're gonna start this again, the band was way ahead of me. [incomprehensible] We're gonna tune, we're gonna tune these instruments too.</i>
+We're gonna start this again, the band was way ahead of me. [incomprehensible] We're gonna tune, we're gonna tune these instruments too.
 
 Once upon a time you dressed so fine,
 Threw the bums a dime in your prime, didn't you?
@@ -22630,7 +22630,7 @@ Song name: I Don't Believe You (She Acts Like We Never Have Met)
 Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
 Lyrics:
 
-<i>This is called "I Don't Believe You (It Used to Go Like That and Now It Goes Like This)".</i>
+This is called "I Don't Believe You (It Used to Go Like That and Now It Goes Like This)".
 
 Well, I can't understand,
 She let go of my hand
@@ -22757,7 +22757,7 @@ Song name: Leopard-Skin Pill-Box Hat
 Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
 Lyrics:
 
-<i>This is ca––this is called "Yes–" – this is, uh, this is called "Yes, I See You've Got Your Brand-New Leopard-Skin Pill-Box Hat."</i>
+This is ca––this is called "Yes–" – this is, uh, this is called "Yes, I See You've Got Your Brand-New Leopard-Skin Pill-Box Hat."
 
 Well, I see you got your brand-new leopard-skin pill-box hat,
 Yes, I see you got your brand-new leopard-skin pill-box hat.
@@ -22788,7 +22788,7 @@ Song name: One Too Many Mornings
 Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
 Lyrics:
 
-<i>...if you only just wouldn't clap so hard.</i>
+...if you only just wouldn't clap so hard.
 
 Down the street the dogs are barking and the day is getting dark,
 As the night comes in a-falling, the dogs will lose their bark,
@@ -22860,10 +22860,10 @@ Song name: Like a Rolling Stone
 Album name: The Bootleg Series Vol. 4: Bob Dylan Live 1966, The "Royal Albert Hall" Concert
 Lyrics:
 
-<i>I don't believe you.</i>
-<i>You're a liar!</i>
-<p>
-<i>Play fucking loud!</i>
+I don't believe you.
+You're a liar!
+
+Play fucking loud!
 
 Once upon a time you dressed so fine,
 Threw the bums a dime in your prime, didn't you?
@@ -22929,7 +22929,7 @@ With no direction home,
 Like a complete unknown,
 Like a rolling stone?
 
-<i>Thank you.</i>
+Thank you.
 
 Song name: Blowin' in the Wind
 Album name: The Essential Bob Dylan
