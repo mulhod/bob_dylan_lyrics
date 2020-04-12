@@ -552,7 +552,7 @@ def htmlify_album(album: Album, albums: List[Album],
     attrs_div = Tag(name="div")
     image_file_path = join("..", resources_dir, images_dir, album.image_file_name)
     image = Tag(name="img",
-                attrs={"bob_dylan_lyrics": image_file_path,
+                attrs={"src": image_file_path,
                        "width": "300px",
                        "style": "padding-bottom:10px"})
     attrs_div.append(image)
