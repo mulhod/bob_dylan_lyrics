@@ -637,13 +637,32 @@ def htmlify_album(album: Album, albums: List[Album],
                 song_text = \
                     remove_annotations(standardize_quotes(song_file.read())).strip()
 
-                # Remove tags
+                # Remove tags and replace some special characters that
+                # sometimes don't show up correctly
                 song_text_lines = song_text.splitlines()
                 for i in range(len(song_text_lines)):
                     tags = ["<sup>", "</sup>", "<i>", "</i>", "<p>"]
                     if any(tag in song_text_lines[i] for tag in tags):
                         for tag in tags:
                             song_text_lines[i] = song_text_lines[i].replace(tag, "")
+                    if "–" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("–", "-")
+                    if "é" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("é", "e")
+                    if "ñ" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("ñ", "n")
+                    if "ó" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("ó", "o")
+                    if "í" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("í", "i")
+                    if "á" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("á", "a")
+                    if "î" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("î", "i")
+                    if "ü" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("ü", "u")
+                    if "â" in song_text_lines[i]:
+                        song_text_lines[i] = song_text_lines[i].replace("â", "a")
                 song_text = newline_join(song_text_lines)
 
                 song_lyrics_dicts.append({"name": song.name,
