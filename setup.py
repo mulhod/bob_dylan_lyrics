@@ -9,10 +9,10 @@ def reqs():
 
 setup(name = 'Bob Dylan Lyrics',
       description='Repository of Bob Dylan lyrics project. The aim is not only to provide all of the lyrics, but to make sure the lyrics are correct and also to supply the lyrics with interpretations and punctuation (which they often lack elsewhere).',
-      url='https://github.com/mulhod/reviewer_experience_prediction',
+      url='https://github.com/mulhod/bob_dylan_lyrics',
       long_description=readme(),
       version='0.1',
-      author='Matt Mulholland et al.',
+      author='Matt Mulholland',
       author_email='mulhodm@gmail.com',
       include_package_data=True,
       install_requires=reqs(),
