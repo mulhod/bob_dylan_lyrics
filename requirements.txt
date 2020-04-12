@@ -6,5 +6,5 @@ jupyter==1.0.0
 markdown==2.6.6
 pandas
 pudb
-requests==2.8.1
+requests==2.20.0
 typing==3.5.0.1
