@@ -15,6 +15,7 @@ from os.path import dirname, realpath, join
 from typing import Dict, List, Union, Any, Iterable, Tuple, Optional
 
 import cytoolz
+import pandas as pd
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 
@@ -38,6 +39,7 @@ albums_index_html_file_name = 'albums.html'
 custom_style_sheet_file_name = 'stof-style.css'
 downloads_file_name = 'downloads.html'
 all_songs_with_metadata_file_name = 'all_songs_with_metadata.txt'
+all_songs_with_metadata_csv_file_name = 'all_songs_with_metadata.csv'
 all_songs_file_name = 'all_songs.txt'
 all_songs_unique_file_name = 'all_songs_unique.txt'
 text_dir_path = join(songs_dir, 'txt')
@@ -77,7 +79,7 @@ get_title_index_letter = lambda x: cytoolz.first(clean_title(x))
 
 class Album():
     """
-    Class for representing albums.(or collections of songs).
+    Class for representing albums (or collections of songs).
     """
 
     def __init__(self, type_: str, metadata: Dict[str, Any]):
@@ -93,6 +95,7 @@ class Album():
         self.sides = metadata.get('sides')
         self.image_file_name = metadata.get('image_file_name')
         self.release_date = metadata.get('release_date')
+        self.year = self.release_date.split()[-1]
         self.producers = metadata.get('producers')
         self.label = metadata.get('label')
         self.with_ = metadata.get('with', '')
@@ -191,18 +194,19 @@ class Song():
                           in sorted_keys if key in attrs_dict])
 
 
-def generate_lyrics_download_files(song_tuples: List[Tuple[str, str, str]]) -> None:
+def generate_lyrics_download_files(song_dicts: List[Dict[str, str]]) -> None:
     """
     Generate lyrics download files containing:
 
     1) all of the song lyrics separated by metadata including the song
        name and the album name in the order in which they appeared,
-    2) all of the song lyrics in the order in which they appeared (with
+    2) all of the song lyrics including metadata in CSV format,
+    3) all of the song lyrics in the order in which they appeared (with
        no metadata),
-    2) all of the unique song lyrics (no metadata)
+    4) all of the unique song lyrics (no metadata)
 
-    :param song_tuples: list of song name/album name/lyrics tuples
-    :type song_tuples: List[Tuple[str, str, str]]
+    :param song_dicts: list of song lyrics dictionaries
+    :type song_dicts: List[Dict[str, str]]
 
     :returns: None
     :rtype: None
@@ -212,21 +216,26 @@ def generate_lyrics_download_files(song_tuples: List[Tuple[str, str, str]]) -> N
 
     # Write big file with all of the songs + some metadata
     song_text_with_metadata_lines = []
-    for song_tuple in song_tuples:
-        song_text_with_metadata_lines.append('Song name: {}'.format(song_tuple[0]))
-        song_text_with_metadata_lines.append('Album name: {}'.format(song_tuple[1]))
-        song_text_with_metadata_lines.append('Lyrics:\n\n{}\n'.format(song_tuple[2]))
+    for song_dict in song_dicts:
+        song_text_with_metadata_lines.append('Song name: {}'.format(song_dict["name"]))
+        song_text_with_metadata_lines.append('Album name: {}'.format(song_dict["album"]))
+        song_text_with_metadata_lines.append('Lyrics:\n\n{}\n'.format(song_dict["text"]))
     song_text_with_metadata = newline_join(song_text_with_metadata_lines).strip()
     song_text_with_metadata_path = join(file_dumps_dir_path,
                                         all_songs_with_metadata_file_name)
     with open(song_text_with_metadata_path, 'w') as song_text_with_metadata_file:
         print(song_text_with_metadata, file=song_text_with_metadata_file, end='')
 
+    # Write metadata file in CSV form with extra year information
+    song_text_with_metadata_csv_path = join(file_dumps_dir_path,
+                                            all_songs_with_metadata_csv_file_name)
+    pd.DataFrame(song_dicts).to_csv(song_text_with_metadata_csv_path, index=False)
+
     # Write big file with all songs (even duplicates)
     song_text = newline_join(chain(*[[line.strip() for line
-                                      in song_tuple[2].strip().splitlines()
+                                      in song_dict["text"].strip().splitlines()
                                       if line.strip()]
-                                     for song_tuple in song_tuples]))
+                                     for song_dict in song_dicts]))
     song_text_path = join(file_dumps_dir_path, all_songs_file_name)
     with open(song_text_path, 'w') as song_text_file:
         print(song_text, file=song_text_file, end='')

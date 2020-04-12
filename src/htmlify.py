@@ -34,8 +34,8 @@ from src import (Album, Song, SongsRelatedAlbumsDictType,
                  file_id_types_to_skip, root_dir_path, albums_dir, songs_dir,
                  resources_dir, images_dir, albums_index_html_file_name,
                  downloads_file_name, all_songs_with_metadata_file_name,
-                 all_songs_file_name, all_songs_unique_file_name,
-                 text_dir_path, song_index_dir_path,
+                 all_songs_with_metadata_csv_file_name, all_songs_file_name,
+                 all_songs_unique_file_name, text_dir_path, song_index_dir_path,
                  songs_and_albums_index_json_file_path,
                  songs_index_html_file_path, album_index_dir_path,
                  albums_index_html_file_path, file_dumps_dir_path,
@@ -408,7 +408,7 @@ def htmlify_everything(albums: List[Album],
                        song_files_dict: SongsRelatedAlbumsDictType,
                        make_downloads: bool = False,
                        allow_file_not_found_error: bool = False) \
-    -> Optional[List[Tuple[str, str, str]]]:
+    -> Optional[List[Tuple[str, str, str, str]]]:
     """
     Create HTML files for the main index page, each album's index page,
     and the pages for all songs and, optionally, return a list of song
@@ -426,7 +426,7 @@ def htmlify_everything(albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or list of song nane/album name/lyrics tuples
+    :returns: None or list of song name/album name/year/lyrics tuples
     :rtype: Optional[List[Tuple[str, str, str]]]
     """
 
@@ -494,10 +494,10 @@ def htmlify_everything(albums: List[Album],
 
 def htmlify_album(album: Album, albums: List[Album],
                   make_downloads: bool = False,
-                  allow_file_not_found_error: bool = False) -> Optional[List[Tuple[str, str, str]]]:
+                  allow_file_not_found_error: bool = False) -> Optional[Dict[str, str]]:
     """
     Generate HTML pages for a particular album and its songs and,
-    optionally, return a list of song name/album name/lyrics tuples.
+    optionally, return a list of song lyrics dictionaries.
 
     :param album: Album object
     :type name: Album
@@ -510,8 +510,8 @@ def htmlify_album(album: Album, albums: List[Album],
                                        one that does not exist ye
     :type allow_file_not_found_error: bool
 
-    :returns: None or list of song name/album/lyrics tuples
-    :rtype: Optional[List[Tuple[str, str, str]]]
+    :returns: None or list of song name/album/year/lyrics tuples
+    :rtype: Optional[Dict[str, str]]
     """
 
     print('HTMLifying index page for {}...'.format(album.name),
@@ -605,11 +605,11 @@ def htmlify_album(album: Album, albums: List[Album],
     # Generate HTML files for each song (unless a song is indicated as
     # having appeared on previous album(s) since this new instance of
     # the song will simply reuse the original lyrics file) and,
-    # optionally, add song name/text tuples to the `song_lyrics_tuples`
-    # list so that lyrics download files can be generated at the end of
-    # processing
+    # optionally, add song name/text dictionaries to the
+    # `song_lyrics_dicts` list so that lyrics download files can be
+    # generated at the end of processing
     if make_downloads:
-        song_lyrics_tuples = []
+        song_lyrics_dicts = []
     for song in album.songs:
 
         # HTMLify the song
@@ -623,7 +623,7 @@ def htmlify_album(album: Album, albums: List[Album],
                     break
                 raise e
 
-        # Add song name/song text tuple to the `song_lyrics_tuples` list
+        # Add song name/song text tuple to the `song_lyrics_dicts` list
         # for the lyrics download files
         if (make_downloads and
             not song.instrumental and
@@ -634,10 +634,13 @@ def htmlify_album(album: Album, albums: List[Album],
             with open(input_path) as song_file:
                 song_text = \
                     remove_annotations(standardize_quotes(song_file.read())).strip()
-                song_lyrics_tuples.append((song.name, album.name, song_text))
+                song_lyrics_dicts.append({"name": song.name,
+                                          "album": album.name,
+                                          "album_year": album.year,
+                                          "text": song_text})
 
     if make_downloads:
-        return song_lyrics_tuples
+        return song_lyrics_dicts
 
     return
 
@@ -1214,6 +1217,10 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
     # Get the size of the files in KiB
     file_sizes_dict = {file_path: ceil(getsize(file_path)/1024) for file_path
                        in glob(join(file_dumps_dir_path, '*.txt'))}
+    metadata_csv_file_path = join(file_dumps_dir_path,
+                                  all_songs_with_metadata_csv_file_name)
+    file_sizes_dict[metadata_csv_file_path] = \
+        ceil(getsize(metadata_csv_file_path)/1024)
 
     html = Tag(name='html')
     html.append(make_head_element(1))
@@ -1237,15 +1244,21 @@ def htmlify_downloads_page(albums: List[Album]) -> None:
     i = Tag(name='i')
     i.append(last_album_a)
     ul = Tag(name='ul')
-    for file_name in [all_songs_with_metadata_file_name, all_songs_file_name,
+    for file_name in [all_songs_with_metadata_file_name,
+                      all_songs_with_metadata_csv_file_name,
+                      all_songs_file_name,
                       all_songs_unique_file_name]:
-        if file_name == 'all_songs_with_metadata.txt':
+        if file_name == all_songs_with_metadata_file_name:
             text = ('All songs in the order in which they appeared on released'
                     ' albums + metadata, including song names and album names')
-        elif file_name == 'all_songs.txt':
+        elif file_name == all_songs_with_metadata_csv_file_name:
+            text = ('All songs in the order in which they appeared on released'
+                    ' albums + metadata, including song names and album names '
+                    'and year, in CSV format')
+        elif file_name == all_songs_file_name:
             text = ('All songs in the order in which they appeared on released'
                     ' albums')
-        elif file_name == 'all_songs_unique.txt':
+        elif file_name == all_songs_unique_file_name:
             text = 'All unique songs'
         download_a = ('<a href={0} download>{0}</a>: {1} (up to and including '
                       '{2}) ({3} KiB)'

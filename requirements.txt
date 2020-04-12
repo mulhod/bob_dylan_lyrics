@@ -1,8 +1,10 @@
 argparse
 beautifulsoup4==4.4.1
 cytoolz==0.7.5
+html5lib==1.0b8
 jupyter==1.0.0
 markdown==2.6.6
+pandas
 pudb
 requests==2.8.1
 typing==3.5.0.1
