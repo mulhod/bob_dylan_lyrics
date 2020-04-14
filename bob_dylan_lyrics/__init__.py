@@ -535,13 +535,13 @@ def prepare_html(html: Tag) -> str:
     Clean up HTML and add a declaration.
 
     :param html: input Tag object representing a full HTML page
-    :type html: str
+    :type html: Tag
 
     :returns: output HTML
     :rtype: str
     """
 
-    return add_html_declaration(clean_up_html(str(html)))
+    return add_html_declaration(clean_up_html(html.prettify()))
 
 
 def find_annotation_indices(line: str, annotations: List[str]) -> List[int]:
@@ -608,17 +608,26 @@ def make_head_element(level: int = 0) -> Tag:
                    attrs={"name": "viewport",
                           "content": "width=device-width, initial-scale=1"})
     head.append(meta_tag)
-    head.append(Tag(name="link",
-                    attrs={"rel": "stylesheet",
-                           "href": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}))
+    head.append(
+        Tag(name="link",
+            attrs=
+                {"rel": "stylesheet",
+                 "href": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/"
+                         "bootstrap.min.css"}))
     head.append(Tag(name="link",
                     attrs={"rel": "stylesheet",
                            "href": join(*[".."]*level, resources_dir,
                                         custom_style_sheet_file_name)}))
-    head.append(Tag(name="script",
-                    attrs={"src": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"}))
-    head.append(Tag(name="script",
-                    attrs={"src": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}))
+    head.append(
+        Tag(name="script",
+            attrs=
+                {"src": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/"
+                        "jquery.min.js"}))
+    head.append(
+        Tag(name="script",
+            attrs={
+                "src": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/"
+                       "bootstrap.min.js"}))
     head.append(Tag(name="script",
                     attrs={"src": join(*[".."]*level, resources_dir,
                                        "search.js")}))
