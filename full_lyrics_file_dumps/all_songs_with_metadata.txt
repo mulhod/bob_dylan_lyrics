@@ -2129,38 +2129,38 @@ Album name: Bringing It All Back Home
 Lyrics:
 
 My love, she speaks like silence,
-Without ideals or violence.
-She doesn't have to say she's faithful.
+Without ideals or violence,
+She doesn't have to say she's faithful,
 Yet she's true like ice, like fire.
 People carry roses
-And make promises by the hours.
-My love, she laughs like the flowers.
+And make promises by the hours,
+My love, she laughs like the flowers,
 Valentines can't buy her.
 
 In the dime-stores and bus-stations
 People talk of situations,
 Read books, repeat quotations,
 Draw conclusions on the wall.
-Some speak of the future.
-My love, she speaks softly.
+Some speak of the future,
+My love, she speaks softly,
 She knows there's no success like failure
 And that failure's no success at all.
 
-The cloak-and-dagger dangles.
-Madams light the candles.
+The cloak-and-dagger dangles,
+Madams light the candles,
 In ceremonies of the horsemen
 Even the pawn must hold a grudge.
 Statues made of matchsticks
-Crumble into one another.
-My love winks, she does not bother.
+Crumble into one another,
+My love winks, she does not bother,
 She knows too much to argue or to judge.
 
-The bridge at midnight trembles.
-The country doctor rambles.
+The bridge at midnight trembles,
+The country doctor rambles,
 Bankers' nieces seek perfection,
 Expecting all the gifts that wise men bring.
 The wind howls like a hammer
-And the night blows rainy.
+And the night blows rainy,
 My love, she's like some raven
 At my window with a broken wing.
 
@@ -7605,12 +7605,12 @@ She turned around to look at me as I was a-walking away,
 I heard her say over my shoulder, "We'll meet again someday on the avenue,
 Tangled up in blue."
 
-I had a job in the Great North Woods, working as a cook for a spell,
+I had a job in the Great North Woods working as a cook for a spell,
 But I never did like it all that much and one day the ax just fell,
-So I drifted down to New Orleans, where I lucky was to be employed,
-Working for a while on a fishing boat right outside of Delacroix;
-But, all the while I was alone, the past was close behind,
-I seen a lot of women, but she never escaped my mind and I just grew
+So I drifted down to New Orleans where I lucky was to be employed,
+Working for a while on a fishing boat right outside of Delacroix,
+But all the while I was alone, the past was close behind,
+I seen a lot of women but she never escaped my mind and I just grew
 Tangled up in blue.
 
 She was working in a topless place and I stopped in for a beer,
@@ -7633,11 +7633,11 @@ I lived with them on Montague Street, in a basement down the stairs,
 There was music in the cafes at night and revolution in the air,
 Then he started into dealing with slaves and something inside of him died,
 She had to sell everything she owned and froze up inside,
-And, when it finally--the bottom fell out, I became withdrawn,
+And when it finally--the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
@@ -9974,7 +9974,7 @@ Without ideals or violence,
 Doesn't have to say she's faithful,
 Yet she's true like ice, like fire.
 People carry roses,
-Make promises by the hour;
+Make promises by the hour,
 My love, she laughs like the flowers,
 Valentines can't buy her.
 
@@ -9982,7 +9982,7 @@ In the dimestores and bus-stations
 People talk over situations,
 Read books and repeat quotations,
 Draw conclusions on the wall.
-Some speak of the future;
+Some speak of the future,
 My love, she speaks softly,
 Knows there's no success like failure
 And that failure's no success at all.
@@ -9992,7 +9992,7 @@ Madams light the candles,
 In ceremonies of the horsemen
 Even a pawn must hold a grudge.
 Statues made of matchsticks
-Crumble into one another;
+Crumble into one another,
 My love winks, she doesn't bother,
 She knows too much to argue or to judge.
 
@@ -12576,11 +12576,11 @@ I lived with them on Montague Street in a basement down the stairs,
 There was snow all winter and no heat, revolution was in the air,
 Till one day all of his slaves ran free, something inside of him died.
 The only thing I could do was be me and get on that train and ride.
-And, when it all came crashing down, I was already south,
+And when it all came crashing down, I was already south,
 I didn't know whether the world was flat or round, I had the worst taste in my mouth that I ever knew,
 Tangled up in blue.
 
-So, now I'm going on back again, maybe tomorrow or maybe next year,
+So now I'm going on back again, maybe tomorrow or maybe next year,
 I gotta find someone among the women and men whose destiny is unclear.
 Some're masters of illusion, some're ministers of the trade,
 All under strong delusion, all of their beds're unmade.
@@ -14419,12 +14419,12 @@ She turned around to look at me as I was a-walking away,
 I heard her say over my shoulder, "We'll meet again someday on the avenue,
 Tangled up in blue."
 
-I had a job in the Great North Woods, working as a cook for a spell,
+I had a job in the Great North Woods working as a cook for a spell,
 But I never did like it all that much and one day the ax just fell,
-So I drifted down to New Orleans, where I lucky was to be employed,
-Working for a while on a fishing boat right outside of Delacroix;
-But, all the while I was alone, the past was close behind,
-I seen a lot of women, but she never escaped my mind and I just grew
+So I drifted down to New Orleans where I lucky was to be employed,
+Working for a while on a fishing boat right outside of Delacroix,
+But all the while I was alone, the past was close behind,
+I seen a lot of women but she never escaped my mind and I just grew
 Tangled up in blue.
 
 She was working in a topless place and I stopped in for a beer,
@@ -14447,11 +14447,11 @@ I lived with them on Montague Street, in a basement down the stairs,
 There was music in the cafes at night and revolution in the air,
 Then he started into dealing with slaves and something inside of him died,
 She had to sell everything she owned and froze up inside,
-And, when it finally--the bottom fell out, I became withdrawn,
+And when it finally--the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
@@ -18750,11 +18750,11 @@ And she turned around to look at him as he was a-walking away,
 She said, "This can't be the end, we'll meet on another day on the avenue,
 Tangled up in blue."
 
-He had a job in the old North Woods, working as a cook for a spell,
+He had a job in the old North Woods working as a cook for a spell,
 But he never did like it all that much and one day the ax just fell,
-When he drifted down to LA, where he'd reckoned to try his luck,
-Working for a while in an airplane plant loading cargo onto a truck;
-But, all the while he was alone, the past was close behind,
+When he drifted down to LA where he'd reckoned to try his luck,
+Working for a while in an airplane plant loading cargo onto a truck,
+But all the while he was alone, the past was close behind,
 He seen a lotta women, but she never escaped his mind and he just grew
 Tangled up in blue.
 
@@ -18778,11 +18778,11 @@ He was always in a hurry, too busy or too stoned,
 And everything that she ever planned just a-had to be postponed.
 He thought they were successful, she thought they were blessed
 With objects and material things, but I never was impressed,
-And, when it all came crashing down, I became withdrawn,
+And when it all came crashing down, I became withdrawn,
 The only thing I knew how to do was a-keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are doctors' wives,
 Don't know how it all got started, don't know what they're doing with their lives,
@@ -20537,12 +20537,12 @@ She turned around to look at me as I was a-walking away,
 I heard her say over my shoulder, "We'll meet again someday on the avenue,
 Tangled up in blue."
 
-I had a job in the Great North Woods, working as a cook for a spell,
+I had a job in the Great North Woods working as a cook for a spell,
 But I never did like it all that much and one day the ax just fell,
-So I drifted down to New Orleans, where I lucky was to be employed,
-Working for a while on a fishing boat right outside of Delacroix;
-But, all the while I was alone, the past was close behind,
-I seen a lot of women, but she never escaped my mind and I just grew
+So I drifted down to New Orleans where I lucky was to be employed,
+Working for a while on a fishing boat right outside of Delacroix,
+But all the while I was alone, the past was close behind,
+I seen a lot of women but she never escaped my mind and I just grew
 Tangled up in blue.
 
 She was working in a topless place and I stopped in for a beer,
@@ -20565,11 +20565,11 @@ I lived with them on Montague Street, in a basement down the stairs,
 There was music in the cafes at night and revolution in the air,
 Then he started into dealing with slaves and something inside of him died,
 She had to sell everything she owned and froze up inside,
-And, when it finally--the bottom fell out, I became withdrawn,
+And when it finally--the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
@@ -23667,12 +23667,12 @@ She turned around to look at me as I was a-walking away,
 I heard her say over my shoulder, "We'll meet again someday on the avenue,
 Tangled up in blue."
 
-I had a job in the Great North Woods, working as a cook for a spell,
+I had a job in the Great North Woods working as a cook for a spell,
 But I never did like it all that much and one day the ax just fell,
-So I drifted down to New Orleans, where I lucky was to be employed,
-Working for a while on a fishing boat right outside of Delacroix;
-But, all the while I was alone, the past was close behind,
-I seen a lot of women, but she never escaped my mind and I just grew
+So I drifted down to New Orleans where I lucky was to be employed,
+Working for a while on a fishing boat right outside of Delacroix,
+But all the while I was alone, the past was close behind,
+I seen a lot of women but she never escaped my mind and I just grew
 Tangled up in blue.
 
 She was working in a topless place and I stopped in for a beer,
@@ -23695,11 +23695,11 @@ I lived with them on Montague Street, in a basement down the stairs,
 There was music in the cafes at night and revolution in the air,
 Then he started into dealing with slaves and something inside of him died,
 She had to sell everything she owned and froze up inside,
-And, when it finally--the bottom fell out, I became withdrawn,
+And when it finally--the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
@@ -25416,6 +25416,102 @@ Is standing in the clothes that you once wore.
 Strike another match, go start anew,
 And it's all over now, Baby Blue.
 
+Song name: Love Minus Zero/No Limit
+Album name: The Bootleg Series Vol. 5: Bob Dylan Live 1975, The Rolling Thunder Revue
+Lyrics:
+
+My love, she speaks like silence,
+Without ideals or violence,
+Doesn't have to say she's faithful,
+Yet she's true like ice, like fire.
+People carry roses,
+Make promises by the hours,
+My love, she laughs like the flowers,
+Valentines can't buy her.
+
+In the dime-stores and bus-stations
+People talk over situations,
+Read books and repeat quotations,
+Draw conclusions on the wall.
+Some speak of the future,
+My love, she speaks softly,
+Knows there's no success like failure
+And that failure's no success at all.
+
+The cloak-and-dagger dangles,
+Madams light the candles,
+In ceremonies of the horsemen
+Even the pawn must hold a grudge.
+Statues made of matchsticks
+Crumble into one another,
+My love winks, she doesn't bother,
+She knows too much to argue or to judge.
+
+The bridge at midnight trembles,
+The country doctor rambles,
+Bankers' nieces seek perfection,
+Expecting all the gifts that wise men bring.
+The wind howls like a hammer,
+The night blows rainy,
+My love, she's like some raven
+At my window with a broken wing.
+
+Thank you.
+
+Song name: Tangled Up in Blue
+Album name: The Bootleg Series Vol. 5: Bob Dylan Live 1975, The Rolling Thunder Revue
+Lyrics:
+
+Early one morning the sun was shining, she was lying in bed,
+Wondering if she'd changed at all, if her hair was still red.
+Their folks, they said their lives together sure was a-gonna be rough,
+They never did like mama's homemade dress, papa's bankbook wasn't big enough.
+And he was standing on the side of the road, rain falling on his shoes,
+Heading out for the East Coast - Lord knows, he's paid some dues getting through,
+Tangled up in blue.
+
+She was married when they first met, soon to be divorced,
+He helped her out of a jam, I guess, but he used a little too much force.
+Then they drove that car as far as they could, abandoned it out west,
+Splitting up on a dark, sad night, both agreeing it was best.
+She turned around to look at him as he was a-walking away,
+Saying over her shoulder, "We'll meet again someday on the avenue,
+Tangled up in blue."
+
+He had a job in Santa Fe working in an old hotel,
+But he never did like it all that much and one day it just a-went to hell,
+So he drifted down to New Orleans, lucky not to be destroyed,
+Where he got him a job on a fishing boat docked outside Delacroix,
+But all the while he was alone, the past was close behind,
+He seen a lot of women but she never escaped his mind and he just grew
+Tangled up in blue.
+
+She was working in a topless place and I stopped in for a beer,
+I just kept looking at the side of her face in the spotlight so clear,
+And later on, when the crowd thinned out, I was just about to do the same,
+She was standing there right beside my chair, said, "Don't tell me, let me guess your name,"
+I muttered something underneath my breath, she studied the lines of my face,
+I must admit, felt a little uneasy when she bent down to tie the laces of my shoe,
+Tangled up in blue.
+
+I lived with them on Montague Street, in a basement down the stairs,
+There was music in the cafes at night and revolution in the air,
+Till he started into dealing with slaves and something inside of him died,
+She had to sell everything she owned and froze up inside,
+And when it all came crashing down, I became withdrawn,
+The only thing I knew how to do was keep on keeping on like a bird that flew,
+Tangled up in blue.
+
+So now I'm going back on again, I got to get to them somehow,
+All the faces we used to know, they're an illusion to me now.
+Some are mathematicians, some are truck drivers' wives,
+Don't know how it all got started, I don't know what they're doing with their lives,
+But me, I'm still on the road, heading for another joint,
+We always did feel the same, we just saw it from a different point of view,
+Tangled up in blue.
+
+Thank y'all.
+
 Song name: Blowin' in the Wind
 Album name: The Best of Bob Dylan
 Lyrics:
@@ -25748,12 +25844,12 @@ She turned around to look at me as I was a-walking away,
 I heard her say over my shoulder, "We'll meet again someday on the avenue,
 Tangled up in blue."
 
-I had a job in the Great North Woods, working as a cook for a spell,
+I had a job in the Great North Woods working as a cook for a spell,
 But I never did like it all that much and one day the ax just fell,
-So I drifted down to New Orleans, where I lucky was to be employed,
-Working for a while on a fishing boat right outside of Delacroix;
-But, all the while I was alone, the past was close behind,
-I seen a lot of women, but she never escaped my mind and I just grew
+So I drifted down to New Orleans where I lucky was to be employed,
+Working for a while on a fishing boat right outside of Delacroix,
+But all the while I was alone, the past was close behind,
+I seen a lot of women but she never escaped my mind and I just grew
 Tangled up in blue.
 
 She was working in a topless place and I stopped in for a beer,
@@ -25776,11 +25872,11 @@ I lived with them on Montague Street, in a basement down the stairs,
 There was music in the cafes at night and revolution in the air,
 Then he started into dealing with slaves and something inside of him died,
 She had to sell everything she owned and froze up inside,
-And, when it finally--the bottom fell out, I became withdrawn,
+And when it finally--the bottom fell out, I became withdrawn,
 The only thing I knew how to do was to keep on keeping on like a bird that flew,
 Tangled up in blue.
 
-So, now I'm going back again, I got to get to her somehow,
+So now I'm going back again, I got to get to her somehow,
 All the people we used to know, they're an illusion to me now.
 Some are mathematicians, some are carpenters' wives,
 Don't know how it all got started, I don't know what they're doing with their lives,
