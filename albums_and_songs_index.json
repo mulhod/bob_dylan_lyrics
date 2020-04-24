@@ -4384,6 +4384,178 @@
     {
         "type": "album",
         "metadata": {
+            "name": "The Bootleg Series Vol. 6: Bob Dylan Live 1964, Concert at Philharmonic Hall",
+            "file_id": "the_bootleg_series_vol_6_bob_dylan_live_1964_concert_at_philharmonic_hall",
+            "image_file_name": "The_Bootleg_Series_Volume_6_Bob_Dylan_Live_1964_Concert_at_Philharmonic_Hall.jpg",
+            "release_date": "March 30, 2004",
+            "length": "104:12",
+            "producers": "Steve Berkowitz and Jeff Rosen",
+            "label": "Columbia",
+            "discs": {
+                "1": "1-11",
+                "2": "12-19"
+            },
+            "songs": {
+                "The Times They Are a-Changin'": {
+                    "index": 1,
+                    "file_id": "the_times_they_are_a-changin_5",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Spanish Harlem Incident": {
+                    "index": 2,
+                    "file_id": "spanish_harlem_incident_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Talkin' John Birch Paranoid Blues": {
+                    "index": 3,
+                    "file_id": "talkin_john_birch_paranoid_blues_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "To Ramona": {
+                    "index": 4,
+                    "file_id": "to_ramona_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Who Killed Davey Moore?": {
+                    "index": 5,
+                    "file_id": "who_killed_davey_moore_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Gates of Eden": {
+                    "index": 6,
+                    "file_id": "gates_of_eden_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "If You Gotta Go, Go Now (Or Else You Got to Stay All Night)": {
+                    "index": 7,
+                    "file_id": "if_you_gotta_go_go_now_or_else_you_got_to_stay_all_night_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "It's Alright, Ma (I'm Only Bleeding)": {
+                    "index": 8,
+                    "file_id": "its_alright_ma_im_only_bleeding_4",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "I Don't Believe You (She Acts Like We Never Have Met)": {
+                    "index": 9,
+                    "file_id": "i_dont_believe_you_she_acts_like_we_never_have_met_4",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Mr. Tambourine Man": {
+                    "index": 10,
+                    "file_id": "mr_tambourine_man_5",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "A Hard Rain's A-Gonna Fall": {
+                    "index": 11,
+                    "file_id": "a_hard_rains_a-gonna_fall_3",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Talkin' World War III Blues": {
+                    "index": 12,
+                    "actual_name": "Talkin' WWIII Blues",
+                    "file_id": "talkin_wwiii_blues_2",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Don't Think Twice, It's All Right": {
+                    "index": 13,
+                    "file_id": "dont_think_twice_its_all_right_4",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "The Lonesome Death of Hattie Carroll": {
+                    "index": 14,
+                    "file_id": "the_lonesome_death_of_hattie_carroll_3",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Mama, You Been on My Mind": {
+                    "index": 15,
+                    "file_id": "mama_you_been_on_my_mind_3",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "Silver Dagger": {
+                    "index": 16,
+                    "written_by": "Traditional, arranged by Bob Dylan",
+                    "file_id": "silver_dagger_1",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "With God on Our Side": {
+                    "index": 17,
+                    "file_id": "with_god_on_our_side_3",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "It Ain't Me, Babe": {
+                    "index": 18,
+                    "file_id": "it_aint_me_babe_5",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                },
+                "All I Really Want to Do": {
+                    "index": 19,
+                    "file_id": "all_i_really_want_to_do_3",
+                    "live": {
+                        "date": "on October 31, 1964",
+                        "location/concert": "<a href='https://en.wikipedia.org/wiki/Philharmonic_Hall,_Liverpool'>Philharmonic Hall</a> in <a href='https://en.wikipedia.org/wiki/London'>London, England</a>"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "type": "album",
+        "metadata": {
             "name": "The Best of Bob Dylan",
             "file_id": "the_best_of_bob_dylan",
             "image_file_name": "The_Best_of_Bob_Dylan.jpg",
