@@ -612,7 +612,7 @@ def make_head_element(level: int = 0) -> Tag:
         Tag(name="link",
             attrs=
                 {"rel": "stylesheet",
-                 "href": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/"
+                 "href": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/"
                          "bootstrap.min.css"}))
     head.append(Tag(name="link",
                     attrs={"rel": "stylesheet",
@@ -626,7 +626,7 @@ def make_head_element(level: int = 0) -> Tag:
     head.append(
         Tag(name="script",
             attrs={
-                "src": "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/"
+                "src": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/"
                        "bootstrap.min.js"}))
     head.append(Tag(name="script",
                     attrs={"src": join(*[".."]*level, resources_dir,
